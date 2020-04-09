@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar should render correctly 1`] = `
-<Styled(Sider)
-  collapsible={true}
->
+<Sider>
+  <styled.div>
+    Logo
+  </styled.div>
   <Menu
     defaultSelectedKeys={
       Array [
@@ -42,5 +43,5 @@ exports[`Sidebar should render correctly 1`] = `
       </Link>
     </MenuItem>
   </Menu>
-</Styled(Sider)>
+</Sider>
 `;

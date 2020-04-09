@@ -10,6 +10,6 @@ describe('Sidebar', () => {
   it('should render correctly', () => {
     const component = shallow(<Sidebar />);
 
-    // expect(component).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });
