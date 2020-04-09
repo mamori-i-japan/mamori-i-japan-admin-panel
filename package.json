@@ -24,8 +24,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-coverage": "npm run test -- --coverage --watchAll=false",
+    "test:cov": "npm run test -- --coverage --watchAll=false",
     "tslint": "tslint --fix --project .",
+    "deploy:dev": "npm run build && echo \"need deploy scripts\"",
+    "deploy:stg": "npm run build && echo \"need deploy scripts\"",
+    "deploy:prd": "npm run build && echo \"need deploy scripts\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
