@@ -24,7 +24,7 @@ orbs:
 executors:
   default:
     docker:
-      - image: circleci/node:12.16.2
+      - image: circleci/node:12.16.1
     working_directory: ~/repo
 
 commands:
