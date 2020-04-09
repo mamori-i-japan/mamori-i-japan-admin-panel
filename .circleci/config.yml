@@ -33,13 +33,13 @@ commands:
       - restore_cache:
           name: restore cache
           keys:
-            - dependencies-{{ checksum "package-lock.json" }}
+            - dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: install
           command: yarn install
       - save_cache:
           name: save cache
-          key: dependencies-{{ checksum "package-lock.json" }}
+          key: dependencies-{{ checksum "yarn.lock" }}
           paths:
             - ~/.npm
 
@@ -47,7 +47,7 @@ commands:
     steps:
       - run:
           name: lint
-          command: npm run lint
+          command: npm run tslint
 
   npm_test:
     steps:
@@ -57,9 +57,9 @@ commands:
       - run:
           name: coverage
           command: npm run test:cov
-      # - run:
-      #     name: e2e test
-      #     command: npm run test:e2e
+      - run:
+          name: e2e test
+          command: npm run test:e2e
 
   npm_deploy:
     parameters:
@@ -116,9 +116,9 @@ jobs:
 workflows:
   service:
     jobs:
-      # - lint
+      - lint
       - test:
-          # requires: [lint]
+          requires: [lint]
       - deploy_dev:
           requires: [test]
           filters: *filters_dev

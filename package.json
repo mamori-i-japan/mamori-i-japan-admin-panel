@@ -25,6 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cov": "npm run test -- --coverage --watchAll=false",
+    "test:e2e": "echo \"need e2e test scripts\"",
     "tslint": "tslint --fix --project .",
     "deploy:dev": "npm run build && echo \"need deploy scripts\"",
     "deploy:stg": "npm run build && echo \"need deploy scripts\"",
