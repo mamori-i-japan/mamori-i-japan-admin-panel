@@ -4,8 +4,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import Top from '../containers/Top';
-import RestaurantList from '../containers/List';
-import RestaurantDetail from '../containers/Detail';
+import List from '../containers/List';
+import Detail from '../containers/Detail';
 
 import { HOST } from '../constants';
 
@@ -25,14 +25,14 @@ const routes = [
         component: Top,
       },
       {
-        path: HOST + 'restaurant/:id',
+        path: HOST + 'items/:id',
         exact: true,
-        component: RestaurantDetail,
+        component: Detail,
       },
       {
-        path: HOST + 'restaurant',
+        path: HOST + 'items',
         exact: true,
-        component: RestaurantList,
+        component: List,
       },
     ],
   },

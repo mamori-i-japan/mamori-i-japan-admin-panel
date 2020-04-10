@@ -12,7 +12,7 @@ export default [
     name: '',
     jaName: '一覧temp',
     icon: 'user',
-    path: HOST + 'list',
+    path: HOST + 'items',
     children: [],
   },
 ];
