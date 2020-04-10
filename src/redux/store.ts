@@ -2,15 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { createBrowserHistory } from 'history';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import reducers from './reducers';
 import rootSaga from './rootSaga';
 
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose,
-    store: any
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    store: any;
   }
 }
 
@@ -22,7 +21,7 @@ const composeEnhancers =
 const history = createBrowserHistory();
 const routeMiddleware = routerMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [thunk, routeMiddleware, sagaMiddleware];
+const middlewares = [routeMiddleware, sagaMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(logger);
@@ -31,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
 const store = createStore(
   combineReducers({
     ...reducers,
-    router: connectRouter(history)
+    router: connectRouter(history),
   }),
   composeEnhancers(applyMiddleware(...middlewares))
 );
