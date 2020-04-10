@@ -1,17 +1,18 @@
 import { HOST } from '../../constants';
 
-
 export default [
   {
-    name: 'Dashboard',
+    name: '',
+    jaName: 'ダッシュボード',
     icon: 'user',
     path: HOST,
-    children: []
+    children: [],
   },
   {
-    name: 'Restaurant',
+    name: '',
+    jaName: '一覧temp',
     icon: 'user',
-    path: HOST + 'restaurant',
-    children: []
+    path: HOST + 'list',
+    children: [],
   },
-]
+];
