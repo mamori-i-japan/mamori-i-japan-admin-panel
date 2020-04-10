@@ -2,9 +2,6 @@
 
 exports[`Top should render correctly with no props 1`] = `
 <div>
-  <div>
-    top
-  </div>
   <_default
     dataKey="month"
     fields={
