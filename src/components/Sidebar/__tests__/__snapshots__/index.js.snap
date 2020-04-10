@@ -6,12 +6,12 @@ exports[`Sidebar should render correctly 1`] = `
     Logo
   </styled.div>
   <Menu
-    defaultSelectedKeys={
+    mode="inline"
+    selectedKeys={
       Array [
         "0",
       ]
     }
-    mode="inline"
     theme="dark"
   >
     <MenuItem
@@ -32,7 +32,7 @@ exports[`Sidebar should render correctly 1`] = `
       key="1"
     >
       <Link
-        to="/list"
+        to="/items"
       >
         <Icon
           type="user"
