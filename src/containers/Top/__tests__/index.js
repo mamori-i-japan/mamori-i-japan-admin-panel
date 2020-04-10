@@ -13,10 +13,10 @@ describe('Top', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('should render correctly content: "top"', () => {
-    const { getByText } = render(<Top />);
-    const linkElement = getByText(/top/i);
+  // it('should render correctly content: "top"', () => {
+  //   const { getByText } = render(<Top />);
+  //   const linkElement = getByText(/top/i);
 
-    expect(linkElement).toBeInTheDocument();
-  });
+  //   expect(linkElement).toBeInTheDocument();
+  // });
 });

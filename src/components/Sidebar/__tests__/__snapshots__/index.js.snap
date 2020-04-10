@@ -24,7 +24,7 @@ exports[`Sidebar should render correctly 1`] = `
           type="user"
         />
         <span>
-          Dashboard
+          ダッシュボード
         </span>
       </Link>
     </MenuItem>
@@ -32,13 +32,13 @@ exports[`Sidebar should render correctly 1`] = `
       key="1"
     >
       <Link
-        to="/restaurant"
+        to="/list"
       >
         <Icon
           type="user"
         />
         <span>
-          Restaurant
+          一覧temp
         </span>
       </Link>
     </MenuItem>

@@ -2,6 +2,81 @@
 
 exports[`Top should render correctly with no props 1`] = `
 <div>
-  Top
+  <div>
+    top
+  </div>
+  <_default
+    dataKey="month"
+    fields={
+      Array [
+        "Tokyo",
+        "London",
+      ]
+    }
+    sourceData={
+      Array [
+        Object {
+          "London": 3.9,
+          "Tokyo": 7,
+          "month": "Jan",
+        },
+        Object {
+          "London": 4.2,
+          "Tokyo": 6.9,
+          "month": "Feb",
+        },
+        Object {
+          "London": 5.7,
+          "Tokyo": 9.5,
+          "month": "Mar",
+        },
+        Object {
+          "London": 8.5,
+          "Tokyo": 14.5,
+          "month": "Apr",
+        },
+        Object {
+          "London": 11.9,
+          "Tokyo": 18.4,
+          "month": "May",
+        },
+        Object {
+          "London": 15.2,
+          "Tokyo": 21.5,
+          "month": "Jun",
+        },
+        Object {
+          "London": 17,
+          "Tokyo": 25.2,
+          "month": "Jul",
+        },
+        Object {
+          "London": 16.6,
+          "Tokyo": 26.5,
+          "month": "Aug",
+        },
+        Object {
+          "London": 14.2,
+          "Tokyo": 23.3,
+          "month": "Sep",
+        },
+        Object {
+          "London": 10.3,
+          "Tokyo": 18.3,
+          "month": "Oct",
+        },
+        Object {
+          "London": 6.6,
+          "Tokyo": 13.9,
+          "month": "Nov",
+        },
+        Object {
+          "London": 4.8,
+          "Tokyo": 9.6,
+          "month": "Dec",
+        },
+      ]
+    }
+  />
 </div>
 `;
