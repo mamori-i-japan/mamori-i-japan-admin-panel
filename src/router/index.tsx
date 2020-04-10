@@ -1,13 +1,11 @@
 import React from 'react';
 import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-
 import Login from '../containers/Login';
-
 import Dashboard from '../containers/Dashboard';
 import Top from '../containers/Top';
-import RestaurantList from '../containers/RestaurantList';
-import RestaurantDetail from '../containers/RestaurantDetail';
+import RestaurantList from '../containers/List';
+import RestaurantDetail from '../containers/Detail';
 
 import { HOST } from '../constants';
 
