@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, Icon, Layout } from 'antd';
+import { findIndex } from 'lodash';
 import { Logo } from './style';
 import config from './config';
 
@@ -14,13 +15,17 @@ interface SidebarProps {
 }
 
 export default ({ sidebarIsCollapse }: any) => {
+  const { pathname } = useLocation();
   const { langCode } = useContext(I18nContext);
-  const [selectedKey, setSelectedKey] = useState('0');
+  const [selectedKey, setSelectedKey] = useState('');
+
+  useEffect(() => {
+    setSelectedKey('' + findIndex(config, { path: pathname }));
+  }, [pathname]);
 
   return (
     <Sider collapsed={sidebarIsCollapse}>
       <Logo>Logo</Logo>
-      {/* TODO: change '0' to a sdynamic key in sotre */}
       <Menu selectedKeys={[selectedKey]} theme="dark" mode="inline">
         {config.map((item: any, index) => (
           <Menu.Item key={index}>
