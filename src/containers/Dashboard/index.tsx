@@ -9,7 +9,7 @@ import Footer from '../../components/Footer';
 
 import { PageLayout } from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebarCollapse } from '../../redux/Sidebar/actions';
+import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
 
 const { Content } = Layout;
 
@@ -26,8 +26,8 @@ export default (props: any) => {
     (store: any) => store.sidebar.isCollapse
   );
 
-  const handleToggleSidebarCollapse = useCallback(
-    () => dispatch(toggleSidebarCollapse()),
+  const toggleSidebarCollapse = useCallback(
+    () => dispatch(toggleSidebarCollapseAction()),
     [dispatch]
   );
 
@@ -38,7 +38,7 @@ export default (props: any) => {
       <Layout>
         <Header
           sidebarIsCollapse={sidebarIsCollapse}
-          toggleSidebarCollapse={handleToggleSidebarCollapse}
+          toggleSidebarCollapse={toggleSidebarCollapse}
         />
 
         <Content>

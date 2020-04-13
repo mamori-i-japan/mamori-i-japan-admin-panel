@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { AppHeader } from './style';
+import { ActionFunctionAny } from 'redux-actions';
+import { Action } from 'redux';
 
 interface HeaderProps {
-  sidebarIsCollapse: boolean,
-  toggleSidebarCollapse: () => { type: string; }
+  sidebarIsCollapse: boolean;
+  toggleSidebarCollapse: () => ActionFunctionAny<Action<any>>;
 }
 
 export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {
@@ -16,5 +18,5 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {
         onClick={toggleSidebarCollapse}
       />
     </AppHeader>
-  )
-}
+  );
+};

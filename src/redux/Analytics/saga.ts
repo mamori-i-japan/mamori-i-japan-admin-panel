@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all, fork } from 'redux-saga/effects';
+import { put, takeEvery, all, fork } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 
 function* getAnalyticsSaga() {
