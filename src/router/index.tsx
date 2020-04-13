@@ -3,9 +3,10 @@ import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
+import PositiveDetail from '../containers/PositiveDetail';
+import Register from '../containers/Register';
 import Top from '../containers/Top';
 import List from '../containers/List';
-import Detail from '../containers/Detail';
 
 import { HOST } from '../constants';
 
@@ -15,32 +16,36 @@ const routes = [
     component: Login,
   },
   {
+    path: HOST + 'join',
+    component: Register,
+  },
+  {
     path: HOST,
     component: Dashboard,
     auth: true,
     routes: [
+      // {
+      //   path: HOST,
+      //   exact: true,
+      //   component: Top,
+      // },
       {
         path: HOST,
         exact: true,
-        component: Top,
+        component: PositiveDetail,
       },
-      {
-        path: HOST + 'items/:id',
-        exact: true,
-        component: Detail,
-      },
-      {
-        path: HOST + 'items',
-        exact: true,
-        component: List,
-      },
+      // {
+      //   path: HOST + 'items',
+      //   exact: true,
+      //   component: List,
+      // },
     ],
   },
 ];
 
 // TODO: move real auth logic to store  JST token?
 export const fakeAuth = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   authenticate(cb: any) {
     fakeAuth.isAuthenticated = true;
     setTimeout(cb, 100); // fake async

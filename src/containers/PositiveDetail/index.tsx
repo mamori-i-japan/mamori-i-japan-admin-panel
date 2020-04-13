@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => {
-  return <div>detail</div>;
+  return <div> positive detail</div>;
 };
