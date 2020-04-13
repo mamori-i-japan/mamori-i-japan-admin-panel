@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -9,13 +9,12 @@ import Sidebar from '../';
 configure({ adapter: new Adapter() });
 
 describe('Sidebar', () => {
+  const history = createMemoryHistory();
   it('should render correctly', () => {
-    const history = createMemoryHistory();
-
     const component = shallow(
-      <Router history={history}>
+      <MemoryRouter keyLength={0}>
         <Sidebar />
-      </Router>
+      </MemoryRouter>
     );
 
     expect(component).toMatchSnapshot();
