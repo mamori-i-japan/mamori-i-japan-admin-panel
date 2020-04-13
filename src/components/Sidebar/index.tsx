@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Icon, Layout } from 'antd';
+import { Menu, Layout } from 'antd';
+import Icon from '@ant-design/icons';
 import { findIndex } from 'lodash';
 import { Logo } from './style';
 import config from './config';
-
 import { I18nContext } from '../../locales';
 
 const { Sider } = Layout;
@@ -31,7 +31,7 @@ export default ({ sidebarIsCollapse }: any) => {
           <Menu.Item key={index}>
             <Link to={item.path}>
               <Icon type={item.icon} />
-              <span>{item[`${langCode}Name`]}</span>
+              <span>{item[`name${langCode}`]}</span>
             </Link>
           </Menu.Item>
         ))}

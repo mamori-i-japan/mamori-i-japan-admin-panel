@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import Icon from '@ant-design/icons';
 import { AppHeader } from './style';
 import { ActionFunctionAny } from 'redux-actions';
 import { Action } from 'redux';
