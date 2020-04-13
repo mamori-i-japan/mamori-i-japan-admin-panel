@@ -6,7 +6,7 @@ import { Action } from 'redux';
 
 interface HeaderProps {
   sidebarIsCollapse: boolean;
-  toggleSidebarCollapse: () => ActionFunctionAny<Action<any>>;
+  toggleSidebarCollapse: () => { type: string };
 }
 
 export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {

@@ -9,7 +9,7 @@ import Footer from '../../components/Footer';
 
 import { PageLayout } from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
+import actionTypes from '../../redux/Sidebar/actionTypes';
 
 const { Content } = Layout;
 
@@ -27,7 +27,7 @@ export default (props: any) => {
   );
 
   const toggleSidebarCollapse = useCallback(
-    () => dispatch(toggleSidebarCollapseAction()),
+    () => dispatch({ type: actionTypes.TOGGLE_SIDEBAR_COLLAPSE }),
     [dispatch]
   );
 
