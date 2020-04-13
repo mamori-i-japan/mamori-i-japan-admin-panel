@@ -1,17 +1,23 @@
-import Messages from '../../constants/messages';
 import Validations from '../../constants/validations';
 
+// TODO: move rules to vallidation libs
 export default [
   {
-    key: 'email',
+    name: 'email',
     type: 'input',
     label: 'メールアドレス',
-    rules: [{ required: true, message: 'Please input your username!' }],
+    rules: [
+      {
+        type: 'email',
+        message: 'The input is not valid E-mail!',
+      },
+      { required: true, message: 'Please input!' },
+    ],
   },
   {
-    key: 'password',
+    name: 'password',
     type: 'password',
     label: 'パスワード',
-    rules: [{ required: true, message: 'Please input your username!' }],
+    rules: [{ required: true, message: 'Please input!' }],
   },
 ];

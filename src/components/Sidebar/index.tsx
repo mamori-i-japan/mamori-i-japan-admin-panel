@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Layout } from 'antd';
-import Icon from '@ant-design/icons';
+import { AppstoreOutlined } from '@ant-design/icons';
 import { findIndex } from 'lodash';
 import { Logo } from './style';
 import config from './config';
@@ -30,7 +30,7 @@ export default ({ sidebarIsCollapse }: any) => {
         {config.map((item: any, index) => (
           <Menu.Item key={index}>
             <Link to={item.path}>
-              <Icon type={item.icon} />
+              <AppstoreOutlined />
               <span>{item[`name${langCode}`]}</span>
             </Link>
           </Menu.Item>

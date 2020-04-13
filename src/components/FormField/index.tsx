@@ -22,14 +22,17 @@ type FormFieldContentProps = {
 };
 
 export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
-  const { type, className, label, placeholder, key, rules } = field;
+  const { type, className, label, placeholder, name, rules } = field;
+
+  console.log(rules);
 
   switch (type) {
     case 'select':
       return (
         <Form.Item
           className={className}
-          key={key}
+          key={name}
+          name={name}
           label={label}
           rules={rules}
           colon={false}
@@ -47,24 +50,39 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
 
     case 'textArea':
       return (
-        <Form.Item key={key} label={field.label} rules={rules} colon={false}>
-          <TextArea
-            // autosize={{ minRows: 3, maxRows: 8 }}
-            placeholder={field.placeholder}
-          />
+        <Form.Item
+          key={name}
+          name={name}
+          label={field.label}
+          rules={rules}
+          colon={false}
+        >
+          <TextArea placeholder={field.placeholder} />
         </Form.Item>
       );
 
     case 'date':
       return (
-        <Form.Item key={key} label={field.label} rules={rules} colon={false}>
+        <Form.Item
+          key={name}
+          name={name}
+          label={field.label}
+          rules={rules}
+          colon={false}
+        >
           <DatePicker size="large" />
         </Form.Item>
       );
 
     case 'inputNumber':
       return (
-        <Form.Item key={key} label={field.label} rules={rules} colon={false}>
+        <Form.Item
+          key={name}
+          name={name}
+          label={field.label}
+          rules={rules}
+          colon={false}
+        >
           <InputNumber size="large" placeholder={field.placeholder} />
         </Form.Item>
       );
@@ -72,7 +90,8 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
     case 'checkbox':
       return (
         <Form.Item
-          key={key}
+          key={name}
+          name={name}
           className={className}
           label={field.label}
           rules={rules}
@@ -85,7 +104,8 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
     case 'timePicker':
       return (
         <Form.Item
-          key={key}
+          key={name}
+          name={name}
           className={className}
           label={label}
           rules={rules}
@@ -107,7 +127,8 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
     case 'password':
       return (
         <Form.Item
-          key={key}
+          key={name}
+          name={name}
           className={className}
           label={label}
           rules={rules}
@@ -119,7 +140,13 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
 
     default:
       return (
-        <Form.Item key={key} label={label} rules={rules} colon={false}>
+        <Form.Item
+          key={name}
+          name={name}
+          label={label}
+          rules={rules}
+          colon={false}
+        >
           <Input placeholder={placeholder} />
         </Form.Item>
       );

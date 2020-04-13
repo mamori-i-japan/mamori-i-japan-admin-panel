@@ -1,1 +1,6 @@
-export default {};
+export default {
+  require: '',
+  email: '',
+  password: '',
+  phone: '',
+};

@@ -6,7 +6,8 @@ import Dashboard from '../containers/Dashboard';
 import PositiveDetail from '../containers/PositiveDetail';
 import Register from '../containers/Register';
 import Top from '../containers/Top';
-import List from '../containers/List';
+import AdminUserList from '../containers/AdminUserList';
+import AdminUserDetail from '../containers/AdminUserDetail';
 
 import { HOST } from '../constants';
 
@@ -34,11 +35,16 @@ const routes = [
         exact: true,
         component: PositiveDetail,
       },
-      // {
-      //   path: HOST + 'items',
-      //   exact: true,
-      //   component: List,
-      // },
+      {
+        path: HOST + 'users/:id',
+        exact: true,
+        component: AdminUserDetail,
+      },
+      {
+        path: HOST + 'users',
+        exact: true,
+        component: AdminUserList,
+      },
     ],
   },
 ];

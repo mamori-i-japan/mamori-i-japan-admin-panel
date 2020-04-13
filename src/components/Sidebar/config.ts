@@ -8,11 +8,11 @@ export default [
     path: HOST,
     children: [],
   },
-  // {
-  //   name: '',
-  //   nameJa: '一覧temp',
-  //   icon: 'user',
-  //   path: HOST + 'items',
-  //   children: [],
-  // },
+  {
+    name: '',
+    nameja: 'ユーザー',
+    icon: 'user',
+    path: HOST + 'users',
+    children: [],
+  },
 ];

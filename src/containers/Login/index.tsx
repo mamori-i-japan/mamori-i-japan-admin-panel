@@ -48,7 +48,9 @@ export default () => {
         onFinishFailed={onFinishFailed}
       >
         {dataMap &&
-          dataMap.map((item: any) => <FormField key={item.key} field={item} />)}
+          dataMap.map((item: any) => (
+            <FormField key={item.name} field={item} />
+          ))}
 
         <Form.Item {...tailLayout}>
           <Button block type="primary" htmlType="submit">
