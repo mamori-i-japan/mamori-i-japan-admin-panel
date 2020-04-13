@@ -1,47 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar should render correctly 1`] = `
-<Sider>
-  <styled.div>
-    Logo
-  </styled.div>
-  <Menu
-    mode="inline"
-    selectedKeys={
-      Array [
-        "0",
-      ]
+<ContextProvider
+  value={
+    Object {
+      "history": Object {
+        "action": "POP",
+        "block": [Function],
+        "canGo": [Function],
+        "createHref": [Function],
+        "entries": Array [
+          Object {
+            "hash": "",
+            "key": "fhrluy",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+        ],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "index": 0,
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "key": "fhrluy",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      },
+      "location": Object {
+        "hash": "",
+        "key": "fhrluy",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "match": Object {
+        "isExact": true,
+        "params": Object {},
+        "path": "/",
+        "url": "/",
+      },
+      "staticContext": undefined,
     }
-    theme="dark"
-  >
-    <MenuItem
-      key="0"
-    >
-      <Link
-        to="/"
-      >
-        <Icon
-          type="user"
-        />
-        <span>
-          ダッシュボード
-        </span>
-      </Link>
-    </MenuItem>
-    <MenuItem
-      key="1"
-    >
-      <Link
-        to="/items"
-      >
-        <Icon
-          type="user"
-        />
-        <span>
-          一覧temp
-        </span>
-      </Link>
-    </MenuItem>
-  </Menu>
-</Sider>
+  }
+>
+  <_default />
+</ContextProvider>
 `;

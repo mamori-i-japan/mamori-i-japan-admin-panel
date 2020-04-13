@@ -1,4 +1,6 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -8,7 +10,13 @@ configure({ adapter: new Adapter() });
 
 describe('Sidebar', () => {
   it('should render correctly', () => {
-    const component = shallow(<Sidebar />);
+    const history = createMemoryHistory();
+
+    const component = shallow(
+      <Router history={history}>
+        <Sidebar />
+      </Router>
+    );
 
     expect(component).toMatchSnapshot();
   });
