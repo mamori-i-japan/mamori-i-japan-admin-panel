@@ -13,8 +13,7 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {
   return (
     <AppHeader>
       <div className="trigger" onClick={toggleSidebarCollapse}>
-        {!sidebarIsCollapse && <MenuFoldOutlined />}
-        {sidebarIsCollapse && <MenuUnfoldOutlined />}
+        {sidebarIsCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </div>
     </AppHeader>
   );
