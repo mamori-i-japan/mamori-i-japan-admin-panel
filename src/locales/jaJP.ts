@@ -1,6 +1,7 @@
 export default {
   loginTitle: 'J Trance 管理画面',
-  loginSubmit: '登録',
+  loginSubmit: 'ログイン',
+  registerSubmit: '登録',
   createItem: '追加',
   editItem: '編集',
   deleteItem: '削除',
