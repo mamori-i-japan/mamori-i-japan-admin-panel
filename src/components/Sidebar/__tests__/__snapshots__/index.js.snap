@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar should render correctly 1`] = `
+<Styled(Sider)
+  collapsible={true}
+>
+  <Menu
+    defaultSelectedKeys={
+      Array [
+        "0",
+      ]
+    }
+    mode="inline"
+    theme="dark"
+  >
+    <MenuItem
+      key="0"
+    >
+      <Link
+        to="/"
+      >
+        <Icon
+          type="user"
+        />
+        <span>
+          Dashboard
+        </span>
+      </Link>
+    </MenuItem>
+    <MenuItem
+      key="1"
+    >
+      <Link
+        to="/restaurant"
+      >
+        <Icon
+          type="user"
+        />
+        <span>
+          Restaurant
+        </span>
+      </Link>
+    </MenuItem>
+  </Menu>
+</Styled(Sider)>
+`;

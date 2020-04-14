@@ -1,0 +1,4 @@
+
+export default {
+  TOGGLE_SIDEBAR_COLLAPSE: 'TOGGLE_SIDEBAR_COLLAPSE'
+}
