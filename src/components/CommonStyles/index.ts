@@ -6,6 +6,20 @@ export const ContentContainer = styled.div`
   padding: 24px;
   min-height: calc(100% - 48px);
   background-color: #fff;
+  overflow: hidden;
+
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  section {
+    width: 100%;
+    padding-top: 24px;
+    overflow-x: scroll;
+  }
 `;
 
 export const DetailForm = styled(Form)`

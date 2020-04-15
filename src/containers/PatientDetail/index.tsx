@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
-import { Button, Typography } from 'antd';
+import { Button } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
-
+import { langCode } from '../../constants';
 import dataMap from './dataMap';
 
-const { Title } = Typography;
 
 export default () => {
+  const history = useHistory();
   const { translate } = useContext(I18nContext);
+
+  const handleBack = () => {
+    history.goBack();
+  }
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -21,27 +27,32 @@ export default () => {
 
   return (
     <ContentContainer>
-      <Title level={4}>{translate('registerPatient')}</Title>
-      <DetailForm
-        name="positive form"
-        size="large"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        {dataMap &&
-          dataMap.map((item: any) => (
-            <FormField
-              key={item.name}
-              field={{ ...item, label: translate(item.label) }}
-            />
-          ))}
+      <header>
+        <Button type="link" onClick={handleBack} icon={<ArrowLeftOutlined />}>
+          {translate('back')}
+        </Button>
+        <Button type="primary" htmlType="submit">
+          {translate('submit')}
+        </Button>
+      </header>
 
-        <DetailForm.Item>
-          <Button type="primary" htmlType="submit">
-            {translate('submit')}
-          </Button>
-        </DetailForm.Item>
-      </DetailForm>
+      <section>
+        <DetailForm
+          name="positive form"
+          size="large"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          {dataMap &&
+            dataMap.map((item: any) => (
+              <FormField
+                key={item.name}
+                label={item[`label${langCode}`]}
+                field={item}
+              />
+            ))}
+        </DetailForm>
+      </section>
     </ContentContainer>
   );
 };

@@ -17,12 +17,13 @@ const timeFormat = 'HH:mm';
 //TODO: fix me
 type FormFieldContentProps = {
   field: any;
+  label: string;
   defaultValue?: any;
   selectData?: any;
 };
 
-export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
-  const { type, className, label, placeholder, name, rules } = field;
+export default ({ field, label, defaultValue, selectData }: FormFieldContentProps) => {
+  const { type, className, placeholder, name, rules } = field;
 
   console.log(rules);
 
@@ -31,7 +32,6 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
       return (
         <Form.Item
           className={className}
-          key={name}
           name={name}
           label={label}
           rules={rules}
@@ -51,9 +51,8 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
     case 'textArea':
       return (
         <Form.Item
-          key={name}
           name={name}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
@@ -79,7 +78,7 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
         <Form.Item
           key={name}
           name={name}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
@@ -93,7 +92,7 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
           key={name}
           name={name}
           className={className}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
@@ -143,6 +142,7 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
         <Form.Item
           key={name}
           name={name}
+          className={className}
           label={label}
           rules={rules}
           colon={false}

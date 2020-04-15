@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Layout } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { findIndex } from 'lodash';
 import { Logo } from './style';
 import config from './config';
-import { I18nContext } from '../../locales';
+import { langCode } from '../../constants';
 
 const { Sider } = Layout;
 
@@ -16,7 +16,6 @@ interface SidebarProps {
 
 export default ({ sidebarIsCollapse }: any) => {
   const { pathname } = useLocation();
-  const { langCode } = useContext(I18nContext);
   const [selectedKey, setSelectedKey] = useState('');
 
   useEffect(() => {

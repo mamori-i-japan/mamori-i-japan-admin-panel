@@ -4,9 +4,8 @@ import { Form, Button, Typography } from 'antd';
 import { fakeAuth } from '../../router';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
-
+import { langCode } from '../../constants';
 import { LoginContainer } from './style';
-
 import dataMap from './dataMap';
 
 const { Title } = Typography;
@@ -41,7 +40,7 @@ export default () => {
       >
         {dataMap &&
           dataMap.map((item: any) => (
-            <FormField key={item.name} field={item} />
+            <FormField key={item.name} label={item[`label${langCode}`]} field={item} />
           ))}
 
         <Form.Item >
