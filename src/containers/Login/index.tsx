@@ -4,21 +4,11 @@ import { Form, Button, Typography } from 'antd';
 import { fakeAuth } from '../../router';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
-
+import { langCode } from '../../constants';
 import { LoginContainer } from './style';
-
 import dataMap from './dataMap';
 
 const { Title } = Typography;
-
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 6, span: 8 },
-};
 
 export default () => {
   let history = useHistory();
@@ -42,17 +32,18 @@ export default () => {
     <LoginContainer>
       <Title level={3}>{translate('loginTitle')}</Title>
       <Form
-        {...layout}
         name="login"
+        layout="vertical"
+        size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
         {dataMap &&
           dataMap.map((item: any) => (
-            <FormField key={item.name} field={item} />
+            <FormField key={item.name} label={item[`label${langCode}`]} field={item} />
           ))}
 
-        <Form.Item {...tailLayout}>
+        <Form.Item >
           <Button block type="primary" htmlType="submit">
             {translate('loginSubmit')}
           </Button>

@@ -1,4 +1,4 @@
-import Validations from '../../constants/validations';
+import Validation from '../../constants/Validation';
 
 // TODO: move rules to vallidation libs
 export default [
@@ -14,10 +14,10 @@ export default [
       { required: true, message: 'Please input!' },
     ],
   },
-  {
-    name: 'password',
-    type: 'password',
-    label: 'パスワード',
-    rules: [{ required: true, message: 'Please input!' }],
-  },
+  // {
+  //   name: 'password',
+  //   type: 'password',
+  //   label: 'パスワード',
+  //   rules: [{ required: true, message: 'Please input!' }],
+  // },
 ];

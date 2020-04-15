@@ -9,6 +9,7 @@ import {
   TimePicker,
 } from 'antd';
 import moment from 'moment';
+import Item from 'antd/lib/list/Item';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -17,21 +18,19 @@ const timeFormat = 'HH:mm';
 //TODO: fix me
 type FormFieldContentProps = {
   field: any;
+  label: string;
   defaultValue?: any;
   selectData?: any;
 };
 
-export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
-  const { type, className, label, placeholder, name, rules } = field;
-
-  console.log(rules);
+export default ({ field, label, defaultValue, selectData }: FormFieldContentProps) => {
+  const { type, className, placeholder, name, rules } = field;
 
   switch (type) {
     case 'select':
       return (
         <Form.Item
           className={className}
-          key={name}
           name={name}
           label={label}
           rules={rules}
@@ -51,9 +50,8 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
     case 'textArea':
       return (
         <Form.Item
-          key={name}
           name={name}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
@@ -79,11 +77,11 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
         <Form.Item
           key={name}
           name={name}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
-          <InputNumber size="large" placeholder={field.placeholder} />
+          <InputNumber size="large" min={field.min} max={field.max} placeholder={field.placeholder} />
         </Form.Item>
       );
 
@@ -93,7 +91,7 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
           key={name}
           name={name}
           className={className}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >
@@ -143,11 +141,12 @@ export default ({ field, defaultValue, selectData }: FormFieldContentProps) => {
         <Form.Item
           key={name}
           name={name}
+          className={className}
           label={label}
           rules={rules}
           colon={false}
         >
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} disabled={field.readOnly} />
         </Form.Item>
       );
   }

@@ -3,16 +3,14 @@ import { HOST } from '../../constants';
 export default [
   {
     name: '',
-    nameja: '陽性判定者登録',
-    icon: 'user',
+    nameJa: '陽性判定者',
     path: HOST,
     children: [],
   },
-  {
-    name: '',
-    nameja: 'ユーザー',
-    icon: 'user',
-    path: HOST + 'users',
-    children: [],
-  },
+  // {
+  //   name: '',
+  //   nameJa: 'ユーザ一覧',
+  //   path: HOST + 'users',
+  //   children: [],
+  // },
 ];

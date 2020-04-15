@@ -3,9 +3,10 @@ import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
-import PositiveDetail from '../containers/PositiveDetail';
 import Register from '../containers/Register';
 import Top from '../containers/Top';
+import PatientList from '../containers/PatientList';
+import PatientDetail from '../containers/PatientDetail';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 
@@ -33,7 +34,12 @@ const routes = [
       {
         path: HOST,
         exact: true,
-        component: PositiveDetail,
+        component: PatientList,
+      },
+      {
+        path: HOST + 'patients/:id',
+        exact: true,
+        component: PatientDetail,
       },
       {
         path: HOST + 'users/:id',
@@ -51,7 +57,7 @@ const routes = [
 
 // TODO: move real auth logic to store  JST token?
 export const fakeAuth = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   authenticate(cb: any) {
     fakeAuth.isAuthenticated = true;
     setTimeout(cb, 100); // fake async
@@ -68,25 +74,25 @@ export const RouteWithSubRoutes: any = ({
   routes,
   ...rest
 }: any) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      if (!auth || fakeAuth.isAuthenticated) {
-        // pass the sub-routes down to keep nesting
-        return <Component {...props} routes={routes} />;
-      } else {
-        return (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
-        );
-      }
-    }}
-  ></Route>
-);
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!auth || fakeAuth.isAuthenticated) {
+          // pass the sub-routes down to keep nesting
+          return <Component {...props} routes={routes} />;
+        } else {
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          );
+        }
+      }}
+    ></Route>
+  );
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */
