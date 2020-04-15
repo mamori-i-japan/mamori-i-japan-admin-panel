@@ -4,7 +4,7 @@ export default [
   {
     name: 'phone',
     type: 'input',
-    label: '電話番号',
+    label: 'phoneNumber',
     rules: [{ required: true, message: 'Please input' }],
   },
 ];

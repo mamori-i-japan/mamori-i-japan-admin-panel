@@ -7,5 +7,7 @@ export default {
   deleteItem: '削除',
   logout: 'ログアウト',
   submit: '保存',
+  registerPatient: '陽性者登録',
+  phoneNumber: '電話番号',
   footerCopyright: '管理画面 ©2020',
 };
