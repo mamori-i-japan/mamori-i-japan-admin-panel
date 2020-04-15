@@ -14,10 +14,10 @@ export default [
       { required: true, message: 'Please input!' },
     ],
   },
-  {
-    name: 'password',
-    type: 'password',
-    label: 'パスワード',
-    rules: [{ required: true, message: 'Please input!' }],
-  },
+  // {
+  //   name: 'password',
+  //   type: 'password',
+  //   label: 'パスワード',
+  //   rules: [{ required: true, message: 'Please input!' }],
+  // },
 ];
