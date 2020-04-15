@@ -11,15 +11,6 @@ import dataMap from './dataMap';
 
 const { Title } = Typography;
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 6, span: 8 },
-};
-
 export default () => {
   let history = useHistory();
   let localtion = useLocation();
@@ -42,8 +33,9 @@ export default () => {
     <LoginContainer>
       <Title level={3}>{translate('loginTitle')}</Title>
       <Form
-        {...layout}
         name="login"
+        layout="vertical"
+        size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -52,7 +44,7 @@ export default () => {
             <FormField key={item.name} field={item} />
           ))}
 
-        <Form.Item {...tailLayout}>
+        <Form.Item >
           <Button block type="primary" htmlType="submit">
             {translate('loginSubmit')}
           </Button>

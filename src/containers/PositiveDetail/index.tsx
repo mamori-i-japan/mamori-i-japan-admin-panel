@@ -21,6 +21,7 @@ export default () => {
     <ContentContainer>
       <DetailForm
         name="positive form"
+        size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >

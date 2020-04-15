@@ -9,8 +9,8 @@ export const LoginContainer = styled.div`
   height: 80vh;
 
   .ant-form {
-    width: 80%;
-    max-width: 560px;
+    width: 90%;
+    max-width: 420px;
     padding-top: 40px;
   }
 `;
