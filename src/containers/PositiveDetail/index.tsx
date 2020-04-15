@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 
 import dataMap from './dataMap';
+
+const { Title } = Typography;
 
 export default () => {
   const { translate } = useContext(I18nContext);
@@ -19,6 +21,7 @@ export default () => {
 
   return (
     <ContentContainer>
+      <Title level={4}>{translate('registerPatient')}</Title>
       <DetailForm
         name="positive form"
         onFinish={onFinish}
@@ -26,7 +29,10 @@ export default () => {
       >
         {dataMap &&
           dataMap.map((item: any) => (
-            <FormField key={item.name} field={item} />
+            <FormField
+              key={item.name}
+              field={{ ...item, label: translate(item.label) }}
+            />
           ))}
 
         <DetailForm.Item>
