@@ -9,6 +9,7 @@ import {
   TimePicker,
 } from 'antd';
 import moment from 'moment';
+import Item from 'antd/lib/list/Item';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -24,8 +25,6 @@ type FormFieldContentProps = {
 
 export default ({ field, label, defaultValue, selectData }: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules } = field;
-
-  console.log(rules);
 
   switch (type) {
     case 'select':
@@ -82,7 +81,7 @@ export default ({ field, label, defaultValue, selectData }: FormFieldContentProp
           rules={rules}
           colon={false}
         >
-          <InputNumber size="large" placeholder={field.placeholder} />
+          <InputNumber size="large" min={field.min} max={field.max} placeholder={field.placeholder} />
         </Form.Item>
       );
 
@@ -147,7 +146,7 @@ export default ({ field, label, defaultValue, selectData }: FormFieldContentProp
           rules={rules}
           colon={false}
         >
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} disabled={field.readOnly} />
         </Form.Item>
       );
   }

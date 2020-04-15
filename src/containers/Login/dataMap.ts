@@ -1,4 +1,4 @@
-import Validations from '../../constants/validations';
+import Validation from '../../constants/Validation';
 
 // TODO: move rules to vallidation libs
 export default [

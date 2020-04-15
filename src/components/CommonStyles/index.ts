@@ -15,10 +15,19 @@ export const ContentContainer = styled.div`
     width: 100%;
   }
 
+  .ant-btn-link {
+    padding-left: 0;
+  }
+
   section {
     width: 100%;
     padding-top: 24px;
     overflow-x: scroll;
+  }
+
+  .ant-table {
+    border: 1px solid #f0f0f0;
+    border-bottom: none;
   }
 `;
 

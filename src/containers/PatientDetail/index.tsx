@@ -8,6 +8,10 @@ import FormField from '../../components/FormField';
 import { langCode } from '../../constants';
 import dataMap from './dataMap';
 
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
 export default () => {
   const history = useHistory();
@@ -28,16 +32,17 @@ export default () => {
   return (
     <ContentContainer>
       <header>
-        <Button type="link" onClick={handleBack} icon={<ArrowLeftOutlined />}>
+        <Button type="link" size="large" onClick={handleBack} icon={<ArrowLeftOutlined />}>
           {translate('back')}
         </Button>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" size="large" htmlType="submit">
           {translate('submit')}
         </Button>
       </header>
 
       <section>
         <DetailForm
+          {...layout}
           name="positive form"
           size="large"
           onFinish={onFinish}
