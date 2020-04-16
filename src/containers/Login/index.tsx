@@ -40,10 +40,14 @@ export default () => {
       >
         {dataMap &&
           dataMap.map((item: any) => (
-            <FormField key={item.name} label={item[`label${langCode}`]} field={item} />
+            <FormField
+              key={item.name}
+              label={item[`label${langCode}`]}
+              field={item}
+            />
           ))}
 
-        <Form.Item >
+        <Form.Item>
           <Button block type="primary" htmlType="submit">
             {translate('loginSubmit')}
           </Button>

@@ -8,15 +8,16 @@ export const LoginContainer = styled.div`
   width: 100vw;
   height: 80vh;
 
-  .ant-form, .ant-typography {
+  .ant-form,
+  .ant-typography {
     width: 90%;
     max-width: 420px;
     padding-top: 40px;
   }
 
-  label{
+  label {
     &::before {
-      content: none!important;
+      content: none !important;
     }
   }
 `;
