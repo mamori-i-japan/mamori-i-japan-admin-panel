@@ -64,7 +64,7 @@ const routes = [
 
 // TODO: move real auth logic to store  JST token?
 export const fakeAuth = {
-  isAuthenticated: true,
+  isAuthenticated: process.env.NODE_ENV === 'development',
   authenticate(cb: any) {
     fakeAuth.isAuthenticated = true;
     setTimeout(cb, 100); // fake async
