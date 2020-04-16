@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button, Tag } from 'antd';
+// import { useHistory } from 'react-router-dom';
+import { Typography, Table } from 'antd';
 import { I18nContext } from '../../locales';
 import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -17,11 +17,10 @@ const dataSource = [
     age: 32,
     agreed: 1,
   },
-]
+];
 
 export default () => {
-
-  const history = useHistory();
+  // const history = useHistory();
   const { translate } = useContext(I18nContext);
   let columns: any = [
     {
@@ -60,15 +59,17 @@ export default () => {
       titleJa: '情報提供への同意',
       dataIndex: 'agreed',
       key: 'agreed',
-      render: (value: number) => (
-        value === 1 ? '同意' : ''
-      ),
+      render: (value: number) => (value === 1 ? '同意' : ''),
     },
   ];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     columns = columns.map((item: any) => {
-      item.title = item[`title${langCode}`];
+      return {
+        ...item,
+        title: item[`title${langCode}`],
+      };
     });
   });
 
@@ -83,4 +84,4 @@ export default () => {
       </section>
     </ContentContainer>
   );
-}
+};

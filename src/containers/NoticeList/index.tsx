@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button, Tag } from 'antd';
+import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
 import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -15,10 +15,9 @@ const dataSource = [
     address: 'address code',
     createDate: '2020.04.30',
   },
-]
+];
 
 export default () => {
-
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   let columns: any = [
@@ -53,8 +52,12 @@ export default () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     columns = columns.map((item: any) => {
-      item.title = item[`title${langCode}`];
+      return {
+        ...item,
+        title: item[`title${langCode}`],
+      };
     });
   });
 
@@ -72,4 +75,4 @@ export default () => {
       </section>
     </ContentContainer>
   );
-}
+};

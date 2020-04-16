@@ -19,7 +19,7 @@ export default () => {
 
   const handleBack = () => {
     history.goBack();
-  }
+  };
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -32,7 +32,12 @@ export default () => {
   return (
     <ContentContainer>
       <header>
-        <Button type="link" size="large" onClick={handleBack} icon={<ArrowLeftOutlined />}>
+        <Button
+          type="link"
+          size="large"
+          onClick={handleBack}
+          icon={<ArrowLeftOutlined />}
+        >
           {translate('back')}
         </Button>
         <Button type="primary" size="large" htmlType="submit">
@@ -46,7 +51,7 @@ export default () => {
           name="positive form"
           size="large"
           initialValues={{
-            status: 'positive'
+            status: 'positive',
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
