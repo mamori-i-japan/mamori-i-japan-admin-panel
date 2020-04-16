@@ -7,10 +7,10 @@ import ContactList from '../containers/ContactList';
 import NoticeList from '../containers/NoticeList';
 import PatientList from '../containers/PatientList';
 import PatientDetail from '../containers/PatientDetail';
-import Register from '../containers/Register';
-import Top from '../containers/Top';
-import AdminUserList from '../containers/AdminUserList';
-import AdminUserDetail from '../containers/AdminUserDetail';
+// import Register from '../containers/Register';
+// import Top from '../containers/Top';
+// import AdminUserList from '../containers/AdminUserList';
+// import AdminUserDetail from '../containers/AdminUserDetail';
 
 import { HOST } from '../constants';
 
@@ -81,25 +81,25 @@ export const RouteWithSubRoutes: any = ({
   routes,
   ...rest
 }: any) => (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (!auth || fakeAuth.isAuthenticated) {
-          // pass the sub-routes down to keep nesting
-          return <Component {...props} routes={routes} />;
-        } else {
-          return (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: props.location },
-              }}
-            />
-          );
-        }
-      }}
-    ></Route>
-  );
+  <Route
+    {...rest}
+    render={(props) => {
+      if (!auth || fakeAuth.isAuthenticated) {
+        // pass the sub-routes down to keep nesting
+        return <Component {...props} routes={routes} />;
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location },
+            }}
+          />
+        );
+      }
+    }}
+  ></Route>
+);
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */
