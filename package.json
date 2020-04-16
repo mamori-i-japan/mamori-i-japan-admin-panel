@@ -29,7 +29,7 @@
     "test:cov": "npm run test -- --coverage --watchAll=false",
     "test:e2e": "echo \"need e2e test scripts\"",
     "tslint": "tslint --fix --project .",
-    "deploy:dev": "npm run build && echo \"need deploy scripts\"",
+    "deploy:dev": "npm run build && firebase deploy --token \"$FIREBASE_DEV_TOKEN\"",
     "deploy:stg": "npm run build && echo \"need deploy scripts\"",
     "deploy:prd": "npm run build && echo \"need deploy scripts\"",
     "openapi-generate": "openapi-generator generate -i swagger/openapi.yml -g typescript-axios -o src/apis/openapi",
