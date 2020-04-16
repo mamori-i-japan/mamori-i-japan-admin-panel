@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import { Switch, RouteProps } from 'react-router-dom';
 import { RouteWithSubRoutes } from '../../router';
@@ -8,8 +9,8 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 import { PageLayout } from './style';
-import { useDispatch, useSelector } from 'react-redux';
-import actionTypes from '../../redux/Sidebar/actionTypes';
+
+import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
 
 const { Content } = Layout;
 
@@ -27,7 +28,7 @@ export default (props: any) => {
   );
 
   const toggleSidebarCollapse = useCallback(
-    () => dispatch({ type: actionTypes.TOGGLE_SIDEBAR_COLLAPSE }),
+    () => dispatch(toggleSidebarCollapseAction()),
     [dispatch]
   );
 

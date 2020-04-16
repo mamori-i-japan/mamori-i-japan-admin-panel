@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiHost } from '../constants/envConfig';
+import { apiHost } from '../constants';
 // eslint-disable-next-line import/no-cycle
 import { store } from '../redux/store';
 
