@@ -67,6 +67,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
+    "firebase-tools": "^8.0.3",
     "lodash": "^4.17.15",
     "redux-devtools": "^3.5.0",
     "redux-logger": "^3.0.6",
