@@ -3,10 +3,12 @@ import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
-import Register from '../containers/Register';
-import Top from '../containers/Top';
+import ContactList from '../containers/ContactList';
+import NoticeList from '../containers/NoticeList';
 import PatientList from '../containers/PatientList';
 import PatientDetail from '../containers/PatientDetail';
+import Register from '../containers/Register';
+import Top from '../containers/Top';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 
@@ -17,22 +19,22 @@ const routes = [
     path: HOST + 'login',
     component: Login,
   },
-  {
-    path: HOST + 'join',
-    component: Register,
-  },
+  // {
+  //   path: HOST + 'join',
+  //   component: Register,
+  // },
   {
     path: HOST,
     component: Dashboard,
     auth: true,
     routes: [
-      // {
-      //   path: HOST,
-      //   exact: true,
-      //   component: Top,
-      // },
       {
         path: HOST,
+        exact: true,
+        component: NoticeList,
+      },
+      {
+        path: HOST + 'patients',
         exact: true,
         component: PatientList,
       },
@@ -42,15 +44,20 @@ const routes = [
         component: PatientDetail,
       },
       {
-        path: HOST + 'users/:id',
+        path: HOST + 'contact',
         exact: true,
-        component: AdminUserDetail,
+        component: ContactList,
       },
-      {
-        path: HOST + 'users',
-        exact: true,
-        component: AdminUserList,
-      },
+      // {
+      //   path: HOST + 'users/:id',
+      //   exact: true,
+      //   component: AdminUserDetail,
+      // },
+      // {
+      //   path: HOST + 'users',
+      //   exact: true,
+      //   component: AdminUserList,
+      // },
     ],
   },
 ];
