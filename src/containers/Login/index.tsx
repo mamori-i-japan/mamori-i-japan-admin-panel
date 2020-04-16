@@ -11,11 +11,11 @@ import dataMap from './dataMap';
 const { Title } = Typography;
 
 export default () => {
-  let history = useHistory();
-  let localtion = useLocation();
+  const history = useHistory();
+  const localtion = useLocation();
   const { translate } = useContext(I18nContext);
 
-  let { from }: any = localtion.state || { from: { pathname: '/' } };
+  const { from }: any = localtion.state || { from: { pathname: '/' } };
 
   const onFinish = (values: any) => {
     console.log('Success:', values);

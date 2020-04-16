@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "test:cov": "npm run test -- --coverage --watchAll=false",
     "test:e2e": "echo \"need e2e test scripts\"",
-    "tslint": "tslint --fix --project .",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
     "deploy:dev": "npm run build && firebase deploy --token \"$FIREBASE_DEV_TOKEN\"",
     "deploy:stg": "npm run build && echo \"need deploy scripts\"",
     "deploy:prd": "npm run build && echo \"need deploy scripts\"",
