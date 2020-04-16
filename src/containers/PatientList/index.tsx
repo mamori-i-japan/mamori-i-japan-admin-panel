@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button } from 'antd';
+import { Typography, Table, Button, Tag } from 'antd';
 import { I18nContext } from '../../locales';
 import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -138,6 +138,11 @@ export default () => {
       titleJa: '状況',
       dataIndex: 'status',
       key: 'status',
+      render: (value: number) => (
+        <Tag color={value === 1 ? 'red' : 'green'}>
+          {value === 1 ? '陽性' : '回復'}
+        </Tag>
+      ),
     },
     {
       title: '',
@@ -175,6 +180,9 @@ export default () => {
       titleJa: '情報提供への同意',
       dataIndex: 'agreed',
       key: 'agreed',
+      render: (value: number) => (
+        value === 1 ? '同意' : ''
+      ),
     },
   ];
 
