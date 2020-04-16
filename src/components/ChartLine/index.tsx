@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart, Tooltip, Axis, Legend, Line, Point } from 'viser-react';
 
-const DataSet = require('@antv/data-set');
+import DataSet from '@antv/data-set';
 
 export default ({ dataKey, fields, sourceData }: any) => {
   const dv = new DataSet.View().source(sourceData);

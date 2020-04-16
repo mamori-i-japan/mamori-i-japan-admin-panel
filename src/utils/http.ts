@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { apiHost } from '../constants';
 // eslint-disable-next-line import/no-cycle
-import { store } from '../redux/store';
+// import { store } from '../redux/store';
 
 const AxiosRequestInterceptor = async (config: any) => {
   const configTemp = config;
