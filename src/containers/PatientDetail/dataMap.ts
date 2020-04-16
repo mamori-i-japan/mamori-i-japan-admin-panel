@@ -6,6 +6,16 @@ export default [
     type: 'radio',
     label: '',
     labelJa: '状況',
+    options: [
+      {
+        name: '陽性',
+        value: 'positive'
+      },
+      {
+        name: '陰性',
+        value: 'negative'
+      }
+    ],
     rules: [],
   },
   {
@@ -18,7 +28,7 @@ export default [
   {
     name: 'uuid',
     type: 'input',
-    label: '年齢',
+    label: '',
     labelJa: 'UUID',
     rules: [],
   },

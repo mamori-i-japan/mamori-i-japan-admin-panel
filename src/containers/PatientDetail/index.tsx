@@ -45,6 +45,9 @@ export default () => {
           {...layout}
           name="positive form"
           size="large"
+          initialValues={{
+            status: 'positive'
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >

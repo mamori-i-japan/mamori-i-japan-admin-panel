@@ -7,9 +7,9 @@ import {
   InputNumber,
   Checkbox,
   TimePicker,
+  Radio,
 } from 'antd';
 import moment from 'moment';
-import Item from 'antd/lib/list/Item';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -19,11 +19,16 @@ const timeFormat = 'HH:mm';
 type FormFieldContentProps = {
   field: any;
   label: string;
-  defaultValue?: any;
+  defaultValue?: string | boolean | number;
   selectData?: any;
 };
 
-export default ({ field, label, defaultValue, selectData }: FormFieldContentProps) => {
+export default ({
+  field,
+  label,
+  defaultValue,
+  selectData,
+}: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules } = field;
 
   switch (type) {
@@ -47,41 +52,23 @@ export default ({ field, label, defaultValue, selectData }: FormFieldContentProp
         </Form.Item>
       );
 
-    case 'textArea':
+    case 'radio':
       return (
         <Form.Item
+          className={className}
           name={name}
           label={label}
           rules={rules}
           colon={false}
         >
-          <TextArea placeholder={field.placeholder} />
-        </Form.Item>
-      );
-
-    case 'date':
-      return (
-        <Form.Item
-          key={name}
-          name={name}
-          label={field.label}
-          rules={rules}
-          colon={false}
-        >
-          <DatePicker size="large" />
-        </Form.Item>
-      );
-
-    case 'inputNumber':
-      return (
-        <Form.Item
-          key={name}
-          name={name}
-          label={label}
-          rules={rules}
-          colon={false}
-        >
-          <InputNumber size="large" min={field.min} max={field.max} placeholder={field.placeholder} />
+          <Radio.Group>
+            {field.options &&
+              field.options.map(
+                ({ value, name }: { value: string; name: string }) => (
+                  <Radio key={value} value={value}>{name}</Radio>
+                )
+              )}
+          </Radio.Group>
         </Form.Item>
       );
 
@@ -96,6 +83,19 @@ export default ({ field, label, defaultValue, selectData }: FormFieldContentProp
           colon={false}
         >
           <Checkbox />
+        </Form.Item>
+      );
+
+    case 'date':
+      return (
+        <Form.Item
+          key={name}
+          name={name}
+          label={field.label}
+          rules={rules}
+          colon={false}
+        >
+          <DatePicker size="large" />
         </Form.Item>
       );
 
@@ -133,6 +133,31 @@ export default ({ field, label, defaultValue, selectData }: FormFieldContentProp
           colon={false}
         >
           <Input.Password placeholder={placeholder} />
+        </Form.Item>
+      );
+
+    case 'textArea':
+      return (
+        <Form.Item name={name} label={label} rules={rules} colon={false}>
+          <TextArea placeholder={field.placeholder} />
+        </Form.Item>
+      );
+
+    case 'inputNumber':
+      return (
+        <Form.Item
+          key={name}
+          name={name}
+          label={label}
+          rules={rules}
+          colon={false}
+        >
+          <InputNumber
+            size="large"
+            min={field.min}
+            max={field.max}
+            placeholder={field.placeholder}
+          />
         </Form.Item>
       );
 
