@@ -23,6 +23,11 @@ describe('MessageList', () => {
       })),
     });
 
+    //Mock canvas (used by antd)
+    window.HTMLCanvasElement.prototype.getContext = () => {
+      return {};
+    };
+
     const component = mount(
       <MemoryRouter keyLength={0}>
         <MessageList />

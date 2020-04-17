@@ -221,7 +221,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                 dataSource={
                   Array [
                     Object {
-                      "address": "address code",
+                      "address": "東京都",
                       "content": "text text text text text",
                       "createDate": "2020.04.30",
                       "id": 1,
@@ -277,7 +277,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                           data={
                             Array [
                               Object {
-                                "address": "address code",
+                                "address": "東京都",
                                 "content": "text text text text text",
                                 "createDate": "2020.04.30",
                                 "id": 1,
@@ -288,7 +288,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                           dataSource={
                             Array [
                               Object {
-                                "address": "address code",
+                                "address": "東京都",
                                 "content": "text text text text text",
                                 "createDate": "2020.04.30",
                                 "id": 1,
@@ -366,7 +366,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                         <td
                                           class="ant-table-cell"
                                         >
-                                          address code
+                                          東京都
                                         </td>
                                         <td
                                           class="ant-table-cell"
@@ -420,7 +420,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                   ],
                                   "data": Array [
                                     Object {
-                                      "address": "address code",
+                                      "address": "東京都",
                                       "content": "text text text text text",
                                       "createDate": "2020.04.30",
                                       "id": 1,
@@ -429,7 +429,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                   ],
                                   "dataSource": Array [
                                     Object {
-                                      "address": "address code",
+                                      "address": "東京都",
                                       "content": "text text text text text",
                                       "createDate": "2020.04.30",
                                       "id": 1,
@@ -502,7 +502,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                               <td
                                                 class="ant-table-cell"
                                               >
-                                                address code
+                                                東京都
                                               </td>
                                               <td
                                                 class="ant-table-cell"
@@ -915,7 +915,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                       data={
                                         Array [
                                           Object {
-                                            "address": "address code",
+                                            "address": "東京都",
                                             "content": "text text text text text",
                                             "createDate": "2020.04.30",
                                             "id": 1,
@@ -955,7 +955,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                           key="1"
                                           record={
                                             Object {
-                                              "address": "address code",
+                                              "address": "東京都",
                                               "content": "text text text text text",
                                               "createDate": "2020.04.30",
                                               "id": 1,
@@ -1000,7 +1000,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                               prefixCls="ant-table"
                                               record={
                                                 Object {
-                                                  "address": "address code",
+                                                  "address": "東京都",
                                                   "content": "text text text text text",
                                                   "createDate": "2020.04.30",
                                                   "id": 1,
@@ -1029,7 +1029,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                               prefixCls="ant-table"
                                               record={
                                                 Object {
-                                                  "address": "address code",
+                                                  "address": "東京都",
                                                   "content": "text text text text text",
                                                   "createDate": "2020.04.30",
                                                   "id": 1,
@@ -1058,7 +1058,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                               prefixCls="ant-table"
                                               record={
                                                 Object {
-                                                  "address": "address code",
+                                                  "address": "東京都",
                                                   "content": "text text text text text",
                                                   "createDate": "2020.04.30",
                                                   "id": 1,
@@ -1072,7 +1072,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                                 rowSpan={null}
                                                 style={Object {}}
                                               >
-                                                address code
+                                                東京都
                                               </td>
                                             </Cell>
                                             <Cell
@@ -1087,7 +1087,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                                               prefixCls="ant-table"
                                               record={
                                                 Object {
-                                                  "address": "address code",
+                                                  "address": "東京都",
                                                   "content": "text text text text text",
                                                   "createDate": "2020.04.30",
                                                   "id": 1,
