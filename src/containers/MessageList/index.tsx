@@ -29,17 +29,17 @@ export default () => {
       key: 'id',
     },
     {
-      title: translate('content'),
+      title: 'content',
       dataIndex: 'content',
       key: 'content',
     },
     {
-      title: translate('prefecture'),
+      title: 'prefecture',
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: translate('registrationDate'),
+      title: 'registrationDate',
       dataIndex: 'createDate',
       key: 'createDate',
     },
@@ -63,7 +63,12 @@ export default () => {
           bordered={true}
           loading={loading}
           dataSource={dataSource}
-          columns={columns}
+          columns={columns.map((item: any) => {
+            return {
+              ...item,
+              title: translate(item.title),
+            };
+          })}
         />
       </section>
     </ContentContainer>
