@@ -4,9 +4,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import ContactList from '../containers/ContactList';
-import NoticeList from '../containers/NoticeList';
-import PatientList from '../containers/PositiveList';
-import PatientDetail from '../containers/PositiveDetail';
+import MessageList from '../containers/MessageList';
+import PositiveList from '../containers/PositiveList';
+import PositiveDetail from '../containers/PositiveDetail';
 // import Register from '../containers/Register';
 // import Top from '../containers/Top';
 // import AdminUserList from '../containers/AdminUserList';
@@ -31,17 +31,17 @@ const routes = [
       {
         path: HOST,
         exact: true,
-        component: NoticeList,
+        component: MessageList,
       },
       {
         path: HOST + 'positives',
         exact: true,
-        component: PatientList,
+        component: PositiveList,
       },
       {
         path: HOST + 'positives/:id',
         exact: true,
-        component: PatientDetail,
+        component: PositiveDetail,
       },
       {
         path: HOST + 'contacts',

@@ -1,1 +1,1 @@
-export const updateNotice = 'temp';
+export { };
