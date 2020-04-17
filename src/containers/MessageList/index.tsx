@@ -4,6 +4,7 @@ import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import { ColumnsType } from 'antd/es/table/interface';
+import prefecturesMap from '../../constants/Prefecture';
 
 const { Title } = Typography;
 
@@ -12,7 +13,7 @@ const dataSource = [
     key: 1,
     id: 1,
     content: 'text text text text text',
-    address: 'address code',
+    address: prefecturesMap['ja'][13],
     createDate: '2020.04.30',
   },
 ];
