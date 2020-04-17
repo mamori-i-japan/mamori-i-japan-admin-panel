@@ -9,7 +9,7 @@ const langLocales: any = {
   Ja: jaJP,
 };
 
-const getTranslate = (langCode: string) => (key: string): String =>
+const getTranslate = (langCode: string) => (key: string): string =>
   langLocales[langCode][key] || key;
 
 const initialState = {

@@ -1,4 +1,4 @@
-import Validations from '../../constants/Validation';
+// import Validations from '../../constants/Validation';
 
 export default [
   {
@@ -9,12 +9,12 @@ export default [
     options: [
       {
         name: '陽性',
-        value: 'positive'
+        value: 'positive',
       },
       {
         name: '陰性',
-        value: 'negative'
-      }
+        value: 'negative',
+      },
     ],
     rules: [],
   },
@@ -48,5 +48,13 @@ export default [
     label: '',
     labelJa: '登録日',
     rules: [],
-  }
+  },
+  // {
+  //   readOnly: true,
+  //   name: 'agreed',
+  //   type: 'input',
+  //   label: '',
+  //   labelJa: '情報提供への同意',
+  //   rules: [],
+  // },
 ];

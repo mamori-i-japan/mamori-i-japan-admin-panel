@@ -9,7 +9,7 @@ import {
   TimePicker,
   Radio,
 } from 'antd';
-import moment from 'moment';
+// import moment from 'moment';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -65,7 +65,9 @@ export default ({
             {field.options &&
               field.options.map(
                 ({ value, name }: { value: string; name: string }) => (
-                  <Radio key={value} value={value}>{name}</Radio>
+                  <Radio key={value} value={value}>
+                    {name}
+                  </Radio>
                 )
               )}
           </Radio.Group>
