@@ -20,44 +20,38 @@ const dataSource = [
 ];
 
 export default () => {
-  // const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
+
   let columns: any = [
     {
-      title: '',
-      titleJa: '電話番号',
+      title: 'phone',
       dataIndex: 'phone',
       key: 'phone',
     },
     {
-      title: '',
-      titleJa: 'UUID',
+      title: 'UUID',
       dataIndex: 'uuid',
       key: 'uuid',
     },
     {
-      title: '',
-      titleJa: '年齢',
+      title: 'age',
       dataIndex: 'age',
       key: 'age',
     },
 
     {
-      title: '',
-      titleJa: '都道府県',
+      title: 'address',
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: '',
-      titleJa: '登録日',
+      title: 'createDate',
       dataIndex: 'createDate',
       key: 'createDate',
     },
     {
-      title: '',
-      titleJa: '情報提供への同意',
+      title: 'agreed',
       dataIndex: 'agreed',
       key: 'agreed',
       render: (value: number) => (value === 1 ? '同意' : ''),
@@ -81,7 +75,7 @@ export default () => {
       </header>
 
       <section>
-        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
+        <Table loading={loading} dataSource={dataSource} columns={columns} />
       </section>
     </ContentContainer>
   );

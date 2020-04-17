@@ -10,4 +10,18 @@ export default {
   logout: 'ログアウト',
   submit: '保存',
   footerCopyright: '管理画面 ©2020',
+  message: 'メッセージ',
+  status: '状況',
+  positive: '陽性判定者',
+  contact: '濃厚接触者',
+  phone: '電話番号',
+  address: '都道府県',
+  age: '年齢',
+  createDate: '登録日',
+  agreed: '情報提供への同意',
+  positiveStatus: '陽性',
+  negativeStatus: '陰性',
+  email: 'メールアドレス',
+  password: 'パスワード',
+  content: '内容'
 };

@@ -5,8 +5,7 @@ export default [
   {
     name: 'email',
     type: 'input',
-    label: '',
-    labelJa: 'メールアドレス',
+    label: 'mail',
     rules: [
       {
         type: 'email',
@@ -18,7 +17,7 @@ export default [
   // {
   //   name: 'password',
   //   type: 'password',
-  //   label: 'パスワード',
+  //   label: 'password',
   //   rules: [{ required: true, message: 'Please input!' }],
   // },
 ];

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button } from 'antd';
+import { Typography, Table, Button, Tag } from 'antd';
 import { I18nContext } from '../../locales';
 import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -10,11 +10,14 @@ const { Title } = Typography;
 const dataSource = [
   {
     key: 1,
-    id: 1,
-    content: 'text text text text text',
+    status: 1,
+    phone: '08077667788',
+    uuid: '',
     address: 'address code',
     createDate: '2020.04.30',
-  },
+    age: 32,
+    agreed: 1,
+  }
 ];
 
 export default () => {
@@ -23,15 +26,31 @@ export default () => {
   const loading = false;
   let columns: any = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'status',
+      dataIndex: 'status',
+      key: 'status',
+      render: (value: number) => (
+        <Tag color={value === 1 ? 'red' : 'green'}>
+          {value === 1 ? '陽性' : '回復'}
+        </Tag>
+      ),
     },
     {
-      title: 'content',
-      dataIndex: 'content',
-      key: 'content',
+      title: 'phone',
+      dataIndex: 'phone',
+      key: 'phone',
     },
+    {
+      title: 'UUID',
+      dataIndex: 'uuid',
+      key: 'uuid',
+    },
+    {
+      title: 'age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+
     {
       title: 'address',
       dataIndex: 'address',
@@ -41,6 +60,12 @@ export default () => {
       title: 'createDate',
       dataIndex: 'createDate',
       key: 'createDate',
+    },
+    {
+      title: 'agreed',
+      dataIndex: 'agreed',
+      key: 'agreed',
+      render: (value: number) => (value === 1 ? '同意' : ''),
     },
   ];
 
@@ -68,7 +93,7 @@ export default () => {
       </header>
 
       <section>
-        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
+        <Table loading={loading} dataSource={dataSource} columns={columns} />
       </section>
     </ContentContainer>
   );

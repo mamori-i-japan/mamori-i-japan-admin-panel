@@ -5,8 +5,8 @@ import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import ContactList from '../containers/ContactList';
 import NoticeList from '../containers/NoticeList';
-import PatientList from '../containers/PatientList';
-import PatientDetail from '../containers/PatientDetail';
+import PatientList from '../containers/PositiveList';
+import PatientDetail from '../containers/PositiveDetail';
 // import Register from '../containers/Register';
 // import Top from '../containers/Top';
 // import AdminUserList from '../containers/AdminUserList';
@@ -34,12 +34,12 @@ const routes = [
         component: NoticeList,
       },
       {
-        path: HOST + 'patients',
+        path: HOST + 'positives',
         exact: true,
         component: PatientList,
       },
       {
-        path: HOST + 'patients/:id',
+        path: HOST + 'positives/:id',
         exact: true,
         component: PatientDetail,
       },
@@ -81,25 +81,25 @@ export const RouteWithSubRoutes: any = ({
   routes,
   ...rest
 }: any) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      if (!auth || fakeAuth.isAuthenticated) {
-        // pass the sub-routes down to keep nesting
-        return <Component {...props} routes={routes} />;
-      } else {
-        return (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
-        );
-      }
-    }}
-  ></Route>
-);
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!auth || fakeAuth.isAuthenticated) {
+          // pass the sub-routes down to keep nesting
+          return <Component {...props} routes={routes} />;
+        } else {
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          );
+        }
+      }}
+    ></Route>
+  );
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */
