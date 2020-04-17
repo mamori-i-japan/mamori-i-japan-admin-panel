@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
-import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
+import { ColumnsType } from 'antd/es/table/interface';
+import prefecturesMap from '../../constants/Prefecture';
 
 const { Title } = Typography;
 
@@ -12,7 +13,7 @@ const dataSource = [
     key: 1,
     id: 1,
     content: 'text text text text text',
-    address: 'address code',
+    address: prefecturesMap['ja'][13],
     createDate: '2020.04.30',
   },
 ];
@@ -21,28 +22,24 @@ export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
-  let columns: any = [
+  const columns: ColumnsType<object> = [
     {
-      title: '',
-      titleJa: 'ID',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
     },
     {
-      title: '',
-      titleJa: '内容',
+      title: 'content',
       dataIndex: 'content',
       key: 'content',
     },
     {
-      title: '',
-      titleJa: '都道府県',
+      title: 'prefecture',
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: '',
-      titleJa: '登録日',
+      title: 'registrationDate',
       dataIndex: 'createDate',
       key: 'createDate',
     },
@@ -51,16 +48,6 @@ export default () => {
   const handleCreate = () => {
     history.push('/patients/create');
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    columns = columns.map((item: any) => {
-      return {
-        ...item,
-        title: item[`title${langCode}`],
-      };
-    });
-  });
 
   return (
     <ContentContainer>
@@ -72,7 +59,17 @@ export default () => {
       </header>
 
       <section>
-        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
+        <Table
+          bordered={true}
+          loading={loading}
+          dataSource={dataSource}
+          columns={columns.map((item: any) => {
+            return {
+              ...item,
+              title: translate(item.title),
+            };
+          })}
+        />
       </section>
     </ContentContainer>
   );

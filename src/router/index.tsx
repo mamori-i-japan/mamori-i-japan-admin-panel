@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import ContactList from '../containers/ContactList';
-import NoticeList from '../containers/NoticeList';
+import MessageList from '../containers/MessageList';
 import PatientList from '../containers/PatientList';
 import PatientDetail from '../containers/PatientDetail';
 // import Register from '../containers/Register';
@@ -31,7 +31,7 @@ const routes = [
       {
         path: HOST,
         exact: true,
-        component: NoticeList,
+        component: MessageList,
       },
       {
         path: HOST + 'patients',

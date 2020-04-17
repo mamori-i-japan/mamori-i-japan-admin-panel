@@ -10,5 +10,8 @@ export default {
   back: 'Go back',
   retisterPatient: 'Register patient',
   phoneNumber: 'Phone number',
+  content: 'Content',
+  prefecture: 'Prefecture',
+  registrationDate: 'Registration date',
   footerCopyright: 'Admin Panel ©2020',
 };
