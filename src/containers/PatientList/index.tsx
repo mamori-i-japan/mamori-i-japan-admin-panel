@@ -180,9 +180,7 @@ export default () => {
       titleJa: '情報提供への同意',
       dataIndex: 'agreed',
       key: 'agreed',
-      render: (value: number) => (
-        value === 1 ? '同意' : ''
-      ),
+      render: (value: number) => (value === 1 ? '同意' : ''),
     },
   ];
 
@@ -191,8 +189,12 @@ export default () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     columns = columns.map((item: any) => {
-      item.title = item[`title${langCode}`];
+      return {
+        ...item,
+        title: item[`title${langCode}`],
+      };
     });
   });
 
