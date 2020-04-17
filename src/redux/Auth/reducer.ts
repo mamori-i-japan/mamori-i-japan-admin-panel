@@ -2,17 +2,17 @@ import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
 
 const initialState = {
-  token: null
+  token: ''
 }
 
 export default handleActions(
   {
-    [actionTypes.LOGIN_SUCCESS]: ({ token }: any) => ({
+    [actionTypes.LOGIN_SUCCESS]: (state, { payload: { token } }) => ({
       token
     }),
 
     [actionTypes.LOGOUT_SUCCESS]: () => ({
-      token: null
+      token: ''
     })
   },
   initialState

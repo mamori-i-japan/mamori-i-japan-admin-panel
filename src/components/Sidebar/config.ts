@@ -16,4 +16,9 @@ export default [
     path: HOST + 'contacts',
     children: [],
   },
+  {
+    name: 'user',
+    path: HOST + 'users',
+    children: [],
+  },
 ];

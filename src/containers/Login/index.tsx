@@ -1,8 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { fakeAuth } from '../../router';
+import { useDispatch } from 'react-redux';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
 import { LoginContainer } from './style';
@@ -19,19 +18,12 @@ export default () => {
 
   const { from }: any = localtion.state || { from: { pathname: '/' } };
 
-  const isAuth = useSelector(
-    (store: any) => store.auth.token
-  );
-
   const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
-
 
   const onFinish = (values: any) => {
     login(values);
 
-    // return fakeAuth.authenticate(() => {
-    //   history.replace(from);
-    // });
+    // history.replace(from)
   };
 
   const onFinishFailed = (errorInfo: any) => {

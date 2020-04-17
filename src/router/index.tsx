@@ -7,10 +7,10 @@ import ContactList from '../containers/ContactList';
 import MessageList from '../containers/MessageList';
 import PositiveList from '../containers/PositiveList';
 import PositiveDetail from '../containers/PositiveDetail';
+import AdminUserList from '../containers/AdminUserList';
+import AdminUserDetail from '../containers/AdminUserDetail';
 // import Register from '../containers/Register';
 // import Top from '../containers/Top';
-// import AdminUserList from '../containers/AdminUserList';
-// import AdminUserDetail from '../containers/AdminUserDetail';
 
 import { HOST } from '../constants';
 
@@ -48,16 +48,16 @@ const routes = [
         exact: true,
         component: ContactList,
       },
-      // {
-      //   path: HOST + 'users/:id',
-      //   exact: true,
-      //   component: AdminUserDetail,
-      // },
-      // {
-      //   path: HOST + 'users',
-      //   exact: true,
-      //   component: AdminUserList,
-      // },
+      {
+        path: HOST + 'users/:id',
+        exact: true,
+        component: AdminUserDetail,
+      },
+      {
+        path: HOST + 'users',
+        exact: true,
+        component: AdminUserList,
+      },
     ],
   },
 ];

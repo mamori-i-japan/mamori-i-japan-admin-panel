@@ -4,11 +4,11 @@ import { store } from '../redux/store';
 
 const AxiosRequestInterceptor = async (config: any) => {
   const configTemp = config;
-  const { accessToken } = store.getState().auth.token;
+  const token = store.getState().auth.token;
 
   configTemp.headers = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${accessToken || ''}`,
+    Authorization: `Bearer ${token}`,
     ...configTemp.headers,
   };
 
