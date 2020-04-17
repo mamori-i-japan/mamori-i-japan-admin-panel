@@ -20,68 +20,59 @@ const dataSource = [
   }
 ];
 
+export let columns: any = [
+  {
+    title: 'status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: number) => (
+      <Tag color={value === 1 ? 'red' : 'green'}>
+        {value === 1 ? '陽性' : '回復'}
+      </Tag>
+    ),
+  },
+  {
+    title: 'phone',
+    dataIndex: 'phone',
+    key: 'phone',
+  },
+  {
+    title: 'UUID',
+    dataIndex: 'uuid',
+    key: 'uuid',
+  },
+  {
+    title: 'age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+
+  {
+    title: 'address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'createDate',
+    dataIndex: 'createDate',
+    key: 'createDate',
+  },
+  {
+    title: 'agreed',
+    dataIndex: 'agreed',
+    key: 'agreed',
+    render: (value: number) => (value === 1 ? '同意' : ''),
+  },
+];
+
 export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
-  let columns: any = [
-    {
-      title: 'status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (value: number) => (
-        <Tag color={value === 1 ? 'red' : 'green'}>
-          {value === 1 ? '陽性' : '回復'}
-        </Tag>
-      ),
-    },
-    {
-      title: 'phone',
-      dataIndex: 'phone',
-      key: 'phone',
-    },
-    {
-      title: 'UUID',
-      dataIndex: 'uuid',
-      key: 'uuid',
-    },
-    {
-      title: 'age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-
-    {
-      title: 'address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'createDate',
-      dataIndex: 'createDate',
-      key: 'createDate',
-    },
-    {
-      title: 'agreed',
-      dataIndex: 'agreed',
-      key: 'agreed',
-      render: (value: number) => (value === 1 ? '同意' : ''),
-    },
-  ];
 
   const handleCreate = () => {
     history.push('/positives/create');
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    columns = columns.map((item: any) => {
-      return {
-        ...item,
-        title: item[`title${langCode}`],
-      };
-    });
-  });
 
   return (
     <ContentContainer>
@@ -93,7 +84,12 @@ export default () => {
       </header>
 
       <section>
-        <Table loading={loading} dataSource={dataSource} columns={columns} />
+        <Table loading={loading} dataSource={dataSource} columns={columns.map((item: any) => {
+          return {
+            ...item,
+            title: translate(item.title),
+          };
+        })} />
       </section>
     </ContentContainer>
   );

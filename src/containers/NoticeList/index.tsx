@@ -48,16 +48,6 @@ export default () => {
     history.push('/positives/create');
   };
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    columns = columns.map((item: any) => {
-      return {
-        ...item,
-        title: item[`title${langCode}`],
-      };
-    });
-  });
-
   return (
     <ContentContainer>
       <header>
@@ -68,7 +58,12 @@ export default () => {
       </header>
 
       <section>
-        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
+        <Table loading={loading} dataSource={dataSource} columns={columns.map((item: any) => {
+          return {
+            ...item,
+            title: translate(item.title),
+          };
+        })} />
       </section>
     </ContentContainer>
   );

@@ -60,7 +60,7 @@ export default () => {
             dataMap.map((item: any) => (
               <FormField
                 key={item.name}
-                label={item[`label${langCode}`]}
+                label={translate(item.label)}
                 field={item}
               />
             ))}

@@ -44,7 +44,7 @@ const routes = [
         component: PatientDetail,
       },
       {
-        path: HOST + 'contact',
+        path: HOST + 'contacts',
         exact: true,
         component: ContactList,
       },
