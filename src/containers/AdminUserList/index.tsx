@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button, Tag } from 'antd';
+import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales'
 import { ContentContainer } from '../../components/CommonStyles';
 

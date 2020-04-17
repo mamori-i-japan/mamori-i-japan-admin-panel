@@ -15,42 +15,55 @@ const onAuthStateChanged = () => {
   });
 };
 
+const signInWithEmailLink: any = async (email: string) => {
+  const { user } = await auth.signInWithEmailLink(email, window.location.href);
+
+  // Clear the URL to remove the sign-in link parameters.
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.href.split('?')[0]
+    );
+  }
+
+  // Clear email from storage.
+  localStorage.removeItem('emailForSignIn');
+
+  return user;
+};
+
 function* loginSaga() {
   yield takeEvery(actionTypes.LOGIN, function* _({ payload }: any) {
+    let user;
     // Confirm the link is a sign-in with email link.
     if (auth.isSignInWithEmailLink(window.location.href)) {
-      const user = yield call(onAuthStateChanged);
+      let email = localStorage.getItem('emailForSignIn');
 
-      if (user) {
-        const idToken = yield call([user, user.getIdToken]);
-
-        yield put({ type: actionTypes.LOGIN_SUCCESS, payload: { token: idToken } });
-
-        const res = yield call(login, payload);
-
-        // console.log(res);
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt('Please provide your email for confirmation');
+      } else {
+        // The client SDK will parse the code from the link for you.
+        user = yield call(signInWithEmailLink, email);
       }
+    } else {
+      user = yield call(onAuthStateChanged);
     }
 
-    // let localStorageEmail = localStorage.getItem('emailForSignIn');
+    if (user) {
+      const idToken = yield call([user, user.getIdToken]);
 
-    // if (!localStorageEmail) {
-    //   // User opened the link on a different device. To prevent session fixation
-    //   // attacks, ask the user to provide the associated email again. For example:
-    //   localStorageEmail = window.prompt('Please provide your email for confirmation');
-    // }
+      yield put({
+        type: actionTypes.LOGIN_SUCCESS,
+        payload: { token: idToken },
+      });
 
-    // // The client SDK will parse the code from the link for you.
-    // yield auth.signInWithEmailLink(email, window.location.href)
-    //   .then(function (result) {
-    //     // Clear email from storage.
-    //     window.localStorage.removeItem('emailForSignIn');
+      const res = yield call(login, payload);
 
-    //   })
-    //   .catch(function (error) {
-    //     // Some error occurred, you can inspect the code: error.code
-    //     // Common errors could be invalid email and invalid or expired OTPs.
-    //   });
+      console.log(res);
+    }
   });
 }
 

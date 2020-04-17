@@ -23,7 +23,7 @@ export default () => {
   const onFinish = (values: any) => {
     login(values);
 
-    // history.replace(from)
+    // history.replace(from);
   };
 
   const onFinishFailed = (errorInfo: any) => {
