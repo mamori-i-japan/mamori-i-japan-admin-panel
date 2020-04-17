@@ -132,6 +132,7 @@ const dataSource = [
 export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
+  const loading = false;
   let columns: any = [
     {
       title: '',
@@ -206,7 +207,7 @@ export default () => {
       </header>
 
       <section>
-        <Table dataSource={dataSource} columns={columns} />
+        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
       </section>
     </ContentContainer>
   );

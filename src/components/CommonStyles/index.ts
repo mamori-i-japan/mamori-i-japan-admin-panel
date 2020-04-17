@@ -24,11 +24,6 @@ export const ContentContainer = styled.div`
     padding-top: 24px;
     overflow-x: scroll;
   }
-
-  .ant-table {
-    border: 1px solid #f0f0f0;
-    border-bottom: none;
-  }
 `;
 
 export const DetailForm = styled(Form)`
