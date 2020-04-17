@@ -26,5 +26,4 @@ export default {
   negativeStatus: '陰性',
   email: 'メールアドレス',
   password: 'パスワード',
-  content: '内容',
 };
