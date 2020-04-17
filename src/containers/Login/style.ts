@@ -20,4 +20,8 @@ export const LoginContainer = styled.div`
       content: none !important;
     }
   }
+
+  button {
+    margin-top: 8px;
+  }
 `;

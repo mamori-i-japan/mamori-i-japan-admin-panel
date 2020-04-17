@@ -1,8 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { Typography, Table } from 'antd';
 import { I18nContext } from '../../locales';
-import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
 import { columns } from '../PositiveList';
 
@@ -14,7 +12,7 @@ const dataSource = [
     phone: '08077667788',
     uuid: '',
     address: 'address code',
-    createDate: '2020.04.30',
+    createdDate: '2020.04.30',
     age: 32,
     agreed: 1,
   },

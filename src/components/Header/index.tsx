@@ -14,7 +14,7 @@ interface HeaderProps {
 }
 
 export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {
-  let history = useHistory();
+  const history = useHistory();
   const { translate } = useContext(I18nContext);
 
   const handleLogout = () => {

@@ -5,7 +5,7 @@ export default [
   {
     name: 'email',
     type: 'input',
-    label: 'mail',
+    label: 'email',
     rules: [
       {
         type: 'email',

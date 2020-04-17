@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
-import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
 
 const { Title } = Typography;
@@ -13,7 +12,7 @@ const dataSource = [
     id: 1,
     content: 'text text text text text',
     address: 'address code',
-    createDate: '2020.04.30',
+    createdDate: '2020.04.30',
   },
 ];
 
@@ -21,7 +20,7 @@ export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
-  let columns: any = [
+  const columns: any = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -38,9 +37,9 @@ export default () => {
       key: 'address',
     },
     {
-      title: 'createDate',
-      dataIndex: 'createDate',
-      key: 'createDate',
+      title: 'createdDate',
+      dataIndex: 'createdDate',
+      key: 'createdDate',
     },
   ];
 
