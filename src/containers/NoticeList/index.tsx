@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
-import { langCode } from '../../constants';
 import { ContentContainer } from '../../components/CommonStyles';
+import { ColumnsType } from 'antd/es/table/interface';
 
 const { Title } = Typography;
 
@@ -21,28 +21,24 @@ export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
-  let columns: any = [
+  const columns: ColumnsType<object> = [
     {
-      title: '',
-      titleJa: 'ID',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
     },
     {
-      title: '',
-      titleJa: '内容',
+      title: translate('content'),
       dataIndex: 'content',
       key: 'content',
     },
     {
-      title: '',
-      titleJa: '都道府県',
+      title: translate('prefecture'),
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: '',
-      titleJa: '登録日',
+      title: translate('registrationDate'),
       dataIndex: 'createDate',
       key: 'createDate',
     },
@@ -51,16 +47,6 @@ export default () => {
   const handleCreate = () => {
     history.push('/patients/create');
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    columns = columns.map((item: any) => {
-      return {
-        ...item,
-        title: item[`title${langCode}`],
-      };
-    });
-  });
 
   return (
     <ContentContainer>
@@ -72,7 +58,12 @@ export default () => {
       </header>
 
       <section>
-        <Table bordered={true} loading={loading} dataSource={dataSource} columns={columns} />
+        <Table
+          bordered={true}
+          loading={loading}
+          dataSource={dataSource}
+          columns={columns}
+        />
       </section>
     </ContentContainer>
   );
