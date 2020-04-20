@@ -9,6 +9,7 @@ import PositiveList from '../containers/PositiveList';
 import PositiveDetail from '../containers/PositiveDetail';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
+import { store } from '../redux/store';
 // import Register from '../containers/Register';
 // import Top from '../containers/Top';
 
@@ -62,19 +63,6 @@ const routes = [
   },
 ];
 
-// TODO: move real auth logic to store  JST token?
-export const fakeAuth = {
-  isAuthenticated: process.env.NODE_ENV === 'development',
-  authenticate(cb: any) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb: any) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-};
-
 export const RouteWithSubRoutes: any = ({
   component: Component,
   auth,
@@ -84,7 +72,7 @@ export const RouteWithSubRoutes: any = ({
     <Route
       {...rest}
       render={(props) => {
-        if (!auth || fakeAuth.isAuthenticated) {
+        if (!auth || store.getState().auth.token) {
           // pass the sub-routes down to keep nesting
           return <Component {...props} routes={routes} />;
         } else {

@@ -56,17 +56,38 @@ function* loginSaga() {
       const idToken = yield call([user, user.getIdToken]);
 
       yield put({
-        type: actionTypes.LOGIN_SUCCESS,
+        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
         payload: { token: idToken },
       });
 
       const res = yield call(login, payload);
 
-      console.log(res);
+      if (res.data && auth.currentUser) {
+        user = yield auth.currentUser;
+
+        const refreshToken = yield call([user, user.getIdToken], true);
+
+        yield localStorage.setItem('token', refreshToken);
+
+        yield put({
+          type: actionTypes.LOGIN_SUCCESS,
+          payload: { token: refreshToken, email: res.data.email },
+        });
+      }
     }
   });
 }
 
+function* logoutSaga() {
+  yield takeEvery(actionTypes.LOGOUT, function* _() {
+    localStorage.removeItem('token');
+
+    yield put({
+      type: actionTypes.LOGIN_SUCCESS,
+    });
+  });
+}
+
 export default function* rootSaga() {
-  yield all([fork(loginSaga)]);
+  yield all([fork(loginSaga), fork(logoutSaga)]);
 }

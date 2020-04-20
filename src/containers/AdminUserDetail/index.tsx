@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Button, Form } from 'antd';
+import { Button, Form, message } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
@@ -32,9 +32,10 @@ export default () => {
     form
       .validateFields()
       .then(values => {
-        console.log(values);
         form.resetFields();
         sentEmail(values);
+        // TODO: move to locale lib
+        message.success('Send email successfully!');
       })
       .catch(info => {
         console.log('Validate Failed:', info);

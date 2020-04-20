@@ -2,25 +2,26 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ActionFunctionAny } from 'redux-actions';
 import { Action } from 'redux';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { AppHeader } from './style';
 import { I18nContext } from '../../locales';
-import { fakeAuth } from '../../router';
 
 interface HeaderProps {
   sidebarIsCollapse: boolean;
   toggleSidebarCollapse: ActionFunctionAny<Action<any>>;
+  logout: ActionFunctionAny<Action<any>>;
 }
 
-export default ({ sidebarIsCollapse, toggleSidebarCollapse }: HeaderProps) => {
+export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProps) => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
 
   const handleLogout = () => {
-    return fakeAuth.authenticate(() => {
-      history.replace('/login');
-    });
+    logout();
+    // TODO: locale
+    message.success('Logout success!');
+    history.replace('/');
   };
 
   return (
