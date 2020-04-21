@@ -75,6 +75,8 @@ function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
     yield auth.signOut();
 
+    localStorage.removeItem('token');
+
     yield put({
       type: actionTypes.LOGOUT_SUCCESS,
     });
