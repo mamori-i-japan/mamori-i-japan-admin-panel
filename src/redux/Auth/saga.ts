@@ -58,36 +58,35 @@ function* loginSaga() {
           localStorage.setItem('emailForSignIn', email);
         })
         .catch((error: Error) => console.log(error));
+    }
+    try {
+      user = yield call(onAuthStateChanged);
 
-      try {
-        user = yield call(onAuthStateChanged);
+      const idToken = yield call([user, user.getIdToken]);
 
-        const idToken = yield call([user, user.getIdToken]);
+      yield put({
+        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+        payload: { token: idToken },
+      });
+
+      const res = yield call(login, payload);
+
+      if (res.data && auth.currentUser) {
+        user = yield auth.currentUser;
+
+        const refreshToken = yield call([user, user.getIdToken], true);
+
+        yield localStorage.setItem('token', refreshToken);
 
         yield put({
-          type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-          payload: { token: idToken },
+          type: actionTypes.LOGIN_SUCCESS,
+          payload: { token: refreshToken, email: res.data.email },
         });
-
-        const res = yield call(login, payload);
-
-        if (res.data && auth.currentUser) {
-          user = yield auth.currentUser;
-
-          const refreshToken = yield call([user, user.getIdToken], true);
-
-          yield localStorage.setItem('token', refreshToken);
-
-          yield put({
-            type: actionTypes.LOGIN_SUCCESS,
-            payload: { token: refreshToken, email: res.data.email },
-          });
-        }
-      } catch (error) {
-        //TODO: We provide localization, have to show error message on UI layer
-        console.log(error);
-        message.error('Entered account has error!');
       }
+    } catch (error) {
+      //TODO: We provide localization, have to show error message on UI layer
+      console.log(error);
+      message.error('Entered account has error!');
     }
   });
 }
