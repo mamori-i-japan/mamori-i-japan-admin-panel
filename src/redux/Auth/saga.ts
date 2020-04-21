@@ -1,6 +1,7 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
-import { auth, actionCodeSettings } from '../../firebase';
+import firebaseActionTypes from './../Firebase/actionTypes';
+import { auth } from '../../firebase';
 import { login } from '../../apis';
 import { message } from 'antd';
 
@@ -36,43 +37,37 @@ function* loginSaga() {
       } else {
         // The client SDK will parse the code from the link for you.
         user = yield call(signInWithEmailLink, email);
+
+        const defaultToken = yield call([user, user.getIdToken]);
+
+        yield put({
+          type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+          payload: { token: defaultToken },
+        });
+
+        const res = yield call(login);
+
+        if (res.data && auth.currentUser) {
+          const accessTokenWithClaims = yield call([user, user.getIdToken], true);
+
+          localStorage.setItem('token', accessTokenWithClaims);
+
+          yield put({
+            type: actionTypes.LOGIN_SUCCESS,
+            payload: { token: accessTokenWithClaims, email: res.data.email },
+          });
+        }
       }
     } else {
       const { email } = payload;
 
-      yield auth
-        .sendSignInLinkToEmail(email, actionCodeSettings)
-        .then(() => {
-          localStorage.setItem('emailForSignIn', email);
-        })
-        .catch((error: Error) => console.log(error));
+      yield put({
+        type: firebaseActionTypes.SEND_EMAIL,
+        payload: { email },
+      });
+
+      message.success('Please check email and login by auth link');
     }
-
-    // try {
-
-    //   const idToken = yield call([user, user.getIdToken]);
-
-    //   yield put({
-    //     type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-    //     payload: { token: idToken },
-    //   });
-
-    //   const res = yield call(login);
-
-    //   if (res.data && auth.currentUser) {
-
-    //   
-
-    //     yield put({
-    //       type: actionTypes.LOGIN_SUCCESS,
-    //       payload: { token: accessTokenWithClaims, email: res.data.email },
-    //     });
-    //   }
-    // } catch (error) {
-    //   //TODO: We provide localization, have to show error message on UI layer
-    //   console.log(error);
-    //   message.error('Entered account has error!');
-    // }
   });
 }
 
@@ -81,7 +76,7 @@ function* logoutSaga() {
     yield auth.signOut();
 
     yield put({
-      type: actionTypes.LOGIN_SUCCESS,
+      type: actionTypes.LOGOUT_SUCCESS,
     });
   });
 }

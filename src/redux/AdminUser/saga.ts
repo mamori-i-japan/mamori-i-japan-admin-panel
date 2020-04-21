@@ -12,11 +12,10 @@ function* createUserSaga() {
       type: loadingActionTypes.START_LOADING
     })
 
-    try {
-      yield put({ type: firebaseActionTypes.GET_ACCESS_TOKEN });
+    yield put({ type: firebaseActionTypes.GET_ACCESS_TOKEN });
 
-      const res = yield call(postAdminUser, { email });
-      console.log(res);
+    try {
+      yield call(postAdminUser, { email });
 
       yield put({
         type: firebaseActionTypes.SEND_EMAIL,

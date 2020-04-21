@@ -22,7 +22,6 @@ export default () => {
 
   const onFinish = async (values: any) => {
     await login(values);
-    message.success('Login success!');
     history.replace(from);
   };
 

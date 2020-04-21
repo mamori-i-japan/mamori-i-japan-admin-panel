@@ -6,8 +6,6 @@ function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
     const user = yield auth.currentUser;
 
-    console.log(user);
-
     const token = yield call([user, user.getIdToken]);
 
     yield put({
