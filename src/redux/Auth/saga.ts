@@ -1,6 +1,6 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
-import { auth } from '../../firebase';
+import { auth, actionCodeSettings } from '../../firebase';
 import { login } from '../../apis';
 import { message } from 'antd';
 
@@ -51,6 +51,14 @@ function* loginSaga() {
         user = yield call(signInWithEmailLink, email);
       }
     } else {
+      const email = payload.email;
+      yield auth
+        .sendSignInLinkToEmail(email, actionCodeSettings)
+        .then(() => {
+          localStorage.setItem('emailForSignIn', email);
+        })
+        .catch((error: Error) => console.log(error));
+
       try {
         user = yield call(onAuthStateChanged);
 
@@ -75,11 +83,10 @@ function* loginSaga() {
             payload: { token: refreshToken, email: res.data.email },
           });
         }
-      }
-      catch (error) {
+      } catch (error) {
         //TODO: We provide localization, have to show error message on UI layer
         console.log(error);
-        message.error('Entered account has error!')
+        message.error('Entered account has error!');
       }
     }
   });
@@ -88,6 +95,7 @@ function* loginSaga() {
 function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
     localStorage.removeItem('token');
+    yield auth.signOut();
 
     yield put({
       type: actionTypes.LOGIN_SUCCESS,
