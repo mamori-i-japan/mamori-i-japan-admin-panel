@@ -4,19 +4,6 @@ import { auth, actionCodeSettings } from '../../firebase';
 import { login } from '../../apis';
 import { message } from 'antd';
 
-const onAuthStateChanged = () => {
-  return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged((user) => {
-      console.log(user);
-      if (user) {
-        resolve(user);
-      } else {
-        reject(new Error('error'));
-      }
-    });
-  });
-};
-
 const signInWithEmailLink: any = async (email: string) => {
   const { user } = await auth.signInWithEmailLink(email, window.location.href);
 
@@ -51,7 +38,8 @@ function* loginSaga() {
         user = yield call(signInWithEmailLink, email);
       }
     } else {
-      const email = payload.email;
+      const { email } = payload;
+
       yield auth
         .sendSignInLinkToEmail(email, actionCodeSettings)
         .then(() => {
@@ -59,41 +47,37 @@ function* loginSaga() {
         })
         .catch((error: Error) => console.log(error));
     }
-    try {
-      user = yield call(onAuthStateChanged);
 
-      const idToken = yield call([user, user.getIdToken]);
+    // try {
 
-      yield put({
-        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-        payload: { token: idToken },
-      });
+    //   const idToken = yield call([user, user.getIdToken]);
 
-      const res = yield call(login);
+    //   yield put({
+    //     type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+    //     payload: { token: idToken },
+    //   });
 
-      if (res.data && auth.currentUser) {
-        user = yield auth.currentUser;
+    //   const res = yield call(login);
 
-        const refreshToken = yield call([user, user.getIdToken], true);
+    //   if (res.data && auth.currentUser) {
 
-        yield localStorage.setItem('token', refreshToken);
+    //   
 
-        yield put({
-          type: actionTypes.LOGIN_SUCCESS,
-          payload: { token: refreshToken, email: res.data.email },
-        });
-      }
-    } catch (error) {
-      //TODO: We provide localization, have to show error message on UI layer
-      console.log(error);
-      message.error('Entered account has error!');
-    }
+    //     yield put({
+    //       type: actionTypes.LOGIN_SUCCESS,
+    //       payload: { token: accessTokenWithClaims, email: res.data.email },
+    //     });
+    //   }
+    // } catch (error) {
+    //   //TODO: We provide localization, have to show error message on UI layer
+    //   console.log(error);
+    //   message.error('Entered account has error!');
+    // }
   });
 }
 
 function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
-    localStorage.removeItem('token');
     yield auth.signOut();
 
     yield put({
