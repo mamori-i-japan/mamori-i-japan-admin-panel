@@ -10,8 +10,24 @@ const { Title } = Typography;
 
 const dataSource = [
   {
+    key: 0,
+    id: 0,
+    content:
+      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
+    address: 'デフォルト',
+    createDate: '2020.04.30',
+  },
+  {
     key: 1,
     id: 1,
+    content:
+      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
+    address: prefecturesMap['ja'][1],
+    createDate: '2020.04.30',
+  },
+  {
+    key: 13,
+    id: 13,
     content:
       'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
     address: prefecturesMap['ja'][13],
