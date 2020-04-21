@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button } from 'antd';
+import { Typography, Button } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import { ColumnsType } from 'antd/es/table/interface';
 import prefecturesMap from '../../constants/Prefecture';
+import EditableTabel from '../../components/EditableTable';
 
 const { Title } = Typography;
 
@@ -76,7 +77,7 @@ export default () => {
       </header>
 
       <section>
-        <Table
+        <EditableTabel
           loading={loading}
           dataSource={dataSource}
           columns={columns.map((item: any) => {
