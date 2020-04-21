@@ -17,7 +17,7 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProp
   const history = useHistory();
   const { translate } = useContext(I18nContext);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logout();
     // TODO: locale
     message.success('Logout success!');

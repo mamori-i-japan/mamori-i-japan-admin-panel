@@ -1,21 +1,8 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
-import { auth, actionCodeSettings } from '../../firebase';
+import firebaseActionTypes from './../Firebase/actionTypes';
+import { auth } from '../../firebase';
 import { login } from '../../apis';
-import { message } from 'antd';
-
-const onAuthStateChanged = () => {
-  return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged((user) => {
-      console.log(user);
-      if (user) {
-        resolve(user);
-      } else {
-        reject(new Error('error'));
-      }
-    });
-  });
-};
 
 const signInWithEmailLink: any = async (email: string) => {
   const { user } = await auth.signInWithEmailLink(email, window.location.href);
@@ -49,55 +36,49 @@ function* loginSaga() {
       } else {
         // The client SDK will parse the code from the link for you.
         user = yield call(signInWithEmailLink, email);
-      }
-    } else {
-      const email = payload.email;
-      yield auth
-        .sendSignInLinkToEmail(email, actionCodeSettings)
-        .then(() => {
-          localStorage.setItem('emailForSignIn', email);
-        })
-        .catch((error: Error) => console.log(error));
-    }
-    try {
-      user = yield call(onAuthStateChanged);
 
-      const idToken = yield call([user, user.getIdToken]);
-
-      yield put({
-        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-        payload: { token: idToken },
-      });
-
-      const res = yield call(login, payload);
-
-      if (res.data && auth.currentUser) {
-        user = yield auth.currentUser;
-
-        const refreshToken = yield call([user, user.getIdToken], true);
-
-        yield localStorage.setItem('token', refreshToken);
+        const defaultToken = yield call([user, user.getIdToken]);
 
         yield put({
-          type: actionTypes.LOGIN_SUCCESS,
-          payload: { token: refreshToken, email: res.data.email },
+          type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+          payload: { token: defaultToken },
         });
+
+        const res = yield call(login);
+
+        if (res.data && auth.currentUser) {
+          const accessTokenWithClaims = yield call(
+            [user, user.getIdToken],
+            true
+          );
+
+          localStorage.setItem('token', accessTokenWithClaims);
+
+          yield put({
+            type: actionTypes.LOGIN_SUCCESS,
+            payload: { token: accessTokenWithClaims, email: res.data.email },
+          });
+        }
       }
-    } catch (error) {
-      //TODO: We provide localization, have to show error message on UI layer
-      console.log(error);
-      message.error('Entered account has error!');
+    } else {
+      const { email } = payload;
+
+      yield put({
+        type: firebaseActionTypes.SEND_EMAIL,
+        payload: { email },
+      });
     }
   });
 }
 
 function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
+    yield call([auth, auth.signOut]);
+
     localStorage.removeItem('token');
-    yield auth.signOut();
 
     yield put({
-      type: actionTypes.LOGIN_SUCCESS,
+      type: actionTypes.LOGOUT_SUCCESS,
     });
   });
 }

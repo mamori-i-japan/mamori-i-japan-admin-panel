@@ -12,7 +12,7 @@ function* createPositiveSaga() {
         type: loadingActionTypes.START_LOADING
       })
 
-      const res = yield call(postPositive, { phoneNumber: phone });
+      const res = yield call(postPositive, { phoneNumber: '+81' + phone });
 
       if (res) {
         yield put({
