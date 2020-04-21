@@ -1,6 +1,5 @@
 // import Validation from '../../constants/Validation';
 
-// TODO: move rules to vallidation libs
 export default [
   {
     name: 'email',
@@ -14,10 +13,4 @@ export default [
       { required: true, message: 'Please input!' },
     ],
   },
-  // {
-  //   name: 'password',
-  //   type: 'password',
-  //   label: 'password',
-  //   rules: [{ required: true, message: 'Please input!' }],
-  // },
 ];

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Table, Button } from 'antd';
+import { Typography, Table, Button, Tag } from 'antd';
 import { I18nContext } from '../../locales'
 import { ContentContainer } from '../../components/CommonStyles';
 
@@ -9,21 +9,58 @@ const { Title } = Typography;
 const dataSource = [
   {
     key: 1,
+    status: 1,
     phone: '08077667788',
-    createdDate: '2020.04.30'
+    uuid: '',
+    address: 'address code',
+    createdDate: '2020.04.30',
+    age: 32,
+    agreed: 1,
   }
 ];
 
 export const columns: any = [
+  {
+    title: 'status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: number) => (
+      <Tag color={value === 1 ? 'red' : 'green'}>
+        {value === 1 ? '陽性' : '回復'}
+      </Tag>
+    ),
+  },
   {
     title: 'phone',
     dataIndex: 'phone',
     key: 'phone',
   },
   {
+    title: 'UUID',
+    dataIndex: 'uuid',
+    key: 'uuid',
+  },
+  {
+    title: 'age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+
+  {
+    title: 'address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
     title: 'createdDate',
     dataIndex: 'createdDate',
     key: 'createdDate',
+  },
+  {
+    title: 'agreed',
+    dataIndex: 'agreed',
+    key: 'agreed',
+    render: (value: number) => (value === 1 ? '同意' : ''),
   },
 ];
 
@@ -33,7 +70,7 @@ export default () => {
   const loading = false;
 
   const handleCreate = () => {
-    history.push('/users/create');
+    history.push('/positives/create');
   };
 
   return (

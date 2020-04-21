@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, Layout } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { findIndex } from 'lodash';
 import { Logo } from './style';
 import config from './config';
-import { langCode } from '../../constants';
+import { I18nContext } from '../../locales';
 
 const { Sider } = Layout;
 
@@ -16,6 +16,7 @@ interface SidebarProps {
 
 export default ({ sidebarIsCollapse }: any) => {
   const { pathname } = useLocation();
+  const { translate } = useContext(I18nContext);
   const [selectedKey, setSelectedKey] = useState('');
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default ({ sidebarIsCollapse }: any) => {
           <Menu.Item key={index}>
             <Link to={item.path}>
               <AppstoreOutlined />
-              <span>{item[`name${langCode}`]}</span>
+              <span>{translate(item.name)}</span>
             </Link>
           </Menu.Item>
         ))}

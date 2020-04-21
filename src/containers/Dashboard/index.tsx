@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import { Switch, RouteProps } from 'react-router-dom';
 import { RouteWithSubRoutes } from '../../router';
-
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
+import { logoutAction } from '../../redux/Auth/actions';
 
 import { PageLayout } from './style';
-
-import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
 
 const { Content } = Layout;
 
@@ -32,6 +31,8 @@ export default (props: any) => {
     [dispatch]
   );
 
+  const logout = useCallback(() => dispatch(logoutAction()), [dispatch]);
+
   return (
     <PageLayout>
       <Sidebar sidebarIsCollapse={sidebarIsCollapse} />
@@ -40,6 +41,7 @@ export default (props: any) => {
         <Header
           sidebarIsCollapse={sidebarIsCollapse}
           toggleSidebarCollapse={toggleSidebarCollapse}
+          logout={logout}
         />
 
         <Content>

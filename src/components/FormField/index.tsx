@@ -93,7 +93,7 @@ export default ({
         <Form.Item
           key={name}
           name={name}
-          label={field.label}
+          label={label}
           rules={rules}
           colon={false}
         >

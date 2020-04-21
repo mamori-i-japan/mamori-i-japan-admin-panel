@@ -4,15 +4,14 @@ export default [
   {
     name: 'status',
     type: 'radio',
-    label: '',
-    labelJa: '状況',
+    label: 'status',
     options: [
       {
-        name: '陽性',
+        name: 'positiveStatus',
         value: 'positive',
       },
       {
-        name: '陰性',
+        name: 'negativeStatus',
         value: 'negative',
       },
     ],
@@ -21,15 +20,13 @@ export default [
   {
     name: 'phone',
     type: 'input',
-    label: '',
-    labelJa: '電話番号',
+    label: 'phone',
     rules: [],
   },
   // {
   //   name: 'age',
   //   type: 'inputNumber',
-  //   label: '',
-  //   labelJa: '年齢',
+  //   label: 'age',
   //   min: 0,
   //   max: 150,
   //   rules: [],
@@ -37,24 +34,20 @@ export default [
   // {
   //   name: 'address',
   //   type: 'input',
-  //   label: '',
-  //   labelJa: '都道府県',
+  //   label: 'address',
   //   rules: [],
   // },
   {
-    readOnly: true,
     name: 'createdDate',
-    type: 'input',
-    label: '',
-    labelJa: '登録日',
+    type: 'date',
+    label: 'createdDate',
     rules: [],
   },
   // {
   //   readOnly: true,
   //   name: 'agreed',
   //   type: 'input',
-  //   label: '',
-  //   labelJa: '情報提供への同意',
+  //   label: 'agreed',
   //   rules: [],
   // },
 ];

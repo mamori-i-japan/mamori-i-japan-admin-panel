@@ -5,7 +5,6 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
-import { langCode } from '../../constants';
 import dataMap from './dataMap';
 
 const layout = {
@@ -60,7 +59,7 @@ export default () => {
             dataMap.map((item: any) => (
               <FormField
                 key={item.name}
-                label={item[`label${langCode}`]}
+                label={translate(item.label)}
                 field={item}
               />
             ))}

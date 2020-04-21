@@ -5,12 +5,13 @@ import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
 import ContactList from '../containers/ContactList';
 import MessageList from '../containers/MessageList';
-import PatientList from '../containers/PatientList';
-import PatientDetail from '../containers/PatientDetail';
+import PositiveList from '../containers/PositiveList';
+import PositiveDetail from '../containers/PositiveDetail';
+import AdminUserList from '../containers/AdminUserList';
+import AdminUserDetail from '../containers/AdminUserDetail';
+import { store } from '../redux/store';
 // import Register from '../containers/Register';
 // import Top from '../containers/Top';
-// import AdminUserList from '../containers/AdminUserList';
-// import AdminUserDetail from '../containers/AdminUserDetail';
 
 import { HOST } from '../constants';
 
@@ -34,46 +35,33 @@ const routes = [
         component: MessageList,
       },
       {
-        path: HOST + 'patients',
+        path: HOST + 'positives',
         exact: true,
-        component: PatientList,
+        component: PositiveList,
       },
       {
-        path: HOST + 'patients/:id',
+        path: HOST + 'positives/:id',
         exact: true,
-        component: PatientDetail,
+        component: PositiveDetail,
       },
       {
-        path: HOST + 'contact',
+        path: HOST + 'contacts',
         exact: true,
         component: ContactList,
       },
-      // {
-      //   path: HOST + 'users/:id',
-      //   exact: true,
-      //   component: AdminUserDetail,
-      // },
-      // {
-      //   path: HOST + 'users',
-      //   exact: true,
-      //   component: AdminUserList,
-      // },
+      {
+        path: HOST + 'users/:id',
+        exact: true,
+        component: AdminUserDetail,
+      },
+      {
+        path: HOST + 'users',
+        exact: true,
+        component: AdminUserList,
+      },
     ],
   },
 ];
-
-// TODO: move real auth logic to store  JST token?
-export const fakeAuth = {
-  isAuthenticated: process.env.NODE_ENV === 'development',
-  authenticate(cb: any) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb: any) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-};
 
 export const RouteWithSubRoutes: any = ({
   component: Component,
@@ -81,25 +69,25 @@ export const RouteWithSubRoutes: any = ({
   routes,
   ...rest
 }: any) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      if (!auth || fakeAuth.isAuthenticated) {
-        // pass the sub-routes down to keep nesting
-        return <Component {...props} routes={routes} />;
-      } else {
-        return (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
-        );
-      }
-    }}
-  ></Route>
-);
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!auth || store.getState().auth.token) {
+          // pass the sub-routes down to keep nesting
+          return <Component {...props} routes={routes} />;
+        } else {
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          );
+        }
+      }}
+    ></Route>
+  );
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */

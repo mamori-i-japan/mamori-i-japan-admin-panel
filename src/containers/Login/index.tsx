@@ -1,27 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Form, Button, Typography } from 'antd';
-import { fakeAuth } from '../../router';
+import { Form, Button, Typography, message } from 'antd';
+import { useDispatch } from 'react-redux';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
-import { langCode } from '../../constants';
 import { LoginContainer } from './style';
 import dataMap from './dataMap';
+import { loginAction } from '../../redux/Auth/actions';
 
 const { Title } = Typography;
 
 export default () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const localtion = useLocation();
   const { translate } = useContext(I18nContext);
 
   const { from }: any = localtion.state || { from: { pathname: '/' } };
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    return fakeAuth.authenticate(() => {
-      history.replace(from);
-    });
+  const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
+
+  const onFinish = async (values: any) => {
+    await login(values);
+    message.success('Login success!');
+    history.replace(from);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -42,7 +44,7 @@ export default () => {
           dataMap.map((item: any) => (
             <FormField
               key={item.name}
-              label={item[`label${langCode}`]}
+              label={translate(item.label)}
               field={item}
             />
           ))}

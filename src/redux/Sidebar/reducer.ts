@@ -7,7 +7,7 @@ const initialState = {
 
 export default handleActions(
   {
-    [actionTypes.TOGGLE_SIDEBAR_COLLAPSE]: (state = initialState) => ({
+    [actionTypes.TOGGLE_SIDEBAR_COLLAPSE]: (state) => ({
       isCollapse: !state.isCollapse
     })
   },

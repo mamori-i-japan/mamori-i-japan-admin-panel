@@ -46,7 +46,7 @@ export default () => {
   ];
 
   const handleCreate = () => {
-    history.push('/patients/create');
+    history.push('/positives/create');
   };
 
   return (
@@ -60,7 +60,6 @@ export default () => {
 
       <section>
         <Table
-          bordered={true}
           loading={loading}
           dataSource={dataSource}
           columns={columns.map((item: any) => {

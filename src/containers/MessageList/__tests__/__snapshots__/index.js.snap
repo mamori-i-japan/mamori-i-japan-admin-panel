@@ -46,7 +46,7 @@ exports[`MessageList should render correctly with no props 1`] = `
               "componentStyle": ComponentStyle {
                 "componentId": "sc-bdVaJa",
                 "isStatic": false,
-                "lastClassName": "lfPbSp",
+                "lastClassName": "iRaftV",
                 "rules": Array [
                   "
   margin: 24px;
@@ -71,6 +71,11 @@ exports[`MessageList should render correctly with no props 1`] = `
     padding-top: 24px;
     overflow-x: scroll;
   }
+
+  .ant-table {
+    border: 1px solid #f0f0f0;
+    border-bottom: none;
+  }
 ",
                 ],
               },
@@ -87,7 +92,7 @@ exports[`MessageList should render correctly with no props 1`] = `
           forwardedRef={null}
         >
           <div
-            className="sc-bdVaJa lfPbSp"
+            className="sc-bdVaJa iRaftV"
           >
             <header>
               <Title
@@ -193,7 +198,6 @@ exports[`MessageList should render correctly with no props 1`] = `
             </header>
             <section>
               <Table
-                bordered={true}
                 columns={
                   Array [
                     Object {
@@ -248,8 +252,7 @@ exports[`MessageList should render correctly with no props 1`] = `
                         key="container"
                       >
                         <Table
-                          bordered={true}
-                          className="ant-table-bordered"
+                          className=""
                           columns={
                             Array [
                               Object {
@@ -387,15 +390,14 @@ exports[`MessageList should render correctly with no props 1`] = `
                           transformColumns={[Function]}
                         >
                           <div
-                            className="ant-table ant-table-bordered"
+                            className="ant-table"
                           >
                             <Component
                               pingLeft={false}
                               pingRight={false}
                               props={
                                 Object {
-                                  "bordered": true,
-                                  "className": "ant-table-bordered",
+                                  "className": "",
                                   "columns": Array [
                                     Object {
                                       "dataIndex": "id",
