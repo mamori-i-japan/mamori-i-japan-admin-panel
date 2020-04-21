@@ -20,7 +20,7 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
-  const sentEmail = useCallback((data) => dispatch(createUserAction(data)), [
+  const createUser = useCallback((data) => dispatch(createUserAction(data)), [
     dispatch,
   ]);
 
@@ -31,11 +31,9 @@ export default () => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(values => {
+      .then(async values => {
         form.resetFields();
-        sentEmail(values);
-        // TODO: move to locale lib
-        message.success('Send email successfully!');
+        createUser(values);
       })
       .catch(info => {
         console.log('Validate Failed:', info);
@@ -64,8 +62,6 @@ export default () => {
           form={form}
           name="createUser"
           size="large"
-          initialValues={{
-          }}
         >
           {dataMap &&
             dataMap.map((item: any) => (

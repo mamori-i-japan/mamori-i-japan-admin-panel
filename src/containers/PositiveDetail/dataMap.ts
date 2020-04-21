@@ -1,26 +1,27 @@
 // import Validations from '../../constants/Validation';
 
 export default [
-  {
-    name: 'status',
-    type: 'radio',
-    label: 'status',
-    options: [
-      {
-        name: 'positiveStatus',
-        value: 'positive',
-      },
-      {
-        name: 'negativeStatus',
-        value: 'negative',
-      },
-    ],
-    rules: [],
-  },
+  // {
+  //   name: 'status',
+  //   type: 'radio',
+  //   label: 'status',
+  //   options: [
+  //     {
+  //       name: 'positiveStatus',
+  //       value: 'positive',
+  //     },
+  //     {
+  //       name: 'negativeStatus',
+  //       value: 'negative',
+  //     },
+  //   ],
+  //   rules: [],
+  // },
   {
     name: 'phone',
-    type: 'input',
+    type: 'phoneInput',
     label: 'phone',
+    addonBefore: '+81',
     rules: [],
   },
   // {
@@ -37,12 +38,12 @@ export default [
   //   label: 'address',
   //   rules: [],
   // },
-  {
-    name: 'createdDate',
-    type: 'date',
-    label: 'createdDate',
-    rules: [],
-  },
+  // {
+  //   name: 'createdDate',
+  //   type: 'date',
+  //   label: 'createdDate',
+  //   rules: [],
+  // },
   // {
   //   readOnly: true,
   //   name: 'agreed',

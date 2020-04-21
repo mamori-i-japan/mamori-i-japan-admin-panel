@@ -17,7 +17,7 @@ export default [
     children: [],
   },
   {
-    name: 'user',
+    name: 'adminUser',
     path: HOST + 'users',
     children: [],
   },

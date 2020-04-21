@@ -3,14 +3,19 @@ import actionTypes from './actionTypes';
 import { auth, actionCodeSettings } from '../../firebase';
 
 function* createUserSaga() {
-  yield takeEvery(actionTypes.CREATE_USER, function* _({ payload: { email } }: any) {
-    yield auth.sendSignInLinkToEmail(email, actionCodeSettings)
+  yield takeEvery(actionTypes.CREATE_USER, function* _({
+    payload: { email },
+  }: any) {
+    //TODO: create admin user to firebase
+
+    yield auth
+      .sendSignInLinkToEmail(email, actionCodeSettings)
       .then(() => {
         localStorage.setItem('emailForSignIn', email);
-      }).catch((error: Error) => console.log(error));
-  })
+      })
+      .catch((error: Error) => console.log(error));
+  });
 
-  //TODO: create admin user to firebase
 }
 
 export default function* rootSaga() {
