@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Button, Form, message } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
@@ -20,6 +20,9 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
+  const loading = useSelector((store: any) => store.loading.isLoading);
+
+
   const createUser = useCallback((data) => dispatch(createUserAction(data)), [
     dispatch,
   ]);
@@ -31,8 +34,7 @@ export default () => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(async values => {
-        form.resetFields();
+      .then(values => {
         createUser(values);
       })
       .catch(info => {
@@ -51,7 +53,7 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" onClick={handleSubmit}>
+        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
           {translate('submit')}
         </Button>
       </header>

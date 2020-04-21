@@ -1,5 +1,6 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
+import loadingActionTypes from '../Loading/actionTypes';
 import { postPositive } from '../../apis';
 
 function* createPositiveSaga() {
@@ -7,6 +8,10 @@ function* createPositiveSaga() {
     payload: { phone },
   }: any) {
     try {
+      yield put({
+        type: loadingActionTypes.START_LOADING
+      })
+
       const res = yield call(postPositive, { phoneNumber: phone });
 
       if (res) {
@@ -17,6 +22,10 @@ function* createPositiveSaga() {
     } catch (error) {
       console.log(error);
     }
+
+    yield put({
+      type: loadingActionTypes.END_LOADING
+    })
   });
 }
 

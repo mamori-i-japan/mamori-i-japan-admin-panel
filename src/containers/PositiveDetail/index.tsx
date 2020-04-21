@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { Button, Form } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
@@ -19,6 +19,7 @@ export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
+  const loading = useSelector((store: any) => store.loading.isLoading);
 
   const createPositive = useCallback(
     (values) => dispatch(createPositiveAction(values)),
@@ -32,9 +33,8 @@ export default () => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(async (values) => {
+      .then((values) => {
         createPositive(values);
-        // form.resetFields();
       })
       .catch(info => {
         console.log('Validate Failed:', info);
@@ -52,7 +52,7 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" onClick={handleSubmit}>
+        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
           {translate('submit')}
         </Button>
       </header>
