@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Button } from 'antd';
 import EditableCell from './EditableCell';
+import { ColumnType } from 'antd/lib/table';
 
-interface Item {
+interface RecordTypeDefault {
   key: string;
-  name: string;
-  age: number;
-  address: string;
 }
 
-export default ({ dataResource }: any) => {
+export interface ColumnTypeWithEditable<T> extends ColumnType<T> {
+  key: string;
+  title: string;
+  dataIndex: string;
+  editable: boolean;
+}
+
+interface EditableTableProps<T> {
+  loading: boolean;
+  dataSource: Array<T>;
+  columns: Array<ColumnTypeWithEditable<T>>;
+}
+
+export default <T extends RecordTypeDefault>({
+  loading,
+  dataSource,
+  columns,
+}: EditableTableProps<T>) => {
   const [form] = Form.useForm();
-  const [data, setData] = useState(dataResource);
+  const [data, setData] = useState(dataSource);
   const [editingKey, setEditingKey] = useState('');
 
-  const isEditing = (record: Item) => record.key === editingKey;
+  const isEditing = (record: T) => record.key === editingKey;
 
-  const edit = (record: Item) => {
-    form.setFieldsValue({ name: '', age: '', address: '', ...record });
+  const edit = (record: T) => {
+    form.setFieldsValue({ ...record });
     setEditingKey(record.key);
   };
 
@@ -27,7 +42,7 @@ export default ({ dataResource }: any) => {
 
   const save = async (key: React.Key) => {
     try {
-      const row = (await form.validateFields()) as Item;
+      const row = (await form.validateFields()) as T;
 
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
@@ -49,35 +64,20 @@ export default ({ dataResource }: any) => {
     }
   };
 
-  const columns = [
-    {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
-      editable: true,
-    },
-    {
-      title: 'age',
-      dataIndex: 'age',
-      width: '15%',
-      editable: true,
-    },
-    {
-      title: 'address',
-      dataIndex: 'address',
-      width: '40%',
-      editable: true,
-    },
+  const columnsWithOperation = [
+    ...columns,
     {
       title: 'operation',
       dataIndex: 'operation',
-      render: (_: any, record: Item) => {
+      editable: false,
+      render: (_: any, record: T) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
             <Button onClick={() => save(record.key)} style={{ marginRight: 8 }}>
               Save
             </Button>
+            {/* TODO: localization */}
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
               <Button>Cancel</Button>
             </Popconfirm>
@@ -91,15 +91,15 @@ export default ({ dataResource }: any) => {
     },
   ];
 
-  const mergedColumns = columns.map((col) => {
+  const mergedColumns = columnsWithOperation.map((col) => {
     if (!col.editable) {
       return col;
     }
     return {
       ...col,
-      onCell: (record: Item) => ({
+      onCell: (record: T) => ({
         record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
+        inputType: 'text',
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
@@ -110,6 +110,7 @@ export default ({ dataResource }: any) => {
   return (
     <Form form={form} component={false}>
       <Table
+        loading={loading}
         components={{
           body: {
             cell: EditableCell,
