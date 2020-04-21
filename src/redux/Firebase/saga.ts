@@ -1,6 +1,7 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../firebase';
 import actionTypes from './actionTypes';
+import { message } from 'antd';
 
 function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
@@ -28,6 +29,8 @@ function* sendEmailSaga() {
       yield put({
         type: actionTypes.SEND_EMAIL_SUCCESS
       })
+
+      message.success('Please check email and login by auth link');
     } catch (error) {
       console.log(error)
     }

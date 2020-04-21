@@ -3,7 +3,6 @@ import actionTypes from './actionTypes';
 import firebaseActionTypes from './../Firebase/actionTypes';
 import { auth } from '../../firebase';
 import { login } from '../../apis';
-import { message } from 'antd';
 
 const signInWithEmailLink: any = async (email: string) => {
   const { user } = await auth.signInWithEmailLink(email, window.location.href);
@@ -48,7 +47,10 @@ function* loginSaga() {
         const res = yield call(login);
 
         if (res.data && auth.currentUser) {
-          const accessTokenWithClaims = yield call([user, user.getIdToken], true);
+          const accessTokenWithClaims = yield call(
+            [user, user.getIdToken],
+            true
+          );
 
           localStorage.setItem('token', accessTokenWithClaims);
 
@@ -65,15 +67,13 @@ function* loginSaga() {
         type: firebaseActionTypes.SEND_EMAIL,
         payload: { email },
       });
-
-      message.success('Please check email and login by auth link');
     }
   });
 }
 
 function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
-    yield auth.signOut();
+    yield call([auth, auth.signOut]);
 
     localStorage.removeItem('token');
 

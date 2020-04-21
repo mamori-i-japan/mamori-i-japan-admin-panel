@@ -23,7 +23,8 @@ export default handleActions(
     }),
 
     [actionTypes.LOGOUT_SUCCESS]: () => ({
-      ...initialState,
+      token: null,
+      email: null,
     }),
   },
   initialState
