@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Button, Form, message } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
@@ -20,7 +20,10 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
-  const sentEmail = useCallback((data) => dispatch(createUserAction(data)), [
+  const loading = useSelector((store: any) => store.loading.isLoading);
+
+
+  const createUser = useCallback((data) => dispatch(createUserAction(data)), [
     dispatch,
   ]);
 
@@ -32,10 +35,7 @@ export default () => {
     form
       .validateFields()
       .then(values => {
-        form.resetFields();
-        sentEmail(values);
-        // TODO: move to locale lib
-        message.success('Send email successfully!');
+        createUser(values);
       })
       .catch(info => {
         console.log('Validate Failed:', info);
@@ -53,7 +53,7 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" onClick={handleSubmit}>
+        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
           {translate('submit')}
         </Button>
       </header>
@@ -64,8 +64,6 @@ export default () => {
           form={form}
           name="createUser"
           size="large"
-          initialValues={{
-          }}
         >
           {dataMap &&
             dataMap.map((item: any) => (

@@ -163,6 +163,20 @@ export default ({
         </Form.Item>
       );
 
+    case 'phoneInput':
+      return (
+        <Form.Item
+          key={name}
+          name={name}
+          className={className}
+          label={label}
+          rules={rules}
+          colon={false}
+        >
+          <Input addonBefore={field.addonBefore} placeholder={placeholder} />
+        </Form.Item>
+      )
+
     default:
       return (
         <Form.Item

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
-import { Button } from 'antd';
+import React, { useContext, useCallback } from 'react';
+import { Button, Form } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap from './dataMap';
+import { createPositiveAction } from '../../redux/Positive/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,19 +15,30 @@ const layout = {
 };
 
 export default () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
+  const [form] = Form.useForm();
+  const loading = useSelector((store: any) => store.loading.isLoading);
+
+  const createPositive = useCallback(
+    (values) => dispatch(createPositiveAction(values)),
+    [dispatch]
+  );
 
   const handleBack = () => {
     history.goBack();
   };
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const handleSubmit = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        createPositive(values);
+      })
+      .catch(info => {
+        console.log('Validate Failed:', info);
+      });
   };
 
   return (
@@ -39,7 +52,7 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" htmlType="submit">
+        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
           {translate('submit')}
         </Button>
       </header>
@@ -47,13 +60,9 @@ export default () => {
       <section>
         <DetailForm
           {...layout}
-          name="positive form"
+          form={form}
+          name="createPositive"
           size="large"
-          initialValues={{
-            status: 'positive',
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
         >
           {dataMap &&
             dataMap.map((item: any) => (
