@@ -12,7 +12,8 @@ const dataSource = [
   {
     key: 1,
     id: 1,
-    content: 'text text text text text',
+    content:
+      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
     address: prefecturesMap['ja'][13],
     createDate: '2020.04.30',
   },
