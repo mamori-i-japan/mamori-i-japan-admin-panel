@@ -2,10 +2,12 @@ import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import { auth } from '../../firebase';
 import { login } from '../../apis';
+import { message } from 'antd';
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
     auth.onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         resolve(user);
       } else {
@@ -49,30 +51,35 @@ function* loginSaga() {
         user = yield call(signInWithEmailLink, email);
       }
     } else {
-      user = yield call(onAuthStateChanged);
-    }
+      try {
+        user = yield call(onAuthStateChanged);
 
-    if (user) {
-      const idToken = yield call([user, user.getIdToken]);
-
-      yield put({
-        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-        payload: { token: idToken },
-      });
-
-      const res = yield call(login, payload);
-
-      if (res.data && auth.currentUser) {
-        user = yield auth.currentUser;
-
-        const refreshToken = yield call([user, user.getIdToken], true);
-
-        yield localStorage.setItem('token', refreshToken);
+        const idToken = yield call([user, user.getIdToken]);
 
         yield put({
-          type: actionTypes.LOGIN_SUCCESS,
-          payload: { token: refreshToken, email: res.data.email },
+          type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+          payload: { token: idToken },
         });
+
+        const res = yield call(login, payload);
+
+        if (res.data && auth.currentUser) {
+          user = yield auth.currentUser;
+
+          const refreshToken = yield call([user, user.getIdToken], true);
+
+          yield localStorage.setItem('token', refreshToken);
+
+          yield put({
+            type: actionTypes.LOGIN_SUCCESS,
+            payload: { token: refreshToken, email: res.data.email },
+          });
+        }
+      }
+      catch (error) {
+        //TODO: We provide localization, have to show error message on UI layer
+        console.log(error);
+        message.error('Entered account has error!')
       }
     }
   });
