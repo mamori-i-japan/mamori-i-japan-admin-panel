@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Form, Button, Typography, message } from 'antd';
+import { Form, Button, Typography } from 'antd';
 import { useDispatch } from 'react-redux';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
