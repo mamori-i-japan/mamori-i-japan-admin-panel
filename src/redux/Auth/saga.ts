@@ -69,7 +69,7 @@ function* loginSaga() {
         payload: { token: idToken },
       });
 
-      const res = yield call(login, payload);
+      const res = yield call(login);
 
       if (res.data && auth.currentUser) {
         user = yield auth.currentUser;
