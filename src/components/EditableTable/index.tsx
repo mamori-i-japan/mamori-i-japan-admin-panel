@@ -67,14 +67,20 @@ export default <T extends RecordTypeDefault>({
   const columnsWithOperation = [
     ...columns,
     {
+      // TODO: localization
       title: 'operation',
       dataIndex: 'operation',
+      width: '14rem',
       editable: false,
       render: (_: any, record: T) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Button onClick={() => save(record.key)} style={{ marginRight: 8 }}>
+            <Button
+              type="primary"
+              onClick={() => save(record.key)}
+              style={{ marginRight: 8 }}
+            >
               Save
             </Button>
             {/* TODO: localization */}
