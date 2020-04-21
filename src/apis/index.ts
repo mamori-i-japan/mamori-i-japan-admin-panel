@@ -5,7 +5,7 @@ export const login = () => {
 };
 
 export const postPositive = (data: { phoneNumber: string }) => {
-  return http.post('admin/positives', data);
+  return http.post('admins/positives', data);
 };
 
 export const getAdminUserList = () => {
