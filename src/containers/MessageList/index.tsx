@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Typography, Button } from 'antd';
+import { Typography } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import prefecturesMap from '../../constants/Prefecture';
@@ -46,7 +45,6 @@ const dataSource: Array<RecordType> = [
 ];
 
 export default () => {
-  const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = false;
   const columns: Array<ColumnTypeWithEditable<RecordType>> = [
@@ -76,17 +74,10 @@ export default () => {
     },
   ];
 
-  const handleCreate = () => {
-    history.push('/positives/create');
-  };
-
   return (
     <ContentContainer>
       <header>
         <Title level={4}>{translate('list')}</Title>
-        <Button type="primary" size="large" onClick={handleCreate}>
-          {translate('createItem')}
-        </Button>
       </header>
 
       <section>
