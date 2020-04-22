@@ -1,5 +1,5 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
-import { auth, actionCodeSettings } from '../../firebase';
+import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
 import { message } from 'antd';
 
