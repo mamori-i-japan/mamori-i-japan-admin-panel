@@ -1,4 +1,5 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
+import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
 import firebaseActionTypes from './../Firebase/actionTypes';
 import { auth } from '../../firebase';
@@ -33,32 +34,37 @@ function* loginSaga() {
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:
         email = window.prompt('Please provide your email for confirmation');
-      } else {
-        // The client SDK will parse the code from the link for you.
-        user = yield call(signInWithEmailLink, email);
+      }
+      // The client SDK will parse the code from the link for you.
+      user = yield call(signInWithEmailLink, email);
 
-        const defaultToken = yield call([user, user.getIdToken]);
+      const defaultToken = yield call([user, user.getIdToken]);
+
+      yield put({
+        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+        payload: { token: defaultToken },
+      });
+
+      const res = yield call(login);
+
+      if (res.data && auth.currentUser) {
+        const accessTokenWithClaims = yield call(
+          [user, user.getIdToken],
+          true
+        );
+
+        localStorage.setItem('token', accessTokenWithClaims);
 
         yield put({
-          type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
-          payload: { token: defaultToken },
+          type: actionTypes.LOGIN_SUCCESS,
+          payload: { token: accessTokenWithClaims, email: res.data.email },
         });
 
-        const res = yield call(login);
+        // const { from }: any = { from: { pathname: '/' } }; // window.location.state || 
 
-        if (res.data && auth.currentUser) {
-          const accessTokenWithClaims = yield call(
-            [user, user.getIdToken],
-            true
-          );
+        yield put(replace('/'));
 
-          localStorage.setItem('token', accessTokenWithClaims);
 
-          yield put({
-            type: actionTypes.LOGIN_SUCCESS,
-            payload: { token: accessTokenWithClaims, email: res.data.email },
-          });
-        }
       }
     } else {
       const { email } = payload;
@@ -80,6 +86,8 @@ function* logoutSaga() {
     yield put({
       type: actionTypes.LOGOUT_SUCCESS,
     });
+
+    yield put(replace('/'));
   });
 }
 
