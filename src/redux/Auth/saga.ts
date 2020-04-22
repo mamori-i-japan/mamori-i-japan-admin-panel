@@ -2,7 +2,7 @@ import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
 import firebaseActionTypes from './../Firebase/actionTypes';
-import { auth } from '../../firebase';
+import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
 
 const signInWithEmailLink: any = async (email: string) => {
