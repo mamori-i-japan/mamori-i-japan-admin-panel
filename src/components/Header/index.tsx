@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ActionFunctionAny } from 'redux-actions';
 import { Action } from 'redux';
 import { Button, message } from 'antd';
@@ -14,14 +13,12 @@ interface HeaderProps {
 }
 
 export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProps) => {
-  const history = useHistory();
   const { translate } = useContext(I18nContext);
 
   const handleLogout = async () => {
     logout();
     // TODO: locale
     message.success('Logout success!');
-    history.replace('/');
   };
 
   return (
