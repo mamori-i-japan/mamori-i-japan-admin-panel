@@ -139,62 +139,6 @@ exports[`MessageList should render correctly with no props 1`] = `
                   </Base>
                 </withConfigConsumer(Base)>
               </Title>
-              <Button
-                block={false}
-                ghost={false}
-                htmlType="button"
-                loading={false}
-                onClick={[Function]}
-                size="large"
-                type="primary"
-              >
-                <Wave>
-                  <button
-                    className="ant-btn ant-btn-primary ant-btn-lg"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <LoadingIcon
-                      existIcon={false}
-                      loading={false}
-                      prefixCls="ant-btn"
-                    >
-                      <ForwardRef
-                        motionName="ant-btn-loading-icon-motion"
-                        onAppearActive={[Function]}
-                        onAppearStart={[Function]}
-                        onEnterActive={[Function]}
-                        onEnterStart={[Function]}
-                        onLeaveActive={[Function]}
-                        onLeaveStart={[Function]}
-                        removeOnLeave={true}
-                        visible={false}
-                      >
-                        <CSSMotion
-                          internalRef={null}
-                          motionAppear={true}
-                          motionEnter={true}
-                          motionLeave={true}
-                          motionName="ant-btn-loading-icon-motion"
-                          onAppearActive={[Function]}
-                          onAppearStart={[Function]}
-                          onEnterActive={[Function]}
-                          onEnterStart={[Function]}
-                          onLeaveActive={[Function]}
-                          onLeaveStart={[Function]}
-                          removeOnLeave={true}
-                          visible={false}
-                        />
-                      </ForwardRef>
-                    </LoadingIcon>
-                    <span
-                      key=".0"
-                    >
-                      追 加
-                    </span>
-                  </button>
-                </Wave>
-              </Button>
             </header>
             <section>
               <_default
