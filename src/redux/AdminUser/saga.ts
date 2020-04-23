@@ -40,8 +40,13 @@ function* getUsersSaga() {
     yield put({ type: firebaseActionTypes.GET_ACCESS_TOKEN });
 
     try {
-      yield call(getAdminUsers);
-      yield put({ type: actionTypes.GET_USERS_SUCCESS });
+      const res = yield call(getAdminUsers);
+      console.log(res);
+      yield put({
+        type: actionTypes.GET_USERS_SUCCESS, payload: {
+          listData: res.data
+        }
+      });
     } catch (error) {
       console.log(error);
     }
