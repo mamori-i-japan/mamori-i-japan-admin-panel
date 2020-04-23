@@ -1,11 +1,10 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales'
 import { ContentContainer } from '../../components/CommonStyles';
 import { getAdminUsersAction } from '../../redux/AdminUser/actions';
-
 
 const { Title } = Typography;
 
@@ -19,14 +18,12 @@ const dataSource = [
 
 export const columns: any = [
   {
-    title: 'phone',
-    dataIndex: 'phone',
-    key: 'phone',
+    title: 'adminUserId',
+    dataIndex: 'adminUserId',
   },
   {
-    title: 'createdDate',
-    dataIndex: 'createdDate',
-    key: 'createdDate',
+    title: 'created',
+    dataIndex: 'created',
   },
 ];
 
@@ -35,7 +32,15 @@ export default () => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: any) => store.loading.isloading);
-  const getListData = useCallback(() => dispatch(getAdminUsersAction()), [dispatch]);
+  const { listData } = useSelector((store: any) => store.adminUser);
+
+  const fetchData = useCallback(() => dispatch(getAdminUsersAction()), [dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  console.log(listData);
 
   const handleCreate = () => {
     history.push('/users/create');

@@ -1,18 +1,23 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../firebase';
 import actionTypes from './actionTypes';
+import authActionTypes from '../Auth/actionTypes';
 import { message } from 'antd';
 
 function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
     const user = yield auth.currentUser;
 
-    const token = yield call([user, user.getIdToken]);
+    if (user) {
+      const token = yield call([user, user.getIdToken]);
 
-    yield put({
-      type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
-      payload: { token }
-    })
+      yield put({
+        type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
+        payload: { token }
+      })
+    } else {
+      yield put({ type: authActionTypes.LOGOUT });
+    }
   });
 }
 
