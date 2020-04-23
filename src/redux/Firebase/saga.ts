@@ -1,7 +1,6 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../firebase';
 import actionTypes from './actionTypes';
-import authActionTypes from '../Auth/actionTypes';
 import { message } from 'antd';
 
 const onAuthStateChanged = () => {
