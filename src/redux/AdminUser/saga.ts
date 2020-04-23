@@ -5,7 +5,7 @@ import firebaseActionTypes from '../Firebase/actionTypes';
 import { getAdminUsers, postAdminUser } from '../../apis';
 
 function* createUserSaga() {
-  yield takeEvery(actionTypes.CREATE_USER, function* _({
+  yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
     payload: { email },
   }: any) {
     yield put({
@@ -31,7 +31,7 @@ function* createUserSaga() {
 }
 
 function* getUsersSaga() {
-  yield takeEvery(actionTypes.GET_USERS, function* _() {
+  yield takeEvery(actionTypes.GET_ADMIN_USERS, function* _() {
     //TODO: add pagination & query params if API supports
     yield put({
       type: loadingActionTypes.START_LOADING,
@@ -43,7 +43,7 @@ function* getUsersSaga() {
       const res = yield call(getAdminUsers);
       console.log(res);
       yield put({
-        type: actionTypes.GET_USERS_SUCCESS, payload: {
+        type: actionTypes.GET_ADMIN_USERS_SUCCESS, payload: {
           listData: res.data
         }
       });

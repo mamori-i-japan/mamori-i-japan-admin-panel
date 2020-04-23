@@ -7,7 +7,7 @@ const initialState = {
 
 export default handleActions(
   {
-    [actionTypes.GET_USERS_SUCCESS]: (state, { payload: { listData } }) => ({
+    [actionTypes.GET_ADMIN_USERS_SUCCESS]: (state, { payload: { listData } }) => ({
       ...state,
       listData,
     }),

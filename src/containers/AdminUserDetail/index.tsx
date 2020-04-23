@@ -7,7 +7,7 @@ import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap from './dataMap';
-import { createUserAction } from '../../redux/AdminUser/actions';
+import { createAdminUserAction } from '../../redux/AdminUser/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -23,7 +23,7 @@ export default () => {
   const loading = useSelector((store: any) => store.loading.isLoading);
 
 
-  const createUser = useCallback((data) => dispatch(createUserAction(data)), [
+  const createUser = useCallback((data) => dispatch(createAdminUserAction(data)), [
     dispatch,
   ]);
 

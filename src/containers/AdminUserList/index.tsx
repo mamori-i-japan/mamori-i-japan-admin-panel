@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales'
 import { ContentContainer } from '../../components/CommonStyles';
+import { getAdminUsersAction } from '../../redux/AdminUser/actions';
+
 
 const { Title } = Typography;
 
@@ -28,9 +31,11 @@ export const columns: any = [
 ];
 
 export default () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
-  const loading = false;
+  const loading = useSelector((store: any) => store.loading.isloading);
+  const getListData = useCallback(() => dispatch(getAdminUsersAction()), [dispatch]);
 
   const handleCreate = () => {
     history.push('/users/create');
