@@ -8,7 +8,7 @@ export const postAdminUser = (data: { email: string }) => {
   return http.post('/admins/users', data);
 };
 
-export const getAdminUserList = () => {
+export const getAdminUsers = () => {
   return http.get('admins/users');
 };
 
