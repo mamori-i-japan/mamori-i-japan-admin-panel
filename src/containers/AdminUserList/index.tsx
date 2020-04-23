@@ -5,17 +5,27 @@ import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales'
 import { ContentContainer } from '../../components/CommonStyles';
 import { getAdminUsersAction } from '../../redux/AdminUser/actions';
+import moment from 'moment';
 
 const { Title } = Typography;
 
 export const columns: any = [
   {
-    title: 'adminUserId',
+    title: 'ID',
     dataIndex: 'adminUserId',
   },
   {
-    title: 'created',
+    title: 'email',
+    dataIndex: 'email',
+  },
+  {
+    title: 'addedByAdminEmail',
+    dataIndex: 'addedByAdminEmail',
+  },
+  {
+    title: 'createdDate',
     dataIndex: 'created',
+    render: (value: number) => (moment(value).format('YYYY-MM-DD HH:MM')),
   },
 ];
 
@@ -23,7 +33,7 @@ export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
-  const loading = useSelector((store: any) => store.loading.isloading);
+  const loading = useSelector((store: any) => store.loading.isLoading);
   const { listData } = useSelector((store: any) => store.adminUser);
 
   const fetchData = useCallback(() => dispatch(getAdminUsersAction()), [dispatch]);
