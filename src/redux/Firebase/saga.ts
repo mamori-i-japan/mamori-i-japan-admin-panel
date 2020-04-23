@@ -3,16 +3,33 @@ import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
 import { message } from 'antd';
 
+const onAuthStateChanged = () => {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        resolve(user);
+      } else {
+        reject(new Error('error'));
+      }
+    });
+  });
+};
+
 function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
-    const user = yield auth.currentUser;
+    try {
+      const user = yield call(onAuthStateChanged);
 
-    const token = yield call([user, user.getIdToken]);
+      const token = yield call([user, user.getIdToken]);
 
-    yield put({
-      type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
-      payload: { token }
-    })
+      yield put({
+        type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
+        payload: { token }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+
   });
 }
 
