@@ -4,20 +4,33 @@ import actionTypes from './actionTypes';
 import authActionTypes from '../Auth/actionTypes';
 import { message } from 'antd';
 
+const onAuthStateChanged = () => {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        resolve(user);
+      } else {
+        reject(new Error('error'));
+      }
+    });
+  });
+};
+
 function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
-    const user = yield auth.currentUser;
+    try {
+      const user = yield call(onAuthStateChanged);
 
-    if (user) {
       const token = yield call([user, user.getIdToken]);
 
       yield put({
         type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
         payload: { token }
       })
-    } else {
-      yield put({ type: authActionTypes.LOGOUT });
+    } catch (error) {
+      console.log(error);
     }
+
   });
 }
 

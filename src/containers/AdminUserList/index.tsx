@@ -8,14 +8,6 @@ import { getAdminUsersAction } from '../../redux/AdminUser/actions';
 
 const { Title } = Typography;
 
-const dataSource = [
-  {
-    key: 1,
-    phone: '08077667788',
-    createdDate: '2020.04.30'
-  }
-];
-
 export const columns: any = [
   {
     title: 'adminUserId',
@@ -40,8 +32,6 @@ export default () => {
     fetchData();
   }, [fetchData]);
 
-  console.log(listData);
-
   const handleCreate = () => {
     history.push('/users/create');
   };
@@ -56,12 +46,12 @@ export default () => {
       </header>
 
       <section>
-        <Table loading={loading} dataSource={dataSource} columns={columns.map((item: any) => {
-          return {
+        <Table loading={loading} dataSource={listData} columns={columns.map((item: any) => (
+          {
             ...item,
             title: translate(item.title),
-          };
-        })} />
+          }
+        ))} />
       </section>
     </ContentContainer>
   );

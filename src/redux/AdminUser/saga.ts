@@ -41,10 +41,15 @@ function* getUsersSaga() {
 
     try {
       const res = yield call(getAdminUsers);
-      console.log(res);
+
+      // TODO: fix the types of any by auto generate
+      const data = res.data.map((item: any) => ({
+        ...item,
+        key: item.adminUserId
+      }))
       yield put({
         type: actionTypes.GET_ADMIN_USERS_SUCCESS, payload: {
-          listData: res.data
+          listData: data
         }
       });
     } catch (error) {
