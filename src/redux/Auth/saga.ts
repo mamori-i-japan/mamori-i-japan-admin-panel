@@ -26,7 +26,7 @@ const signInWithEmailLink: any = async (email: string) => {
 
 function* loginSaga() {
   yield takeEvery(actionTypes.LOGIN, function* _({ payload }: any) {
-    yield put({ type: loadingActionTypes.END_LOADING });
+    yield put({ type: loadingActionTypes.START_LOADING });
 
     let user;
     // Confirm the link is a sign-in with email link.
