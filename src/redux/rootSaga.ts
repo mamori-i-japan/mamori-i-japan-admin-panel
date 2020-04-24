@@ -4,6 +4,7 @@ import authSaga from './Auth/saga';
 import adminUserSaga from './AdminUser/saga';
 import positiveSaga from './Positive/saga';
 import firebaseSaga from './Firebase/saga';
+import messageSaga from './Message/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     firebaseSaga(),
     adminUserSaga(),
     positiveSaga(),
+    messageSaga(),
   ]);
 }
