@@ -20,7 +20,7 @@ function* getAccessTokenSaga() {
     try {
       const user = yield call(onAuthStateChanged);
 
-      const token = yield call([user, user.getIdToken]);
+      const token = yield call([user, user.getIdToken], true);
 
       yield put({
         type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
