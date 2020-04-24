@@ -19,8 +19,11 @@ function* getAccessTokenSaga() {
   yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
     try {
       const user = yield call(onAuthStateChanged);
-
       const token = yield call([user, user.getIdToken], true);
+
+      console.log(token);
+
+      localStorage.setItem('token', token);
 
       yield put({
         type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
@@ -29,7 +32,6 @@ function* getAccessTokenSaga() {
     } catch (error) {
       console.log(error);
     }
-
   });
 }
 
