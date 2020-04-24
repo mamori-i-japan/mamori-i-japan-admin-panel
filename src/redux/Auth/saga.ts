@@ -50,7 +50,7 @@ function* loginSaga() {
 
       const res = yield call(login);
 
-      if (res.data && auth.currentUser) {
+      if (auth.currentUser) {
         const accessTokenWithClaims = yield call(
           [user, user.getIdToken],
           true

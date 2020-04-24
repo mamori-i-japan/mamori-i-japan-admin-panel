@@ -14,8 +14,6 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: any) => store.loading.isLoading);
 
-  console.log(loading);
-
   const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
 
   const onFinish = (values: any) => {
