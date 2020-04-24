@@ -2,6 +2,7 @@ import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
 import firebaseActionTypes from './../Firebase/actionTypes';
+import loadingActionTypes from './../Loading/actionTypes';
 import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
 
@@ -25,6 +26,8 @@ const signInWithEmailLink: any = async (email: string) => {
 
 function* loginSaga() {
   yield takeEvery(actionTypes.LOGIN, function* _({ payload }: any) {
+    yield put({ type: loadingActionTypes.START_LOADING });
+
     let user;
     // Confirm the link is a sign-in with email link.
     if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -47,7 +50,7 @@ function* loginSaga() {
 
       const res = yield call(login);
 
-      if (res.data && auth.currentUser) {
+      if (auth.currentUser) {
         const accessTokenWithClaims = yield call(
           [user, user.getIdToken],
           true
@@ -74,6 +77,8 @@ function* loginSaga() {
         payload: { email },
       });
     }
+
+    yield put({ type: loadingActionTypes.END_LOADING });
   });
 }
 

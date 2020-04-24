@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import { Form, Button, Typography } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
 import { LoginContainer } from './style';
@@ -12,6 +12,7 @@ const { Title } = Typography;
 export default () => {
   const dispatch = useDispatch();
   const { translate } = useContext(I18nContext);
+  const loading = useSelector((store: any) => store.loading.isLoading);
 
   const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
 
@@ -43,7 +44,7 @@ export default () => {
           ))}
 
         <Form.Item>
-          <Button block type="primary" htmlType="submit">
+          <Button loading={loading} block type="primary" htmlType="submit">
             {translate('loginSubmit')}
           </Button>
         </Form.Item>
