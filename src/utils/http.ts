@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { apiHost } from '../constants';
 import { store } from '../redux/store';
 
 const AxiosRequestInterceptor = async (config: any) => {
@@ -16,7 +15,7 @@ const AxiosRequestInterceptor = async (config: any) => {
 };
 
 axios.defaults.timeout = 30000;
-axios.defaults.baseURL = apiHost;
+axios.defaults.baseURL = process.env.REACT_APP_HOST || 'https://api-dev.mamori-i.jp/';
 axios.interceptors.request.use(AxiosRequestInterceptor);
 
 export default axios;
