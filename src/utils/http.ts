@@ -23,7 +23,7 @@ const AxiosRequestInterceptor = async (config: any) => {
   return configTemp;
 };
 
-const handleError = (response: any) => {
+export const handleError = (response: any) => {
   if (response && response.status === 401) {
     message.error(response.toString());
     store.dispatch(logoutAction());

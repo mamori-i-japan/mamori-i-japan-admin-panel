@@ -1,4 +1,5 @@
 import http from '../utils/http';
+import { db } from '../utils/firebase';
 
 export const login = () => {
   return http.post('auth/admin/login');
@@ -16,6 +17,27 @@ export const postPositive = (data: { phoneNumber: string }) => {
   return http.post('admins/positives', data);
 };
 
+export const getMessages = async () => {
+  const docRef = db.collection("messages").doc("SF");
+  const getOptions: any = {
+    source: 'cache'
+  };
+
+  try {
+    const doc = await docRef.get(getOptions);
+
+    console.log(doc.data());
+
+    return doc.data();
+  } catch (error) {
+    return error;
+  }
+};
+
+export const postMessaage = () => {
+
+};
+
 // todo: 陽性判定者一覧
 export const getPositives = () => {
 
@@ -25,13 +47,3 @@ export const getPositives = () => {
 export const getClosedContacts = () => {
 
 };
-
-// todo: お知らせ一覧
-export const getMessages = () => {
-
-};
-
-// todo: お知らせを変更
-export const postMessaage = () => {
-
-}
