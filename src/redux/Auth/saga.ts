@@ -48,7 +48,7 @@ function* loginSaga() {
         payload: { token: defaultToken },
       });
 
-      const res = yield call(login);
+      yield call(login);
 
       if (auth.currentUser) {
         const accessTokenWithClaims = yield call(
@@ -57,11 +57,6 @@ function* loginSaga() {
         );
 
         localStorage.setItem('token', accessTokenWithClaims);
-
-        yield put({
-          type: actionTypes.LOGIN_SUCCESS,
-          payload: { email: res.data.email },
-        });
 
         yield put({
           type: actionTypes.SAVE_TOKEN_SUCCESS,

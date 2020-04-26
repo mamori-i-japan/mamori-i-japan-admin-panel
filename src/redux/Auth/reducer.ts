@@ -18,10 +18,6 @@ export default handleActions(
       ...payload,
     }),
 
-    [actionTypes.LOGIN_SUCCESS]: (state, { payload }) => ({
-      ...payload,
-    }),
-
     [actionTypes.LOGOUT_SUCCESS]: () => ({
       token: null,
       email: null,
