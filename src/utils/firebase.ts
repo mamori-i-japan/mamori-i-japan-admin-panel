@@ -36,7 +36,7 @@ else {
 
 const auth = firebase.auth();
 
-var db = firebase.firestore();
+const db = firebase.firestore();
 
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this

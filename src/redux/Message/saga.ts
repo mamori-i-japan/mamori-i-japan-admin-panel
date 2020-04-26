@@ -10,7 +10,7 @@ function* editMessageSaga() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
-      const res = yield call(postMessaage, { id, url });
+      yield call(postMessaage, { id, url });
 
       yield put({
         type: actionTypes.UPDATE_MESSAGES_SUCCESS,
