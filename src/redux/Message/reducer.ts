@@ -9,7 +9,7 @@ export default handleActions(
   {
     [actionTypes.GET_MESSAGES_SUCCESS]: (state, { payload }: any) => ({
       ...state,
-      listData: payload
+      ...payload
     }),
 
     [actionTypes.EDIT_MESSAGES_SUCCESS]: state => ({

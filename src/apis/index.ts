@@ -1,5 +1,6 @@
 import http from '../utils/http';
 import { db } from '../utils/firebase';
+import Prefecture from '../constants/Prefecture';
 
 export const login = () => {
   return http.post('auth/admin/login');
@@ -18,33 +19,45 @@ export const postPositive = (data: { phoneNumber: string }) => {
 };
 
 export const getMessages = async () => {
-  const docRef = db.collection("prefectureMessages").doc("SF");
-  const getOptions: any = {
-    source: 'server'
-  };
+  // // generate default documents
+  // Array.apply(null, new Array(48)).map((value, index) => {
+  //   const id = index ? index.toString() : 'default';
+  //   const documentId = index > 9 ? index.toString() : index !== 0 ? `0${index}` : 'default';
+
+  //   db.collection('prefectureMessages')
+  //     .doc(documentId)
+  //     .set({ id, url: `http://www.${id}.temp` });
+  // });
 
   try {
-    const doc = await docRef.get(getOptions);
+    const querySnapshot = await db.collection('prefectureMessages').get();
+    const data: any = [];
 
-    console.log(doc.data());
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
 
-    return doc.data();
+    return data;
+
+
   } catch (error) {
     return error;
   }
 };
 
-export const postMessaage = () => {
-
-
+export const postMessaage = ({ id, url }: { id: string; url: string }) => {
+  db.collection('prefectureMessages')
+    .doc(id)
+    .update({
+      url,
+    })
+    .then(function () {
+      console.log('Document successfully updated!');
+    });
 };
 
 // todo: 陽性判定者一覧
-export const getPositives = () => {
-
-};
+export const getPositives = () => { };
 
 // todo: 濃厚接触者一覧
-export const getClosedContacts = () => {
-
-};
+export const getClosedContacts = () => { };

@@ -8,7 +8,7 @@ function* editMessageSaga() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
-      const res = yield call(postMessaage);
+      const res = yield call(postMessaage, { id: '33', url: '44' });
 
       yield put({
         type: actionTypes.EDIT_MESSAGES_SUCCESS,
@@ -27,13 +27,15 @@ function* getMessagesSaga() {
 
     try {
       const res = yield call(getMessages);
-
-      console.log(res);
+      const data = res.map((item: any) => ({
+        ...item,
+        key: item.id
+      }))
 
       yield put({
         type: actionTypes.GET_MESSAGES_SUCCESS,
         payload: {
-          listData: [],
+          listData: data,
         },
       });
     } catch (error) {

@@ -18,38 +18,16 @@ interface RecordType {
   address: string;
 }
 
-const dataSource: Array<RecordType> = [
-  {
-    key: '0',
-    id: 0,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: 'デフォルト',
-  },
-  {
-    key: '1',
-    id: 1,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: prefecturesMap['ja'][1],
-  },
-  {
-    key: '13',
-    id: 13,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: prefecturesMap['ja'][13],
-  },
-];
-
 export default () => {
   const { translate } = useContext(I18nContext);
   const dispatch = useDispatch();
 
   const loading = useSelector((store: any) => store.loading.isLoading);
-  const { listData } = useSelector((store: any) => store.adminUser);
+  const listData = useSelector((store: any) => store.message.listData);
 
-  const fetchData = useCallback(() => dispatch(getMessagesAction()), [dispatch]);
+  const fetchData = useCallback(() => dispatch(getMessagesAction()), [
+    dispatch,
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -63,16 +41,18 @@ export default () => {
       editable: false,
     },
     {
-      title: 'content',
-      dataIndex: 'content',
-      key: 'content',
+      title: 'URL',
+      dataIndex: 'url',
+      key: 'url',
       editable: true,
     },
     {
       title: 'prefecture',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'id',
+      key: 'id',
       editable: false,
+      render: (value: string) => prefecturesMap['ja'][value],
+
     },
   ];
 
@@ -82,16 +62,16 @@ export default () => {
         <Title level={4}>{translate('list')}</Title>
       </header>
 
+      {console.log(listData)}
+
       <section>
         <EditableTabel<RecordType>
           loading={loading}
           dataSource={listData}
-          columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => {
-            return {
-              ...item,
-              title: translate(item.title),
-            };
-          })}
+          columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => ({
+            ...item,
+            title: translate(item.title),
+          }))}
         />
       </section>
     </ContentContainer>
