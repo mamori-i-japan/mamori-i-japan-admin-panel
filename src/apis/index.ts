@@ -1,6 +1,5 @@
 import http from '../utils/http';
 import { db } from '../utils/firebase';
-import Prefecture from '../constants/Prefecture';
 
 export const login = () => {
   return http.post('auth/admin/login');
@@ -38,22 +37,25 @@ export const getMessages = async () => {
     });
 
     return data;
-
-
   } catch (error) {
     return error;
   }
 };
 
-export const postMessaage = ({ id, url }: { id: string; url: string }) => {
-  db.collection('prefectureMessages')
-    .doc(id)
-    .update({
-      url,
-    })
-    .then(function () {
-      console.log('Document successfully updated!');
-    });
+export const postMessaage = async ({
+  id,
+  url,
+}: {
+  id: string;
+  url: string;
+}) => {
+  const documentId = parseInt(id, 10) > 9 ? id : `0${id}`;
+
+  const res = await db.collection('prefectureMessages').doc(documentId).update({
+    url,
+  });
+
+  return res;
 };
 
 // todo: 陽性判定者一覧

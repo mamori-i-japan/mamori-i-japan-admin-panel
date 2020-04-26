@@ -3,4 +3,4 @@ import actionTypes from "./actionTypes";
 
 export const getMessagesAction = createAction(actionTypes.GET_MESSAGES);
 
-export const creatMessagesAction = createAction(actionTypes.EDIT_MESSAGES_SUCCESS);
+export const editMessagesAction = createAction(actionTypes.UPDATE_MESSAGES);

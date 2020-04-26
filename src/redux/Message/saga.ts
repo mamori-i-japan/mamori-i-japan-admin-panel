@@ -4,14 +4,17 @@ import loadingActionTypes from '../Loading/actionTypes';
 import { getMessages, postMessaage } from '../../apis';
 
 function* editMessageSaga() {
-  yield takeEvery(actionTypes.EDIT_MESSAGES, function* _({ }) {
+  yield takeEvery(actionTypes.UPDATE_MESSAGES, function* _({ payload }: any) {
+    const { url, id } = payload;
+
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
-      const res = yield call(postMessaage, { id: '33', url: '44' });
+      const res = yield call(postMessaage, { id, url });
 
       yield put({
-        type: actionTypes.EDIT_MESSAGES_SUCCESS,
+        type: actionTypes.UPDATE_MESSAGES_SUCCESS,
+        payload
       });
     } catch (error) {
       console.log(error);
@@ -22,7 +25,7 @@ function* editMessageSaga() {
 }
 
 function* getMessagesSaga() {
-  yield takeEvery(actionTypes.GET_MESSAGES, function* _({ }) {
+  yield takeEvery(actionTypes.GET_MESSAGES, function* _() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {

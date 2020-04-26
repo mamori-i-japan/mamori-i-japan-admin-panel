@@ -4,10 +4,13 @@ import { Typography } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import prefecturesMap from '../../constants/Prefecture';
-import EditableTabel, {
+import EditableTable, {
   ColumnTypeWithEditable,
 } from '../../components/EditableTable';
-import { getMessagesAction } from '../../redux/Message/actions';
+import {
+  getMessagesAction,
+  editMessagesAction,
+} from '../../redux/Message/actions';
 
 const { Title } = Typography;
 
@@ -26,6 +29,10 @@ export default () => {
   const listData = useSelector((store: any) => store.message.listData);
 
   const fetchData = useCallback(() => dispatch(getMessagesAction()), [
+    dispatch,
+  ]);
+
+  const editItem = useCallback((values) => dispatch(editMessagesAction(values)), [
     dispatch,
   ]);
 
@@ -52,7 +59,6 @@ export default () => {
       key: 'id',
       editable: false,
       render: (value: string) => prefecturesMap['ja'][value],
-
     },
   ];
 
@@ -62,12 +68,11 @@ export default () => {
         <Title level={4}>{translate('list')}</Title>
       </header>
 
-      {console.log(listData)}
-
       <section>
-        <EditableTabel<RecordType>
+        <EditableTable<RecordType>
           loading={loading}
           dataSource={listData}
+          editItem={editItem}
           columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => ({
             ...item,
             title: translate(item.title),
