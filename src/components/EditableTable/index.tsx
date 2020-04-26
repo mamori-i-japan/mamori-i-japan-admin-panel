@@ -89,10 +89,10 @@ export default <T extends RecordTypeDefault>({
             </Popconfirm>
           </span>
         ) : (
-          <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Button>
-        );
+            <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
+              Edit
+            </Button>
+          );
       },
     },
   ];
@@ -123,7 +123,7 @@ export default <T extends RecordTypeDefault>({
           },
         }}
         bordered
-        dataSource={data}
+        dataSource={dataSource}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{
