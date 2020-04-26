@@ -17,18 +17,18 @@ export interface ColumnTypeWithEditable<T> extends ColumnType<T> {
 interface EditableTableProps<T> {
   loading: boolean;
   dataSource: Array<T>;
+  editItem: any;
   columns: Array<ColumnTypeWithEditable<T>>;
 }
 
 export default <T extends RecordTypeDefault>({
   loading,
+  editItem,
   dataSource,
   columns,
 }: EditableTableProps<T>) => {
   const [form] = Form.useForm();
-  const [data, setData] = useState(dataSource);
   const [editingKey, setEditingKey] = useState('');
-
   const isEditing = (record: T) => record.key === editingKey;
 
   const edit = (record: T) => {
@@ -42,23 +42,12 @@ export default <T extends RecordTypeDefault>({
 
   const save = async (key: React.Key) => {
     try {
-      const row = (await form.validateFields()) as T;
+      const values = (await form.validateFields()) as T;
+      const index = dataSource.findIndex((item) => key === item.key);
 
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
+      editItem({ ...dataSource[index], ...values });
+
+      setEditingKey('');
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
     }
@@ -89,10 +78,10 @@ export default <T extends RecordTypeDefault>({
             </Popconfirm>
           </span>
         ) : (
-          <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Button>
-        );
+            <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
+              Edit
+            </Button>
+          );
       },
     },
   ];
@@ -123,7 +112,7 @@ export default <T extends RecordTypeDefault>({
           },
         }}
         bordered
-        dataSource={data}
+        dataSource={dataSource}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{

@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import prefecturesMap from '../../constants/Prefecture';
-import EditableTabel, {
+import EditableTable, {
   ColumnTypeWithEditable,
 } from '../../components/EditableTable';
+import {
+  getMessagesAction,
+  editMessagesAction,
+} from '../../redux/Message/actions';
 
 const { Title } = Typography;
 
@@ -14,39 +19,27 @@ interface RecordType {
   id: number;
   content: string;
   address: string;
-  createDate: string;
 }
-
-const dataSource: Array<RecordType> = [
-  {
-    key: '0',
-    id: 0,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: 'デフォルト',
-    createDate: '2020.04.30',
-  },
-  {
-    key: '1',
-    id: 1,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: prefecturesMap['ja'][1],
-    createDate: '2020.04.30',
-  },
-  {
-    key: '13',
-    id: 13,
-    content:
-      'ソーシャルディスタンスを保って生活してください。\n体調が悪い場合はxxxまで連絡してください。',
-    address: prefecturesMap['ja'][13],
-    createDate: '2020.04.30',
-  },
-];
 
 export default () => {
   const { translate } = useContext(I18nContext);
-  const loading = false;
+  const dispatch = useDispatch();
+
+  const loading = useSelector((store: any) => store.loading.isLoading);
+  const listData = useSelector((store: any) => store.message.listData);
+
+  const fetchData = useCallback(() => dispatch(getMessagesAction()), [
+    dispatch,
+  ]);
+
+  const editItem = useCallback((values) => dispatch(editMessagesAction(values)), [
+    dispatch,
+  ]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   const columns: Array<ColumnTypeWithEditable<RecordType>> = [
     {
       title: 'ID',
@@ -55,22 +48,17 @@ export default () => {
       editable: false,
     },
     {
-      title: 'content',
-      dataIndex: 'content',
-      key: 'content',
+      title: 'URL',
+      dataIndex: 'url',
+      key: 'url',
       editable: true,
     },
     {
       title: 'prefecture',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'id',
+      key: 'id',
       editable: false,
-    },
-    {
-      title: 'registrationDate',
-      dataIndex: 'createDate',
-      key: 'createDate',
-      editable: false,
+      render: (value: string) => prefecturesMap['ja'][value],
     },
   ];
 
@@ -81,15 +69,14 @@ export default () => {
       </header>
 
       <section>
-        <EditableTabel<RecordType>
+        <EditableTable<RecordType>
           loading={loading}
-          dataSource={dataSource}
-          columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => {
-            return {
-              ...item,
-              title: translate(item.title),
-            };
-          })}
+          dataSource={listData}
+          editItem={editItem}
+          columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => ({
+            ...item,
+            title: translate(item.title),
+          }))}
         />
       </section>
     </ContentContainer>

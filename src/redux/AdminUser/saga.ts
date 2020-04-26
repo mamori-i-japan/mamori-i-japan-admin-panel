@@ -47,6 +47,7 @@ function* getUsersSaga() {
         ...item,
         key: item.adminUserId
       }))
+
       yield put({
         type: actionTypes.GET_ADMIN_USERS_SUCCESS, payload: {
           listData: data

@@ -36,6 +36,8 @@ else {
 
 const auth = firebase.auth();
 
+const db = firebase.firestore();
+
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be whitelisted in the Firebase Console.
@@ -44,4 +46,4 @@ const actionCodeSettings = {
   handleCodeInApp: true
 };
 
-export { firebase, auth, actionCodeSettings };
+export { firebase, auth, db, actionCodeSettings };
