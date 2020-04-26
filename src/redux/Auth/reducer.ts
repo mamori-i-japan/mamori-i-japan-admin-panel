@@ -13,7 +13,7 @@ const initialState: AuthStates = {
 
 export default handleActions(
   {
-    [actionTypes.GET_DEFAULT_TOKEN_SUCCESS]: (state, { payload }) => ({
+    [actionTypes.SAVE_TOKEN_SUCCESS]: (state, { payload }) => ({
       ...state,
       ...payload,
     }),

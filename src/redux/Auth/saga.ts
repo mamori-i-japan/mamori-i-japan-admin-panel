@@ -44,7 +44,7 @@ function* loginSaga() {
       const defaultToken = yield call([user, user.getIdToken]);
 
       yield put({
-        type: actionTypes.GET_DEFAULT_TOKEN_SUCCESS,
+        type: actionTypes.SAVE_TOKEN_SUCCESS,
         payload: { token: defaultToken },
       });
 
@@ -60,8 +60,13 @@ function* loginSaga() {
 
         yield put({
           type: actionTypes.LOGIN_SUCCESS,
-          payload: { token: accessTokenWithClaims, email: res.data.email },
+          payload: { email: res.data.email },
         });
+
+        yield put({
+          type: actionTypes.SAVE_TOKEN_SUCCESS,
+          payliad: { token: accessTokenWithClaims }
+        })
 
         // const { from }: any = { from: { pathname: '/' } }; // window.location.state || 
 

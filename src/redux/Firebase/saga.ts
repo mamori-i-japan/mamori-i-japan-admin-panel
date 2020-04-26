@@ -1,6 +1,7 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
+import authActionTypes from '../Auth/actionTypes';
 import { message } from 'antd';
 
 const onAuthStateChanged = () => {
@@ -21,12 +22,10 @@ function* getAccessTokenSaga() {
       const user = yield call(onAuthStateChanged);
       const token = yield call([user, user.getIdToken], true);
 
-      console.log(token);
-
       localStorage.setItem('token', token);
 
       yield put({
-        type: actionTypes.GET_ACCESS_TOKEN_SUCCESS,
+        type: authActionTypes.SAVE_TOKEN_SUCCESS,
         payload: { token }
       })
     } catch (error) {
@@ -48,7 +47,7 @@ function* sendEmailSaga() {
       yield put({
         type: actionTypes.SEND_EMAIL_SUCCESS
       })
-
+      // TODO:
       message.success('Please check email and login by auth link');
     } catch (error) {
       console.log(error)

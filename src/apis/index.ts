@@ -18,9 +18,9 @@ export const postPositive = (data: { phoneNumber: string }) => {
 };
 
 export const getMessages = async () => {
-  const docRef = db.collection("messages").doc("SF");
+  const docRef = db.collection("prefectureMessages").doc("SF");
   const getOptions: any = {
-    source: 'cache'
+    source: 'server'
   };
 
   try {
@@ -35,6 +35,7 @@ export const getMessages = async () => {
 };
 
 export const postMessaage = () => {
+
 
 };
 
