@@ -34,21 +34,21 @@ const routes = [
         exact: true,
         component: MessageList,
       },
-      {
-        path: HOST + 'positives',
-        exact: true,
-        component: PositiveList,
-      },
-      {
-        path: HOST + 'positives/:id',
-        exact: true,
-        component: PositiveDetail,
-      },
-      {
-        path: HOST + 'contacts',
-        exact: true,
-        component: ContactList,
-      },
+      // {
+      //   path: HOST + 'positives',
+      //   exact: true,
+      //   component: PositiveList,
+      // },
+      // {
+      //   path: HOST + 'positives/:id',
+      //   exact: true,
+      //   component: PositiveDetail,
+      // },
+      // {
+      //   path: HOST + 'contacts',
+      //   exact: true,
+      //   component: ContactList,
+      // },
       {
         path: HOST + 'users/:id',
         exact: true,
