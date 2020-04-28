@@ -25,11 +25,10 @@ const AxiosRequestInterceptor = async (config: any) => {
 
 export const handleError = (response: any) => {
   if (response && response.status === 401) {
-    message.error(response.toString());
+    console.log(response);
+    message.error(`code: ${response.status}, message: ${response.toString()}`);
     store.dispatch(logoutAction());
-  }
-
-  if (response && response.status >= 500) {
+  } else if (response && response.status >= 500) {
     console.log(response);
     message.error(`code: ${response.status}, message: ${response.toString()}`);
   }
