@@ -1,8 +1,8 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { Button, Form } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
@@ -15,7 +15,7 @@ const layout = {
 };
 
 export default () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
