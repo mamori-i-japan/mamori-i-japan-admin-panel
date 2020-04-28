@@ -6,16 +6,16 @@ export default [
     path: HOST,
     children: [],
   },
-  {
-    name: 'positive',
-    path: HOST + 'positives',
-    children: [],
-  },
-  {
-    name: 'contact',
-    path: HOST + 'contacts',
-    children: [],
-  },
+  // {
+  //   name: 'positive',
+  //   path: HOST + 'positives',
+  //   children: [],
+  // },
+  // {
+  //   name: 'contact',
+  //   path: HOST + 'contacts',
+  //   children: [],
+  // },
   {
     name: 'adminUser',
     path: HOST + 'users',
