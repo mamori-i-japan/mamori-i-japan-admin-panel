@@ -7,7 +7,7 @@ import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap from './dataMap';
-import { createPositiveAction } from '../../redux/Positive/actions';
+// import { createPositiveAction } from '../../redux/Positive/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -21,10 +21,10 @@ export default () => {
   const [form] = Form.useForm();
   const loading = useSelector((store: any) => store.loading.isLoading);
 
-  const createPositive = useCallback(
-    (values) => dispatch(createPositiveAction(values)),
-    [dispatch]
-  );
+  // const createPositive = useCallback(
+  //   (values) => dispatch(createPositiveAction(values)),
+  //   [dispatch]
+  // );
 
   const handleBack = () => {
     history.goBack();
@@ -34,7 +34,7 @@ export default () => {
     form
       .validateFields()
       .then((values) => {
-        createPositive(values);
+        // createPositive(values);
       })
       .catch(info => {
         console.log('Validate Failed:', info);
