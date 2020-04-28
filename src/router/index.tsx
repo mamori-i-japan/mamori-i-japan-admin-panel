@@ -2,11 +2,8 @@ import React from 'react';
 import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
-import Dashboard from '../containers/Dashboard';
-import ContactList from '../containers/ContactList';
+import Dashboard from '../containers/Dashboard'
 import MessageList from '../containers/MessageList';
-import PositiveList from '../containers/PositiveList';
-import PositiveDetail from '../containers/PositiveDetail';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 import { store } from '../redux/store';
