@@ -57,9 +57,3 @@ export const postMessaage = async ({
 
   return res;
 };
-
-// todo: 陽性判定者一覧
-export const getPositives = () => { };
-
-// todo: 濃厚接触者一覧
-export const getClosedContacts = () => { };
