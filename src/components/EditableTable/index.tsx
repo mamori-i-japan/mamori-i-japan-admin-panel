@@ -58,8 +58,8 @@ export default <T extends RecordTypeDefault>({
   const columnsWithOperation = [
     ...columns,
     {
-      title: '',
-      dataIndex: '',
+      title: translate('operation'),
+      dataIndex: 'operation',
       width: '14rem',
       editable: false,
       render: (_: any, record: T) => {

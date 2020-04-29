@@ -43,4 +43,5 @@ export default {
   unauthorized: 'Unauthorized',
   internalServerError: 'Internal Server Error',
   UnexpectedError: 'An Unexpected Error Occurred',
+  operation: '操作',
 };
