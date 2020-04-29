@@ -4,8 +4,8 @@ import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getMessages, postMessaage } from '../../apis';
 
-function* editMessageSaga() {
-  yield takeEvery(actionTypes.UPDATE_MESSAGES, function* _({ payload }: any) {
+function* updateMessageSaga() {
+  yield takeEvery(actionTypes.UPDATE_MESSAGE, function* _({ payload }: any) {
     const { url, id } = payload;
 
     yield put({ type: loadingActionTypes.START_LOADING });
@@ -14,7 +14,7 @@ function* editMessageSaga() {
       yield call(postMessaage, { id, url });
 
       yield put({
-        type: actionTypes.UPDATE_MESSAGES_SUCCESS,
+        type: actionTypes.UPDATE_MESSAGE_SUCCESS,
         payload,
       });
 
@@ -62,5 +62,5 @@ function* getMessagesSaga() {
 }
 
 export default function* rootSaga() {
-  yield all([fork(editMessageSaga), fork(getMessagesSaga)]);
+  yield all([fork(updateMessageSaga), fork(getMessagesSaga)]);
 }
