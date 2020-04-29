@@ -28,7 +28,7 @@ export default {
   email: 'メールアドレス',
   password: 'パスワード',
   adminUser: '管理者',
-  //Fixme: please confirm the Japanese of below
+  //TODO: please confirm the Japanese of below
   submitSuccess: 'Submitted!',
   deleteSuccess: '削除した！',
   loginSuccess: 'ログインした！',
@@ -44,4 +44,8 @@ export default {
   internalServerError: 'Internal Server Error',
   UnexpectedError: '不明なエラーが発生しました。',
   operation: '操作',
+  organizationName: '組織名',
+  organizationCode: '組織コード',
+  addedByAdminEmail: 'addedByAdminEmail',
+  organization: '組織管理',
 };

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Table, Button } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
-import { getAdminUsersAction } from '../../redux/AdminUser/actions';
+import { getOrganizationsAction } from '../../redux/Organization/actions';
 import moment from 'moment';
 
 const { Title } = Typography;
@@ -12,11 +12,15 @@ const { Title } = Typography;
 export const columns: any = [
   {
     title: 'ID',
-    dataIndex: 'adminUserId',
+    dataIndex: 'id',
   },
   {
-    title: 'email',
-    dataIndex: 'email',
+    title: 'organizationName',
+    dataIndex: 'name',
+  },
+  {
+    title: 'organizationCode',
+    dataIndex: 'organizationCode',
   },
   {
     title: 'addedByAdminEmail',
@@ -29,23 +33,22 @@ export const columns: any = [
   },
 ];
 
+
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: any) => store.loading.isLoading);
-  const { listData } = useSelector((store: any) => store.adminUser);
+  const { listData } = useSelector((store: any) => store.organization);
 
-  const fetchData = useCallback(() => dispatch(getAdminUsersAction()), [
-    dispatch,
-  ]);
+  const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [dispatch]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleCreate = () => {
-    history.push('/users/create');
+    history.push('/organizations/create');
   };
 
   return (
@@ -61,12 +64,14 @@ export default () => {
         <Table
           loading={loading}
           dataSource={listData}
-          columns={columns.map((item: any) => ({
-            ...item,
-            title: translate(item.title),
-          }))}
+          columns={columns.map((item: any) => {
+            return {
+              ...item,
+              title: translate(item.title),
+            };
+          })}
         />
       </section>
     </ContentContainer>
-  );
-};
+  )
+}
