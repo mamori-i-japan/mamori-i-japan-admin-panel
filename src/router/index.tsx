@@ -7,7 +7,7 @@ import MessageList from '../containers/MessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 import OrganizationList from '../containers/OrganizationList';
-import OrganizationDetail from '../containers/OrganizationList';
+import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 
 import { HOST } from '../constants';

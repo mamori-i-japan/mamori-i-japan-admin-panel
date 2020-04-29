@@ -17,7 +17,6 @@ function* createOrganizationSaga() {
 
       yield put({
         type: actionTypes.CREATE_ORGANIZATION_SUCCESS,
-        payload,
       });
 
       yield put({
@@ -42,9 +41,10 @@ function* getOrganizationsSaga() {
     try {
       const res = yield call(getOrganizations);
 
-      console.log(res);
-
-      yield put({ type: actionTypes.GET_ORGANIZATIONS });
+      yield put({
+        type: actionTypes.GET_ORGANIZATIONS_SUCCESS,
+        payload: { listData: res.data },
+      });
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
@@ -64,6 +64,11 @@ function* updateOrganizationSaga() {
 
     try {
       yield put({ type: actionTypes.UPDATE_ORGANIZATION_SUCCESS });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'submitSuccess' },
+      });
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,

@@ -39,15 +39,11 @@ function* getMessagesSaga() {
 
     try {
       const res = yield call(getMessages);
-      const data = res.map((item: any) => ({
-        ...item,
-        key: item.id,
-      }));
 
       yield put({
         type: actionTypes.GET_MESSAGES_SUCCESS,
         payload: {
-          listData: data,
+          listData: res,
         },
       });
     } catch (error) {

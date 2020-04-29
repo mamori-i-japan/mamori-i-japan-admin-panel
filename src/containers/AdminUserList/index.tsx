@@ -61,6 +61,7 @@ export default () => {
         <Table
           loading={loading}
           dataSource={listData}
+          rowKey={(record: any) => record.id}
           columns={columns.map((item: any) => ({
             ...item,
             title: translate(item.title),

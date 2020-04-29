@@ -11,10 +11,6 @@ const { Title } = Typography;
 
 export const columns: any = [
   {
-    title: 'ID',
-    dataIndex: 'id',
-  },
-  {
     title: 'organizationName',
     dataIndex: 'name',
   },
@@ -64,6 +60,7 @@ export default () => {
         <Table
           loading={loading}
           dataSource={listData}
+          rowKey={(record: any) => record.id}
           columns={columns.map((item: any) => {
             return {
               ...item,
