@@ -42,6 +42,6 @@ export default {
   badRequest: 'Bad Request',
   unauthorized: 'Unauthorized',
   internalServerError: 'Internal Server Error',
-  UnexpectedError: 'An Unexpected Error Occurred',
+  UnexpectedError: '不明なエラーが発生しました。',
   operation: '操作',
 };
