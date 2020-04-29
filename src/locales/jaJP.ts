@@ -26,5 +26,7 @@ export default {
   negativeStatus: '陰性',
   email: 'メールアドレス',
   password: 'パスワード',
-  adminUser: '管理者'
+  adminUser: '管理者',
+  //Fixme: please confirm the Japanese of below
+  logoutConfirmTitle: 'ログアウトしますか？',
 };

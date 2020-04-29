@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { ActionFunctionAny } from 'redux-actions';
 import { Action } from 'redux';
-import { Button, message } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Button, Modal } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { AppHeader } from './style';
 import { I18nContext } from '../../locales';
+
+const { confirm } = Modal;
 
 interface HeaderProps {
   sidebarIsCollapse: boolean;
@@ -16,9 +18,14 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProp
   const { translate } = useContext(I18nContext);
 
   const handleLogout = async () => {
-    logout();
-    // TODO: locale
-    message.success('Logout success!');
+    confirm({
+      title: translate('logoutConfirmTitle'),
+      icon: <ExclamationCircleOutlined />,
+      okText: translate('logout'),
+      onOk() {
+        logout();
+      },
+    });
   };
 
   return (

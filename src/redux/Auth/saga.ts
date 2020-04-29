@@ -84,6 +84,8 @@ function* loginSaga() {
 
 function* logoutSaga() {
   yield takeEvery(actionTypes.LOGOUT, function* _() {
+    yield put({ type: loadingActionTypes.START_LOADING });
+
     yield call([auth, auth.signOut]);
 
     localStorage.removeItem('token');
@@ -91,6 +93,8 @@ function* logoutSaga() {
     yield put({
       type: actionTypes.LOGOUT_SUCCESS,
     });
+
+    yield put({ type: loadingActionTypes.END_LOADING });
 
     yield put(replace('/'));
   });

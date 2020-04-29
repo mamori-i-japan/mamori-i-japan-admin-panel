@@ -14,4 +14,5 @@ export default {
   prefecture: 'Prefecture',
   registrationDate: 'Registration date',
   footerCopyright: 'Admin Panel ©2020',
+  logoutConfirmTitle: 'Are you sure to logout?'
 };
