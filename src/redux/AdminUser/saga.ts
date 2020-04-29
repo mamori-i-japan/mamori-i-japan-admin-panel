@@ -64,7 +64,10 @@ function* getAdminUsersSaga() {
         },
       });
     } catch (error) {
-      console.log(error);
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.status, errorMessage: error.error },
+      });
     }
 
     yield put({

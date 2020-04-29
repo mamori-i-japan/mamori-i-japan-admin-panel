@@ -50,10 +50,13 @@ export const postMessaage = async ({
   url: string;
 }) => {
   const documentId = parseInt(id, 10) > 9 ? id : `0${id}`;
+  try {
+    const res = await db.collection('prefectureMessages').doc(documentId).update({
+      url,
+    });
 
-  const res = await db.collection('prefectureMessages').doc(documentId).update({
-    url,
-  });
-
-  return res;
+    return res;
+  } catch (error) {
+    return error;
+  }
 };

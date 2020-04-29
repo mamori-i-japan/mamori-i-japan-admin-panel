@@ -23,7 +23,10 @@ function* editMessageSaga() {
         payload: { successMessage: 'submitSuccess' },
       });
     } catch (error) {
-      console.log(error);
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.status, errorMessage: error.error },
+      });
     }
 
     yield put({ type: loadingActionTypes.END_LOADING });
@@ -48,7 +51,10 @@ function* getMessagesSaga() {
         },
       });
     } catch (error) {
-      console.log(error);
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.status, errorMessage: error.error },
+      });
     }
 
     yield put({ type: loadingActionTypes.END_LOADING });
