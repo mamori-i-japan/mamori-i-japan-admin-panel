@@ -1,10 +1,9 @@
 import React, { useReducer } from 'react';
 import { langCode } from '../constants';
-
 import jaJP from './jaJP';
 import enUS from './enUS';
 
-const langLocales: any = {
+export const langLocales: any = {
   En: enUS,
   Ja: jaJP,
 };

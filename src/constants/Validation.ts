@@ -1,4 +1,4 @@
-// import Message from './Message';
+import { langCode } from './index';
 
 export default {
   required: { required: true, message: 'Please input' },
