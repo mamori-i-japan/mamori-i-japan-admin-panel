@@ -6,6 +6,7 @@ export default {
   editItem: '編集',
   list: '一覧',
   back: '戻る',
+  cancel: 'キャンセル',
   deleteItem: '削除',
   logout: 'ログアウト',
   submit: '保存',

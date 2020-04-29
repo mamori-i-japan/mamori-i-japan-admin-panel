@@ -3,7 +3,6 @@ import actionTypes from './actionTypes';
 
 function* getAnalyticsSaga() {
   yield takeEvery(actionTypes.GET_ANALYTICS, function* _() {
-    // TODO: get from API
     // const res = yield call (getAnalytics());
 
     const res = [

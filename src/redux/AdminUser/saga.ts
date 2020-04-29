@@ -52,7 +52,6 @@ function* getAdminUsersSaga() {
     try {
       const res = yield call(getAdminUsers);
 
-      // TODO: fix the types of any by auto generate
       const data = res.data.map((item: any) => ({
         ...item,
         key: item.adminUserId,
