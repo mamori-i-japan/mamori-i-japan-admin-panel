@@ -261,7 +261,7 @@ exports[`MessageList should render correctly 1`] = `
                                 "dataIndex": "operation",
                                 "editable": false,
                                 "render": [Function],
-                                "title": "operation",
+                                "title": "操作",
                                 "width": "14rem",
                               },
                             ]
@@ -326,7 +326,7 @@ exports[`MessageList should render correctly 1`] = `
                                           "dataIndex": "operation",
                                           "editable": false,
                                           "render": [Function],
-                                          "title": "operation",
+                                          "title": "操作",
                                           "width": "14rem",
                                         },
                                       ]
@@ -392,7 +392,7 @@ exports[`MessageList should render correctly 1`] = `
                                                   <th
                                                     class="ant-table-cell"
                                                   >
-                                                    operation
+                                                    操作
                                                   </th>
                                                 </tr>
                                               </thead>
@@ -506,7 +506,7 @@ exports[`MessageList should render correctly 1`] = `
                                                 "dataIndex": "operation",
                                                 "editable": false,
                                                 "render": [Function],
-                                                "title": "operation",
+                                                "title": "操作",
                                                 "width": "14rem",
                                               },
                                             ],
@@ -566,7 +566,7 @@ exports[`MessageList should render correctly 1`] = `
                                                         <th
                                                           class="ant-table-cell"
                                                         >
-                                                          operation
+                                                          操作
                                                         </th>
                                                       </tr>
                                                     </thead>
@@ -713,7 +713,7 @@ exports[`MessageList should render correctly 1`] = `
                                                       "editable": false,
                                                       "fixed": undefined,
                                                       "render": [Function],
-                                                      "title": "operation",
+                                                      "title": "操作",
                                                       "width": "14rem",
                                                     },
                                                   ]
@@ -794,7 +794,7 @@ exports[`MessageList should render correctly 1`] = `
                                                       "dataIndex": "operation",
                                                       "editable": false,
                                                       "render": [Function],
-                                                      "title": "operation",
+                                                      "title": "操作",
                                                       "width": "14rem",
                                                     },
                                                   ]
@@ -829,7 +829,7 @@ exports[`MessageList should render correctly 1`] = `
                                                       "editable": false,
                                                       "fixed": undefined,
                                                       "render": [Function],
-                                                      "title": "operation",
+                                                      "title": "操作",
                                                       "width": "14rem",
                                                     },
                                                   ]
@@ -906,7 +906,7 @@ exports[`MessageList should render correctly 1`] = `
                                                           "rowSpan": 1,
                                                         },
                                                         Object {
-                                                          "children": "operation",
+                                                          "children": "操作",
                                                           "className": "",
                                                           "colEnd": 3,
                                                           "colSpan": 1,
@@ -915,7 +915,7 @@ exports[`MessageList should render correctly 1`] = `
                                                             "dataIndex": "operation",
                                                             "editable": false,
                                                             "render": [Function],
-                                                            "title": "operation",
+                                                            "title": "操作",
                                                             "width": "14rem",
                                                           },
                                                           "key": undefined,
@@ -953,7 +953,7 @@ exports[`MessageList should render correctly 1`] = `
                                                           "editable": false,
                                                           "fixed": undefined,
                                                           "render": [Function],
-                                                          "title": "operation",
+                                                          "title": "操作",
                                                           "width": "14rem",
                                                         },
                                                       ]
@@ -1084,7 +1084,7 @@ exports[`MessageList should render correctly 1`] = `
                                                             "dataIndex": "operation",
                                                             "editable": false,
                                                             "render": [Function],
-                                                            "title": "operation",
+                                                            "title": "操作",
                                                             "width": "14rem",
                                                           }
                                                         }
@@ -1103,7 +1103,7 @@ exports[`MessageList should render correctly 1`] = `
                                                           rowSpan={null}
                                                           style={Object {}}
                                                         >
-                                                          operation
+                                                          操作
                                                         </th>
                                                       </Cell>
                                                     </tr>
