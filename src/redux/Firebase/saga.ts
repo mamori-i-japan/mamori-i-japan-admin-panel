@@ -31,7 +31,7 @@ function* getAccessTokenSaga() {
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
-        payload: { errorCode: error.status, errorMessage: error.error },
+        payload: { errorCode: error.code, errorMessage: error.message },
       });
     }
   });
@@ -54,7 +54,7 @@ function* sendEmailSaga() {
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
-        payload: { errorCode: error.status, errorMessage: error.error },
+        payload: { errorCode: error.code, errorMessage: error.message },
       });
     }
   });
