@@ -2,9 +2,10 @@ import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import firebaseActionTypes from '../Firebase/actionTypes';
+import feedbackActionTypes from '../Feedback/actionTypes';
 import { getAdminUsers, postAdminUser } from '../../apis';
 
-function* createUserSaga() {
+function* createAdminUserSaga() {
   yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
     payload: { email },
   }: any) {
@@ -16,9 +17,15 @@ function* createUserSaga() {
 
     try {
       yield call(postAdminUser, { email });
+
       yield put({
         type: firebaseActionTypes.SEND_EMAIL,
         payload: { email },
+      });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'createAdminUserSuccess' },
       });
     } catch (error) {
       console.log(error);
@@ -30,7 +37,7 @@ function* createUserSaga() {
   });
 }
 
-function* getUsersSaga() {
+function* getAdminUsersSaga() {
   yield takeEvery(actionTypes.GET_ADMIN_USERS, function* _() {
     //TODO: add pagination & query params if API supports
     yield put({
@@ -45,13 +52,14 @@ function* getUsersSaga() {
       // TODO: fix the types of any by auto generate
       const data = res.data.map((item: any) => ({
         ...item,
-        key: item.adminUserId
-      }))
+        key: item.adminUserId,
+      }));
 
       yield put({
-        type: actionTypes.GET_ADMIN_USERS_SUCCESS, payload: {
-          listData: data
-        }
+        type: actionTypes.GET_ADMIN_USERS_SUCCESS,
+        payload: {
+          listData: data,
+        },
       });
     } catch (error) {
       console.log(error);
@@ -64,5 +72,5 @@ function* getUsersSaga() {
 }
 
 export default function* rootSaga() {
-  yield all([fork(createUserSaga), fork(getUsersSaga)]);
+  yield all([fork(createAdminUserSaga), fork(getAdminUsersSaga)]);
 }

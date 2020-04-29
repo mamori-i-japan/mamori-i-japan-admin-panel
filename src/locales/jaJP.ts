@@ -28,5 +28,14 @@ export default {
   password: 'パスワード',
   adminUser: '管理者',
   //Fixme: please confirm the Japanese of below
+  submitSuccess: 'Submitted!',
+  deleteSuccess: '削除した！',
+  loginSuccess: 'ログインした！',
+  logoutSuccess: 'ログアウトした！',
+  createAdminUserSuccess: '管理者を追加した！追加した管理者にメールを送信しました！',
+  adminUserIsExistError: '管理者が存在します!',
   logoutConfirmTitle: 'ログアウトしますか？',
+  isRequired: '入力してください',
+  isValidEmail: '有効なメールアドレスを入力してください',
+  loginByAuthLink: 'メールを確認し、認証リンクでログインしてください',
 };

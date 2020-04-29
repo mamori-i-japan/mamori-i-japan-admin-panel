@@ -1,8 +1,9 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
-import firebaseActionTypes from './../Firebase/actionTypes';
-import loadingActionTypes from './../Loading/actionTypes';
+import firebaseActionTypes from '../Firebase/actionTypes';
+import loadingActionTypes from '../Loading/actionTypes';
+import feedbackTypes from '../Feedback/actionTypes';
 import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
 
@@ -51,23 +52,23 @@ function* loginSaga() {
       yield call(login);
 
       if (auth.currentUser) {
-        const accessTokenWithClaims = yield call(
-          [user, user.getIdToken],
-          true
-        );
+        const accessTokenWithClaims = yield call([user, user.getIdToken], true);
 
         localStorage.setItem('token', accessTokenWithClaims);
 
         yield put({
           type: actionTypes.SAVE_TOKEN_SUCCESS,
-          payliad: { token: accessTokenWithClaims }
-        })
+          payliad: { token: accessTokenWithClaims },
+        });
 
-        // const { from }: any = { from: { pathname: '/' } }; // window.location.state || 
+        yield put({
+          type: feedbackTypes.SHOW_SUCCESS_MESSAGE,
+          payload: { successMessage: 'loginSuccess' },
+        });
+
+        // const { from }: any = { from: { pathname: '/' } }; // window.location.state ||
 
         yield put(replace('/'));
-
-
       }
     } else {
       const { email } = payload;
@@ -75,6 +76,11 @@ function* loginSaga() {
       yield put({
         type: firebaseActionTypes.SEND_EMAIL,
         payload: { email },
+      });
+
+      yield put({
+        type: feedbackTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'loginByAuthLink' },
       });
     }
 
@@ -92,6 +98,11 @@ function* logoutSaga() {
 
     yield put({
       type: actionTypes.LOGOUT_SUCCESS,
+    });
+
+    yield put({
+      type: feedbackTypes.SHOW_SUCCESS_MESSAGE,
+      payload: { successMessage: 'logoutSuccess' },
     });
 
     yield put({ type: loadingActionTypes.END_LOADING });

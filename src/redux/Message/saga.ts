@@ -1,6 +1,7 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
+import feedbackActionTypes from '../Feedback/actionTypes';
 import { getMessages, postMessaage } from '../../apis';
 
 function* editMessageSaga() {
@@ -14,7 +15,12 @@ function* editMessageSaga() {
 
       yield put({
         type: actionTypes.UPDATE_MESSAGES_SUCCESS,
-        payload
+        payload,
+      });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'submitted' },
       });
     } catch (error) {
       console.log(error);
@@ -32,8 +38,8 @@ function* getMessagesSaga() {
       const res = yield call(getMessages);
       const data = res.map((item: any) => ({
         ...item,
-        key: item.id
-      }))
+        key: item.id,
+      }));
 
       yield put({
         type: actionTypes.GET_MESSAGES_SUCCESS,
