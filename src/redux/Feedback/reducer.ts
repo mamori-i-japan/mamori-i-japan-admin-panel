@@ -8,15 +8,13 @@ export interface FeedbackState {
   isSuccess: boolean;
   errorMessage: string;
   isError: boolean;
-  isDelete: boolean;
 }
 
 const initalState: FeedbackState = {
-  errorMessage: '',
-  isError: false,
-  successMessage: '',
-  isSuccess: false,
-  isDelete: false,
+  errorMessage: 'error',
+  isError: true,
+  successMessage: 'success',
+  isSuccess: true,
 };
 
 export default handleActions(
@@ -36,7 +34,7 @@ export default handleActions(
       successMessage: '',
     }),
 
-    [actionTypes.SHOW_ERROR_ALERT]: (
+    [actionTypes.SHOW_ERROR_MESSAGE]: (
       state,
       { payload: { errorMessage } }: { type: string; payload: FeedbackState }
     ) => ({
@@ -45,20 +43,10 @@ export default handleActions(
       errorMessage: langLocales[langCode][errorMessage],
     }),
 
-    [actionTypes.CLOSE_ERROR_ALERT]: (state) => ({
+    [actionTypes.CLOSE_ERROR_MESSAGE]: (state) => ({
       ...state,
       isError: false,
       errorMessage: '',
-    }),
-
-    [actionTypes.SHOW_DELETE_MODAL]: (state) => ({
-      ...state,
-      isDelete: true,
-    }),
-
-    [actionTypes.CLOSE_DELETE_MODAL]: (state) => ({
-      ...state,
-      isDelete: false,
     }),
   },
   initalState
