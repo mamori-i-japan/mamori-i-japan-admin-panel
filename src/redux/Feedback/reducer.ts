@@ -11,10 +11,10 @@ export interface FeedbackState {
 }
 
 const initalState: FeedbackState = {
-  errorMessage: 'error',
-  isError: true,
-  successMessage: 'success',
-  isSuccess: true,
+  errorMessage: '',
+  isError: false,
+  successMessage: '',
+  isSuccess: false,
 };
 
 export default handleActions(

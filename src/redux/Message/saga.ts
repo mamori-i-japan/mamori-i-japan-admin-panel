@@ -20,7 +20,7 @@ function* editMessageSaga() {
 
       yield put({
         type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
-        payload: { successMessage: 'submitted' },
+        payload: { successMessage: 'submitSuccess' },
       });
     } catch (error) {
       console.log(error);
