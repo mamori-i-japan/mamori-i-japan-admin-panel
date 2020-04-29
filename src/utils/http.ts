@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { message } from 'antd';
 import { store } from '../redux/store';
-import { logoutAction } from '../redux/Auth/actions';
+// import { logoutAction } from '../redux/Auth/actions';
+import { showErrorAlertAction } from '../redux/Feedback/actions';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_HOST || 'https://api-dev.mamori-i.jp/',
-  timeout: 30000
+  timeout: 30000,
 });
 
 const AxiosRequestInterceptor = async (config: any) => {
@@ -25,26 +25,27 @@ const AxiosRequestInterceptor = async (config: any) => {
 
 export const handleError = (response: any) => {
   if (response && response.status === 401) {
-    console.log(response);
-    message.error(`code: ${response.status}, message: ${response.toString()}`);
-    store.dispatch(logoutAction());
+    store.dispatch(showErrorAlertAction(401, 'unauthorized'));
+    // store.dispatch(logoutAction());
   } else if (response && response.status >= 500) {
-    console.log(response);
-    message.error(`code: ${response.status}, message: ${response.toString()}`);
+    store.dispatch(showErrorAlertAction(response.status, 'internalServerError'));
   }
 };
 
 instance.interceptors.request.use(AxiosRequestInterceptor);
 
-instance.interceptors.response.use(response => {
-  return response;
-}, error => {
-  if (error.response) {
-    handleError(error.response);
-  } else {
-    console.log('no error response');
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response) {
+      handleError(error.response);
+      return Promise.reject(error.response);
+    } else {
+      store.dispatch(showErrorAlertAction('000', 'unexpectError'));
+    }
   }
-})
+);
 
 export default instance;
-

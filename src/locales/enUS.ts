@@ -14,5 +14,10 @@ export default {
   prefecture: 'Prefecture',
   registrationDate: 'Registration date',
   footerCopyright: 'Admin Panel ©2020',
-  logoutConfirmTitle: 'Are you sure to logout?'
+  logoutConfirmTitle: 'Are you sure to logout?',
+  adminUserIsExistError: 'The email address is already in use by another account.',
+  badRequest: 'Bad Request',
+  unauthorized: 'Unauthorized',
+  internalServerError: 'Internal Server Error',
+  UnexpectedError: 'An Unexpected Error Occurred',
 };

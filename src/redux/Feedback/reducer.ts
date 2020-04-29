@@ -5,6 +5,7 @@ import { langLocales } from '../../locales';
 
 export interface FeedbackState {
   successMessage: string;
+  errorCode: number | null;
   isSuccess: boolean;
   errorMessage: string;
   isError: boolean;
@@ -12,6 +13,7 @@ export interface FeedbackState {
 
 const initalState: FeedbackState = {
   errorMessage: '',
+  errorCode: null,
   isError: false,
   successMessage: '',
   isSuccess: false,
@@ -36,11 +38,13 @@ export default handleActions(
 
     [actionTypes.SHOW_ERROR_MESSAGE]: (
       state,
-      { payload: { errorMessage } }: { type: string; payload: FeedbackState }
+      {
+        payload: { errorMessage, errorCode },
+      }: { type: string; payload: FeedbackState }
     ) => ({
       ...state,
       isError: true,
-      errorMessage: langLocales[langCode][errorMessage],
+      errorMessage: `${errorCode}, ${langLocales[langCode][errorMessage]}`,
     }),
 
     [actionTypes.CLOSE_ERROR_MESSAGE]: (state) => ({

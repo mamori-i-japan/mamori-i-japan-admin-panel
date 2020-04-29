@@ -28,7 +28,10 @@ function* createAdminUserSaga() {
         payload: { successMessage: 'createAdminUserSuccess' },
       });
     } catch (error) {
-      console.log(error);
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.status, errorMessage: 'adminUserIsExistError' },
+      });
     }
 
     yield put({
