@@ -9,14 +9,13 @@ function* createOrganizationSaga() {
   yield takeEvery(actionTypes.CREATE_ORGANIZATION, function* _({
     payload,
   }: any) {
-    const { name } = payload;
 
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
 
     try {
-      yield call(postOrganization, { name });
+      yield call(postOrganization, payload);
 
       yield put({
         type: actionTypes.CREATE_ORGANIZATION_SUCCESS,

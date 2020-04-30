@@ -19,6 +19,10 @@ export const columns: any = [
     dataIndex: 'organizationCode',
   },
   {
+    title: 'message',
+    dataIndex: 'message'
+  },
+  {
     title: 'addedByAdminEmail',
     dataIndex: 'addedByAdminEmail',
   },
