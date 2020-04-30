@@ -20,7 +20,8 @@ export default ({ sidebarIsCollapse }: any) => {
   const [selectedKey, setSelectedKey] = useState('');
 
   useEffect(() => {
-    setSelectedKey('' + findIndex(config, { path: pathname }));
+    const array = pathname.split('/');
+    setSelectedKey('' + findIndex(config, { path: '/' + array[1] }));
   }, [pathname]);
 
   return (

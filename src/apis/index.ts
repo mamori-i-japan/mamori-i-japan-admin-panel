@@ -60,3 +60,11 @@ export const postMessaage = async ({
     return error;
   }
 };
+
+export const getOrganizations = () => {
+  return http.get('admins/organizations');
+};
+
+export const postOrganization = (data: { name: string }) => {
+  return http.post('admins/organizations', data)
+}

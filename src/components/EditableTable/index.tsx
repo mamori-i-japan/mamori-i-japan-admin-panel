@@ -114,6 +114,7 @@ export default <T extends RecordTypeDefault>({
         dataSource={dataSource}
         columns={mergedColumns}
         rowClassName="editable-row"
+        rowKey={(record: any) => record.id}
         pagination={{
           onChange: cancel,
         }}

@@ -12,7 +12,7 @@ export default handleActions(
       ...payload
     }),
 
-    [actionTypes.UPDATE_MESSAGES_SUCCESS]: (state, { payload }: any) => {
+    [actionTypes.UPDATE_MESSAGE_SUCCESS]: (state, { payload }: any) => {
       const updatedData: any[] = state.listData;
 
       updatedData[parseInt(payload.id, 10) - 1].url = payload.url;

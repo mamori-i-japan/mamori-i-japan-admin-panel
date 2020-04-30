@@ -29,12 +29,17 @@ export default () => {
       </header>
 
       <section>
-        <Table loading={loading} dataSource={dataSource} columns={columns.map((item: any) => {
-          return {
-            ...item,
-            title: translate(item.title),
-          };
-        })} />
+        <Table
+          loading={loading}
+          dataSource={dataSource}
+          rowKey={(record: any) => record.id}
+          columns={columns.map((item: any) => {
+            return {
+              ...item,
+              title: translate(item.title),
+            };
+          })}
+        />
       </section>
     </ContentContainer>
   );

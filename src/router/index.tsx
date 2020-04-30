@@ -6,6 +6,8 @@ import Dashboard from '../containers/Dashboard'
 import MessageList from '../containers/MessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
+import OrganizationList from '../containers/OrganizationList';
+import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 
 import { HOST } from '../constants';
@@ -34,6 +36,16 @@ const routes = [
         path: HOST + 'users',
         exact: true,
         component: AdminUserList,
+      },
+      {
+        path: HOST + 'organizations/:id',
+        exact: true,
+        component: OrganizationDetail,
+      },
+      {
+        path: HOST + 'organizations',
+        exact: true,
+        component: OrganizationList,
       },
     ],
   },

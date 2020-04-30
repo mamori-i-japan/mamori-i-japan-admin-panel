@@ -4,6 +4,7 @@ import adminUser from './AdminUser/reducer';
 import loading from './Loading/reducer';
 import message from './Message/reducer';
 import feedback from './Feedback/reducer';
+import organization from './Organization/reducer';
 
 export default {
   sidebar,
@@ -11,5 +12,6 @@ export default {
   loading,
   adminUser,
   message,
-  feedback
+  feedback,
+  organization
 };

@@ -9,7 +9,7 @@ import EditableTable, {
 } from '../../components/EditableTable';
 import {
   getMessagesAction,
-  editMessagesAction,
+  updateMessageAction,
 } from '../../redux/Message/actions';
 
 const { Title } = Typography;
@@ -32,7 +32,7 @@ export default () => {
     dispatch,
   ]);
 
-  const editItem = useCallback((values) => dispatch(editMessagesAction(values)), [
+  const editItem = useCallback((values) => dispatch(updateMessageAction(values)), [
     dispatch,
   ]);
 

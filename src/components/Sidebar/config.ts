@@ -6,6 +6,10 @@ export default [
     path: HOST,
     children: [],
   },
+  {
+    name: 'organization',
+    path: HOST + 'organizations',
+  },
   // {
   //   name: 'positive',
   //   path: HOST + 'positives',
@@ -20,5 +24,5 @@ export default [
     name: 'adminUser',
     path: HOST + 'users',
     children: [],
-  },
+  }
 ];
