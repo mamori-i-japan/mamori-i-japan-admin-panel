@@ -3,7 +3,6 @@ import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getMessages, postMessaage } from '../../apis';
-import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
 
 function* updateMessageSaga() {
   yield takeEvery(actionTypes.UPDATE_MESSAGE, function* _({ payload }: any) {
