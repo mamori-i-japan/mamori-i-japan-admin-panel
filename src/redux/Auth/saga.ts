@@ -1,11 +1,11 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
-import firebaseActionTypes from '../Firebase/actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
+import { sendEmailSaga } from '../Firebase/saga';
 
 const signInWithEmailLink: any = async (email: string) => {
   const { user } = await auth.signInWithEmailLink(email, window.location.href);
@@ -93,10 +93,7 @@ function* loginSaga() {
     } else {
       const { email } = payload;
 
-      yield put({
-        type: firebaseActionTypes.SEND_EMAIL,
-        payload: { email },
-      });
+      yield call(sendEmailSaga, email);
 
       yield put({
         type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,

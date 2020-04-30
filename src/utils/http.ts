@@ -12,8 +12,6 @@ const AxiosRequestInterceptor = async (config: any) => {
   const configTemp = config;
   const token = store.getState().auth.token;
 
-  console.log(token);
-
   configTemp.headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,

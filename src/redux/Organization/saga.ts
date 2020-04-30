@@ -3,6 +3,7 @@ import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getOrganizations, postOrganization } from '../../apis';
+import { getAccessTokenSaga } from '../Firebase/saga';
 
 function* createOrganizationSaga() {
   yield takeEvery(actionTypes.CREATE_ORGANIZATION, function* _({
@@ -11,6 +12,8 @@ function* createOrganizationSaga() {
     const { name } = payload;
 
     yield put({ type: loadingActionTypes.START_LOADING });
+
+    yield call(getAccessTokenSaga);
 
     try {
       yield call(postOrganization, { name });
@@ -38,6 +41,8 @@ function* getOrganizationsSaga() {
   yield takeEvery(actionTypes.GET_ORGANIZATIONS, function* _() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
+    yield call(getAccessTokenSaga);
+
     try {
       const res = yield call(getOrganizations);
 
@@ -62,6 +67,8 @@ function* updateOrganizationSaga() {
   }: any) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
+    yield call(getAccessTokenSaga);
+
     try {
       yield put({ type: actionTypes.UPDATE_ORGANIZATION_SUCCESS });
 
@@ -85,6 +92,8 @@ function* deleteOrganizationSaga() {
     payload,
   }: any) {
     yield put({ type: loadingActionTypes.START_LOADING });
+
+    yield call(getAccessTokenSaga);
 
     try {
       yield put({ type: actionTypes.DELETE_ORGANIZATION_SUCCESS });

@@ -13,9 +13,9 @@ export const getAdminUsers = () => {
   return http.get('admins/users');
 };
 
-export const postPositive = (data: { phoneNumber: string }) => {
-  return http.post('admins/positives', data);
-};
+// export const postPositive = (data: { phoneNumber: string }) => {
+//   return http.post('admins/positives', data);
+// };
 
 export const getMessages = async () => {
   // // generate default documents
@@ -67,4 +67,4 @@ export const getOrganizations = () => {
 
 export const postOrganization = (data: { name: string }) => {
   return http.post('admins/organizations', data)
-}
+};
