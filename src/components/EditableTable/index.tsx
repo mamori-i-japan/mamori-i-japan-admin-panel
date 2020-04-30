@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Table, Popconfirm, Form, Button } from 'antd';
+import React, { useState, useContext } from 'react';
+import { Table, Form, Button } from 'antd';
 import EditableCell from './EditableCell';
 import { ColumnType } from 'antd/lib/table';
+import { I18nContext } from '../../locales';
 
 interface RecordTypeDefault {
   key: string;
@@ -28,6 +29,7 @@ export default <T extends RecordTypeDefault>({
   columns,
 }: EditableTableProps<T>) => {
   const [form] = Form.useForm();
+  const { translate } = useContext(I18nContext);
   const [editingKey, setEditingKey] = useState('');
   const isEditing = (record: T) => record.key === editingKey;
 
@@ -56,8 +58,7 @@ export default <T extends RecordTypeDefault>({
   const columnsWithOperation = [
     ...columns,
     {
-      // TODO: localization
-      title: 'operation',
+      title: translate('operation'),
       dataIndex: 'operation',
       width: '14rem',
       editable: false,
@@ -70,16 +71,14 @@ export default <T extends RecordTypeDefault>({
               onClick={() => save(record.key)}
               style={{ marginRight: 8 }}
             >
-              Save
+              {translate('submit')}
             </Button>
-            {/* TODO: localization */}
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <Button>Cancel</Button>
-            </Popconfirm>
+
+            <Button onClick={cancel}> {translate('cancel')}</Button>
           </span>
         ) : (
             <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
-              Edit
+              {translate('editItem')}
             </Button>
           );
       },

@@ -18,12 +18,12 @@ export interface ContainerProps {
   locale?: any;
 }
 
-export default (props: any) => {
+export default (props: ContainerProps) => {
   const { routes } = props;
-
   const dispatch = useDispatch();
+
   const sidebarIsCollapse = useSelector(
-    (store: any) => store.sidebar.isCollapse
+    ({ sidebar }: any) => sidebar.isCollapse
   );
 
   const toggleSidebarCollapse = useCallback(

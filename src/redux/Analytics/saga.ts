@@ -3,9 +3,6 @@ import actionTypes from './actionTypes';
 
 function* getAnalyticsSaga() {
   yield takeEvery(actionTypes.GET_ANALYTICS, function* _() {
-    // TODO: get from API
-    // const res = yield call (getAnalytics());
-
     const res = [
       { month: 'Jan', Tokyo: 7.0, London: 3.9 },
       { month: 'Feb', Tokyo: 6.9, London: 4.2 },

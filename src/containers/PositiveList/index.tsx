@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Table, Button, Tag } from 'antd';
-import { I18nContext } from '../../locales'
+import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 
 const { Title } = Typography;
@@ -16,7 +16,7 @@ const dataSource = [
     createdDate: '2020.04.30',
     age: 32,
     agreed: 1,
-  }
+  },
 ];
 
 export const columns: any = [
@@ -83,12 +83,16 @@ export default () => {
       </header>
 
       <section>
-        <Table loading={loading} dataSource={dataSource} columns={columns.map((item: any) => {
-          return {
-            ...item,
-            title: translate(item.title),
-          };
-        })} />
+        <Table
+          loading={loading}
+          dataSource={dataSource}
+          columns={columns.map((item: any) => {
+            return {
+              ...item,
+              title: translate(item.title),
+            };
+          })}
+        />
       </section>
     </ContentContainer>
   );

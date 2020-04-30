@@ -15,7 +15,6 @@ const { Option } = Select;
 const { TextArea } = Input;
 const timeFormat = 'HH:mm';
 
-//TODO: fix me
 type FormFieldContentProps = {
   field: any;
   label: string;

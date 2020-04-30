@@ -2,7 +2,7 @@ import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
 import authActionTypes from '../Auth/actionTypes';
-import { message } from 'antd';
+import feedbackActionTypes from '../Feedback/actionTypes';
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -29,7 +29,10 @@ function* getAccessTokenSaga() {
         payload: { token }
       })
     } catch (error) {
-      console.log(error);
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.code, errorMessage: error.message },
+      });
     }
   });
 }
@@ -47,10 +50,12 @@ function* sendEmailSaga() {
       yield put({
         type: actionTypes.SEND_EMAIL_SUCCESS
       })
-      // TODO:
-      message.success('Please check email and login by auth link');
+
     } catch (error) {
-      console.log(error)
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.code, errorMessage: error.message },
+      });
     }
   });
 }

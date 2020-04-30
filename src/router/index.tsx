@@ -7,8 +7,6 @@ import MessageList from '../containers/MessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 import { store } from '../redux/store';
-// import Register from '../containers/Register';
-// import Top from '../containers/Top';
 
 import { HOST } from '../constants';
 
@@ -17,10 +15,6 @@ const routes = [
     path: HOST + 'login',
     component: Login,
   },
-  // {
-  //   path: HOST + 'join',
-  //   component: Register,
-  // },
   {
     path: HOST,
     component: Dashboard,
@@ -31,21 +25,6 @@ const routes = [
         exact: true,
         component: MessageList,
       },
-      // {
-      //   path: HOST + 'positives',
-      //   exact: true,
-      //   component: PositiveList,
-      // },
-      // {
-      //   path: HOST + 'positives/:id',
-      //   exact: true,
-      //   component: PositiveDetail,
-      // },
-      // {
-      //   path: HOST + 'contacts',
-      //   exact: true,
-      //   component: ContactList,
-      // },
       {
         path: HOST + 'users/:id',
         exact: true,
@@ -60,7 +39,7 @@ const routes = [
   },
 ];
 
-export const RouteWithSubRoutes: any = ({
+export const RouteWithSubRoutes = ({
   component: Component,
   auth,
   routes,

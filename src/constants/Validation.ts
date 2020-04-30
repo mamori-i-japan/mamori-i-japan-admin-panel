@@ -1,8 +1,10 @@
-// import Message from './Message';
+import { langCode } from './index';
+import { langLocales } from '../locales';
 
 export default {
-  required: { required: true, message: 'Please input' },
-  email: '',
-  password: '',
-  phone: '',
+  required: { required: true, message: langLocales[langCode].isRequired },
+  email: {
+    type: 'email',
+    message: langLocales[langCode].isValidEmail,
+  },
 };
