@@ -48,5 +48,5 @@ export default {
   organizationName: '組織名',
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
-  organization: '組織管理',
+  organization: '組織情報',
 };
