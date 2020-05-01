@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
+import { MessageState } from "./types";
 
-const initialState = {
-  listData: []
+const initialState: MessageState = {
+  listData: [],
 };
 
-export default handleActions(
+export default handleActions<MessageState>(
   {
     [actionTypes.GET_MESSAGES_SUCCESS]: (state, { payload }: any) => ({
       ...state,
@@ -13,7 +14,7 @@ export default handleActions(
     }),
 
     [actionTypes.UPDATE_MESSAGE_SUCCESS]: (state, { payload }: any) => {
-      const updatedData: any[] = state.listData;
+      const updatedData = state.listData;
 
       updatedData[parseInt(payload.id, 10) - 1].url = payload.url;
 
