@@ -71,3 +71,11 @@ export const getOrganizations = () => {
 export const postOrganization = (data: { name: string; message: string }) => {
   return http.post('admins/organizations', data);
 };
+
+export const putOrganization = (data: { id: string }) => {
+  return http.put('admins/organizations', data);
+};
+
+export const deleteOpganization = (data: { id: string }) => {
+  return http.delete('admins/organizations', { data: data });
+};
