@@ -2,37 +2,13 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Table, Button } from 'antd';
+import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import { getOrganizationsAction } from '../../redux/Organization/actions';
 import moment from 'moment';
 
 const { Title } = Typography;
-
-export const columns: any = [
-  {
-    title: 'organizationName',
-    dataIndex: 'name',
-  },
-  {
-    title: 'organizationCode',
-    dataIndex: 'organizationCode',
-  },
-  {
-    title: 'message',
-    dataIndex: 'message'
-  },
-  {
-    title: 'addedByAdminEmail',
-    dataIndex: 'addedByAdminEmail',
-  },
-  {
-    title: 'createdDate',
-    dataIndex: 'created',
-    render: (value: number) => moment(value).format('YYYY-MM-DD HH:MM'),
-  },
-];
-
 
 export default () => {
   const dispatch = useDispatch();
@@ -41,7 +17,13 @@ export default () => {
   const loading = useSelector((store: any) => store.loading.isLoading);
   const { listData } = useSelector((store: any) => store.organization);
 
-  const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [dispatch]);
+  const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [
+    dispatch,
+  ]);
+
+  const handleEdit = useCallback(() => { }, [dispatch]);
+
+  const handleDelete = useCallback(() => { }, [dispatch]);
 
   useEffect(() => {
     fetchData();
@@ -50,6 +32,40 @@ export default () => {
   const handleCreate = () => {
     history.push('/organizations/create');
   };
+
+  const columns: any = [
+    {
+      title: 'organizationName',
+      dataIndex: 'name',
+    },
+    {
+      title: 'organizationCode',
+      dataIndex: 'organizationCode',
+    },
+    {
+      title: 'message',
+      dataIndex: 'message',
+    },
+    {
+      title: 'addedByAdminEmail',
+      dataIndex: 'addedByAdminEmail',
+    },
+    {
+      title: 'createdDate',
+      dataIndex: 'created',
+      render: (value: number) => {
+        console.log(value);
+        console.log(moment(value).format('YYYY-MM-DD HH:MM'));
+        return moment(value).format('YYYY-MM-DD HH:MM');
+      },
+    },
+    {
+      title: 'operation',
+      render: () => (
+        <OperationButtons handleEdit={handleEdit} handleDelete={handleDelete} />
+      ),
+    },
+  ];
 
   return (
     <ContentContainer>
@@ -74,5 +90,5 @@ export default () => {
         />
       </section>
     </ContentContainer>
-  )
-}
+  );
+};
