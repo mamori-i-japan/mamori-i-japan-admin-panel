@@ -62,7 +62,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(setSelectedOrganizationAction(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <ContentContainer>
