@@ -8,6 +8,7 @@ import { ContentContainer } from '../../components/CommonStyles';
 import {
   getOrganizationsAction,
   deleteOrganizationAction,
+  setSelectedOrganizationAction
 } from '../../redux/Organization/actions';
 import moment from 'moment';
 
@@ -24,7 +25,7 @@ export default () => {
     dispatch,
   ]);
 
-  const deleteItem = useCallback(() => dispatch(deleteOrganizationAction()), [
+  const deleteItem = useCallback((id) => dispatch(deleteOrganizationAction(id)), [
     dispatch,
   ]);
 
@@ -33,11 +34,13 @@ export default () => {
   }, [fetchData]);
 
   const handleCreate = () => {
+    dispatch(setSelectedOrganizationAction(null));
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    history.push(`/organizations/${id}}`);
+    dispatch(setSelectedOrganizationAction(id));
+    history.push(`/organizations/${id}`);
   };
 
   const columns: any = [
@@ -72,7 +75,7 @@ export default () => {
         return (
           <OperationButtons
             handleEdit={() => handleEdit(id)}
-            deleteItem={deleteItem}
+            deleteItem={() => deleteItem(id)}
           />
         );
       },

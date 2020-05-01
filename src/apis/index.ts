@@ -72,8 +72,8 @@ export const postOrganization = (data: { name: string; message: string }) => {
   return http.post('admins/organizations', data);
 };
 
-export const putOrganization = (data: { id: string }) => {
-  return http.put('admins/organizations', data);
+export const patchOrganization = ({ id, name, message }: { name: string; message: string, id: string }) => {
+  return http.patch(`admins/organizations/${id}`, { name, message });
 };
 
 export const deleteOrganization = (data: { id: string }) => {

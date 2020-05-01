@@ -1,5 +1,5 @@
-import React, { useContext, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useCallback, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import dataMap from './dataMap';
 import {
   createOrganizationAction,
   updateOrganizationsAction,
+  setSelectedOrganizationAction
 } from '../../redux/Organization/actions';
 
 const layout = {
@@ -20,21 +21,26 @@ const layout = {
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
   const loading = useSelector((store: any) => store.loading.isLoading);
+
+  const detailData = useSelector((store: any) => store.organization.detailData);
 
   const createItem = useCallback(
     (data) => dispatch(createOrganizationAction(data)),
     [dispatch]
   );
 
-  const editItem = useCallback(() => dispatch(updateOrganizationsAction()), [
-    dispatch,
-  ]);
+  const editItem = useCallback(
+    (data) => dispatch(updateOrganizationsAction(data)),
+    [dispatch]
+  );
 
   const handleBack = () => {
+    form.resetFields();
     history.goBack();
   };
 
@@ -42,12 +48,21 @@ export default () => {
     form
       .validateFields()
       .then((values) => {
-        createItem(values);
+        if (id === 'create') {
+          createItem(values);
+        } else {
+          values.id = id;
+          editItem(values);
+        }
       })
       .catch((info) => {
         console.log('Validate Failed:', info);
       });
   };
+
+  useEffect(() => {
+    dispatch(setSelectedOrganizationAction(id));
+  }, [id]);
 
   return (
     <ContentContainer>
@@ -71,7 +86,13 @@ export default () => {
       </header>
 
       <section>
-        <DetailForm {...layout} form={form} name="createUser" size="large">
+        <DetailForm
+          {...layout}
+          form={form}
+          initialValues={detailData}
+          name="createUser"
+          size="large"
+        >
           {dataMap &&
             dataMap.map((item: any) => (
               <FormField

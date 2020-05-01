@@ -1,10 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Modal } from 'antd';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  ExclamationCircleOutlined,
-} from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import styled from 'styled-components';
 
@@ -42,7 +38,9 @@ export default ({ handleEdit, deleteItem }: IProps) => {
 
   return (
     <Buttons>
-      {handleEdit && <Button onClick={handleEdit}>{translate('editItem')}</Button>}
+      {handleEdit && (
+        <Button onClick={handleEdit}>{translate('editItem')}</Button>
+      )}
 
       {deleteItem && (
         <Button danger onClick={handleDelete}>
