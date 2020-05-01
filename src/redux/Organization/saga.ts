@@ -51,9 +51,14 @@ function* getOrganizationsSaga() {
     try {
       const res = yield call(getOrganizations);
 
+      const data = res.data.map((item: any) => ({
+        ...item,
+        created: item.created._seconds
+      }))
+
       yield put({
         type: actionTypes.GET_ORGANIZATIONS_SUCCESS,
-        payload: { listData: res.data },
+        payload: { listData: data },
       });
     } catch (error) {
       yield put({

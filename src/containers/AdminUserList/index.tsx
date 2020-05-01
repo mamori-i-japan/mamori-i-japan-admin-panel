@@ -25,7 +25,8 @@ export const columns: any = [
   {
     title: 'createdDate',
     dataIndex: 'created',
-    render: (value: number) => moment(value).format('YYYY-MM-DD HH:MM'),
+    render: (value: number) =>
+      moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
   },
 ];
 

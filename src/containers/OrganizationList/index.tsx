@@ -8,7 +8,7 @@ import { ContentContainer } from '../../components/CommonStyles';
 import {
   getOrganizationsAction,
   deleteOrganizationAction,
-  getOrganizationAction
+  getOrganizationAction,
 } from '../../redux/Organization/actions';
 import moment from 'moment';
 
@@ -25,9 +25,10 @@ export default () => {
     dispatch,
   ]);
 
-  const deleteItem = useCallback((id) => dispatch(deleteOrganizationAction(id)), [
-    dispatch,
-  ]);
+  const deleteItem = useCallback(
+    (id) => dispatch(deleteOrganizationAction(id)),
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchData();
@@ -63,9 +64,8 @@ export default () => {
     {
       title: 'createdDate',
       dataIndex: 'created',
-      render: (value: number) => {
-        return moment(value).format('YYYY-MM-DD HH:MM');
-      },
+      render: (value: number) =>
+        moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
     },
     {
       title: 'operation',
