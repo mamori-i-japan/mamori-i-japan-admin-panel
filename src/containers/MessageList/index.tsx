@@ -71,7 +71,10 @@ export default () => {
       <section>
         <EditableTable<RecordType>
           loading={loading}
-          dataSource={listData}
+          dataSource={listData && listData.map((item: any) => ({
+            ...item,
+            key: item.id,
+          }))}
           editItem={editItem}
           columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => ({
             ...item,
