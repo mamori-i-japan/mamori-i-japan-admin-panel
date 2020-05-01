@@ -1,9 +1,9 @@
 import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
-import firebaseActionTypes from '../Firebase/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getAdminUsers, postAdminUser } from '../../apis';
+import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
 
 function* createAdminUserSaga() {
   yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
@@ -13,15 +13,12 @@ function* createAdminUserSaga() {
       type: loadingActionTypes.START_LOADING,
     });
 
-    yield put({ type: firebaseActionTypes.GET_ACCESS_TOKEN });
+    yield call(getAccessTokenSaga);
 
     try {
       yield call(postAdminUser, { email });
 
-      yield put({
-        type: firebaseActionTypes.SEND_EMAIL,
-        payload: { email },
-      });
+      yield call(sendEmailSaga, email);
 
       yield put({
         type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
@@ -30,7 +27,10 @@ function* createAdminUserSaga() {
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
-        payload: { errorCode: error.status, errorMessage: 'adminUserIsExistError' },
+        payload: {
+          errorCode: error.status,
+          errorMessage: 'adminUserIsExistError',
+        },
       });
     }
 
@@ -42,12 +42,11 @@ function* createAdminUserSaga() {
 
 function* getAdminUsersSaga() {
   yield takeEvery(actionTypes.GET_ADMIN_USERS, function* _() {
-    //TODO: add pagination & query params if API supports
     yield put({
       type: loadingActionTypes.START_LOADING,
     });
 
-    yield put({ type: firebaseActionTypes.GET_ACCESS_TOKEN });
+    yield call(getAccessTokenSaga);
 
     try {
       const res = yield call(getAdminUsers);

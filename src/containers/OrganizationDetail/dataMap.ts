@@ -7,4 +7,10 @@ export default [
     label: 'organizationName',
     rules: [Validation.required],
   },
+  {
+    name: 'message',
+    type: 'input',
+    label: 'message',
+    rules: [Validation.required],
+  }
 ];

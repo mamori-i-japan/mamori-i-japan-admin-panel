@@ -1,4 +1,4 @@
-import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
 import authActionTypes from '../Auth/actionTypes';
@@ -16,50 +16,41 @@ const onAuthStateChanged = () => {
   });
 };
 
-function* getAccessTokenSaga() {
-  yield takeEvery(actionTypes.GET_ACCESS_TOKEN, function* _() {
-    try {
-      const user = yield call(onAuthStateChanged);
-      const token = yield call([user, user.getIdToken], true);
+export function* getAccessTokenSaga() {
+  try {
+    const user = yield call(onAuthStateChanged);
+    const token = yield call([user, user.getIdToken], true);
 
-      localStorage.setItem('token', token);
+    localStorage.setItem('token', token);
 
-      yield put({
-        type: authActionTypes.SAVE_TOKEN_SUCCESS,
-        payload: { token }
-      })
-    } catch (error) {
-      yield put({
-        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
-        payload: { errorCode: error.code, errorMessage: error.message },
-      });
-    }
-  });
+    yield put({
+      type: authActionTypes.SAVE_TOKEN_SUCCESS,
+      payload: { token }
+    })
+  } catch (error) {
+    yield put({
+      type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+      payload: { errorCode: error.code, errorMessage: error.message },
+    });
+  }
 }
 
-function* sendEmailSaga() {
-  yield takeEvery(actionTypes.SEND_EMAIL, function* _({
-    payload: { email },
-  }: any) {
-    try {
-      yield call([auth, auth
-        .sendSignInLinkToEmail], email, actionCodeSettings)
+export function* sendEmailSaga(email: string) {
+  try {
+    yield call([auth, auth
+      .sendSignInLinkToEmail], email, actionCodeSettings)
 
-      yield localStorage.setItem('emailForSignIn', email);
+    yield localStorage.setItem('emailForSignIn', email);
 
-      yield put({
-        type: actionTypes.SEND_EMAIL_SUCCESS
-      })
+    yield put({
+      type: actionTypes.SEND_EMAIL_SUCCESS
+    })
 
-    } catch (error) {
-      yield put({
-        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
-        payload: { errorCode: error.code, errorMessage: error.message },
-      });
-    }
-  });
-}
+  } catch (error) {
+    yield put({
+      type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+      payload: { errorCode: error.code, errorMessage: error.message },
+    });
+  }
 
-export default function* rootSaga() {
-  yield all([fork(getAccessTokenSaga), fork(sendEmailSaga)]);
 }

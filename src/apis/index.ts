@@ -13,9 +13,9 @@ export const getAdminUsers = () => {
   return http.get('admins/users');
 };
 
-export const postPositive = (data: { phoneNumber: string }) => {
-  return http.post('admins/positives', data);
-};
+// export const postPositive = (data: { phoneNumber: string }) => {
+//   return http.post('admins/positives', data);
+// };
 
 export const getMessages = async () => {
   // // generate default documents
@@ -51,9 +51,12 @@ export const postMessaage = async ({
 }) => {
   const documentId = parseInt(id, 10) > 9 ? id : `0${id}`;
   try {
-    const res = await db.collection('prefectureMessages').doc(documentId).update({
-      url,
-    });
+    const res = await db
+      .collection('prefectureMessages')
+      .doc(documentId)
+      .update({
+        url,
+      });
 
     return res;
   } catch (error) {
@@ -65,6 +68,6 @@ export const getOrganizations = () => {
   return http.get('admins/organizations');
 };
 
-export const postOrganization = (data: { name: string }) => {
-  return http.post('admins/organizations', data)
-}
+export const postOrganization = (data: { name: string; message: string }) => {
+  return http.post('admins/organizations', data);
+};
