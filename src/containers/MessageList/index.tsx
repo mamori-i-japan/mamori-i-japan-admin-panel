@@ -11,22 +11,16 @@ import {
   getMessagesAction,
   updateMessageAction,
 } from '../../redux/Message/actions';
+import { PrefectureMessage } from '../../redux/Message/types';
 
 const { Title } = Typography;
-
-interface RecordType {
-  key: string;
-  id: number;
-  content: string;
-  address: string;
-}
 
 export default () => {
   const { translate } = useContext(I18nContext);
   const dispatch = useDispatch();
 
   const loading = useSelector((store: any) => store.loading.isLoading);
-  const listData = useSelector((store: any) => store.message.listData);
+  const listData: PrefectureMessage[] = useSelector((store: any) => store.message.listData);
 
   const fetchData = useCallback(() => dispatch(getMessagesAction()), [
     dispatch,
@@ -40,7 +34,7 @@ export default () => {
     fetchData();
   }, [fetchData]);
 
-  const columns: Array<ColumnTypeWithEditable<RecordType>> = [
+  const columns: Array<ColumnTypeWithEditable<PrefectureMessage>> = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -69,14 +63,14 @@ export default () => {
       </header>
 
       <section>
-        <EditableTable<RecordType>
+        <EditableTable<PrefectureMessage>
           loading={loading}
           dataSource={listData && listData.map((item: any) => ({
             ...item,
             key: item.id,
           }))}
           editItem={editItem}
-          columns={columns.map((item: ColumnTypeWithEditable<RecordType>) => ({
+          columns={columns.map((item: ColumnTypeWithEditable<PrefectureMessage>) => ({
             ...item,
             title: translate(item.title),
           }))}
