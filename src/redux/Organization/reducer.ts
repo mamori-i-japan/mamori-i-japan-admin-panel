@@ -13,7 +13,7 @@ export default handleActions(
       ...payload,
     }),
 
-    [actionTypes.GET_SELECTED_ORGANIZATION_SUCCESS]: (
+    [actionTypes.GET_ORGANIZATION_SUCCESS]: (
       state,
       { payload }: any
     ) => ({

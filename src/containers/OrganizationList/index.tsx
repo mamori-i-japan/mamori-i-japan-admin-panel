@@ -8,7 +8,7 @@ import { ContentContainer } from '../../components/CommonStyles';
 import {
   getOrganizationsAction,
   deleteOrganizationAction,
-  getSelectedOrganizationAction
+  getOrganizationAction
 } from '../../redux/Organization/actions';
 import moment from 'moment';
 
@@ -34,12 +34,12 @@ export default () => {
   }, [fetchData]);
 
   const handleCreate = () => {
-    dispatch(getSelectedOrganizationAction(null));
+    dispatch(getOrganizationAction(null));
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    dispatch(getSelectedOrganizationAction(id));
+    dispatch(getOrganizationAction(id));
     history.push(`/organizations/${id}`);
   };
 

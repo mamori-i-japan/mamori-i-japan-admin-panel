@@ -8,6 +8,7 @@ import {
   postOrganization,
   patchOrganization,
   deleteOrganization,
+  getOrganization,
 } from '../../apis';
 import { getAccessTokenSaga } from '../Firebase/saga';
 
@@ -127,17 +128,37 @@ function* deleteOrganizationSaga() {
   });
 }
 
-function* getSelectedOrganizationSaga() {
-  yield takeEvery(actionTypes.GET_SELECTED_ORGANIZATION, function* _({
-    payload,
-  }: any) {
+function* getOrganizationSaga() {
+  yield takeEvery(actionTypes.GET_ORGANIZATION, function* _({ payload }: any) {
     const { listData } = yield select((state) => state.organization);
-    const detailData = find(listData, { id: payload });
+    let detailData;
 
-    yield put({
-      type: actionTypes.GET_SELECTED_ORGANIZATION_SUCCESS,
-      payload: { detailData },
-    });
+    if (listData.length) {
+      detailData = find(listData, { id: payload });
+
+      yield put({
+        type: actionTypes.GET_ORGANIZATION_SUCCESS,
+        payload: { detailData },
+      });
+    } else {
+      yield call(getAccessTokenSaga);
+
+      try {
+        const res = yield call(getOrganization, payload);
+
+        detailData = res.data
+
+        yield put({
+          type: actionTypes.GET_ORGANIZATION_SUCCESS,
+          payload: { detailData },
+        });
+      } catch (error) {
+        yield put({
+          type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+          payload: { errorCode: error.status, errorMessage: error.error },
+        });
+      }
+    }
   });
 }
 
@@ -147,6 +168,6 @@ export default function* rootSaga() {
     fork(getOrganizationsSaga),
     fork(updateOrganizationSaga),
     fork(deleteOrganizationSaga),
-    fork(getSelectedOrganizationSaga),
+    fork(getOrganizationSaga),
   ]);
 }

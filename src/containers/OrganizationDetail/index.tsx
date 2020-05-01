@@ -10,7 +10,7 @@ import dataMap from './dataMap';
 import {
   createOrganizationAction,
   updateOrganizationsAction,
-  getSelectedOrganizationAction
+  getOrganizationAction
 } from '../../redux/Organization/actions';
 
 const layout = {
@@ -61,10 +61,12 @@ export default () => {
   };
 
   useEffect(() => {
-    if (id! === 'create') {
-      dispatch(getSelectedOrganizationAction(id));
+    if (id !== 'create') {
+      dispatch(getOrganizationAction(id));
     }
   }, [id, dispatch]);
+
+  console.log(detailData);
 
   return (
     <ContentContainer>
@@ -88,7 +90,7 @@ export default () => {
       </header>
 
       <section>
-        <DetailForm
+        {(id === 'create' || detailData) && <DetailForm
           {...layout}
           form={form}
           initialValues={detailData}
@@ -103,7 +105,7 @@ export default () => {
                 field={item}
               />
             ))}
-        </DetailForm>
+        </DetailForm>}
       </section>
     </ContentContainer>
   );
