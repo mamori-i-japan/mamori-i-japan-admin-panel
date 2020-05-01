@@ -76,6 +76,6 @@ export const putOrganization = (data: { id: string }) => {
   return http.put('admins/organizations', data);
 };
 
-export const deleteOpganization = (data: { id: string }) => {
+export const deleteOrganization = (data: { id: string }) => {
   return http.delete('admins/organizations', { data: data });
 };

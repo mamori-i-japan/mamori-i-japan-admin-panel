@@ -2,14 +2,18 @@ import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
-import { getOrganizations, postOrganization } from '../../apis';
+import {
+  getOrganizations,
+  postOrganization,
+  putOrganization,
+  deleteOrganization,
+} from '../../apis';
 import { getAccessTokenSaga } from '../Firebase/saga';
 
 function* createOrganizationSaga() {
   yield takeEvery(actionTypes.CREATE_ORGANIZATION, function* _({
     payload,
   }: any) {
-
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
@@ -69,6 +73,8 @@ function* updateOrganizationSaga() {
     yield call(getAccessTokenSaga);
 
     try {
+      yield call(putOrganization, payload);
+
       yield put({ type: actionTypes.UPDATE_ORGANIZATION_SUCCESS });
 
       yield put({
@@ -95,7 +101,20 @@ function* deleteOrganizationSaga() {
     yield call(getAccessTokenSaga);
 
     try {
-      yield put({ type: actionTypes.DELETE_ORGANIZATION_SUCCESS });
+      yield call(deleteOrganization, payload);
+
+      yield put({
+        type: actionTypes.DELETE_ORGANIZATION_SUCCESS,
+      });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'deleteSuccess' },
+      });
+
+      yield put({
+        type: actionTypes.GET_ORGANIZATIONS,
+      });
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,

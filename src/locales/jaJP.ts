@@ -48,5 +48,8 @@ export default {
   organizationName: '組織名',
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
+  // TODO:
   organization: '組織情報',
+  deleteConfirmTitle: '削除しますか？',
+  notFound: '見つかりません'
 };

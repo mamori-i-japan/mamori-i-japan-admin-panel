@@ -7,7 +7,10 @@ import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap from './dataMap';
-import { createOrganizationAction } from '../../redux/Organization/actions';
+import {
+  createOrganizationAction,
+  updateOrganizationsAction,
+} from '../../redux/Organization/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -22,7 +25,14 @@ export default () => {
 
   const loading = useSelector((store: any) => store.loading.isLoading);
 
-  const createOrganization = useCallback((data) => dispatch(createOrganizationAction(data)), [dispatch])
+  const createItem = useCallback(
+    (data) => dispatch(createOrganizationAction(data)),
+    [dispatch]
+  );
+
+  const editItem = useCallback(() => dispatch(updateOrganizationsAction()), [
+    dispatch,
+  ]);
 
   const handleBack = () => {
     history.goBack();
@@ -31,10 +41,10 @@ export default () => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(values => {
-        createOrganization(values);
+      .then((values) => {
+        createItem(values);
       })
-      .catch(info => {
+      .catch((info) => {
         console.log('Validate Failed:', info);
       });
   };
@@ -50,18 +60,18 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
+        <Button
+          type="primary"
+          size="large"
+          loading={loading}
+          onClick={handleSubmit}
+        >
           {translate('submit')}
         </Button>
       </header>
 
       <section>
-        <DetailForm
-          {...layout}
-          form={form}
-          name="createUser"
-          size="large"
-        >
+        <DetailForm {...layout} form={form} name="createUser" size="large">
           {dataMap &&
             dataMap.map((item: any) => (
               <FormField
@@ -73,5 +83,5 @@ export default () => {
         </DetailForm>
       </section>
     </ContentContainer>
-  )
-}
+  );
+};

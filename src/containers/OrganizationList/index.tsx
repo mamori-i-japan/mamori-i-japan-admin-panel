@@ -5,7 +5,10 @@ import { Typography, Table, Button } from 'antd';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
-import { getOrganizationsAction } from '../../redux/Organization/actions';
+import {
+  getOrganizationsAction,
+  deleteOrganizationAction,
+} from '../../redux/Organization/actions';
 import moment from 'moment';
 
 const { Title } = Typography;
@@ -21,9 +24,9 @@ export default () => {
     dispatch,
   ]);
 
-  const handleEdit = useCallback(() => { }, [dispatch]);
-
-  const handleDelete = useCallback(() => { }, [dispatch]);
+  const deleteItem = useCallback(() => dispatch(deleteOrganizationAction()), [
+    dispatch,
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -31,6 +34,10 @@ export default () => {
 
   const handleCreate = () => {
     history.push('/organizations/create');
+  };
+
+  const handleEdit = (id: string) => {
+    history.push(`/organizations/${id}}`);
   };
 
   const columns: any = [
@@ -61,9 +68,14 @@ export default () => {
     },
     {
       title: 'operation',
-      render: () => (
-        <OperationButtons handleEdit={handleEdit} handleDelete={handleDelete} />
-      ),
+      render: ({ id }: { id: string }) => {
+        return (
+          <OperationButtons
+            handleEdit={() => handleEdit(id)}
+            deleteItem={deleteItem}
+          />
+        );
+      },
     },
   ];
 

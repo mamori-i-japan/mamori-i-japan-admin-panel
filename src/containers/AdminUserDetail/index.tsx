@@ -23,7 +23,7 @@ export default () => {
   const loading = useSelector((store: any) => store.loading.isLoading);
 
 
-  const createUser = useCallback((data) => dispatch(createAdminUserAction(data)), [
+  const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
     dispatch,
   ]);
 
@@ -35,7 +35,7 @@ export default () => {
     form
       .validateFields()
       .then(values => {
-        createUser(values);
+        createItem(values);
       })
       .catch(info => {
         console.log('Validate Failed:', info);

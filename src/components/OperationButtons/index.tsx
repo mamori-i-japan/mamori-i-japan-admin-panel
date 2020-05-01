@@ -1,7 +1,14 @@
 import React, { useContext } from 'react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import styled from 'styled-components';
+
+const { confirm } = Modal;
 
 const Buttons = styled.div`
   display: flex;
@@ -14,19 +21,34 @@ const Buttons = styled.div`
 
 interface IProps {
   handleEdit?: () => void;
-  handleDelete?: () => void;
+  deleteItem?: () => void;
 }
 
-export default ({ handleEdit, handleDelete }: IProps) => {
+export default ({ handleEdit, deleteItem }: IProps) => {
   const { translate } = useContext(I18nContext);
+
+  const handleDelete = () => {
+    confirm({
+      title: translate('deleteConfirmTitle'),
+      icon: <ExclamationCircleOutlined />,
+      okText: translate('deleteItem'),
+      onOk() {
+        if (deleteItem) {
+          deleteItem();
+        }
+      },
+    });
+  };
 
   return (
     <Buttons>
-      <Button onClick={handleEdit}>
-        {translate('editItem')}
-      </Button>
+      {handleEdit && <Button onClick={handleEdit}>{translate('editItem')}</Button>}
 
-      <Button danger onClick={handleDelete}> {translate('deleteItem')} </Button>
+      {deleteItem && (
+        <Button danger onClick={handleDelete}>
+          {translate('deleteItem')}
+        </Button>
+      )}
     </Buttons>
   );
 };
