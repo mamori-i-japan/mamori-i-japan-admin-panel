@@ -8,7 +8,7 @@ import { ContentContainer } from '../../components/CommonStyles';
 import {
   getOrganizationsAction,
   deleteOrganizationAction,
-  setSelectedOrganizationAction
+  getSelectedOrganizationAction
 } from '../../redux/Organization/actions';
 import moment from 'moment';
 
@@ -34,12 +34,12 @@ export default () => {
   }, [fetchData]);
 
   const handleCreate = () => {
-    dispatch(setSelectedOrganizationAction(null));
+    dispatch(getSelectedOrganizationAction(null));
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    dispatch(setSelectedOrganizationAction(id));
+    dispatch(getSelectedOrganizationAction(id));
     history.push(`/organizations/${id}`);
   };
 
@@ -64,8 +64,6 @@ export default () => {
       title: 'createdDate',
       dataIndex: 'created',
       render: (value: number) => {
-        console.log(value);
-        console.log(moment(value).format('YYYY-MM-DD HH:MM'));
         return moment(value).format('YYYY-MM-DD HH:MM');
       },
     },

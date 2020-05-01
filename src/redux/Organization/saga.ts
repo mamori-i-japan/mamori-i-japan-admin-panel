@@ -127,17 +127,15 @@ function* deleteOrganizationSaga() {
   });
 }
 
-function* setSelectedOrganizationSaga() {
-  yield takeEvery(actionTypes.SET_SELECTED_ORGANIZATION, function* _({
+function* getSelectedOrganizationSaga() {
+  yield takeEvery(actionTypes.GET_SELECTED_ORGANIZATION, function* _({
     payload,
   }: any) {
     const { listData } = yield select((state) => state.organization);
     const detailData = find(listData, { id: payload });
-    console.log(payload);
-    console.log(detailData)
 
     yield put({
-      type: actionTypes.SET_SELECTED_ORGANIZATION_SUCCESS,
+      type: actionTypes.GET_SELECTED_ORGANIZATION_SUCCESS,
       payload: { detailData },
     });
   });
@@ -149,6 +147,6 @@ export default function* rootSaga() {
     fork(getOrganizationsSaga),
     fork(updateOrganizationSaga),
     fork(deleteOrganizationSaga),
-    fork(setSelectedOrganizationSaga),
+    fork(getSelectedOrganizationSaga),
   ]);
 }

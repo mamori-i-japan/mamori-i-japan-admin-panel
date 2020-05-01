@@ -10,7 +10,7 @@ import dataMap from './dataMap';
 import {
   createOrganizationAction,
   updateOrganizationsAction,
-  setSelectedOrganizationAction
+  getSelectedOrganizationAction
 } from '../../redux/Organization/actions';
 
 const layout = {
@@ -61,7 +61,9 @@ export default () => {
   };
 
   useEffect(() => {
-    dispatch(setSelectedOrganizationAction(id));
+    if (id! === 'create') {
+      dispatch(getSelectedOrganizationAction(id));
+    }
   }, [id, dispatch]);
 
   return (
