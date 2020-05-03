@@ -1,4 +1,5 @@
 import Validation from '../../constants/Validation';
+import { prefectureList } from '../../constants/Prefecture'
 
 type RoleOption = {
   id: string;
@@ -11,7 +12,27 @@ type FormItem = {
   label: string;
   selectOptions?: RoleOption[];
   rules: any[];
+  onChange?: () => void;
 }
+
+const roleOptions: RoleOption[] = [
+  {
+    id: '0',
+    name: 'Super Admin',
+  },
+  {
+    id: '1',
+    name: 'National Admin',
+  },
+  {
+    id: '2',
+    name: 'Prefecture Admin',
+  },
+  {
+    id: '3',
+    name: 'Organization Admin',
+  },
+];
 
 const dataMap: FormItem[] = [
   {
@@ -24,26 +45,21 @@ const dataMap: FormItem[] = [
     name: 'role',
     type: 'select',
     label: 'role',
-    selectOptions: [
-      {
-        id: '0',
-        name: 'Super Admin',
-      },
-      {
-        id: '1',
-        name: 'National Admin',
-      },
-      {
-        id: '2',
-        name: 'Prefecture Admin',
-      },
-      {
-        id: '3',
-        name: 'Organization Admin',
-      },
-    ],
+    selectOptions: roleOptions,
     rules: [Validation.required],
   },
 ];
 
+const prefectureForm = {
+  name: 'prefecture',
+  type: 'select',
+  label: 'prefecture',
+  selectOptions: prefectureList.map((prefectureName, index) => ({
+    id: index.toString(),
+    name: prefectureName,
+  })),
+  rules: [Validation.required],
+};
+
+export { prefectureForm, roleOptions };
 export default dataMap;

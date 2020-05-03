@@ -1,4 +1,4 @@
-export default {
+const prefectures = {
   ja: {
     1: '北海道',
     2: '青森県',
@@ -49,3 +49,9 @@ export default {
     47: '沖縄県',
   },
 } as any;
+
+export default prefectures;
+
+const prefectureList: string[] = [...Array(47)].map<string>((_, index) => prefectures['ja'][`${index + 1}`]);
+
+export { prefectureList };
