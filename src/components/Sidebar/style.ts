@@ -11,7 +11,16 @@ export const Logo = styled.div`
   line-height: 1px;
 
     img {
-      width: auto;
-      height: 100%;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+
+    p {
+      margin: 0;
+      padding-left: 8px;
+      font-size: 14px;
+      font-weight: bold;
     }
 `;
