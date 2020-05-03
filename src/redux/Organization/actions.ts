@@ -9,3 +9,5 @@ export const updateOrganizationsAction = createAction(actionTypes.UPDATE_ORGANIZ
 
 export const deleteOrganizationAction = createAction(actionTypes.DELETE_ORGANIZATION);
 
+export const getOrganizationAction = createAction(actionTypes.GET_ORGANIZATION);
+

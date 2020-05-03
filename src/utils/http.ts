@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from '../redux/store';
-// import { logoutAction } from '../redux/Auth/actions';
+import { logoutAction } from '../redux/Auth/actions';
 import { showErrorAlertAction } from '../redux/Feedback/actions';
 
 const instance = axios.create({
@@ -24,7 +24,7 @@ const AxiosRequestInterceptor = async (config: any) => {
 export const handleError = (response: any) => {
   if (response && response.status === 401) {
     store.dispatch(showErrorAlertAction(401, 'unauthorized'));
-    // store.dispatch(logoutAction());
+    store.dispatch(logoutAction());
   } else if (response && response.status >= 500) {
     store.dispatch(showErrorAlertAction(response.status, 'internalServerError'));
   }

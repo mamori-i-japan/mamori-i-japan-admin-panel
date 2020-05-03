@@ -1,15 +1,21 @@
-import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
+import { put, takeEvery, all, fork, call, select } from 'redux-saga/effects';
+import { find } from 'lodash';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
-import { getOrganizations, postOrganization } from '../../apis';
+import {
+  getOrganizations,
+  postOrganization,
+  patchOrganization,
+  deleteOrganization,
+  getOrganization,
+} from '../../apis';
 import { getAccessTokenSaga } from '../Firebase/saga';
 
 function* createOrganizationSaga() {
   yield takeEvery(actionTypes.CREATE_ORGANIZATION, function* _({
     payload,
   }: any) {
-
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
@@ -45,9 +51,14 @@ function* getOrganizationsSaga() {
     try {
       const res = yield call(getOrganizations);
 
+      const data = res.data.map((item: any) => ({
+        ...item,
+        created: item.created._seconds
+      }))
+
       yield put({
         type: actionTypes.GET_ORGANIZATIONS_SUCCESS,
-        payload: { listData: res.data },
+        payload: { listData: data },
       });
     } catch (error) {
       yield put({
@@ -69,6 +80,8 @@ function* updateOrganizationSaga() {
     yield call(getAccessTokenSaga);
 
     try {
+      yield call(patchOrganization, payload);
+
       yield put({ type: actionTypes.UPDATE_ORGANIZATION_SUCCESS });
 
       yield put({
@@ -95,7 +108,20 @@ function* deleteOrganizationSaga() {
     yield call(getAccessTokenSaga);
 
     try {
-      yield put({ type: actionTypes.DELETE_ORGANIZATION_SUCCESS });
+      yield call(deleteOrganization, payload);
+
+      yield put({
+        type: actionTypes.DELETE_ORGANIZATION_SUCCESS,
+      });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'deleteSuccess' },
+      });
+
+      yield put({
+        type: actionTypes.GET_ORGANIZATIONS,
+      });
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
@@ -107,11 +133,46 @@ function* deleteOrganizationSaga() {
   });
 }
 
+function* getOrganizationSaga() {
+  yield takeEvery(actionTypes.GET_ORGANIZATION, function* _({ payload }: any) {
+    const { listData } = yield select((state) => state.organization);
+    let detailData;
+
+    if (listData.length) {
+      detailData = find(listData, { id: payload });
+
+      yield put({
+        type: actionTypes.GET_ORGANIZATION_SUCCESS,
+        payload: { detailData },
+      });
+    } else {
+      yield call(getAccessTokenSaga);
+
+      try {
+        const res = yield call(getOrganization, payload);
+
+        detailData = res.data
+
+        yield put({
+          type: actionTypes.GET_ORGANIZATION_SUCCESS,
+          payload: { detailData },
+        });
+      } catch (error) {
+        yield put({
+          type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+          payload: { errorCode: error.status, errorMessage: error.error },
+        });
+      }
+    }
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(createOrganizationSaga),
     fork(getOrganizationsSaga),
     fork(updateOrganizationSaga),
     fork(deleteOrganizationSaga),
+    fork(getOrganizationSaga),
   ]);
 }

@@ -18,14 +18,12 @@ const timeFormat = 'HH:mm';
 type FormFieldContentProps = {
   field: any;
   label: string;
-  defaultValue?: string | boolean | number;
   selectData?: any;
 };
 
 export default ({
   field,
   label,
-  defaultValue,
   selectData,
 }: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules } = field;

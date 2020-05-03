@@ -2,37 +2,17 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Table, Button } from 'antd';
+import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
-import { getOrganizationsAction } from '../../redux/Organization/actions';
+import {
+  getOrganizationsAction,
+  deleteOrganizationAction,
+  getOrganizationAction,
+} from '../../redux/Organization/actions';
 import moment from 'moment';
 
 const { Title } = Typography;
-
-export const columns: any = [
-  {
-    title: 'organizationName',
-    dataIndex: 'name',
-  },
-  {
-    title: 'organizationCode',
-    dataIndex: 'organizationCode',
-  },
-  {
-    title: 'message',
-    dataIndex: 'message'
-  },
-  {
-    title: 'addedByAdminEmail',
-    dataIndex: 'addedByAdminEmail',
-  },
-  {
-    title: 'createdDate',
-    dataIndex: 'created',
-    render: (value: number) => moment(value).format('YYYY-MM-DD HH:MM'),
-  },
-];
-
 
 export default () => {
   const dispatch = useDispatch();
@@ -41,15 +21,64 @@ export default () => {
   const loading = useSelector((store: any) => store.loading.isLoading);
   const { listData } = useSelector((store: any) => store.organization);
 
-  const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [dispatch]);
+  const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [
+    dispatch,
+  ]);
+
+  const deleteItem = useCallback(
+    (id) => dispatch(deleteOrganizationAction(id)),
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleCreate = () => {
+    dispatch(getOrganizationAction(null));
     history.push('/organizations/create');
   };
+
+  const handleEdit = (id: string) => {
+    dispatch(getOrganizationAction(id));
+    history.push(`/organizations/${id}`);
+  };
+
+  const columns: any = [
+    {
+      title: 'organizationName',
+      dataIndex: 'name',
+    },
+    {
+      title: 'organizationCode',
+      dataIndex: 'organizationCode',
+    },
+    {
+      title: 'message',
+      dataIndex: 'message',
+    },
+    {
+      title: 'addedByAdminEmail',
+      dataIndex: 'addedByAdminEmail',
+    },
+    {
+      title: 'createdDate',
+      dataIndex: 'created',
+      render: (value: number) =>
+        moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
+    },
+    {
+      title: 'operation',
+      render: ({ id }: { id: string }) => {
+        return (
+          <OperationButtons
+            handleEdit={() => handleEdit(id)}
+            deleteItem={() => deleteItem(id)}
+          />
+        );
+      },
+    },
+  ];
 
   return (
     <ContentContainer>
@@ -74,5 +103,5 @@ export default () => {
         />
       </section>
     </ContentContainer>
-  )
-}
+  );
+};
