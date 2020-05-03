@@ -18,13 +18,13 @@ const timeFormat = 'HH:mm';
 type FormFieldContentProps = {
   field: any;
   label: string;
-  selectData?: any;
+  onChange?: ((value: number) => void);
 };
 
 export default ({
   field,
   label,
-  selectData,
+  onChange,
 }: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules } = field;
 
@@ -38,9 +38,9 @@ export default ({
           rules={rules}
           colon={false}
         >
-          <Select size="large" placeholder={placeholder}>
-            {selectData[field.selectOptions] &&
-              selectData[field.selectOptions].map((item: any) => (
+          <Select size="large" placeholder={placeholder} onChange={onChange}>
+            {field.selectOptions &&
+              field.selectOptions.map((item: any) => (
                 <Option key={item.id} value={item.id}>
                   {item.name}
                 </Option>
