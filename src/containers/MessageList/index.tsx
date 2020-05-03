@@ -12,6 +12,7 @@ import {
   updateMessageAction,
 } from '../../redux/Message/actions';
 import { PrefectureMessage } from '../../redux/Message/types';
+import { langCode } from '../../constants';
 
 const { Title } = Typography;
 
@@ -52,7 +53,7 @@ export default () => {
       dataIndex: 'id',
       key: 'id',
       editable: false,
-      render: (value: string) => prefecturesMap['ja'][value],
+      render: (value: string) => prefecturesMap[langCode][value],
     },
   ];
 

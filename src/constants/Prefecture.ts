@@ -1,5 +1,7 @@
+import { langCode } from "./index";
+
 const prefectures = {
-  ja: {
+  Ja: {
     1: '北海道',
     2: '青森県',
     3: '岩手県',
@@ -52,6 +54,6 @@ const prefectures = {
 
 export default prefectures;
 
-const prefectureList: string[] = [...Array(47)].map<string>((_, index) => prefectures['ja'][`${index + 1}`]);
+const prefectureList: string[] = [...Array(47)].map<string>((_, index) => prefectures[langCode][`${index + 1}`]);
 
 export { prefectureList };
