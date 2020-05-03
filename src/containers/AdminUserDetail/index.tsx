@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -17,16 +17,19 @@ const layout = {
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
 
   const loading = useSelector((store: any) => store.loading.isLoading);
 
-
   const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
     dispatch,
   ]);
+
+  // TODO: implement
+  const editItem = (values: any) => { console.log('item edited', values) };
 
   const handleBack = () => {
     history.goBack();
@@ -35,8 +38,13 @@ export default () => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(values => {
-        createItem(values);
+      .then((values) => {
+        if (id === 'create') {
+          createItem(values);
+        } else {
+          values.id = id;
+          editItem(values);
+        }
       })
       .catch(info => {
         console.log('Validate Failed:', info);
@@ -55,8 +63,8 @@ export default () => {
       updateFormatOfForm(dataMap);
     } else {
       updateFormatOfForm(dataMap);
-    }
-  }
+    };
+  };
 
   return (
     <ContentContainer>
