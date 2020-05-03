@@ -2,16 +2,24 @@ import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
 
 const initialState = {
-  listData: []
+  listData: [],
+  detailData: null,
 };
 
 export default handleActions(
   {
     [actionTypes.GET_ORGANIZATIONS_SUCCESS]: (state, { payload }: any) => ({
       ...state,
-      ...payload
+      ...payload,
+    }),
+
+    [actionTypes.GET_ORGANIZATION_SUCCESS]: (
+      state,
+      { payload }: any
+    ) => ({
+      ...state,
+      ...payload,
     }),
   },
   initialState
 );
-

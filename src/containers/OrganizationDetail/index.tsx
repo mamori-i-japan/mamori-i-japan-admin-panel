@@ -1,5 +1,5 @@
-import React, { useContext, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useCallback, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -7,7 +7,11 @@ import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap from './dataMap';
-import { createOrganizationAction } from '../../redux/Organization/actions';
+import {
+  createOrganizationAction,
+  updateOrganizationsAction,
+  getOrganizationAction
+} from '../../redux/Organization/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -17,27 +21,52 @@ const layout = {
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
   const loading = useSelector((store: any) => store.loading.isLoading);
 
-  const createOrganization = useCallback((data) => dispatch(createOrganizationAction(data)), [dispatch])
+  const detailData = useSelector((store: any) => store.organization.detailData);
+
+  const createItem = useCallback(
+    (data) => dispatch(createOrganizationAction(data)),
+    [dispatch]
+  );
+
+  const editItem = useCallback(
+    (data) => dispatch(updateOrganizationsAction(data)),
+    [dispatch]
+  );
 
   const handleBack = () => {
+    form.resetFields();
     history.goBack();
   };
 
   const handleSubmit = () => {
     form
       .validateFields()
-      .then(values => {
-        createOrganization(values);
+      .then((values) => {
+        if (id === 'create') {
+          createItem(values);
+        } else {
+          values.id = id;
+          editItem(values);
+        }
       })
-      .catch(info => {
+      .catch((info) => {
         console.log('Validate Failed:', info);
       });
   };
+
+  useEffect(() => {
+    if (id !== 'create') {
+      dispatch(getOrganizationAction(id));
+    }
+  }, [id, dispatch]);
+
+  console.log(detailData);
 
   return (
     <ContentContainer>
@@ -50,15 +79,21 @@ export default () => {
         >
           {translate('back')}
         </Button>
-        <Button type="primary" size="large" loading={loading} onClick={handleSubmit}>
+        <Button
+          type="primary"
+          size="large"
+          loading={loading}
+          onClick={handleSubmit}
+        >
           {translate('submit')}
         </Button>
       </header>
 
       <section>
-        <DetailForm
+        {(id === 'create' || detailData) && <DetailForm
           {...layout}
           form={form}
+          initialValues={detailData}
           name="createUser"
           size="large"
         >
@@ -70,8 +105,8 @@ export default () => {
                 field={item}
               />
             ))}
-        </DetailForm>
+        </DetailForm>}
       </section>
     </ContentContainer>
-  )
-}
+  );
+};
