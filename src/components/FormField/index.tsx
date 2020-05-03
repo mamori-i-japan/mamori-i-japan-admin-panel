@@ -26,7 +26,6 @@ export default ({
   field,
   label,
   defaultValue,
-  selectData,
 }: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules } = field;
 
@@ -41,8 +40,8 @@ export default ({
           colon={false}
         >
           <Select size="large" placeholder={placeholder}>
-            {selectData[field.selectOptions] &&
-              selectData[field.selectOptions].map((item: any) => (
+            {field.selectOptions &&
+              field.selectOptions.map((item: any) => (
                 <Option key={item.id} value={item.id}>
                   {item.name}
                 </Option>

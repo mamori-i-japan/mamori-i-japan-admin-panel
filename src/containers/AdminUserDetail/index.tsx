@@ -35,12 +35,17 @@ export default () => {
     form
       .validateFields()
       .then(values => {
-        createUser(values);
+        console.log(values);
+        // createUser(values);
       })
       .catch(info => {
         console.log('Validate Failed:', info);
       });
   };
+
+  const onRoleChange = () => {
+    console.log('role was changed');
+  }
 
   return (
     <ContentContainer>
@@ -71,6 +76,7 @@ export default () => {
                 key={item.name}
                 label={translate(item.label)}
                 field={item}
+                selectData={item.selectData}
               />
             ))}
         </DetailForm>
