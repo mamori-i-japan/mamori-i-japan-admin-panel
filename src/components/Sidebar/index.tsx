@@ -4,6 +4,7 @@ import { Menu, Layout } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { findIndex } from 'lodash';
 import { Logo } from './style';
+import ImageLogo from '../../assets/images/logo.png';
 import config from './config';
 import { I18nContext } from '../../locales';
 
@@ -12,6 +13,11 @@ const { Sider } = Layout;
 interface SidebarProps {
   sidebarIsCollapse: boolean;
   locale?: any;
+}
+
+const logo = {
+  image: ImageLogo,
+  name: 'まもりあいJAPAN'
 }
 
 export default ({ sidebarIsCollapse }: any) => {
@@ -26,7 +32,14 @@ export default ({ sidebarIsCollapse }: any) => {
 
   return (
     <Sider collapsed={sidebarIsCollapse}>
-      <Logo>Logo</Logo>
+      <Logo>
+        <img src={logo.image} alt={logo.name} />
+        {
+          !sidebarIsCollapse &&
+          <p>{logo.name}</p>
+        }
+      </Logo>
+
       <Menu selectedKeys={[selectedKey]} theme="dark" mode="inline">
         {config.map((item: any, index) => (
           <Menu.Item key={index}>
