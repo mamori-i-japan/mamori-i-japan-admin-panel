@@ -28,7 +28,7 @@ export default () => {
     dispatch,
   ]);
 
-  // TODO: implement
+  // TODO: implement edit admin user
   const editItem = (values: any) => { console.log('item edited', values) };
 
   const handleBack = () => {

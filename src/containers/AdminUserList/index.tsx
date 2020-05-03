@@ -21,6 +21,7 @@ export default () => {
     dispatch,
   ]);
 
+  // TODO: implement delete admin user
   const deleteItem = (id: string) => { console.log('item delete', id) };
   // const deleteItem = useCallback(
   //   (id) => dispatch(deleteAdminUserAction(id)),
