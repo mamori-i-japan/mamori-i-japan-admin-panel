@@ -54,6 +54,7 @@ function* getOrganizationsSaga() {
       const data = res.data.map((item: any) => {
         return {
           ...item,
+          id: item.organizationId, // adjust API change
           created: item.createdAt ? item.createdAt._seconds : null
         }
       })

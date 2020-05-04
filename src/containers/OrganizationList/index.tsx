@@ -63,11 +63,11 @@ export default () => {
     },
     {
       title: 'operation',
-      render: ({ organizationId }: { organizationId: string }) => {
+      render: ({ id }: { id: string }) => {
         return (
           <OperationButtons
-            handleEdit={() => handleEdit(organizationId)}
-            deleteItem={() => deleteItem(organizationId)}
+            handleEdit={() => handleEdit(id)}
+            deleteItem={() => deleteItem(id)}
           />
         );
       },
