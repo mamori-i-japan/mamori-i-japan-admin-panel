@@ -7,8 +7,10 @@ import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
 
 function* createAdminUserSaga() {
   yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
-    payload: { email },
+    payload,
   }: any) {
+    const { email } = payload;
+
     yield put({
       type: loadingActionTypes.START_LOADING,
     });
