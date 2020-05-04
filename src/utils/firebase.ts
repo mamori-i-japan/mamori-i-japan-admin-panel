@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 import 'firebase/firestore';
+import { langCode } from '../constants';
 
 let firebaseConfig;
 
@@ -35,6 +36,8 @@ if (process.env.REACT_APP_ENV === 'prd') {
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 const auth = firebase.auth();
+
+auth.languageCode = langCode;
 
 const db = firebase.firestore();
 
