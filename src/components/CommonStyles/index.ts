@@ -13,6 +13,10 @@ export const ContentContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    &.flex-end {
+      justify-content: flex-end;
+    }
   }
 
   .ant-btn-link {

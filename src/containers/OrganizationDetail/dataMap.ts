@@ -10,7 +10,6 @@ export default [
   {
     name: 'message',
     type: 'input',
-    label: 'message',
-    rules: [Validation.required],
+    label: 'message'
   }
 ];

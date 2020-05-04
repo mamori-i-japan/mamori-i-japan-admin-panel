@@ -1,6 +1,5 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography } from 'antd';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import prefecturesMap from '../../constants/Prefecture';
@@ -13,8 +12,6 @@ import {
 } from '../../redux/Message/actions';
 import { PrefectureMessage } from '../../redux/Message/types';
 import { langCode } from '../../constants';
-
-const { Title } = Typography;
 
 export default () => {
   const { translate } = useContext(I18nContext);
@@ -59,8 +56,8 @@ export default () => {
 
   return (
     <ContentContainer>
-      <header>
-        <Title level={4}>{translate('list')}</Title>
+      <header className="flex-start">
+        <div>{translate('prefetureGuide')}</div>
       </header>
 
       <section>

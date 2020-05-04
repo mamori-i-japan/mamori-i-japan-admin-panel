@@ -54,7 +54,7 @@ function* getOrganizationsSaga() {
       const data = res.data.map((item: any) => {
         return {
           ...item,
-          created: item.created ? item.created._seconds : null
+          created: item.createdAt ? item.createdAt._seconds : null
         }
       })
 
