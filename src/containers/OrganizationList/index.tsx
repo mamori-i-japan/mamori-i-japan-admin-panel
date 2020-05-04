@@ -61,12 +61,12 @@ export default () => {
       title: 'addedByAdminEmail',
       dataIndex: 'addedByAdminEmail',
     },
-    {
-      title: 'createdDate',
-      dataIndex: 'created',
-      render: (value: number) =>
-        moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
-    },
+    // {
+    //   title: 'createdDate',
+    //   dataIndex: 'created',
+    //   render: (value: any) =>
+    //     moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
+    // },
     {
       title: 'operation',
       render: ({ id }: { id: string }) => {
