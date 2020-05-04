@@ -51,10 +51,10 @@ export default () => {
       title: 'email',
       dataIndex: 'email',
     },
-    {
-      title: 'addedByAdminEmail',
-      dataIndex: 'addedByAdminEmail',
-    },
+    // {
+    //   title: 'addedByAdminEmail',
+    //   dataIndex: 'addedByAdminEmail',
+    // },
     {
       title: 'createdDate',
       dataIndex: 'created',
