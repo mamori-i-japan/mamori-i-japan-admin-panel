@@ -59,7 +59,7 @@ export default () => {
       title: 'createdDate',
       dataIndex: 'created',
       render: (value: number) =>
-        moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
+        value ? moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM') : ''
     },
     {
       title: 'operation',

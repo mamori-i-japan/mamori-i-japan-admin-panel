@@ -4,8 +4,8 @@ import validationErrorMessages from "./jaJP/validationErrorMessages";
 
 export default {
   ...errorMessages,
-  successMessages,
-  validationErrorMessages,
+  ...successMessages,
+  ...validationErrorMessages,
   loginTitle: 'ログイン',
   loginSubmit: 'ログイン',
   registerSubmit: '登録',
