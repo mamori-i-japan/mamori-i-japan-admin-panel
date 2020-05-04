@@ -234,7 +234,6 @@ exports[`MessageList should render correctly 1`] = `
                         onFinishFailed={[Function]}
                       >
                         <Table
-                          bordered={true}
                           columns={
                             Array [
                               Object {
@@ -298,8 +297,7 @@ exports[`MessageList should render correctly 1`] = `
                                   key="container"
                                 >
                                   <Table
-                                    bordered={true}
-                                    className="ant-table-bordered"
+                                    className=""
                                     columns={
                                       Array [
                                         Object {
@@ -472,15 +470,14 @@ exports[`MessageList should render correctly 1`] = `
                                     transformColumns={[Function]}
                                   >
                                     <div
-                                      className="ant-table ant-table-bordered"
+                                      className="ant-table"
                                     >
                                       <Component
                                         pingLeft={false}
                                         pingRight={false}
                                         props={
                                           Object {
-                                            "bordered": true,
-                                            "className": "ant-table-bordered",
+                                            "className": "",
                                             "columns": Array [
                                               Object {
                                                 "dataIndex": "id",
