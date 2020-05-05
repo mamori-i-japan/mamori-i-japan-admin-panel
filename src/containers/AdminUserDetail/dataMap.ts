@@ -13,6 +13,8 @@ type FormItem = {
   selectOptions?: RoleOption[];
   rules: any[];
   onChange?: () => void;
+  loading?: boolean;
+  withCreateItem?: boolean;
 }
 
 const roleOptions: RoleOption[] = [
@@ -61,5 +63,16 @@ const prefectureForm = {
   rules: [Validation.required],
 };
 
-export { prefectureForm, roleOptions };
+const organizationForm = (organizationOptions: RoleOption[], isLoading: boolean): FormItem => ({
+  name: 'organization',
+  type: 'select',
+  label: 'organization',
+  selectOptions: organizationOptions,
+  rules: [Validation.required],
+  loading: isLoading,
+  withCreateItem: true,
+});
+
+export { prefectureForm, organizationForm, roleOptions };
+export type { RoleOption, FormItem };
 export default dataMap;
