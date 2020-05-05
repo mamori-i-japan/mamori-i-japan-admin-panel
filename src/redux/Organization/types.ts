@@ -5,7 +5,7 @@ export interface Organization {
   id: string;
   organizationId: string;
   name: string;
-  message: string | null;
+  message: string;
   organizationCode: string;
   addedByAdminUserId: string;
   addedByAdminEmail: string;
