@@ -12,6 +12,7 @@ import {
   updateOrganizationsAction,
   getOrganizationAction
 } from '../../redux/Organization/actions';
+import { Store } from '../../redux/types';
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,9 +26,9 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
 
-  const loading = useSelector((store: any) => store.loading.isLoading);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const detailData = useSelector((store: any) => store.organization.detailData);
+  const detailData = useSelector((store: Store) => store.organization.detailData);
 
   const createItem = useCallback(
     (data) => dispatch(createOrganizationAction(data)),
@@ -66,8 +67,6 @@ export default () => {
     }
   }, [id, dispatch]);
 
-  console.log(detailData);
-
   return (
     <ContentContainer>
       <header>
@@ -93,7 +92,7 @@ export default () => {
         {(id === 'create' || detailData) && <DetailForm
           {...layout}
           form={form}
-          initialValues={detailData}
+          initialValues={detailData || {}}
           name="createUser"
           size="large"
         >

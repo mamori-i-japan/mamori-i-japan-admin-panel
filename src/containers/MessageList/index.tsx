@@ -9,16 +9,17 @@ import EditableTable, {
 import {
   getMessagesAction,
   updateMessageAction,
-} from '../../redux/Message/actions';
-import { PrefectureMessage } from '../../redux/Message/types';
+} from '../../redux/PrefectureMessage/actions';
+import { PrefectureMessage } from '../../redux/PrefectureMessage/types';
 import { langCode } from '../../constants';
+import { Store } from '../../redux/types';
 
 export default () => {
   const { translate } = useContext(I18nContext);
   const dispatch = useDispatch();
 
-  const loading = useSelector((store: any) => store.loading.isLoading);
-  const listData: PrefectureMessage[] = useSelector((store: any) => store.message.listData);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
+  const listData: PrefectureMessage[] = useSelector((store: Store) => store.prefectureMessage.listData);
 
   const fetchData = useCallback(() => dispatch(getMessagesAction()), [
     dispatch,

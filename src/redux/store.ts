@@ -9,7 +9,7 @@ import rootSaga from './rootSaga';
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    store: any;
+    store: {};
   }
 }
 

@@ -21,7 +21,7 @@ const AxiosRequestInterceptor = async (config: any) => {
   return configTemp;
 };
 
-export const handleError = (response: any) => {
+export const handleError = (response: Response) => {
   if (response && response.status === 401) {
     store.dispatch(showErrorAlertAction(401, 'unauthorized'));
     store.dispatch(logoutAction());

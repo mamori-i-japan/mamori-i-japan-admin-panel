@@ -2,18 +2,19 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button } from 'antd';
+import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import { getAdminUsersAction } from '../../redux/AdminUser/actions';
-import moment from 'moment';
+import { Store } from '../../redux/types';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
-  const loading = useSelector((store: any) => store.loading.isLoading);
-  const { listData } = useSelector((store: any) => store.adminUser);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
+  const { listData } = useSelector((store: Store) => store.adminUser);
 
   const fetchData = useCallback(() => dispatch(getAdminUsersAction()), [
     dispatch,

@@ -8,6 +8,7 @@ import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap, { prefectureForm, roleOptions } from './dataMap';
 import { createAdminUserAction } from '../../redux/AdminUser/actions';
+import { Store } from '../../redux/types';
 
 const layout = {
   labelCol: { span: 8 },
@@ -22,7 +23,7 @@ export default () => {
   const [form] = Form.useForm();
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
 
-  const loading = useSelector((store: any) => store.loading.isLoading);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
 
   const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
     dispatch,

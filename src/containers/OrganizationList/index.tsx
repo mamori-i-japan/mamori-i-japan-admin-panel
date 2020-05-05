@@ -2,6 +2,7 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button } from 'antd';
+import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -10,14 +11,14 @@ import {
   deleteOrganizationAction,
   getOrganizationAction,
 } from '../../redux/Organization/actions';
-import moment from 'moment';
+import { Store } from '../../redux/types';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
-  const loading = useSelector((store: any) => store.loading.isLoading);
-  const { listData } = useSelector((store: any) => store.organization);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
+  const { listData } = useSelector((store: Store) => store.organization);
 
   const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [
     dispatch,

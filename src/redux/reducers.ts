@@ -2,7 +2,7 @@ import sidebar from './Sidebar/reducer';
 import auth from './Auth/reducer';
 import adminUser from './AdminUser/reducer';
 import loading from './Loading/reducer';
-import message from './Message/reducer';
+import prefectureMessage from './PrefectureMessage/reducer';
 import feedback from './Feedback/reducer';
 import organization from './Organization/reducer';
 
@@ -11,7 +11,7 @@ export default {
   auth,
   loading,
   adminUser,
-  message,
+  prefectureMessage,
   feedback,
   organization
 };
