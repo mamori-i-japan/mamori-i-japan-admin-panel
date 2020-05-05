@@ -42,6 +42,7 @@ export default {
   organizationName: '組織名',
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
+  // fixme
   role: '役割',
   'Super Admin': '運営管理者',
   'National Admin': '行政管理者',
