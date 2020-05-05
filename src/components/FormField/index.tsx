@@ -26,7 +26,7 @@ export default ({
   label,
   onChange,
 }: FormFieldContentProps) => {
-  const { type, className, placeholder, name, rules } = field;
+  const { type, className, placeholder, name, rules, loading } = field;
 
   switch (type) {
     case 'select':
@@ -38,7 +38,7 @@ export default ({
           rules={rules}
           colon={false}
         >
-          <Select size="large" placeholder={placeholder} onChange={onChange}>
+          <Select size="large" placeholder={placeholder} onChange={onChange} loading={loading}>
             {field.selectOptions &&
               field.selectOptions.map((item: any) => (
                 <Option key={item.id} value={item.id}>

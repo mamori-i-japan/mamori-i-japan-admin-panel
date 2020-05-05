@@ -6,7 +6,12 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
-import dataMap, { prefectureForm, roleOptions, RoleOption, FormItem } from './dataMap';
+import dataMap, {
+  prefectureForm,
+  organizationForm,
+  roleOptions,
+  RoleOption, FormItem
+} from './dataMap';
 import { createAdminUserAction, getOrganizationOptionsAction } from '../../redux/AdminUser/actions';
 
 const layout = {
@@ -21,6 +26,7 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
+  const [currentRole, updateCurrentRole] = useState('');
 
   const loading = useSelector((store: any) => store.loading.isLoading);
   const organizaionsList = useSelector((store: any) => store.organization.listData);
@@ -70,6 +76,7 @@ export default () => {
     } else {
       updateFormatOfForm(dataMap);
     };
+    updateCurrentRole(roleOptions[roleNumber].id);
   };
 
   const translateOptions = (item: FormItem) =>
@@ -82,6 +89,20 @@ export default () => {
           name: translate(option.name),
         })),
       })
+
+  const mapOrganizationsToForm = (organizations: any, isLoading: boolean): FormItem[] =>
+    (currentRole === '3') ? [
+      organizationForm(
+        organizations.map(
+          (organization: { organizationId: string; name: string }) => (
+            {
+              id: organization.organizationId,
+              name: organization.name,
+            })
+        ),
+        isLoading,
+      ),
+    ] : [];
 
   return (
     <ContentContainer>
@@ -107,14 +128,16 @@ export default () => {
           size="large"
         >
           {formatOfForm &&
-            formatOfForm.map((item: FormItem) => (
-              <FormField
-                key={item.name}
-                label={translate(item.label)}
-                field={translateOptions(item)}
-                onChange={item.name === 'role' ? onRoleChange : undefined}
-              />
-            ))}
+            formatOfForm
+              .concat(mapOrganizationsToForm(organizaionsList, isOrganizationLoading))
+              .map((item: FormItem) => (
+                <FormField
+                  key={item.name}
+                  label={translate(item.label)}
+                  field={translateOptions(item)}
+                  onChange={item.name === 'role' ? onRoleChange : undefined}
+                />
+              ))}
         </DetailForm>
       </section>
     </ContentContainer>
