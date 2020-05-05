@@ -55,6 +55,11 @@ export default () => {
       dataIndex: 'addedByAdminEmail',
     },
     {
+      title: 'premmision',
+      dataIndex: 'userAdminRole',
+      render: (value: string) => translate(value)
+    },
+    {
       title: 'createdDate',
       dataIndex: 'created',
       render: (value: number) =>
