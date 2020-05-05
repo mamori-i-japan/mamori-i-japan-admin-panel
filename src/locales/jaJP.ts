@@ -42,6 +42,11 @@ export default {
   organizationName: '組織名',
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
+  role: '役割',
+  'Super Admin': '運営管理者',
+  'National Admin': '行政管理者',
+  'Prefecture Admin': '都道府県管理者',
+  'Organization Admin': '組織管理者',
   // TODO:
   deleteConfirmTitle: '削除しますか？',
   notFound: '見つかりません',
