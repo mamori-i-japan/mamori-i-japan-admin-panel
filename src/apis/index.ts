@@ -1,11 +1,12 @@
 import http from '../utils/http';
-import { db } from '../utils/firebase';
+// import { db } from '../utils/firebase';
 import {
   CreateOrganizationRequestDto,
   UpdateOrganizationRequestDto,
+  UpdatePrefectureRequestDto
 } from './types';
 
-import Firebase from 'firebase';
+// import Firebase from 'firebase';
 import { AdminRoleString } from '../constants/AdminRole';
 
 export const login = () => {
@@ -29,53 +30,53 @@ export const getAdminUsers = () => {
 //   return http.post('admins/positives', data);
 // };
 
-export const getMessages = async () => {
-  // // generate default documents
-  // Array.apply(null, new Array(48)).map((value, index) => {
-  //   const id = index ? index.toString() : 'default';
-  //   const documentId = index > 9 ? index.toString() : index !== 0 ? `0${index}` : 'default';
+// export const getMessages = async () => {
+//   // // generate default documents
+//   // Array.apply(null, new Array(48)).map((value, index) => {
+//   //   const id = index ? index.toString() : 'default';
+//   //   const documentId = index > 9 ? index.toString() : index !== 0 ? `0${index}` : 'default';
 
-  //   db.collection('prefectureMessages')
-  //     .doc(documentId)
-  //     .set({ id, url: `http://www.${id}.temp` });
-  // });
+//   //   db.collection('prefectureMessages')
+//   //     .doc(documentId)
+//   //     .set({ id, url: `http://www.${id}.temp` });
+//   // });
 
-  try {
-    const querySnapshot = await db.collection('prefectureMessages').get();
-    const data: Firebase.firestore.DocumentData[] = [];
+//   try {
+//     const querySnapshot = await db.collection('prefectureMessages').get();
+//     const data: Firebase.firestore.DocumentData[] = [];
 
-    querySnapshot.forEach((doc) => {
-      const item = doc.data();
-      data.push(item);
-    });
+//     querySnapshot.forEach((doc) => {
+//       const item = doc.data();
+//       data.push(item);
+//     });
 
-    return data;
-  } catch (error) {
-    return error;
-  }
-};
+//     return data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
-export const postMessaage = async ({
-  id,
-  url,
-}: {
-  id: string;
-  url: string;
-}) => {
-  const documentId = parseInt(id, 10) > 9 ? id : `0${id}`;
-  try {
-    const res = await db
-      .collection('prefectureMessages')
-      .doc(documentId)
-      .update({
-        url,
-      });
+// export const postMessaage = async ({
+//   id,
+//   url,
+// }: {
+//   id: string;
+//   url: string;
+// }) => {
+//   const documentId = parseInt(id, 10) > 9 ? id : `0${id}`;
+//   try {
+//     const res = await db
+//       .collection('prefectureMessages')
+//       .doc(documentId)
+//       .update({
+//         url,
+//       });
 
-    return res;
-  } catch (error) {
-    return error;
-  }
-};
+//     return res;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const getOrganizations = () => {
   return http.get('admins/organizations');
@@ -109,3 +110,16 @@ export const deleteOrganization = ({ id }: { id: string }) => {
 export const getOrganization = ({ id }: { id: string }) => {
   return http.get(`admins/organizations/${id}`);
 };
+
+export const getPrefectures = () => {
+  return http.get(`admins/prefectures`);
+}
+
+
+export const patchPrefecture = ({
+  id,
+  message,
+}: UpdatePrefectureRequestDto) => {
+  return http.patch(`admins/prefectures/${id}`, { message });
+}
+

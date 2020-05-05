@@ -2,7 +2,7 @@ import { put, takeEvery, all, fork, call, select } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
-import { getMessages, postMessaage } from '../../apis';
+import { getPrefectures, patchPrefecture } from '../../apis';
 
 function* updateMessageSaga() {
   yield takeEvery(actionTypes.UPDATE_MESSAGE, function* _({ payload }: any) {
@@ -11,11 +11,11 @@ function* updateMessageSaga() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
-      yield call(postMessaage, { id, url });
+      yield call(patchPrefecture, { id, message: url });
 
-      const { listData } = yield select((state) => state.prefectureMesage)
+      const { listData } = yield select((state) => state.prefectureMessage)
 
-      listData[parseInt(payload.id, 10) - 1].url = payload.url;
+      listData[parseInt(payload.id, 10)].url = payload.url;
 
       yield put({
         type: actionTypes.UPDATE_MESSAGE_SUCCESS,
@@ -42,12 +42,20 @@ function* getMessagesSaga() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
-      const res = yield call(getMessages);
+      const res = yield call(getPrefectures);
+
+      const data = res.data.map((item: any) => {
+        return ({
+          ...item,
+          url: item.message,
+          id: item.prefectureId
+        })
+      })
 
       yield put({
         type: actionTypes.GET_MESSAGES_SUCCESS,
         payload: {
-          listData: res,
+          listData: data
         },
       });
     } catch (error) {
