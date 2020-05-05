@@ -1,4 +1,5 @@
 import { put, call } from 'redux-saga/effects';
+import jwtDecode from 'jwt-decode';
 import { auth, actionCodeSettings } from '../../utils/firebase';
 import actionTypes from './actionTypes';
 import authActionTypes from '../Auth/actionTypes';
@@ -23,9 +24,11 @@ export function* getAccessTokenSaga() {
 
     localStorage.setItem('token', token);
 
+    const userAdminRole = jwtDecode<{ userAdminRole: string }>(token).userAdminRole;
+
     yield put({
       type: authActionTypes.SAVE_TOKEN_SUCCESS,
-      payload: { token }
+      payload: { token, userAdminRole }
     })
   } catch (error) {
     yield put({
