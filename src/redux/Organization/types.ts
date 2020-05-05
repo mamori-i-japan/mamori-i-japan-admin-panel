@@ -1,10 +1,11 @@
 import { FirebaseDate } from '../../apis/types';
 
 export interface Organization {
-  id?: string;
+  key: string;
+  id: string;
   organizationId: string;
   name: string;
-  message: string;
+  message: string | null;
   organizationCode: string;
   addedByAdminUserId: string;
   addedByAdminEmail: string;

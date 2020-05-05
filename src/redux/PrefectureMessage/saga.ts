@@ -3,17 +3,30 @@ import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getPrefectures, patchPrefecture } from '../../apis';
+import { PrefectureMessage } from './types';
+import { getAccessTokenSaga } from '../Firebase/saga';
+import { UpdatePrefectureRequestDto } from '../../apis/types';
 
 function* updateMessageSaga() {
-  yield takeEvery(actionTypes.UPDATE_MESSAGE, function* _({ payload }: any) {
+  yield takeEvery(actionTypes.UPDATE_MESSAGE, function* _({
+    payload,
+  }: {
+    type: string;
+    payload: UpdatePrefectureRequestDto;
+  }) {
     const { url, id } = payload;
 
     yield put({ type: loadingActionTypes.START_LOADING });
 
-    try {
-      yield call(patchPrefecture, { id, message: url });
+    yield call(getAccessTokenSaga);
 
-      const { listData } = yield select((state) => state.prefectureMessage)
+    try {
+      yield call(patchPrefecture, {
+        id,
+        message: url ? url : null,
+      });
+
+      const { listData } = yield select((state) => state.prefectureMessage);
 
       listData[parseInt(payload.id, 10)].url = payload.url;
 
@@ -41,21 +54,23 @@ function* getMessagesSaga() {
   yield takeEvery(actionTypes.GET_MESSAGES, function* _() {
     yield put({ type: loadingActionTypes.START_LOADING });
 
+    yield call(getAccessTokenSaga);
+
     try {
       const res = yield call(getPrefectures);
 
-      const data = res.data.map((item: any) => {
-        return ({
+      const data = res.data.map((item: PrefectureMessage) => {
+        return {
           ...item,
           url: item.message,
-          id: item.prefectureId
-        })
-      })
+          id: item.prefectureId,
+        };
+      });
 
       yield put({
         type: actionTypes.GET_MESSAGES_SUCCESS,
         payload: {
-          listData: data
+          listData: data,
         },
       });
     } catch (error) {

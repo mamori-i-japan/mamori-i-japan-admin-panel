@@ -1,4 +1,5 @@
 import { Organization } from '../redux/Organization/types';
+import { PrefectureMessage } from '../redux/PrefectureMessage/types';
 
 export type FirebaseDate = {
   _seconds: string;
@@ -16,6 +17,7 @@ export interface UpdateOrganizationRequestDto extends Organization {
 }
 
 export interface UpdatePrefectureRequestDto {
-  message: string;
+  message: string | null;
+  url?: string;
   id: string;
-} 
+}
