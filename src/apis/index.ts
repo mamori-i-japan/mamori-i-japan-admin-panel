@@ -14,7 +14,7 @@ export const login = () => {
 
 export const postAdminUser = (data: {
   email: string,
-  adminRole: string,
+  adminRole: AdminRoleString,
   organizationId: string,
   prefectureId: string,
 }) => {
@@ -81,12 +81,16 @@ export const getOrganizations = () => {
   return http.get('admins/organizations');
 };
 
-export const postOrganization = (data: {
-  name: string;
-  adminRole: AdminRoleString;
-  organizationId?: string;
-  prefectureId?: string;
-}) => {
+// TODO:
+// {
+//   name: string;
+//   message: string;
+//   adminRole?: AdminRoleString;
+//   organizationId?: string;
+//   prefectureId?: string;
+// }
+
+export const postOrganization = (data: CreateOrganizationRequestDto) => {
   return http.post('admins/organizations', data);
 };
 
