@@ -1,11 +1,17 @@
 import http from '../utils/http';
 import { db } from '../utils/firebase';
+import { AdminRoleString } from '../constants/AdminRole';
 
 export const login = () => {
   return http.post('auth/admin/login');
 };
 
-export const postAdminUser = (data: { email: string }) => {
+export const postAdminUser = (data: {
+  email: string,
+  adminRole: string,
+  organizationId: string,
+  prefectureId: string,
+}) => {
   return http.post('/admins/users', data);
 };
 
@@ -68,7 +74,12 @@ export const getOrganizations = () => {
   return http.get('admins/organizations');
 };
 
-export const postOrganization = (data: { name: string; message: string }) => {
+export const postOrganization = (data: {
+  name: string;
+  adminRole: AdminRoleString;
+  organizationId?: string;
+  prefectureId?: string;
+}) => {
   return http.post('admins/organizations', data);
 };
 
