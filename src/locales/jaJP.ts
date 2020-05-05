@@ -47,6 +47,7 @@ export default {
   'National Admin': '行政管理者',
   'Prefecture Admin': '都道府県管理者',
   'Organization Admin': '組織管理者',
+  createNewOrganization: '新しい組織を作成',
   // TODO:
   deleteConfirmTitle: '削除しますか？',
   notFound: '見つかりません',

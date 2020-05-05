@@ -19,12 +19,14 @@ type FormFieldContentProps = {
   field: any;
   label: string;
   onChange?: ((value: number) => void);
+  createButton?: any;
 };
 
 export default ({
   field,
   label,
   onChange,
+  createButton,
 }: FormFieldContentProps) => {
   const { type, className, placeholder, name, rules, loading } = field;
 
@@ -46,6 +48,7 @@ export default ({
                 </Option>
               ))}
           </Select>
+          {createButton}
         </Form.Item>
       );
 

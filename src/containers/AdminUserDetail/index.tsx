@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form } from 'antd';
+import { Button, Form, Space } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
@@ -61,6 +61,10 @@ export default () => {
       .catch(info => {
         console.log('Validate Failed:', info);
       });
+  };
+
+  const handleCreate = () => {
+    history.push('/organizations/create');
   };
 
   const onRoleChange = (roleNumber: number) => {
@@ -136,8 +140,16 @@ export default () => {
                   label={translate(item.label)}
                   field={translateOptions(item)}
                   onChange={item.name === 'role' ? onRoleChange : undefined}
+                  createButton={
+                    item.withCreateItem
+                      ? <Button size={'small'} onClick={handleCreate}>
+                        {translate('createNewOrganization')}
+                      </Button>
+                      : <div />
+                  }
                 />
-              ))}
+              ))
+          }
         </DetailForm>
       </section>
     </ContentContainer>

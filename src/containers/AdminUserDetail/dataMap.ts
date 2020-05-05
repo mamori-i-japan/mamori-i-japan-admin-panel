@@ -14,6 +14,7 @@ type FormItem = {
   rules: any[];
   onChange?: () => void;
   loading?: boolean;
+  withCreateItem?: boolean;
 }
 
 const roleOptions: RoleOption[] = [
@@ -69,6 +70,7 @@ const organizationForm = (organizationOptions: RoleOption[], isLoading: boolean)
   selectOptions: organizationOptions,
   rules: [Validation.required],
   loading: isLoading,
+  withCreateItem: true,
 });
 
 export { prefectureForm, organizationForm, roleOptions };
