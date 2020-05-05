@@ -54,6 +54,9 @@ const prefectures = {
 
 export default prefectures;
 
-const prefectureList: string[] = [...Array(47)].map<string>((_, index) => prefectures[langCode][`${index + 1}`]);
+const prefectureList = [...Array(47)].map((_, index) => ({
+  id: `${index + 1}`,
+  name: prefectures[langCode][`${index + 1}`],
+}));
 
 export { prefectureList };
