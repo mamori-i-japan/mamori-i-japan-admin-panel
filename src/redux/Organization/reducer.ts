@@ -1,22 +1,33 @@
 import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
-import { OrganizationStates, Organization } from './types';
+import { OrganizationStates, Organization, DetailDataState } from './types';
 
 const initialState: OrganizationStates = {
   listData: [],
-  detailData: null,
+  detailData: {},
 };
 
 export default handleActions(
   {
-    [actionTypes.GET_ORGANIZATIONS_SUCCESS]: (state, { payload }: { type: string, payload: Organization[] }) => ({
+    [actionTypes.GET_ORGANIZATIONS_SUCCESS]: (
+      state,
+      { payload }: { type: string; payload: Organization[] }
+    ) => ({
       ...state,
       ...payload,
     }),
 
     [actionTypes.GET_ORGANIZATION_SUCCESS]: (
       state,
-      { payload }: { type: string, payload: any }
+      { payload }: { type: string; payload: DetailDataState }
+    ) => ({
+      ...state,
+      ...payload,
+    }),
+
+    [actionTypes.CLEAR_ORGANIZATION_SUCCESS]: (
+      state,
+      { payload }: { type: string; payload: DetailDataState }
     ) => ({
       ...state,
       ...payload,

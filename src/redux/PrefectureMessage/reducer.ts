@@ -6,7 +6,7 @@ const initialState: PrefectureMessageStates = {
   listData: [],
 };
 
-export default handleActions<PrefectureMessageStates>(
+export default handleActions(
   {
     [actionTypes.GET_MESSAGES_SUCCESS]: (
       state,
@@ -18,19 +18,11 @@ export default handleActions<PrefectureMessageStates>(
 
     [actionTypes.UPDATE_MESSAGE_SUCCESS]: (
       state,
-      { payload }: { type: string; payload: any }
-    ) => {
-      const updatedData = state.listData;
-
-      updatedData[parseInt(payload.id, 10) - 1].url = payload.url;
-
-      console.log(payload);
-
-      return {
-        ...state,
-        listData: updatedData,
-      };
-    },
+      { payload }: { type: string; payload: PrefectureMessageStates }
+    ) => ({
+      ...state,
+      ...payload,
+    }),
   },
   initialState
 );

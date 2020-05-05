@@ -161,7 +161,7 @@ function* getOrganizationSaga() {
     let detailData;
 
     if (listData.length) {
-      detailData = find(listData, { id: payload.id });
+      detailData = find(listData, payload);
 
       yield put({
         type: actionTypes.GET_ORGANIZATION_SUCCESS,
@@ -189,6 +189,15 @@ function* getOrganizationSaga() {
   });
 }
 
+function* clearOrganizationSaga() {
+  yield takeEvery(actionTypes.CLEAR_ORGANIZATION, function* _() {
+    yield put({
+      type: actionTypes.CLEAR_ORGANIZATION_SUCCESS,
+      payload: { detailData: {} },
+    });
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(createOrganizationSaga),
@@ -196,5 +205,6 @@ export default function* rootSaga() {
     fork(updateOrganizationSaga),
     fork(deleteOrganizationSaga),
     fork(getOrganizationSaga),
+    fork(clearOrganizationSaga),
   ]);
 }

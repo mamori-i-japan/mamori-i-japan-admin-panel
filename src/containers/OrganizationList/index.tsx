@@ -10,6 +10,7 @@ import {
   getOrganizationsAction,
   deleteOrganizationAction,
   getOrganizationAction,
+  clearOrganizationAction
 } from '../../redux/Organization/actions';
 import { Store } from '../../redux/types';
 
@@ -25,7 +26,7 @@ export default () => {
   ]);
 
   const deleteItem = useCallback(
-    (id) => dispatch(deleteOrganizationAction(id)),
+    (id) => dispatch(deleteOrganizationAction({ id })),
     [dispatch]
   );
 
@@ -34,12 +35,12 @@ export default () => {
   }, [fetchData]);
 
   const handleCreate = () => {
-    dispatch(getOrganizationAction(null));
+    dispatch(clearOrganizationAction());
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    dispatch(getOrganizationAction(id));
+    dispatch(getOrganizationAction({ id }));
     history.push(`/organizations/${id}`);
   };
 

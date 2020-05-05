@@ -12,7 +12,9 @@ export interface Organization {
   updatedAt: FirebaseDate
 }
 
+export type DetailDataState = Organization | {}
+
 export type OrganizationStates = {
   listData: Organization[]
-  detailData: Organization | null
+  detailData: DetailDataState
 }

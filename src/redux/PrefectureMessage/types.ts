@@ -1,6 +1,6 @@
 export interface PrefectureMessage {
   key: string;
-  id: number;
+  id: string;
   url: string;
   prefecture: string;
 }

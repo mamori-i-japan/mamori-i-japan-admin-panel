@@ -63,7 +63,7 @@ export default () => {
 
   useEffect(() => {
     if (id !== 'create') {
-      dispatch(getOrganizationAction(id));
+      dispatch(getOrganizationAction({ id }));
     }
   }, [id, dispatch]);
 
@@ -89,10 +89,10 @@ export default () => {
       </header>
 
       <section>
-        {(id === 'create' || detailData) && <DetailForm
+        {(id === 'create' || JSON.stringify(detailData) !== '{}') && <DetailForm
           {...layout}
           form={form}
-          initialValues={detailData || {}}
+          initialValues={detailData}
           name="createUser"
           size="large"
         >

@@ -11,3 +11,5 @@ export const deleteOrganizationAction = createAction(actionTypes.DELETE_ORGANIZA
 
 export const getOrganizationAction = createAction(actionTypes.GET_ORGANIZATION);
 
+export const clearOrganizationAction = createAction(actionTypes.CLEAR_ORGANIZATION);
+
