@@ -2,16 +2,10 @@ import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
 import { langCode } from '../../constants';
 import { langLocales } from '../../locales';
+import { FeedbackStates } from './types';
 
-export interface FeedbackState {
-  successMessage: string;
-  errorCode: number | string | null;
-  isSuccess: boolean;
-  errorMessage: string;
-  isError: boolean;
-}
 
-const initalState: FeedbackState = {
+const initalState: FeedbackStates = {
   errorMessage: '',
   errorCode: null,
   isError: false,
@@ -23,7 +17,7 @@ export default handleActions(
   {
     [actionTypes.SHOW_SUCCESS_MESSAGE]: (
       state,
-      { payload: { successMessage } }: { type: string; payload: FeedbackState }
+      { payload: { successMessage } }: { type: string; payload: FeedbackStates }
     ) => ({
       ...state,
       isSuccess: true,
@@ -40,7 +34,7 @@ export default handleActions(
       state,
       {
         payload: { errorCode, errorMessage },
-      }: { type: string; payload: FeedbackState }
+      }: { type: string; payload: FeedbackStates }
     ) => {
       const message = langLocales[langCode][errorMessage];
 

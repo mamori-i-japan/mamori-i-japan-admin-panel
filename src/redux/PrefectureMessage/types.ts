@@ -1,10 +1,10 @@
-export type MessageState = {
-  listData: PrefectureMessage[];
-}
-
 export interface PrefectureMessage {
   key: string;
-  id: number;
+  id: string;
   url: string;
   prefecture: string;
 }
+
+export type PrefectureMessageStates = {
+  listData: PrefectureMessage[];
+};

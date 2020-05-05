@@ -1,5 +1,11 @@
 import http from '../utils/http';
 import { db } from '../utils/firebase';
+import {
+  CreateOrganizationRequestDto,
+  UpdateOrganizationRequestDto,
+} from './types';
+
+import Firebase from 'firebase';
 import { AdminRoleString } from '../constants/AdminRole';
 
 export const login = () => {
@@ -8,7 +14,7 @@ export const login = () => {
 
 export const postAdminUser = (data: {
   email: string,
-  adminRole: string,
+  adminRole: AdminRoleString,
   organizationId: string,
   prefectureId: string,
 }) => {
@@ -36,10 +42,11 @@ export const getMessages = async () => {
 
   try {
     const querySnapshot = await db.collection('prefectureMessages').get();
-    const data: any = [];
+    const data: Firebase.firestore.DocumentData[] = [];
 
     querySnapshot.forEach((doc) => {
-      data.push(doc.data());
+      const item = doc.data();
+      data.push(item);
     });
 
     return data;
@@ -74,12 +81,16 @@ export const getOrganizations = () => {
   return http.get('admins/organizations');
 };
 
-export const postOrganization = (data: {
-  name: string;
-  adminRole: AdminRoleString;
-  organizationId?: string;
-  prefectureId?: string;
-}) => {
+// TODO:
+// {
+//   name: string;
+//   message: string;
+//   adminRole?: AdminRoleString;
+//   organizationId?: string;
+//   prefectureId?: string;
+// }
+
+export const postOrganization = (data: CreateOrganizationRequestDto) => {
   return http.post('admins/organizations', data);
 };
 
@@ -87,18 +98,14 @@ export const patchOrganization = ({
   id,
   name,
   message,
-}: {
-  name: string;
-  message: string;
-  id: string;
-}) => {
+}: UpdateOrganizationRequestDto) => {
   return http.patch(`admins/organizations/${id}`, { name, message });
 };
 
-export const deleteOrganization = (data: { id: string }) => {
-  return http.delete('admins/organizations', { data: data });
+export const deleteOrganization = ({ id }: { id: string }) => {
+  return http.delete('admins/organizations', { data: { id } });
 };
 
-export const getOrganization = (id: string) => {
+export const getOrganization = ({ id }: { id: string }) => {
   return http.get(`admins/organizations/${id}`);
 };

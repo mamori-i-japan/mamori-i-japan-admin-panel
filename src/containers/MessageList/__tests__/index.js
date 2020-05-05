@@ -12,7 +12,7 @@ configure({ adapter: new Adapter() });
 describe('MessageList', () => {
   const initialState = {
     loading: { isLoading: false },
-    message: { listdata: [] },
+    prefectureMessage: { listdata: [] },
   };
   const mockStore = configureStore();
   let store;

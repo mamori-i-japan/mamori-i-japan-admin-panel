@@ -2,6 +2,7 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button } from 'antd';
+import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -9,22 +10,23 @@ import {
   getOrganizationsAction,
   deleteOrganizationAction,
   getOrganizationAction,
+  clearOrganizationAction
 } from '../../redux/Organization/actions';
-import moment from 'moment';
+import { Store } from '../../redux/types';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { translate } = useContext(I18nContext);
-  const loading = useSelector((store: any) => store.loading.isLoading);
-  const { listData } = useSelector((store: any) => store.organization);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
+  const { listData } = useSelector((store: Store) => store.organization);
 
   const fetchData = useCallback(() => dispatch(getOrganizationsAction()), [
     dispatch,
   ]);
 
   const deleteItem = useCallback(
-    (id) => dispatch(deleteOrganizationAction(id)),
+    (id) => dispatch(deleteOrganizationAction({ id })),
     [dispatch]
   );
 
@@ -33,12 +35,12 @@ export default () => {
   }, [fetchData]);
 
   const handleCreate = () => {
-    dispatch(getOrganizationAction(null));
+    dispatch(clearOrganizationAction());
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    dispatch(getOrganizationAction(id));
+    dispatch(getOrganizationAction({ id }));
     history.push(`/organizations/${id}`);
   };
 

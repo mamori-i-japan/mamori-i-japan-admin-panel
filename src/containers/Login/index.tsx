@@ -6,13 +6,14 @@ import { I18nContext } from '../../locales';
 import { LoginContainer } from './style';
 import dataMap from './dataMap';
 import { loginAction } from '../../redux/Auth/actions';
+import { Store } from '../../redux/types';
 
 const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
   const { translate } = useContext(I18nContext);
-  const loading = useSelector((store: any) => store.loading.isLoading);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
 
   const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
 

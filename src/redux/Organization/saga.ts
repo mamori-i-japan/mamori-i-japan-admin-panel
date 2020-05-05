@@ -11,11 +11,19 @@ import {
   getOrganization,
 } from '../../apis';
 import { getAccessTokenSaga } from '../Firebase/saga';
+import {
+  UpdateOrganizationRequestDto,
+  CreateOrganizationRequestDto,
+} from '../../apis/types';
+import { Organization } from './types';
 
 function* createOrganizationSaga() {
   yield takeEvery(actionTypes.CREATE_ORGANIZATION, function* _({
     payload,
-  }: any) {
+  }: {
+    type: string;
+    payload: CreateOrganizationRequestDto;
+  }) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
@@ -51,13 +59,13 @@ function* getOrganizationsSaga() {
     try {
       const res = yield call(getOrganizations);
 
-      const data = res.data.map((item: any) => {
+      const data = res.data.map((item: Organization) => {
         return {
           ...item,
           id: item.organizationId, // adjust API change
-          created: item.createdAt ? item.createdAt._seconds : null
-        }
-      })
+          created: item.createdAt ? item.createdAt._seconds : null,
+        };
+      });
 
       yield put({
         type: actionTypes.GET_ORGANIZATIONS_SUCCESS,
@@ -77,7 +85,10 @@ function* getOrganizationsSaga() {
 function* updateOrganizationSaga() {
   yield takeEvery(actionTypes.UPDATE_ORGANIZATION, function* _({
     payload,
-  }: any) {
+  }: {
+    type: string;
+    payload: UpdateOrganizationRequestDto;
+  }) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
@@ -105,7 +116,10 @@ function* updateOrganizationSaga() {
 function* deleteOrganizationSaga() {
   yield takeEvery(actionTypes.DELETE_ORGANIZATION, function* _({
     payload,
-  }: any) {
+  }: {
+    type: string;
+    payload: { id: string };
+  }) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
@@ -137,12 +151,17 @@ function* deleteOrganizationSaga() {
 }
 
 function* getOrganizationSaga() {
-  yield takeEvery(actionTypes.GET_ORGANIZATION, function* _({ payload }: any) {
+  yield takeEvery(actionTypes.GET_ORGANIZATION, function* _({
+    payload,
+  }: {
+    type: string;
+    payload: { id: string };
+  }) {
     const { listData } = yield select((state) => state.organization);
     let detailData;
 
     if (listData.length) {
-      detailData = find(listData, { id: payload });
+      detailData = find(listData, payload);
 
       yield put({
         type: actionTypes.GET_ORGANIZATION_SUCCESS,
@@ -170,6 +189,15 @@ function* getOrganizationSaga() {
   });
 }
 
+function* clearOrganizationSaga() {
+  yield takeEvery(actionTypes.CLEAR_ORGANIZATION, function* _() {
+    yield put({
+      type: actionTypes.CLEAR_ORGANIZATION_SUCCESS,
+      payload: { detailData: {} },
+    });
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(createOrganizationSaga),
@@ -177,5 +205,6 @@ export default function* rootSaga() {
     fork(updateOrganizationSaga),
     fork(deleteOrganizationSaga),
     fork(getOrganizationSaga),
+    fork(clearOrganizationSaga),
   ]);
 }

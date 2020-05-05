@@ -1,4 +1,4 @@
-import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
+import { put, takeEvery, all, fork, call, select } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
@@ -13,9 +13,13 @@ function* updateMessageSaga() {
     try {
       yield call(postMessaage, { id, url });
 
+      const { listData } = yield select((state) => state.prefectureMesage)
+
+      listData[parseInt(payload.id, 10) - 1].url = payload.url;
+
       yield put({
         type: actionTypes.UPDATE_MESSAGE_SUCCESS,
-        payload,
+        payload: { listData },
       });
 
       yield put({

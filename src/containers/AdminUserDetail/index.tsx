@@ -13,6 +13,7 @@ import dataMap, {
   RoleOption, FormItem
 } from './dataMap';
 import { createAdminUserAction, getOrganizationOptionsAction } from '../../redux/AdminUser/actions';
+import { Store } from '../../redux/types';
 
 const layout = {
   labelCol: { span: 8 },
@@ -28,9 +29,9 @@ export default () => {
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
   const [currentRole, updateCurrentRole] = useState('');
 
-  const loading = useSelector((store: any) => store.loading.isLoading);
-  const organizaionsList = useSelector((store: any) => store.organization.listData);
-  const { isOrganizationLoading } = useSelector((store: any) => store.adminUser);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
+  const organizaionsList = useSelector((store: Store) => store.organization.listData);
+  const { isOrganizationLoading } = useSelector((store: Store) => store.adminUser);
 
   const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
     dispatch,
