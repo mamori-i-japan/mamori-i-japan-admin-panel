@@ -16,5 +16,6 @@ export interface AdminUser {
 export type AdminUserStates = {
   listData: AdminUser[]
   detailData: AdminUser | null
+  isOrganizationLoading: boolean
 }
 
