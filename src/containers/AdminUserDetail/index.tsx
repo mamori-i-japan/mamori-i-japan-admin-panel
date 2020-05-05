@@ -52,7 +52,10 @@ export default () => {
       .validateFields()
       .then((values) => {
         if (id === 'create') {
-          createItem(values);
+          createItem({
+            ...values,
+            organizationId: organizaionsList[values.organization],
+          });
         } else {
           values.id = id;
           editItem(values);
@@ -68,6 +71,7 @@ export default () => {
   };
 
   const onRoleChange = (roleNumber: number) => {
+    form.setFieldsValue({ role: roleNumber })
 
     if (roleOptions[roleNumber].id === '2') {
       // case of prefecture admin
@@ -82,6 +86,14 @@ export default () => {
     };
     updateCurrentRole(roleOptions[roleNumber].id);
   };
+
+  const onPrefectureChange = (index: number) => {
+    form.setFieldsValue({ prefecture: index });
+  }
+
+  const onOrganizationChange = (index: number) => {
+    form.setFieldsValue({ organization: organizaionsList[index].organizationId });
+  }
 
   const translateOptions = (item: FormItem) =>
     item.selectOptions === undefined
@@ -98,11 +110,13 @@ export default () => {
     (currentRole === '3') ? [
       organizationForm(
         organizations.map(
-          (organization: { organizationId: string; name: string }) => (
+          (organization: { organizationId: string; name: string }, index: number) => (
             {
-              id: organization.organizationId,
+              id: index,
               name: organization.name,
-            })
+              organizationId: organization.organizationId,
+            }
+          )
         ),
         isLoading,
       ),
@@ -139,7 +153,14 @@ export default () => {
                   key={item.name}
                   label={translate(item.label)}
                   field={translateOptions(item)}
-                  onChange={item.name === 'role' ? onRoleChange : undefined}
+                  onChange={item.name === 'role'
+                    ? onRoleChange
+                    : item.name === 'prefecture'
+                      ? onPrefectureChange
+                      : item.name === 'organization'
+                        ? onOrganizationChange
+                        : undefined
+                  }
                   createButton={
                     item.withCreateItem
                       ? <Button size={'small'} onClick={handleCreate}>

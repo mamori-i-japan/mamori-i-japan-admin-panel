@@ -5,12 +5,14 @@ import feedbackActionTypes from '../Feedback/actionTypes';
 import organizationActionTypes from '../Organization/actionTypes';
 import { getAdminUsers, postAdminUser } from '../../apis';
 import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
+import { adminRoleFromNumber } from '../../constants/AdminRole';
+import { prefectureList } from '../../constants/Prefecture';
 
 function* createAdminUserSaga() {
   yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
     payload,
   }: any) {
-    const { email } = payload;
+    const { email, role: adminRole, organization, prefecture } = payload;
 
     yield put({
       type: loadingActionTypes.START_LOADING,
@@ -19,7 +21,12 @@ function* createAdminUserSaga() {
     yield call(getAccessTokenSaga);
 
     try {
-      yield call(postAdminUser, { email });
+      yield call(postAdminUser, {
+        email,
+        adminRole: adminRoleFromNumber(adminRole),
+        organizationId: organization,
+        prefectureId: prefectureList[prefecture].id,
+      });
 
       yield call(sendEmailSaga, email);
 

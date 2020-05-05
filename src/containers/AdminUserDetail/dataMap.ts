@@ -4,6 +4,7 @@ import { prefectureList } from '../../constants/Prefecture'
 type RoleOption = {
   id: string;
   name: string;
+  organizationId?: string;
 }
 
 type FormItem = {
@@ -56,9 +57,9 @@ const prefectureForm = {
   name: 'prefecture',
   type: 'select',
   label: 'prefecture',
-  selectOptions: prefectureList.map((prefectureName, index) => ({
+  selectOptions: prefectureList.map((prefecture, index) => ({
     id: index.toString(),
-    name: prefectureName,
+    name: prefecture.name,
   })),
   rules: [Validation.required],
 };
