@@ -1,21 +1,20 @@
-type SuperAdmin = {
-  name: 'Super Admin';
+type AdminRoleType = {
+  name: string;
 }
 
-type NationalAdmin = {
-  name: 'National Admin';
+type AdminRoleString = 'SUPER_ADMIN_ROLE' | 'NATIONAL_ADMIN_ROLE' | 'PREFECTURE_ADMIN_ROLE' | 'ORGANIZATION_ADMIN_ROLE';
+
+function AdminRole(role: AdminRoleString): AdminRoleType {
+  switch (role) {
+    case 'SUPER_ADMIN_ROLE':
+      return { name: 'Super Admin' };
+    case 'NATIONAL_ADMIN_ROLE':
+      return { name: 'National Admin' };
+    case 'PREFECTURE_ADMIN_ROLE':
+      return { name: 'Prefecutre Admin' };
+    case 'ORGANIZATION_ADMIN_ROLE':
+      return { name: 'Organization Admin' };
+  }
 }
 
-type PrefectureAdmin = {
-  name: 'PrefectureAdmin';
-  prefectureNumber: number;
-}
-
-type OrganizationAdmin = {
-  name: 'Organization Admin';
-  organizationCode: string;
-}
-
-type AdminRole = SuperAdmin | NationalAdmin | PrefectureAdmin | OrganizationAdmin;
-
-export type { AdminRole };
+export type { AdminRole, AdminRoleString, AdminRoleType };
