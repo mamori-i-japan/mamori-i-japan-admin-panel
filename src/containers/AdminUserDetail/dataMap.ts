@@ -62,4 +62,5 @@ const prefectureForm = {
 };
 
 export { prefectureForm, roleOptions };
+export type { RoleOption, FormItem };
 export default dataMap;
