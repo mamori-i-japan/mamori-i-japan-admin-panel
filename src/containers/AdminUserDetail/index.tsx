@@ -7,7 +7,7 @@ import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap, { prefectureForm, roleOptions, RoleOption, FormItem } from './dataMap';
-import { createAdminUserAction } from '../../redux/AdminUser/actions';
+import { createAdminUserAction, getOrganizationOptionsAction } from '../../redux/AdminUser/actions';
 
 const layout = {
   labelCol: { span: 8 },
@@ -23,8 +23,14 @@ export default () => {
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
 
   const loading = useSelector((store: any) => store.loading.isLoading);
+  const organizaionsList = useSelector((store: any) => store.organization.listData);
+  const { isOrganizationLoading } = useSelector((store: any) => store.adminUser);
 
   const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
+    dispatch,
+  ]);
+
+  const getOrganizationOptions = useCallback(() => dispatch(getOrganizationOptionsAction()), [
     dispatch,
   ]);
 
@@ -59,7 +65,7 @@ export default () => {
       updateFormatOfForm(formattedForm);
     } else if (roleOptions[roleNumber].id === '3') {
       // case of organization admin
-      // TODO: fetch organization list
+      getOrganizationOptions();
       updateFormatOfForm(dataMap);
     } else {
       updateFormatOfForm(dataMap);

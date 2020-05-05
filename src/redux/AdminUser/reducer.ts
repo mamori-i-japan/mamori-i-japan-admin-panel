@@ -3,6 +3,7 @@ import actionTypes from './actionTypes';
 
 const initialState = {
   listData: [],
+  isOrganizationLoading: false,
 };
 
 export default handleActions(
@@ -11,6 +12,10 @@ export default handleActions(
       ...state,
       listData,
     }),
+    [actionTypes.CHANGE_ORGANIZATION_LOADING_STATUS]: (state, { payload: { isOrganizationLoading } }) => ({
+      ...state,
+      isOrganizationLoading,
+    })
   },
   initialState
 );
