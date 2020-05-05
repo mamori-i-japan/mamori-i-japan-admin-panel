@@ -1,3 +1,3 @@
 export type LoadingStates = {
-  isLoading: boolean
+  isLoading: boolean;
 }

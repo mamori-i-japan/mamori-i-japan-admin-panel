@@ -7,12 +7,12 @@ import { OrganizationStates } from './Organization/types';
 import { SidebarStates } from './Sidebar/types';
 
 export interface Store {
-  adminUser: AdminUserStates
-  auth: AuthStates
-  feedback: FeedbackStates
-  loading: LoadingStates
-  prefectureMessage: PrefectureMessageStates
-  organization: OrganizationStates
-  sidebar: SidebarStates
+  adminUser: AdminUserStates;
+  auth: AuthStates;
+  feedback: FeedbackStates;
+  loading: LoadingStates;
+  prefectureMessage: PrefectureMessageStates;
+  organization: OrganizationStates;
+  sidebar: SidebarStates;
 }
 
