@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography, Table, Button } from 'antd';
+import { Table, Button } from 'antd';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
@@ -11,8 +11,6 @@ import {
   getOrganizationAction,
 } from '../../redux/Organization/actions';
 import moment from 'moment';
-
-const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
@@ -58,13 +56,9 @@ export default () => {
       dataIndex: 'message',
     },
     {
-      title: 'addedByAdminEmail',
-      dataIndex: 'addedByAdminEmail',
-    },
-    {
       title: 'createdDate',
       dataIndex: 'created',
-      render: (value: number) =>
+      render: (value: any) =>
         moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM'),
     },
     {
@@ -82,8 +76,7 @@ export default () => {
 
   return (
     <ContentContainer>
-      <header>
-        <Title level={4}>{translate('list')}</Title>
+      <header className="flex-end">
         <Button type="primary" size="large" onClick={handleCreate}>
           {translate('createItem')}
         </Button>
@@ -100,6 +93,7 @@ export default () => {
               title: translate(item.title),
             };
           })}
+          pagination={false}
         />
       </section>
     </ContentContainer>

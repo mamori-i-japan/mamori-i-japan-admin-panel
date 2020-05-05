@@ -1,4 +1,14 @@
+import errorMessages from "./jaJP/errorMessages";
+import successMessages from "./jaJP/successMessages";
+import validationErrorMessages from "./jaJP/validationErrorMessages";
+
 export default {
+  ...errorMessages,
+  ...successMessages,
+  ...validationErrorMessages,
+  organization: '組織',
+  adminUser: '管理者',
+  prefetureMessage: '都道府県お知らせ',
   loginTitle: 'ログイン',
   loginSubmit: 'ログイン',
   registerSubmit: '登録',
@@ -27,29 +37,13 @@ export default {
   negativeStatus: '陰性',
   email: 'メールアドレス',
   password: 'パスワード',
-  adminUser: '管理者',
-  submitSuccess: '内容を保存しました！',
-  deleteSuccess: '内容を削除しました！',
-  loginSuccess: 'ログインしました！',
-  logoutSuccess: 'ログアウトしました！',
-  createAdminUserSuccess:
-    '管理者を追加しました！追加した管理者にメールを送信しました！',
-  adminUserIsExistError:
-    'このメールアドレスは別の管理者アカウントですでに使用されています。',
   logoutConfirmTitle: 'ログアウトしますか？',
-  isRequired: '入力してください。',
-  isValidEmail: '有効なメールアドレスを入力してください。',
-  loginByAuthLink: 'メールを確認し、認証リンクでログインしてください。',
-  badRequest: 'サーバーへの要求が正しくありません。',
-  unauthorized: '認証に失敗しました。',
-  internalServerError: 'サーバー内でエラーが発生しました。',
-  UnexpectedError: '不明なエラーが発生しました。',
   operation: '操作',
   organizationName: '組織名',
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
   // TODO:
-  organization: '組織情報',
   deleteConfirmTitle: '削除しますか？',
-  notFound: '見つかりません'
+  notFound: '見つかりません',
+  prefetureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.'
 };

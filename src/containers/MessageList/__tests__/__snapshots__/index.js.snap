@@ -58,7 +58,7 @@ exports[`MessageList should render correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bdVaJa",
                   "isStatic": false,
-                  "lastClassName": "iRaftV",
+                  "lastClassName": "bzCFau",
                   "rules": Array [
                     "
   margin: 24px;
@@ -72,6 +72,10 @@ exports[`MessageList should render correctly 1`] = `
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    &.flex-end {
+      justify-content: flex-end;
+    }
   }
 
   .ant-btn-link {
@@ -104,53 +108,14 @@ exports[`MessageList should render correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bdVaJa iRaftV"
+              className="sc-bdVaJa bzCFau"
             >
-              <header>
-                <Title
-                  level={4}
-                >
-                  <withConfigConsumer(Base)
-                    component="h4"
-                  >
-                    <Base
-                      component="h4"
-                      getPrefixCls={[Function]}
-                      prefixCls="ant-typography"
-                      renderEmpty={[Function]}
-                    >
-                      <LocaleReceiver
-                        componentName="Text"
-                      >
-                        <ResizeObserver
-                          disabled={true}
-                          onResize={[Function]}
-                        >
-                          <Typography
-                            className=""
-                            component="h4"
-                            style={
-                              Object {
-                                "WebkitLineClamp": null,
-                              }
-                            }
-                          >
-                            <h4
-                              className="ant-typography"
-                              style={
-                                Object {
-                                  "WebkitLineClamp": null,
-                                }
-                              }
-                            >
-                              一覧
-                            </h4>
-                          </Typography>
-                        </ResizeObserver>
-                      </LocaleReceiver>
-                    </Base>
-                  </withConfigConsumer(Base)>
-                </Title>
+              <header
+                className="flex-start"
+              >
+                <div>
+                  If there is no enter in URL, will save empty value. App side will show default URL.
+                </div>
               </header>
               <section>
                 <_default
@@ -234,7 +199,6 @@ exports[`MessageList should render correctly 1`] = `
                         onFinishFailed={[Function]}
                       >
                         <Table
-                          bordered={true}
                           columns={
                             Array [
                               Object {
@@ -274,11 +238,7 @@ exports[`MessageList should render correctly 1`] = `
                             }
                           }
                           loading={false}
-                          pagination={
-                            Object {
-                              "onChange": [Function],
-                            }
-                          }
+                          pagination={false}
                           rowClassName="editable-row"
                           rowKey={[Function]}
                         >
@@ -298,8 +258,7 @@ exports[`MessageList should render correctly 1`] = `
                                   key="container"
                                 >
                                   <Table
-                                    bordered={true}
-                                    className="ant-table-bordered"
+                                    className=""
                                     columns={
                                       Array [
                                         Object {
@@ -461,26 +420,21 @@ exports[`MessageList should render correctly 1`] = `
                                       }
                                     }
                                     loading={false}
-                                    pagination={
-                                      Object {
-                                        "onChange": [Function],
-                                      }
-                                    }
+                                    pagination={false}
                                     prefixCls="ant-table"
                                     rowClassName={[Function]}
                                     rowKey={[Function]}
                                     transformColumns={[Function]}
                                   >
                                     <div
-                                      className="ant-table ant-table-bordered"
+                                      className="ant-table"
                                     >
                                       <Component
                                         pingLeft={false}
                                         pingRight={false}
                                         props={
                                           Object {
-                                            "bordered": true,
-                                            "className": "ant-table-bordered",
+                                            "className": "",
                                             "columns": Array [
                                               Object {
                                                 "dataIndex": "id",
@@ -635,9 +589,7 @@ exports[`MessageList should render correctly 1`] = `
                                             },
                                             "loading": false,
                                             "mergedExpandedKeys": Set {},
-                                            "pagination": Object {
-                                              "onChange": [Function],
-                                            },
+                                            "pagination": false,
                                             "prefixCls": "ant-table",
                                             "rowClassName": [Function],
                                             "rowKey": [Function],

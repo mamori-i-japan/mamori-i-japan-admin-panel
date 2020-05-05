@@ -53,10 +53,17 @@ function* getAdminUsersSaga() {
     try {
       const res = yield call(getAdminUsers);
 
+      const data = res.data.map((item: any) => {
+        return {
+          ...item,
+          created: item.created ? item.created._seconds : null
+        }
+      })
+
       yield put({
         type: actionTypes.GET_ADMIN_USERS_SUCCESS,
         payload: {
-          listData: res.data,
+          listData: data,
         },
       });
     } catch (error) {

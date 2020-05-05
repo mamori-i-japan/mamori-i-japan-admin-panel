@@ -110,14 +110,16 @@ export default <T extends RecordTypeDefault>({
             cell: EditableCell,
           },
         }}
-        bordered
         dataSource={dataSource}
         columns={mergedColumns}
         rowClassName="editable-row"
         rowKey={(record: any) => record.id}
-        pagination={{
-          onChange: cancel,
-        }}
+        pagination={false
+          // {
+
+          //   onChange: cancel,
+          // }
+        }
       />
     </Form>
   );

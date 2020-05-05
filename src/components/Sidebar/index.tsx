@@ -12,15 +12,14 @@ const { Sider } = Layout;
 
 interface SidebarProps {
   sidebarIsCollapse: boolean;
-  locale?: any;
 }
 
 const logo = {
   image: ImageLogo,
-  name: 'まもりあいJAPAN'
-}
+  name: 'まもりあいJAPAN',
+};
 
-export default ({ sidebarIsCollapse }: any) => {
+export default ({ sidebarIsCollapse }: SidebarProps) => {
   const { pathname } = useLocation();
   const { translate } = useContext(I18nContext);
   const [selectedKey, setSelectedKey] = useState('');
@@ -34,10 +33,7 @@ export default ({ sidebarIsCollapse }: any) => {
     <Sider collapsed={sidebarIsCollapse}>
       <Logo>
         <img src={logo.image} alt={logo.name} />
-        {
-          !sidebarIsCollapse &&
-          <p>{logo.name}</p>
-        }
+        {!sidebarIsCollapse && <p>{logo.name}</p>}
       </Logo>
 
       <Menu selectedKeys={[selectedKey]} theme="dark" mode="inline">
@@ -45,7 +41,10 @@ export default ({ sidebarIsCollapse }: any) => {
           <Menu.Item key={index}>
             <Link to={item.path}>
               <AppstoreOutlined />
-              <span>{translate(item.name)}</span>
+              <span>
+                {translate(item.name)}
+                {translate('list')}
+              </span>
             </Link>
           </Menu.Item>
         ))}
