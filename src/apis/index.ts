@@ -17,7 +17,7 @@ export const postAdminUser = (data: {
   email: string,
   adminRole: AdminRoleString,
   organizationId: string,
-  prefectureId: string,
+  prefectureId: number,
 }) => {
   return http.post('/admins/users', data);
 };

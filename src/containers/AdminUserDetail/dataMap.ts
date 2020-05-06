@@ -1,9 +1,11 @@
 import Validation from '../../constants/Validation';
 import { prefectureList } from '../../constants/Prefecture'
+import { AdminRoleString } from '../../constants/AdminRole';
 
 type RoleOption = {
   id: string;
   name: string;
+  role?: AdminRoleString;
   organizationId?: string;
 }
 
@@ -22,18 +24,22 @@ const roleOptions: RoleOption[] = [
   {
     id: '0',
     name: 'Super Admin',
+    role: 'SUPER_ADMIN_ROLE',
   },
   {
     id: '1',
     name: 'National Admin',
+    role: 'NATIONAL_ADMIN_ROLE',
   },
   {
     id: '2',
     name: 'Prefecture Admin',
+    role: 'PREFECTURE_ADMIN_ROLE',
   },
   {
     id: '3',
     name: 'Organization Admin',
+    role: 'ORGANIZATION_ADMIN_ROLE',
   },
 ];
 
