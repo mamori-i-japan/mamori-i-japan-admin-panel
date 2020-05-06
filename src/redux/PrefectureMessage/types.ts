@@ -4,8 +4,8 @@ export interface PrefectureMessage {
   key: string;
   id: string;
   prefectureId: string;
-  url: string;
-  message: string | null;
+  url?: string;
+  message: string;
   createdAt: FirebaseDate;
   updatedAt: FirebaseDate;
 

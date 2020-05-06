@@ -17,7 +17,7 @@ export interface UpdateOrganizationRequestDto extends Organization {
 }
 
 export interface UpdatePrefectureRequestDto {
-  message: string | null;
-  url?: string;
   id: string;
+  message: string;
+  url?: string;
 }

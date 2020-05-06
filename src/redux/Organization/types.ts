@@ -13,9 +13,11 @@ export interface Organization {
   updatedAt: FirebaseDate;
 }
 
-export type DetailDataState = Organization | {}
+export type DetailDataState = Organization | {};
+
+export type ListDataState = Organization[];
 
 export type OrganizationStates = {
-  listData: Organization[];
+  listData: ListDataState;
   detailData: DetailDataState;
-}
+};

@@ -3,8 +3,8 @@ import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { getPrefectures, patchPrefecture } from '../../apis';
-import { PrefectureMessage } from './types';
 import { getAccessTokenSaga } from '../Firebase/saga';
+import { PrefectureMessage } from './types';
 import { UpdatePrefectureRequestDto } from '../../apis/types';
 
 function* updateMessageSaga() {
@@ -23,7 +23,7 @@ function* updateMessageSaga() {
     try {
       yield call(patchPrefecture, {
         id,
-        message: url ? url : null,
+        message: url ? url : '',
       });
 
       const { listData } = yield select((state) => state.prefectureMessage);

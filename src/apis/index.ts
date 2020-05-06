@@ -1,13 +1,13 @@
 import http from '../utils/http';
-// import { db } from '../utils/firebase';
 import {
   CreateOrganizationRequestDto,
   UpdateOrganizationRequestDto,
   UpdatePrefectureRequestDto
 } from './types';
 
-// import Firebase from 'firebase';
 import { AdminRoleString } from '../constants/AdminRole';
+// import Firebase from 'firebase';
+// import { db } from '../utils/firebase';
 
 export const login = () => {
   return http.post('auth/admin/login');
