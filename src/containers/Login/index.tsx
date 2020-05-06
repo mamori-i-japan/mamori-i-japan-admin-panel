@@ -32,7 +32,7 @@ export default () => {
         if (accessPermission.accessAdminUser()) {
           history.replace(from);
         } else if (accessPermission.accessOrganization()) {
-          history.replace('organizatons');
+          history.replace('organizations');
         } else if (accessPermission.accessPrefecture()) {
           history.replace('prefectures');
         }
