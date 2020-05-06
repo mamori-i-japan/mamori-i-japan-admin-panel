@@ -13,6 +13,7 @@ import {
   getOrganizationAction
 } from '../../redux/Organization/actions';
 import { Store } from '../../redux/types';
+import accessPermission from '../../constants/accessPermission';
 
 const layout = {
   labelCol: { span: 8 },
@@ -68,8 +69,12 @@ export default () => {
   useEffect(() => {
     if (id !== 'create') {
       dispatch(getOrganizationAction({ id }));
+    } else {
+      if (accessPermission.rejectCreateOrganization()) {
+        history.replace('/organizations');
+      }
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, history]);
 
   return (
     <ContentContainer>

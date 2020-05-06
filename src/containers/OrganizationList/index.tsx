@@ -10,13 +10,15 @@ import {
   getOrganizationsAction,
   deleteOrganizationAction,
   getOrganizationAction,
-  clearOrganizationAction
+  clearOrganizationAction,
 } from '../../redux/Organization/actions';
 import { Store } from '../../redux/types';
+import accessPermission from '../../constants/accessPermission';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: Store) => store.loading.isLoading);
   const { listData } = useSelector((store: Store) => store.organization);
@@ -66,12 +68,14 @@ export default () => {
     {
       title: 'operation',
       render: ({ id }: { id: string }) => {
-        return (
-          <OperationButtons
-            handleEdit={() => handleEdit(id)}
-            deleteItem={() => deleteItem(id)}
-          />
-        );
+        const props: any = {
+          handleEdit: () => handleEdit(id),
+        };
+
+        if (!accessPermission.rejectDeleteOrganizaton()) {
+          props.deleteItem = () => deleteItem(id)
+        }
+        return <OperationButtons {...props} />;
       },
     },
   ];
@@ -79,9 +83,11 @@ export default () => {
   return (
     <ContentContainer>
       <header className="flex-end">
-        <Button type="primary" size="large" onClick={handleCreate}>
-          {translate('createItem')}
-        </Button>
+        {!accessPermission.rejectCreateOrganization() && (
+          <Button type="primary" size="large" onClick={handleCreate}>
+            {translate('createItem')}
+          </Button>
+        )}
       </header>
 
       <section>
