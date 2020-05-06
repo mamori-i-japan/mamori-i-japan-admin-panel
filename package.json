@@ -37,7 +37,7 @@
     "test:e2e": "echo \"need e2e test scripts\"",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
     "deploy:dev": "npm run build:dev && firebase deploy --token \"$FIREBASE_DEV_TOKEN\"",
-    "deploy:stg": "npm run build:stg && echo \"need deploy scripts\"",
+    "deploy:stg": "npm run build:stg && firebase deploy --token \"$FIREBASE_DEV_TOKEN\" -P stg",
     "deploy:prd": "npm run build:prd && echo \"need deploy scripts\"",
     "openapi-generate": "openapi-generator generate -i swagger/openapi.yml -g typescript-axios -o src/apis/openapi",
     "eject": "react-scripts eject"
