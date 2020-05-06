@@ -70,7 +70,7 @@ export default () => {
       render: ({ adminUserId }: { adminUserId: string }) => {
         return (
           <OperationButtons
-            handleEdit={() => handleEdit(adminUserId)}
+            // handleEdit={() => handleEdit(adminUserId)}
             deleteItem={() => deleteItem(adminUserId)}
           />
         );
