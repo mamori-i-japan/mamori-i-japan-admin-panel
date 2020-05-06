@@ -48,12 +48,12 @@ export default () => {
 
   const columns: any = [
     {
-      title: 'organizationName',
-      dataIndex: 'name',
-    },
-    {
       title: 'organizationCode',
       dataIndex: 'organizationCode',
+    },
+    {
+      title: 'organizationName',
+      dataIndex: 'name',
     },
     {
       title: 'message',

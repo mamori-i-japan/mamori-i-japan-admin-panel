@@ -1,8 +1,8 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form } from 'antd';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Button, Form, notification } from 'antd';
+import { ArrowLeftOutlined, SmileOutlined } from '@ant-design/icons';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
@@ -10,7 +10,7 @@ import dataMap from './dataMap';
 import {
   createOrganizationAction,
   updateOrganizationsAction,
-  getOrganizationAction
+  getOrganizationAction,
 } from '../../redux/Organization/actions';
 import { Store } from '../../redux/types';
 import accessPermission from '../../constants/accessPermission';
@@ -29,7 +29,9 @@ export default () => {
 
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const detailData = useSelector((store: Store) => store.organization.detailData);
+  const detailData = useSelector(
+    (store: Store) => store.organization.detailData
+  );
 
   const createItem = useCallback(
     (params) => dispatch(createOrganizationAction(params)),
@@ -52,9 +54,19 @@ export default () => {
       .then((values) => {
         if (id === 'create') {
           createItem({
-            data: values, callback: () => {
+            data: values,
+            callback: (data: any) => {
               form.resetFields();
-            }
+
+              notification.open({
+                message: ``,
+                description: `${translate('organizationName')}: ${
+                  data.name
+                  }, ${translate('organizationCode')}: ${data.organizationCode}`,
+                duration: null,
+                icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+              });
+            },
           });
         } else {
           values.id = id;
@@ -98,22 +110,24 @@ export default () => {
       </header>
 
       <section>
-        {(id === 'create' || JSON.stringify(detailData) !== '{}') && <DetailForm
-          {...layout}
-          form={form}
-          initialValues={detailData}
-          name="createUser"
-          size="large"
-        >
-          {dataMap &&
-            dataMap.map((item: any) => (
-              <FormField
-                key={item.name}
-                label={translate(item.label)}
-                field={item}
-              />
-            ))}
-        </DetailForm>}
+        {(id === 'create' || JSON.stringify(detailData) !== '{}') && (
+          <DetailForm
+            {...layout}
+            form={form}
+            initialValues={detailData}
+            name="createUser"
+            size="large"
+          >
+            {dataMap &&
+              dataMap.map((item: any) => (
+                <FormField
+                  key={item.name}
+                  label={translate(item.label)}
+                  field={item}
+                />
+              ))}
+          </DetailForm>
+        )}
       </section>
     </ContentContainer>
   );
