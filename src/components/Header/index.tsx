@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import { ActionFunctionAny } from 'redux-actions';
 import { Action } from 'redux';
 import { Button, Modal } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
 import { AppHeader } from './style';
 import { I18nContext } from '../../locales';
 import { useHistory } from 'react-router-dom';
@@ -15,7 +19,11 @@ interface HeaderProps {
   logout: ActionFunctionAny<Action<any>>;
 }
 
-export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProps) => {
+export default ({
+  sidebarIsCollapse,
+  toggleSidebarCollapse,
+  logout,
+}: HeaderProps) => {
   const history = useHistory();
   const { translate } = useContext(I18nContext);
 
@@ -28,7 +36,7 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProp
         logout({
           callback: () => {
             history.replace('/');
-          }
+          },
         });
       },
     });

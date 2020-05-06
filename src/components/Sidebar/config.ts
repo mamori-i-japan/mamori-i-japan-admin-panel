@@ -3,7 +3,7 @@ import { HOST } from '../../constants';
 export default [
   {
     name: 'adminUser',
-    path: HOST + 'users',
+    path: HOST,
     permission: 'accessAdminUser'
   },
   {

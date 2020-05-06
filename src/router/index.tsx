@@ -33,7 +33,7 @@ const routes = [
         component: AdminUserDetail,
       },
       {
-        path: HOST + 'users',
+        path: HOST,
         exact: true,
         component: AdminUserList,
       },

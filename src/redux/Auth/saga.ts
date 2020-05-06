@@ -113,7 +113,6 @@ function* logoutSaga() {
       });
 
       payload.callback();
-
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
