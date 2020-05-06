@@ -72,7 +72,7 @@ export default () => {
   };
 
   const onRoleChange = (roleNumber: number) => {
-    form.setFieldsValue({ role: roleNumber })
+    form.setFieldsValue({ role: roleNumber });
 
     if (roleOptions[roleNumber].id === '2') {
       // case of prefecture admin

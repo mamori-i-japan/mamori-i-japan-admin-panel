@@ -5,7 +5,7 @@ import feedbackActionTypes from '../Feedback/actionTypes';
 import organizationActionTypes from '../Organization/actionTypes';
 import { getAdminUsers, postAdminUser } from '../../apis';
 import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
-import { adminRoleFromNumber } from '../../constants/AdminRole';
+import { adminRoleList } from '../../constants/AdminRole';
 import { prefectureList } from '../../constants/Prefecture';
 
 function* createAdminUserSaga() {
@@ -23,9 +23,9 @@ function* createAdminUserSaga() {
     try {
       yield call(postAdminUser, {
         email,
-        adminRole: adminRoleFromNumber(adminRole),
+        adminRole: adminRoleList[adminRole],
         organizationId: organization,
-        prefectureId: prefectureList[prefecture].id,
+        prefectureId: Number.parseInt(prefectureList[prefecture].id),
       });
 
       yield call(sendEmailSaga, email);
@@ -35,6 +35,7 @@ function* createAdminUserSaga() {
         payload: { successMessage: 'createAdminUserSuccess' },
       });
     } catch (error) {
+      console.log(error)
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
         payload: {
