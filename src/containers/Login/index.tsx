@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
@@ -12,13 +13,21 @@ const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const localtion = useLocation();
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
+  const { from }: any = localtion.state || { from: { pathname: '/' } };
+
+  const login = useCallback((params) => dispatch(loginAction(params)), [dispatch]);
 
   const onFinish = (values: any) => {
-    login(values);
+    login({
+      data: values, callback: () => {
+        history.replace(from);
+      }
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -23,7 +23,7 @@ const routes = [
     auth: true,
     routes: [
       {
-        path: HOST,
+        path: HOST + 'prefectures',
         exact: true,
         component: MessageList,
       },

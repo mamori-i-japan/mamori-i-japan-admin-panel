@@ -1,5 +1,4 @@
 import { put, takeEvery, all, fork, call } from 'redux-saga/effects';
-import { replace } from 'react-router-redux';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
@@ -69,9 +68,7 @@ function* loginSaga() {
               payload: { successMessage: 'loginSuccess' },
             });
 
-            // const { from }: any = { from: { pathname: '/' } }; // window.location.state ||
-
-            yield put(replace('/'));
+            payload.callback();
           }
         } catch (error) {
           yield put({
@@ -81,7 +78,7 @@ function* loginSaga() {
         }
       }
     } else {
-      const { email } = payload;
+      const { email } = payload.data;
 
       yield call(sendEmailSaga, email);
 
@@ -96,7 +93,7 @@ function* loginSaga() {
 }
 
 function* logoutSaga() {
-  yield takeEvery(actionTypes.LOGOUT, function* _() {
+  yield takeEvery(actionTypes.LOGOUT, function* _({ payload }: any) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     try {
@@ -115,7 +112,8 @@ function* logoutSaga() {
         payload: { successMessage: 'logoutSuccess' },
       });
 
-      yield put(replace('/'));
+      payload.callback();
+
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,

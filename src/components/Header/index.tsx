@@ -5,6 +5,7 @@ import { Button, Modal } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { AppHeader } from './style';
 import { I18nContext } from '../../locales';
+import { useHistory } from 'react-router-dom';
 
 const { confirm } = Modal;
 
@@ -15,6 +16,7 @@ interface HeaderProps {
 }
 
 export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProps) => {
+  const history = useHistory();
   const { translate } = useContext(I18nContext);
 
   const handleLogout = async () => {
@@ -23,7 +25,11 @@ export default ({ sidebarIsCollapse, toggleSidebarCollapse, logout }: HeaderProp
       icon: <ExclamationCircleOutlined />,
       okText: translate('logout'),
       onOk() {
-        logout();
+        logout({
+          callback: () => {
+            history.replace('/');
+          }
+        });
       },
     });
   };
