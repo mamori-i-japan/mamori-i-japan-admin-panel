@@ -31,7 +31,7 @@ export default () => {
   const detailData = useSelector((store: Store) => store.organization.detailData);
 
   const createItem = useCallback(
-    (data) => dispatch(createOrganizationAction(data)),
+    (params) => dispatch(createOrganizationAction(params)),
     [dispatch]
   );
 
@@ -50,7 +50,11 @@ export default () => {
       .validateFields()
       .then((values) => {
         if (id === 'create') {
-          createItem(values);
+          createItem({
+            data: values, callback: () => {
+              form.resetFields();
+            }
+          });
         } else {
           values.id = id;
           editItem(values);

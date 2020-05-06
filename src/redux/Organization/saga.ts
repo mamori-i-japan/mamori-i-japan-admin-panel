@@ -22,14 +22,14 @@ function* createOrganizationSaga() {
     payload,
   }: {
     type: string;
-    payload: CreateOrganizationRequestDto;
+    payload: { data: CreateOrganizationRequestDto, callback: () => void };
   }) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);
 
     try {
-      yield call(postOrganization, payload);
+      yield call(postOrganization, payload.data);
 
       yield put({
         type: actionTypes.CREATE_ORGANIZATION_SUCCESS,
@@ -39,6 +39,8 @@ function* createOrganizationSaga() {
         type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
         payload: { successMessage: 'submitSuccess' },
       });
+
+      payload.callback();
     } catch (error) {
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
