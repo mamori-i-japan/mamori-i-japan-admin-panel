@@ -34,7 +34,7 @@ export default () => {
         } else if (accessPermission.accessOrganization()) {
           history.replace('organizatons');
         } else if (accessPermission.accessPrefecture()) {
-          history.replace('prefecture');
+          history.replace('prefectures');
         }
       },
     });

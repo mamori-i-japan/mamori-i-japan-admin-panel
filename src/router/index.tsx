@@ -9,6 +9,7 @@ import AdminUserDetail from '../containers/AdminUserDetail';
 import OrganizationList from '../containers/OrganizationList';
 import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
+import accessPermission from '../constants/accessPermission';
 
 import { HOST } from '../constants';
 
@@ -26,26 +27,31 @@ const routes = [
         path: HOST + 'prefectures',
         exact: true,
         component: MessageList,
+        permission: 'accessPrefecture',
       },
       {
         path: HOST + 'users/:id',
         exact: true,
         component: AdminUserDetail,
+        permission: 'accessAdminUser',
       },
       {
         path: HOST,
         exact: true,
         component: AdminUserList,
+        permission: 'accessAdminUser',
       },
       {
         path: HOST + 'organizations/:id',
         exact: true,
         component: OrganizationDetail,
+        permission: 'accessOrganization',
       },
       {
         path: HOST + 'organizations',
         exact: true,
         component: OrganizationList,
+        permission: 'accessOrganization',
       },
     ],
   },
@@ -54,27 +60,28 @@ const routes = [
 export const RouteWithSubRoutes = ({
   component: Component,
   auth,
+  permission,
   routes,
   ...rest
-}: any) => (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (!auth || store.getState().auth.token) {
-          // pass the sub-routes down to keep nesting
-          return <Component {...props} routes={routes} />;
-        } else {
-          return (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: props.location },
-              }}
-            />
-          );
-        }
-      }}
-    ></Route>
+}: any) => (!permission || accessPermission[permission]() ?
+  <Route
+    {...rest}
+    render={(props) => {
+      if (!auth || store.getState().auth.token) {
+        // pass the sub-routes down to keep nesting
+        return <Component {...props} routes={routes} />;
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location },
+            }}
+          />
+        );
+      }
+    }}
+  ></Route> : null
   );
 
 export default ({ history }: any) => {
