@@ -5,7 +5,7 @@ import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
-import { sendEmailSaga } from '../Firebase/saga';
+import { sendEmailSaga, getAccessTokenSaga } from '../Firebase/saga';
 
 const signInWithEmailLink: any = async (email: string) => {
   const { user } = await auth.signInWithEmailLink(email, window.location.href);
@@ -62,17 +62,7 @@ function* loginSaga() {
           yield call(login);
 
           if (auth.currentUser) {
-            const accessTokenWithClaims = yield call(
-              [user, user.getIdToken],
-              true
-            );
-
-            localStorage.setItem('token', accessTokenWithClaims);
-
-            yield put({
-              type: actionTypes.SAVE_TOKEN_SUCCESS,
-              payliad: { token: accessTokenWithClaims },
-            });
+            yield call(getAccessTokenSaga);
 
             yield put({
               type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
@@ -113,6 +103,8 @@ function* logoutSaga() {
       yield call([auth, auth.signOut]);
 
       localStorage.removeItem('token');
+      localStorage.removeItem('userAdminRole');
+      localStorage.removeItem('email');
 
       yield put({
         type: actionTypes.LOGOUT_SUCCESS,

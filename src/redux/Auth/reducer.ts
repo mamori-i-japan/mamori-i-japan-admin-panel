@@ -4,8 +4,8 @@ import { AuthStates } from './types';
 
 const initialState: AuthStates = {
   token: localStorage.getItem('token') || null,
-  email: null,
-  userAdminRole: null,
+  email: localStorage.getItem('email') || null,
+  userAdminRole: localStorage.getItem('userAdminRole') || null,
 };
 
 export default handleActions(
