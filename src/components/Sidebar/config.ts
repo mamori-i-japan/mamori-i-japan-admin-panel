@@ -12,7 +12,7 @@ export default [
     permission: 'accessOrganization'
   },
   {
-    name: 'prefetureMessage',
+    name: 'prefectureMessage',
     path: HOST + 'prefectures',
     permission: 'accessPrefecture'
   },
