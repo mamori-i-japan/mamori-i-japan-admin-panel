@@ -110,13 +110,55 @@ exports[`MessageList should render correctly 1`] = `
             <div
               className="sc-bdVaJa bzCFau"
             >
-              <header
-                className="flex-start"
-              >
-                <div>
-                  If there is no enter in URL, will save empty value. App side will show default URL.
-                </div>
+              <header>
+                <Title
+                  level={3}
+                >
+                  <withConfigConsumer(Base)
+                    component="h3"
+                  >
+                    <Base
+                      component="h3"
+                      getPrefixCls={[Function]}
+                      prefixCls="ant-typography"
+                      renderEmpty={[Function]}
+                    >
+                      <LocaleReceiver
+                        componentName="Text"
+                      >
+                        <ResizeObserver
+                          disabled={true}
+                          onResize={[Function]}
+                        >
+                          <Typography
+                            className=""
+                            component="h3"
+                            style={
+                              Object {
+                                "WebkitLineClamp": null,
+                              }
+                            }
+                          >
+                            <h3
+                              className="ant-typography"
+                              style={
+                                Object {
+                                  "WebkitLineClamp": null,
+                                }
+                              }
+                            >
+                              都道府県お知らせ一覧
+                            </h3>
+                          </Typography>
+                        </ResizeObserver>
+                      </LocaleReceiver>
+                    </Base>
+                  </withConfigConsumer(Base)>
+                </Title>
               </header>
+              <div>
+                If there is no enter in URL, will save empty value. App side will show default URL.
+              </div>
               <section>
                 <_default
                   columns={
