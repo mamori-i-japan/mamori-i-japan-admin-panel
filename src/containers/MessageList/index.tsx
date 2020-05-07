@@ -60,12 +60,12 @@ export default () => {
 
   return (
     <ContentContainer>
-      <Title level={3}>
-        {translate('prefectureMessage') + translate('list')}
-      </Title>
-      <header className="flex-start">
-        <div>{translate('prefectureGuide')}</div>
+      <header>
+        <Title level={3}>
+          {translate('prefectureMessage') + translate('list')}
+        </Title>
       </header>
+      <div>{translate('prefectureGuide')}</div>
 
       <section>
         <EditableTable<PrefectureMessage>
