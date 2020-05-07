@@ -1,15 +1,15 @@
 import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import { Switch, RouteProps } from 'react-router-dom';
 import { RouteWithSubRoutes } from '../../router';
-
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { toggleSidebarCollapseAction } from '../../redux/Sidebar/actions';
+import { logoutAction } from '../../redux/Auth/actions';
 
 import { PageLayout } from './style';
-import { useDispatch, useSelector } from 'react-redux';
-import actionTypes from '../../redux/Sidebar/actionTypes';
 
 const { Content } = Layout;
 
@@ -18,18 +18,22 @@ export interface ContainerProps {
   locale?: any;
 }
 
-export default (props: any) => {
+export default (props: ContainerProps) => {
   const { routes } = props;
-
   const dispatch = useDispatch();
+
   const sidebarIsCollapse = useSelector(
-    (store: any) => store.sidebar.isCollapse
+    ({ sidebar }: any) => sidebar.isCollapse
   );
 
   const toggleSidebarCollapse = useCallback(
-    () => dispatch({ type: actionTypes.TOGGLE_SIDEBAR_COLLAPSE }),
+    () => dispatch(toggleSidebarCollapseAction()),
     [dispatch]
   );
+
+  const logout = useCallback((params) => dispatch(logoutAction(params)), [
+    dispatch,
+  ]);
 
   return (
     <PageLayout>
@@ -39,6 +43,7 @@ export default (props: any) => {
         <Header
           sidebarIsCollapse={sidebarIsCollapse}
           toggleSidebarCollapse={toggleSidebarCollapse}
+          logout={logout}
         />
 
         <Content>

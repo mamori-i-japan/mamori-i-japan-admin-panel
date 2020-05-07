@@ -1,5 +1,6 @@
+import { createAction } from 'redux-actions';
 import actionTypes from './actionTypes';
 
-export const toggleSidebarCollapse = () => {
-  return { type: actionTypes.TOGGLE_SIDEBAR_COLLAPSE };
-};
+export const toggleSidebarCollapseAction = createAction(
+  actionTypes.TOGGLE_SIDEBAR_COLLAPSE
+);

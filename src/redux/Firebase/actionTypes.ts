@@ -1,0 +1,3 @@
+export default {
+  SEND_EMAIL_SUCCESS: 'SEND_EMAIL_SUCCESS',
+}

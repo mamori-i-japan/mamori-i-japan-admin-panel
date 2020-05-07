@@ -1,24 +1,74 @@
-import React from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { fakeAuth } from '../../router';
+import { Form, Button, Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import FormField from '../../components/FormField';
+import { I18nContext } from '../../locales';
+import { LoginContainer } from './style';
+import dataMap from './dataMap';
+import { loginAction } from '../../redux/Auth/actions';
+import { Store } from '../../redux/types';
+import accessPermission from '../../constants/accessPermission';
+
+const { Title } = Typography;
 
 export default () => {
-  let history = useHistory();
-  let localtion = useLocation();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const localtion = useLocation();
+  const { translate } = useContext(I18nContext);
+  const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  let { from }: any = localtion.state || { from: { pathname: '/' } };
+  const { from }: any = localtion.state || { from: { pathname: '/' } };
 
-  let login = () => {
-    fakeAuth.authenticate(() => {
-      history.replace(from);
+  const login = useCallback((params) => dispatch(loginAction(params)), [
+    dispatch,
+  ]);
+
+  const onFinish = (values: any) => {
+    login({
+      data: values,
+      callback: () => {
+        if (accessPermission.accessAdminUser()) {
+          history.replace(from);
+        } else if (accessPermission.accessOrganization()) {
+          history.replace('organizations');
+        } else if (accessPermission.accessPrefecture()) {
+          history.replace('prefectures');
+        }
+      },
     });
   };
 
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
-    <div>
-      demo page
-      <p>You must log in to view the page at {from.pathname}</p>
-      <button onClick={login}>Log in</button>
-    </div>
+    <LoginContainer>
+      <Title level={3}>{translate('loginTitle')}</Title>
+      <Form
+        name="login"
+        layout="vertical"
+        size="large"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        {dataMap &&
+          dataMap.map((item: any) => (
+            <FormField
+              key={item.name}
+              label={translate(item.label)}
+              field={item}
+            />
+          ))}
+
+        <Form.Item>
+          <Button loading={loading} block type="primary" htmlType="submit">
+            {translate('loginSubmit')}
+          </Button>
+        </Form.Item>
+      </Form>
+    </LoginContainer>
   );
 };

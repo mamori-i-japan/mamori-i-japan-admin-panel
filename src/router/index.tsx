@@ -1,13 +1,15 @@
 import React from 'react';
 import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-
 import Login from '../containers/Login';
-
-import Dashboard from '../containers/Dashboard';
-import Top from '../containers/Top';
-import RestaurantList from '../containers/RestaurantList';
-import RestaurantDetail from '../containers/RestaurantDetail';
+import Dashboard from '../containers/Dashboard'
+import MessageList from '../containers/MessageList';
+import AdminUserList from '../containers/AdminUserList';
+import AdminUserDetail from '../containers/AdminUserDetail';
+import OrganizationList from '../containers/OrganizationList';
+import OrganizationDetail from '../containers/OrganizationDetail';
+import { store } from '../redux/store';
+import accessPermission from '../constants/accessPermission';
 
 import { HOST } from '../constants';
 
@@ -22,47 +24,50 @@ const routes = [
     auth: true,
     routes: [
       {
+        path: HOST + 'prefectures',
+        exact: true,
+        component: MessageList,
+        permission: 'accessPrefecture',
+      },
+      {
+        path: HOST + 'users/:id',
+        exact: true,
+        component: AdminUserDetail,
+        permission: 'accessAdminUser',
+      },
+      {
         path: HOST,
         exact: true,
-        component: Top,
+        component: AdminUserList,
+        permission: 'accessAdminUser',
       },
       {
-        path: HOST + 'restaurant/:id',
+        path: HOST + 'organizations/:id',
         exact: true,
-        component: RestaurantDetail,
+        component: OrganizationDetail,
+        permission: 'accessOrganization',
       },
       {
-        path: HOST + 'restaurant',
+        path: HOST + 'organizations',
         exact: true,
-        component: RestaurantList,
+        component: OrganizationList,
+        permission: 'accessOrganization',
       },
     ],
   },
 ];
 
-// TODO: move real auth logic to store  JST token?
-export const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb: any) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb: any) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-};
-
-export const RouteWithSubRoutes: any = ({
+export const RouteWithSubRoutes = ({
   component: Component,
   auth,
+  permission,
   routes,
   ...rest
-}: any) => (
+}: any) => (!permission || accessPermission[permission]() ?
   <Route
     {...rest}
     render={(props) => {
-      if (!auth || fakeAuth.isAuthenticated) {
+      if (!auth || store.getState().auth.token) {
         // pass the sub-routes down to keep nesting
         return <Component {...props} routes={routes} />;
       } else {
@@ -76,8 +81,8 @@ export const RouteWithSubRoutes: any = ({
         );
       }
     }}
-  ></Route>
-);
+  ></Route> : null
+  );
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */

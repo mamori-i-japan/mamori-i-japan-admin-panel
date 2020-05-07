@@ -1,50 +1,193 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Admin Panel of まもりあいJAPAN
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+(under construction)
 
-### `yarn start`
+## How to develop
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### install
+```sh
+npm install
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### run local development env
+```sh
+npm start
+```
+Open http://localhost:3000 to view it in the browser.
 
-### `yarn test`
+### test
+```sh
+npm run test
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# test coverage
+npm run test:cov
+```
 
-### `yarn build`
+### build app
+```sh
+npm run build
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### (eject from create-react-app)
+```sh
+npm run eject
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## CI/CD
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We use Circle CI as CI SaaS.
+When you push your code or create PR, lint and test will run.
+When the code is merged to the `develop` branch, the app will be deployed to DEV env.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Specification description　仕様説明
 
 
-Jest as the test runner, assertion library, and mocking library
-Enzyme to provide additional testing utilities to interact with elements
+### UI library
 
-https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675
+    https://ant.design/components/button/
+
+### List screens 一覧画面系
+
+第一ソートキー、ソート順
+
+    Admin user list:  adminUserId / ASC
+
+    Organization list: Need confirm with Yash （5.6）
+
+    Message list: id / ASC
+
+ページングは前へ・次へ しかないので、先頭ページへ・最終ページへ を設置してはどうか？ << と >> が合ったほうがいいのでは？
+
+    https://ant.design/components/pagination/
+
+
+### Form screens フォーム画面系
+
+入力時の必須チェック
+
+    Login:
+      email: isRequired / isEmail
+
+    Create/Edit admin user:
+      email: isRequired / isEmail
+      select: isRequired
+
+    Create/Edit organization:
+      name: isRequired
+      message: isRequired (confirm)
+
+許容可能な桁数・文字種
+
+    今、制限はありません
+
+
+### Feedback フィードバック系
+
+成功 is green alert
+
+    https://ant.design/components/alert/
+    
+    {
+      submitSuccess: '内容を保存しました！',
+      deleteSuccess: '内容を削除しました！',
+      loginSuccess: 'ログインしました！',
+      logoutSuccess: 'ログアウトしました！',
+      createAdminUserSuccess: '管理者を追加しました！追加した管理者にメールを送信しました！',
+      loginByAuthLink: 'メールを確認し、認証リンクでログインしてください。',
+    }
+
+
+エラー is red alert
+
+    https://ant.design/components/alert/
+
+    API errors:
+      {
+        badRequest: 'サーバーへの要求が正しくありません。',　// 400
+        unauthorized: '認証に失敗しました。', // 401
+        internalServerError: 'サーバー内でエラーが発生しました。', // 5xx
+        UnexpectedError: '不明なエラーが発生しました。', // no error response
+        adminUserIsExistError:'このメールアドレスは別の管理者アカウントですでに使用されています。', // POST admins/uers 400
+      }
+
+    Firebase errors:
+      https://firebase.google.com/docs/storage/web/handle-errors
+
+
+Form validation
+
+    {
+      isRequired: '入力してください。',
+      isValidEmail: '有効なメールアドレスを入力してください。',
+      
+    }
+
+Delete / logout have Confirm modal
+
+    https://ant.design/components/modal/#components-modal-demo-confirm
+
+
+
+### Firebase
+Link expiration date for email link authentication
+ メールリンク認証のリンク有効期限
+   
+    Need confirm with Yash （5.6）
+   
+
+Mail title / body 送信メールのタイトル・本文
+    
+    5.4 対応予定
+
+### Business 業務系
+
+デフォルトメッセージのURLはこの画面で編集できなくていいのでは？
+
+    時間あれば、対応する。
+
+デフォルトメッセージのURLの設定が必須ではなくて、設定がない場合はデフォルトに設定されているものが表示されることが分かるようになっていたほうが良いのでは？
+
+    Need to confirm.
+    設定がない場合、empty stringの方がいいと思います。デフォルトに設定されているものが表示されることはApp側でするの方がいいと思います。App側で確認しています。
+
+デフォルトメッセージが最終行に表示されているが、先頭行にあった方がわかりやすくないか？
+
+    時間あれば、対応する。
+
+URLを消す場合どうする？Edit でURL部分をブランクにすればいいけど、それがパッと分かりにくい。削除ボタンを設置するのがいいか要検討。
+
+    追加機能が無いので、削除ボタンを設置しないの方がいいと思います。URLを消す場合、empty stringを保存することができます。
+
+#### 組織管理 > 組織一覧、組織登録
+
+一覧表示するカラムの説明（桁数、文字種、データ取得元：なんの値を表示しているか、登録するときは組織名とメッセージのみだが、組織コードはどのように取得しているか？など）
+
+    桁数: 6
+    文字種: 制限はありません
+    データ取得元: GET admins/organizatons API
+      {
+        "id": "string",
+        "name": "string",
+        "message": "This is optional message",
+        "organizationCode": "string",
+        "addedByAdminUserId": "string",
+        "addedByAdminEmail": "string",
+        "created": 1588297800
+      }
+    組織コードはどのように取得しているか: Generated by server, like ID
+
+
+
+カラム名「登録した人のメールアドレス」は違和感アリなので修正してほしい
+
+    修正したいのカラム名を教えてください。
+
+質問：登録した人のメールアドレス がなぜ必要？
+
+    削除？
+
+管理画面 機能一覧 のシートに組織コード、組織名、メッセージと記載があるが、現在の登録画面だと組織名とメッセージの登録しかできない。これは正しいですか？
+
+    できない？？

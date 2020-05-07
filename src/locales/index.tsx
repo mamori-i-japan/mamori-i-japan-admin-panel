@@ -1,19 +1,19 @@
 import React, { useReducer } from 'react';
-
+import { langCode } from '../constants';
 import jaJP from './jaJP';
 import enUS from './enUS';
 
-const langLocales: any = {
-  en: enUS,
-  ja: jaJP,
+export const langLocales: any = {
+  En: enUS,
+  Ja: jaJP,
 };
 
-const getTranslate = (langCode: string) => (key: string) =>
+const getTranslate = (langCode: string) => (key: string): string =>
   langLocales[langCode][key] || key;
 
 const initialState = {
-  langCode: 'ja',
-  translate: getTranslate('ja'),
+  langCode: langCode,
+  translate: getTranslate(langCode),
 };
 
 export const I18nContext = React.createContext(initialState);

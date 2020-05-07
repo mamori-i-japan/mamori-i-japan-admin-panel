@@ -4,6 +4,7 @@ import { ConfigProvider } from 'antd';
 import { store, history } from '../../redux/store';
 import I18nContextProvider from '../../locales';
 import PublicRoutes from '../../router';
+import Feedback from '../../components/Feedback';
 
 import jaJP from 'antd/es/locale/ja_JP';
 
@@ -17,6 +18,7 @@ export default () => {
       <I18nContextProvider lang={locale.locale}>
         <Provider store={store}>
           <PublicRoutes history={history} />
+          <Feedback />
         </Provider>
       </I18nContextProvider>
     </ConfigProvider>
