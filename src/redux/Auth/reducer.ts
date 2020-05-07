@@ -19,6 +19,7 @@ export default handleActions(
       token: null,
       email: null,
       userAdminRole: null,
+      emailForSignIn: null
     }),
   },
   initialState

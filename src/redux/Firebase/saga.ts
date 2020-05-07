@@ -5,7 +5,7 @@ import actionTypes from './actionTypes';
 import authActionTypes from '../Auth/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 
-const onAuthStateChanged = () => {
+export const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
     auth.onAuthStateChanged((user) => {
       if (user) {
