@@ -43,7 +43,6 @@ export default {
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
   // fixme
-  role: '役割',
   'Super Admin': '運営管理者',
   'National Admin': '行政管理者',
   'Prefecture Admin': '都道府県管理者',
@@ -55,7 +54,7 @@ export default {
   createNewOrganization: '新しい組織を作成',
   // TODO: review the Japanese
   deleteConfirmTitle: '削除しますか？',
-  notFound: '見つかりません',
+  newCreatedOrganizationGuide: '',
+  premmision: '権限',
   prefectureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
-  premmision: '権限'
 };

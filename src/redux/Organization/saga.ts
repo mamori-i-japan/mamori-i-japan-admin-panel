@@ -22,7 +22,10 @@ function* createOrganizationSaga() {
     payload,
   }: {
     type: string;
-    payload: { data: CreateOrganizationRequestDto, callback: (data: Organization) => void };
+    payload: {
+      data: CreateOrganizationRequestDto;
+      callback: (data: Organization) => void;
+    };
   }) {
     yield put({ type: loadingActionTypes.START_LOADING });
 
@@ -159,7 +162,7 @@ function* getOrganizationSaga() {
     payload,
   }: {
     type: string;
-    payload: { id: string };
+    payload: { id: string, callback: () => void };
   }) {
     const { listData } = yield select((state) => state.organization);
     let detailData;
@@ -177,13 +180,18 @@ function* getOrganizationSaga() {
       try {
         const res = yield call(getOrganization, payload);
 
-        detailData = res.data;
+        if (res) {
+          detailData = res.data;
 
-        yield put({
-          type: actionTypes.GET_ORGANIZATION_SUCCESS,
-          payload: { detailData },
-        });
+          yield put({
+            type: actionTypes.GET_ORGANIZATION_SUCCESS,
+            payload: { detailData },
+          });
+        }
       } catch (error) {
+        if (error.status === 404) {
+          payload.callback();
+        }
         yield put({
           type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
           payload: { errorCode: error.status, errorMessage: error.error },

@@ -53,7 +53,7 @@ const dataMap: FormItem[] = [
   {
     name: 'role',
     type: 'select',
-    label: 'role',
+    label: 'permission',
     selectOptions: roleOptions,
     rules: [Validation.required],
   },

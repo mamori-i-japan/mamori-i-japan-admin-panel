@@ -10,6 +10,7 @@ import OrganizationList from '../containers/OrganizationList';
 import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 import accessPermission from '../constants/accessPermission';
+import NoMatch from '../components/NoMatch';
 
 import { HOST } from '../constants';
 
@@ -53,6 +54,10 @@ const routes = [
         component: OrganizationList,
         permission: 'accessOrganization',
       },
+      {
+        path: '*',
+        component: NoMatch,
+      },
     ],
   },
 ];
@@ -92,6 +97,10 @@ export default ({ history }: any) => {
         {routes.map((route: RouteProps, index: number) => (
           <RouteWithSubRoutes key={index} {...route} />
         ))}
+
+        <Route path="/404">
+          <NoMatch />
+        </Route>
       </Switch>
     </ConnectedRouter>
   );

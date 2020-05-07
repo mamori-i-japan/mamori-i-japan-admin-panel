@@ -23,10 +23,31 @@ const AxiosRequestInterceptor = async (config: any) => {
 
 export const handleError = (response: Response) => {
   if (response && response.status === 401) {
-    store.dispatch(showErrorAlertAction(401, 'unauthorized'));
+    store.dispatch(
+      showErrorAlertAction({
+        errorCode: response.status,
+        errorMessage: 'unauthorized',
+      })
+    );
     store.dispatch(logoutAction());
+  } else if (response && response.status === 404) {
+    store.dispatch(
+      showErrorAlertAction({
+        errorCode: response.status,
+        errorMessage: 'notFound',
+      })
+    );
+
+    return Promise.reject(response);
   } else if (response && response.status >= 500) {
-    store.dispatch(showErrorAlertAction(response.status, 'internalServerError'));
+    return store.dispatch(
+      showErrorAlertAction({
+        errorCode: response.status,
+        errorMessage: 'internalServerError',
+      })
+    );
+  } else {
+    return Promise.reject(response);
   }
 };
 
@@ -38,10 +59,14 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      handleError(error.response);
-      return Promise.reject(error.response);
+      return handleError(error.response);
     } else {
-      store.dispatch(showErrorAlertAction('000', 'unexpectError'));
+      store.dispatch(
+        showErrorAlertAction({
+          errorCode: 'xxx',
+          errorMessage: 'unexpectError',
+        })
+      );
     }
   }
 );
