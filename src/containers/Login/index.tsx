@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
@@ -7,18 +8,36 @@ import { LoginContainer } from './style';
 import dataMap from './dataMap';
 import { loginAction } from '../../redux/Auth/actions';
 import { Store } from '../../redux/types';
+import accessPermission from '../../constants/accessPermission';
 
 const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const localtion = useLocation();
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const login = useCallback((data) => dispatch(loginAction(data)), [dispatch]);
+  const { from }: any = localtion.state || { from: { pathname: '/' } };
+
+  const login = useCallback((params) => dispatch(loginAction(params)), [
+    dispatch,
+  ]);
 
   const onFinish = (values: any) => {
-    login(values);
+    login({
+      data: values,
+      callback: () => {
+        if (accessPermission.accessAdminUser()) {
+          history.replace(from);
+        } else if (accessPermission.accessOrganization()) {
+          history.replace('organizations');
+        } else if (accessPermission.accessPrefecture()) {
+          history.replace('prefectures');
+        }
+      },
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {

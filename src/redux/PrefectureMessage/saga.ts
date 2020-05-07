@@ -27,8 +27,13 @@ function* updateMessageSaga() {
       });
 
       const { listData } = yield select((state) => state.prefectureMessage);
+      const { userAdminRole } = yield select((state) => state.auth);
 
-      listData[parseInt(payload.id, 10)].url = payload.url;
+      if (userAdminRole === 'PREFECTURE_ADMIN_ROLE') {
+        listData[0].url = payload.url;
+      } else {
+        listData[parseInt(payload.id, 10)].url = payload.url;
+      }
 
       yield put({
         type: actionTypes.UPDATE_MESSAGE_SUCCESS,

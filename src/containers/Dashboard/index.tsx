@@ -31,7 +31,9 @@ export default (props: ContainerProps) => {
     [dispatch]
   );
 
-  const logout = useCallback(() => dispatch(logoutAction()), [dispatch]);
+  const logout = useCallback((params) => dispatch(logoutAction(params)), [
+    dispatch,
+  ]);
 
   return (
     <PageLayout>

@@ -33,7 +33,7 @@ export default () => {
   const organizaionsList = useSelector((store: Store) => store.organization.listData);
   const { isOrganizationLoading } = useSelector((store: Store) => store.adminUser);
 
-  const createItem = useCallback((data) => dispatch(createAdminUserAction(data)), [
+  const createItem = useCallback((params) => dispatch(createAdminUserAction(params)), [
     dispatch,
   ]);
 
@@ -54,8 +54,13 @@ export default () => {
       .then((values) => {
         if (id === 'create') {
           createItem({
-            ...values,
-            organizationId: organizaionsList[values.organization],
+            data: {
+              ...values,
+              organizationId: organizaionsList[values.organization]
+            },
+            callback: () => {
+              form.resetFields();
+            }
           });
         } else {
           values.id = id;
@@ -114,7 +119,7 @@ export default () => {
           (organization: { organizationId: string; name: string }, index: number) => (
             {
               id: index,
-              name: organization.name,
+              name: `${organization.name}(${organization.organizationId})`,
               organizationId: organization.organizationId,
             }
           )
@@ -164,7 +169,7 @@ export default () => {
                   }
                   createButton={
                     item.withCreateItem
-                      ? <Button size={'small'} onClick={handleCreate}>
+                      ? <Button size={'small'} type="link" onClick={handleCreate} style={{ marginTop: 8 }}>
                         {translate('createNewOrganization')}
                       </Button>
                       : <div />

@@ -24,11 +24,14 @@ export function* getAccessTokenSaga() {
 
     localStorage.setItem('token', token);
 
-    const userAdminRole = jwtDecode<{ userAdminRole: string }>(token).userAdminRole;
+    const { userAdminRole, email } = jwtDecode<{ userAdminRole: string, email: string }>(token);
+
+    localStorage.setItem('email', email);
+    localStorage.setItem('userAdminRole', userAdminRole);
 
     yield put({
       type: authActionTypes.SAVE_TOKEN_SUCCESS,
-      payload: { token, userAdminRole }
+      payload: { token, userAdminRole, email }
     })
   } catch (error) {
     yield put({

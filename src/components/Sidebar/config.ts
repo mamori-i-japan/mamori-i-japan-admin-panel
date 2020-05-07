@@ -3,16 +3,17 @@ import { HOST } from '../../constants';
 export default [
   {
     name: 'adminUser',
-    path: HOST + 'users',
-    children: [],
+    path: HOST,
+    permission: 'accessAdminUser'
   },
   {
     name: 'organization',
     path: HOST + 'organizations',
+    permission: 'accessOrganization'
   },
   {
     name: 'prefetureMessage',
-    path: HOST,
-    children: [],
+    path: HOST + 'prefectures',
+    permission: 'accessPrefecture'
   },
 ];

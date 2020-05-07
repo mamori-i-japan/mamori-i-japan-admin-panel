@@ -7,6 +7,7 @@ import { Logo } from './style';
 import ImageLogo from '../../assets/images/logo.png';
 import config from './config';
 import { I18nContext } from '../../locales';
+import accessPermmision from '../../constants/accessPermission';
 
 const { Sider } = Layout;
 
@@ -37,17 +38,19 @@ export default ({ sidebarIsCollapse }: SidebarProps) => {
       </Logo>
 
       <Menu selectedKeys={[selectedKey]} theme="dark" mode="inline">
-        {config.map((item: any, index) => (
-          <Menu.Item key={index}>
-            <Link to={item.path}>
-              <AppstoreOutlined />
-              <span>
-                {translate(item.name)}
-                {translate('list')}
-              </span>
-            </Link>
-          </Menu.Item>
-        ))}
+        {config.map((item: any, index) =>
+          accessPermmision[item.permission]() ? (
+            <Menu.Item key={index}>
+              <Link to={item.path}>
+                <AppstoreOutlined />
+                <span>
+                  {translate(item.name)}
+                  {translate('list')}
+                </span>
+              </Link>
+            </Menu.Item>
+          ) : null
+        )}
       </Menu>
     </Sider>
   );

@@ -12,7 +12,7 @@ function* createAdminUserSaga() {
   yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
     payload,
   }: any) {
-    const { email, role: adminRole, organization, prefecture } = payload;
+    const { email, role: adminRole, organization, prefecture } = payload.data;
 
     yield put({
       type: loadingActionTypes.START_LOADING,
@@ -20,13 +20,21 @@ function* createAdminUserSaga() {
 
     yield call(getAccessTokenSaga);
 
+    const requestBody: any = {
+      email,
+      adminRole: adminRoleList[adminRole],
+    };
+
+    if (organization) {
+      requestBody.organizationId = organization
+    }
+
+    if (prefecture) {
+      requestBody.prefectureId = Number.parseInt(prefectureList[prefecture].id)
+    }
+
     try {
-      yield call(postAdminUser, {
-        email,
-        adminRole: adminRoleList[adminRole],
-        organizationId: organization,
-        prefectureId: Number.parseInt(prefectureList[prefecture].id),
-      });
+      yield call(postAdminUser, requestBody);
 
       yield call(sendEmailSaga, email);
 
@@ -34,8 +42,9 @@ function* createAdminUserSaga() {
         type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
         payload: { successMessage: 'createAdminUserSuccess' },
       });
+
+      payload.callback();
     } catch (error) {
-      console.log(error)
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
         payload: {
