@@ -19,5 +19,6 @@ export default {
   badRequest: 'Bad Request',
   unauthorized: 'Unauthorized',
   internalServerError: 'Internal Server Error',
-  UnexpectedError: 'An Unexpected Error Occurred',
+  unexpectedError: 'An Unexpected Error Occurred',
+  pageIsNotFound: 'Sorry, the page you visited does not exist.'
 };

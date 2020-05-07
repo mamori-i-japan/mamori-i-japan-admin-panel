@@ -41,6 +41,7 @@ export default handleActions(
       return {
         ...state,
         isError: true,
+        errorCode,
         errorMessage: `${errorCode}, ${message ? langLocales[langCode][errorMessage] : errorMessage}`,
       }
     },

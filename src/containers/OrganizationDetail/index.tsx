@@ -43,6 +43,11 @@ export default () => {
     [dispatch]
   );
 
+  const getItem = useCallback(
+    (params) => dispatch(getOrganizationAction(params)),
+    [dispatch]
+  );
+
   const handleBack = () => {
     form.resetFields();
     history.goBack();
@@ -80,13 +85,18 @@ export default () => {
 
   useEffect(() => {
     if (id !== 'create') {
-      dispatch(getOrganizationAction({ id }));
+      getItem({
+        id,
+        callback: () => {
+          history.replace('/no-result');
+        },
+      });
     } else {
       if (accessPermission.rejectCreateOrganization()) {
-        history.replace('/organizations');
+        history.replace('/no-result');
       }
     }
-  }, [id, dispatch, history]);
+  }, [id, dispatch, history, getItem]);
 
   return (
     <ContentContainer>
