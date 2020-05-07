@@ -36,10 +36,10 @@ export default () => {
     history.push('/users/create');
   };
 
-  const handleEdit = (id: string) => {
-    // dispatch(getAdminUserAction(id));
-    history.push(`/users/${id}`);
-  };
+  // const handleEdit = (id: string) => {
+  //   // dispatch(getAdminUserAction(id));
+  //   history.push(`/users/${id}`);
+  // };
 
   const columns: any = [
     {
