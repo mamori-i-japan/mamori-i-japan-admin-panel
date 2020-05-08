@@ -8,7 +8,7 @@ import { LoginContainer } from './style';
 import dataMap from './dataMap';
 import { loginAction } from '../../redux/Auth/actions';
 import { Store } from '../../redux/types';
-import accessPermission from '../../constants/accessPermission';
+import { redirectDefaultPath } from '../../constants';
 
 const { Title } = Typography;
 
@@ -19,7 +19,9 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const { from }: any = localtion.state || { from: { pathname: '/' } };
+  const { from }: any = localtion.state || {
+    from: { pathname: redirectDefaultPath() },
+  };
 
   const login = useCallback((params) => dispatch(loginAction(params)), [
     dispatch,
@@ -29,13 +31,7 @@ export default () => {
     login({
       data: values,
       callback: () => {
-        if (accessPermission.accessAdminUser()) {
-          history.replace(from);
-        } else if (accessPermission.accessOrganization()) {
-          history.replace('organizations');
-        } else if (accessPermission.accessPrefecture()) {
-          history.replace('prefectures');
-        }
+        history.replace(from);
       },
     });
   };
