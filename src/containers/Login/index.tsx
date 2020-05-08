@@ -31,6 +31,7 @@ export default () => {
     login({
       data: values,
       callback: () => {
+        console.log(from)
         history.replace(from);
       },
     });
