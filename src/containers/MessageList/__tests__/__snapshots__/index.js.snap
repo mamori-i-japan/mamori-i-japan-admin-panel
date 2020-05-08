@@ -58,7 +58,7 @@ exports[`MessageList should render correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bdVaJa",
                   "isStatic": false,
-                  "lastClassName": "bzCFau",
+                  "lastClassName": "zcvEo",
                   "rules": Array [
                     "
   margin: 24px;
@@ -76,6 +76,10 @@ exports[`MessageList should render correctly 1`] = `
     &.flex-end {
       justify-content: flex-end;
     }
+  }
+
+  p {
+    white-space: pre-wrap;
   }
 
   .ant-btn-link {
@@ -108,7 +112,7 @@ exports[`MessageList should render correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bdVaJa bzCFau"
+              className="sc-bdVaJa zcvEo"
             >
               <header>
                 <Title
@@ -156,9 +160,10 @@ exports[`MessageList should render correctly 1`] = `
                   </withConfigConsumer(Base)>
                 </Title>
               </header>
-              <div>
-                If there is no enter in URL, will save empty value. App side will show default URL.
-              </div>
+              <p>
+                URLに入力がない場合は ID:0 のURLをデフォルト表示します。
+デフォルトのURLにしたい場合は、編集ボタンを押してURLをすべて消去し、保存ボタンを押してください。
+              </p>
               <section>
                 <_default
                   columns={
