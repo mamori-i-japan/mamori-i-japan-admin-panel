@@ -57,4 +57,5 @@ export default {
   newCreatedOrganizationGuide: '',
   permission: '権限',
   prefectureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
+  emailConfirmPrompt: '確認のためにメールアドレスを入力してください。'
 };
