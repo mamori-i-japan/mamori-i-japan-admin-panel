@@ -20,5 +20,6 @@ export default {
   unauthorized: 'Unauthorized',
   internalServerError: 'Internal Server Error',
   unexpectedError: 'An Unexpected Error Occurred',
-  pageIsNotFound: 'Sorry, the page you visited does not exist.'
+  pageIsNotFound: 'Sorry, the page you visited does not exist.',
+  emailConfirmPrompt: 'Please provide your email for confirmation.'
 };
