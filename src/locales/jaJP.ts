@@ -55,6 +55,6 @@ export default {
   // TODO: review the Japanese
   deleteConfirmTitle: '削除しますか？',
   newCreatedOrganizationGuide: '',
-  premmision: '権限',
+  permission: '権限',
   prefectureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
 };
