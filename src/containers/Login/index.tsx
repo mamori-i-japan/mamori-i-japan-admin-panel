@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import FormField from '../../components/FormField';
 import { I18nContext } from '../../locales';
 import { LoginContainer } from './style';
 import dataMap from './dataMap';
-import { loginAction } from '../../redux/Auth/actions';
+import { loginAction, autoSignInAction } from '../../redux/Auth/actions';
 import { Store } from '../../redux/types';
 import accessPermission from '../../constants/accessPermission';
 
@@ -17,17 +17,28 @@ export default () => {
   const history = useHistory();
   const localtion = useLocation();
   const { translate } = useContext(I18nContext);
+  const { from }: any = localtion.state || { from: { pathname: '/' } };
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
-  const { from }: any = localtion.state || { from: { pathname: '/' } };
-
-  const login = useCallback((params) => dispatch(loginAction(params)), [
+  const handlelogin = useCallback((data) => dispatch(loginAction(data)), [
     dispatch,
   ]);
 
+  const autoLogin = useCallback(
+    (params) => dispatch(autoSignInAction(params)),
+    [dispatch]
+  );
+
   const onFinish = (values: any) => {
-    login({
-      data: values,
+    handlelogin(values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  useEffect(() => {
+    autoLogin({
       callback: () => {
         if (accessPermission.accessAdminUser()) {
           history.replace(from);
@@ -38,11 +49,7 @@ export default () => {
         }
       },
     });
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+  }, [autoLogin, history, from]);
 
   return (
     <LoginContainer>
@@ -51,6 +58,7 @@ export default () => {
         name="login"
         layout="vertical"
         size="large"
+        initialValues={{ email: localStorage.getItem('emailForSignIn') }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >

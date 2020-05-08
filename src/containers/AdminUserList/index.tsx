@@ -1,13 +1,15 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button } from 'antd';
+import { Table, Button, Typography } from 'antd';
 import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
 import { getAdminUsersAction } from '../../redux/AdminUser/actions';
 import { Store } from '../../redux/types';
+
+const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
@@ -55,7 +57,7 @@ export default () => {
       dataIndex: 'addedByAdminEmail',
     },
     {
-      title: 'premmision',
+      title: 'permission',
       dataIndex: 'userAdminRole',
       render: (value: string) => translate(value)
     },
@@ -80,7 +82,10 @@ export default () => {
 
   return (
     <ContentContainer>
-      <header className="flex-end">
+      <header>
+        <Title level={3}>
+          {translate('adminUser') + translate('list')}
+        </Title>
         <Button type="primary" size="large" onClick={handleCreate}>
           {translate('createItem')}
         </Button>

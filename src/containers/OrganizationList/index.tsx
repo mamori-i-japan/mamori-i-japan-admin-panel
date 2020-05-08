@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button } from 'antd';
+import { Table, Button, Typography } from 'antd';
 import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
@@ -14,6 +14,8 @@ import {
 } from '../../redux/Organization/actions';
 import { Store } from '../../redux/types';
 import accessPermission from '../../constants/accessPermission';
+
+const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
@@ -82,7 +84,10 @@ export default () => {
 
   return (
     <ContentContainer>
-      <header className="flex-end">
+      <header>
+        <Title level={3}>
+          {translate('organization') + translate('list')}
+        </Title>
         {!accessPermission.rejectCreateOrganization() && (
           <Button type="primary" size="large" onClick={handleCreate}>
             {translate('createItem')}

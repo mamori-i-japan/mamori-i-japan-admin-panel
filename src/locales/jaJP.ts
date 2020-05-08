@@ -8,7 +8,7 @@ export default {
   ...validationErrorMessages,
   organization: '組織',
   adminUser: '管理者',
-  prefetureMessage: '都道府県お知らせ',
+  prefectureMessage: '都道府県お知らせ',
   loginTitle: 'ログイン',
   loginSubmit: 'ログイン',
   registerSubmit: '登録',
@@ -43,7 +43,6 @@ export default {
   organizationCode: '組織コード',
   addedByAdminEmail: '登録した人のメールアドレス',
   // fixme
-  role: '役割',
   'Super Admin': '運営管理者',
   'National Admin': '行政管理者',
   'Prefecture Admin': '都道府県管理者',
@@ -55,7 +54,8 @@ export default {
   createNewOrganization: '新しい組織を作成',
   // TODO: review the Japanese
   deleteConfirmTitle: '削除しますか？',
-  notFound: '見つかりません',
-  prefetureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
-  premmision: '権限'
+  newCreatedOrganizationGuide: '',
+  permission: '権限',
+  prefectureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
+  emailConfirmPrompt: '確認のためにメールアドレスを入力してください。'
 };
