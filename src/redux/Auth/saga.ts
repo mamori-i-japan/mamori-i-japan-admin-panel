@@ -50,9 +50,9 @@ function* logoutSaga() {
     try {
       yield call([auth, auth.signOut]);
 
-      localStorage.removeItem('token');
-      localStorage.removeItem('userAdminRole');
-      localStorage.removeItem('email');
+      yield localStorage.removeItem('token');
+      yield localStorage.removeItem('userAdminRole');
+      yield localStorage.removeItem('email');
 
       yield put({
         type: actionTypes.LOGOUT_SUCCESS,
@@ -78,10 +78,13 @@ function* logoutSaga() {
 function* autoSignInSaga() {
   yield takeEvery(actionTypes.AUTO_SIGN_IN, function* _({ payload }: any) {
     if (auth.isSignInWithEmailLink(window.location.href)) {
+      alert('in');
       yield put({ type: loadingActionTypes.START_LOADING });
 
       let email = localStorage.getItem('emailForSignIn');
 
+
+      // TODO:
       if (!email) {
         email = window.prompt(langLocales[langCode]['emailConfirmPrompt']);
       }
@@ -127,6 +130,9 @@ function* autoSignInSaga() {
           });
         }
       }
+
+
+      yield put({ type: loadingActionTypes.END_LOADING });
     }
   });
 }

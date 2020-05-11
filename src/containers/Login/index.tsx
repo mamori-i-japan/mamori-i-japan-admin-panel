@@ -42,7 +42,6 @@ export default () => {
   useEffect(() => {
     autoLogin({
       callback: () => {
-        console.log(from);
         history.replace(from);
       },
     });

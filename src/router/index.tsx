@@ -69,23 +69,33 @@ export const RouteWithSubRoutes = ({
   permission,
   routes,
   ...rest
-}: any) =>
-  !permission || accessPermission[permission]() ? (
+}: any) => (
     <Route
       {...rest}
       render={(props) => {
-        if (authLoggedIn && store.getState().auth.token) {
-          return <Redirect to={redirectDefaultPath()} />;
-        }
+        if (!permission || accessPermission[permission]()) {
+          if (authLoggedIn && store.getState().auth.token) {
+            return <Redirect to={redirectDefaultPath()} />;
+          }
 
-        if (!auth || store.getState().auth.token) {
-          // pass the sub-routes down to keep nesting
-          return <Component {...props} routes={routes} />;
+          if (!auth || store.getState().auth.token) {
+            // pass the sub-routes down to keep nesting
+            return <Component {...props} routes={routes} />;
+          } else {
+            return (
+              <Redirect
+                to={{
+                  pathname: HOST + 'login',
+                  state: { from: props.location },
+                }}
+              />
+            );
+          }
         } else {
           return (
             <Redirect
               to={{
-                pathname: '/login',
+                pathname: HOST + 'no-result',
                 state: { from: props.location },
               }}
             />
@@ -93,7 +103,7 @@ export const RouteWithSubRoutes = ({
         }
       }}
     ></Route>
-  ) : null;
+  );
 
 export default ({ history }: any) => {
   /* place ConnectedRouter under Provider */

@@ -74,7 +74,7 @@ export default () => {
           handleEdit: () => handleEdit(id),
         };
 
-        if (!accessPermission.rejectDeleteOrganizaton()) {
+        if (accessPermission.isAdminUser()) {
           props.deleteItem = () => deleteItem(id)
         }
         return <OperationButtons {...props} />;
@@ -88,7 +88,7 @@ export default () => {
         <Title level={3}>
           {translate('organization') + translate('list')}
         </Title>
-        {!accessPermission.rejectCreateOrganization() && (
+        {accessPermission.isAdminUser() && (
           <Button type="primary" size="large" onClick={handleCreate}>
             {translate('createItem')}
           </Button>

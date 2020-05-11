@@ -6,7 +6,7 @@ export const HOST = '/';
 export const redirectDefaultPath = () => {
   return accessPermission.accessAdminUser()
     ? HOST
-    : accessPermission.accessOrganization()
+    : accessPermission.isOrganizationAdmin()
       ? HOST + 'organizations'
       : HOST + 'prefectures';
 };
