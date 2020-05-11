@@ -3,15 +3,13 @@ import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import organizationActionTypes from '../Organization/actionTypes';
-import { getAdminUsers, postAdminUser } from '../../apis';
+import { getAdminUsers, postAdminUser, deleteAdminUser } from '../../apis';
 import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
 import { adminRoleList } from '../../constants/AdminRole';
 import { prefectureList } from '../../constants/Prefecture';
 
 function* createAdminUserSaga() {
-  yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({
-    payload,
-  }: any) {
+  yield takeEvery(actionTypes.CREATE_ADMIN_USER, function* _({ payload }: any) {
     const { email, role: adminRole, organization, prefecture } = payload.data;
 
     yield put({
@@ -26,11 +24,11 @@ function* createAdminUserSaga() {
     };
 
     if (organization) {
-      requestBody.organizationId = organization
+      requestBody.organizationId = organization;
     }
 
     if (prefecture) {
-      requestBody.prefectureId = Number.parseInt(prefectureList[prefecture].id)
+      requestBody.prefectureId = Number.parseInt(prefectureList[prefecture].id);
     }
 
     try {
@@ -45,12 +43,14 @@ function* createAdminUserSaga() {
 
       payload.callback();
     } catch (error) {
+      const errorMessage = error.status === 403 ? 'adminUserIsExistError' : error.error;
+
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
         payload: {
           errorCode: error.status,
-          errorMessage: 'adminUserIsExistError',
-        },
+          errorMessage: errorMessage
+        }
       });
     }
 
@@ -74,9 +74,10 @@ function* getAdminUsersSaga() {
       const data = res.data.map((item: any) => {
         return {
           ...item,
-          created: item.created ? item.created._seconds : null
-        }
-      })
+          id: item.adminUserId,
+          created: item.created ? item.created._seconds : null,
+        };
+      });
 
       yield put({
         type: actionTypes.GET_ADMIN_USERS_SUCCESS,
@@ -112,10 +113,47 @@ function* getOrganizationOptions() {
   });
 }
 
+function* deleteAdminUserSaga() {
+  yield takeEvery(actionTypes.DELETE_ADMIN_USER, function* _({
+    payload,
+  }: {
+    type: string;
+    payload: { id: string };
+  }) {
+    alert(payload.id);
+    yield put({ type: loadingActionTypes.START_LOADING });
+
+    yield call(getAccessTokenSaga);
+
+    try {
+      yield call(deleteAdminUser, payload);
+
+      yield put({ type: actionTypes.DELETE_ADMIN_USER_SUCCESS });
+
+      yield put({
+        type: feedbackActionTypes.SHOW_SUCCESS_MESSAGE,
+        payload: { successMessage: 'deleteSuccess' },
+      });
+
+      yield put({
+        type: actionTypes.GET_ADMIN_USERS,
+      });
+    } catch (error) {
+      yield put({
+        type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
+        payload: { errorCode: error.status, errorMessage: error.error },
+      });
+    }
+
+    yield put({ type: loadingActionTypes.END_LOADING });
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(createAdminUserSaga),
     fork(getAdminUsersSaga),
     fork(getOrganizationOptions),
+    fork(deleteAdminUserSaga),
   ]);
 }

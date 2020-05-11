@@ -20,7 +20,6 @@ const { Title } = Typography;
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const { translate } = useContext(I18nContext);
   const loading = useSelector((store: Store) => store.loading.isLoading);
   const { listData } = useSelector((store: Store) => store.organization);
@@ -34,17 +33,21 @@ export default () => {
     [dispatch]
   );
 
+  const getItem = useCallback((id) => dispatch(getOrganizationAction({ id })), [dispatch]);
+
+  const clearDetailItem = useCallback(() => dispatch(clearOrganizationAction()), [dispatch]);
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleCreate = () => {
-    dispatch(clearOrganizationAction());
+    clearDetailItem();
     history.push('/organizations/create');
   };
 
   const handleEdit = (id: string) => {
-    dispatch(getOrganizationAction({ id }));
+    getItem(id);
     history.push(`/organizations/${id}`);
   };
 
