@@ -1,5 +1,4 @@
 import { Organization } from '../redux/Organization/types';
-import { PrefectureMessage } from '../redux/PrefectureMessage/types';
 
 export type FirebaseDate = {
   _seconds: string;
