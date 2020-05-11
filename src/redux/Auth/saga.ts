@@ -40,6 +40,9 @@ function* loginSaga() {
     });
 
     yield put({ type: loadingActionTypes.END_LOADING });
+
+    console.log(payload)
+    yield payload.callback();
   });
 }
 

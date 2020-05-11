@@ -13,7 +13,7 @@ export default () => {
       style={{
         paddingTop: 120
       }}
-      subTitle={translate('loginBySentEmail')}
+      subTitle={translate('loginByAuthLink')}
     />
   );
 };

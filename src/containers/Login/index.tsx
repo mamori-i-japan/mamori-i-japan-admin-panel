@@ -1,8 +1,9 @@
-import React, { useContext, useCallback, useEffect } from 'react';
+import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
+import SentEmail from "../../components/SentEmail";
 import { I18nContext } from '../../locales';
 import { LoginContainer } from './style';
 import dataMap from './dataMap';
@@ -19,6 +20,7 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const { from }: any = localtion.state || { from: { pathname: '/' } };
   const loading = useSelector((store: Store) => store.loading.isLoading);
+  const [isEmailSent, changeIsEmailSent] = useState(false);
 
   const handlelogin = useCallback((data) => dispatch(loginAction(data)), [
     dispatch,
@@ -30,7 +32,13 @@ export default () => {
   );
 
   const onFinish = (values: any) => {
-    handlelogin(values);
+    handlelogin({
+      ...values,
+      callback: () => {
+        console.log('send-email-success');
+        changeIsEmailSent(true);
+      },
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -51,8 +59,9 @@ export default () => {
     });
   }, [autoLogin, history, from]);
 
-  return (
-    <LoginContainer>
+  return isEmailSent
+    ? <SentEmail />
+    : <LoginContainer>
       <Title level={3}>{translate('loginTitle')}</Title>
       <Form
         name="login"
@@ -78,5 +87,4 @@ export default () => {
         </Form.Item>
       </Form>
     </LoginContainer>
-  );
 };
