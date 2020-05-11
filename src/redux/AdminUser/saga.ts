@@ -74,10 +74,9 @@ function* getAdminUsersSaga() {
       const data = res.data.map((item: any) => {
         return {
           ...item,
-          id: item.adminUserId,
-          created: item.created ? item.created._seconds : null,
-        };
-      });
+          createdAt: item.createdAt ? item.createdAt._seconds : null
+        }
+      })
 
       yield put({
         type: actionTypes.GET_ADMIN_USERS_SUCCESS,
