@@ -74,7 +74,7 @@ function* getAdminUsersSaga() {
       const data = res.data.map((item: any) => {
         return {
           ...item,
-          created: item.created ? item.created._seconds : null
+          createdAt: item.createdAt ? item.createdAt._seconds : null
         }
       })
 
