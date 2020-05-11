@@ -56,6 +56,6 @@ export default {
   deleteConfirmTitle: '削除しますか？',
   newCreatedOrganizationGuide: '',
   permission: '権限',
-  prefectureGuide: 'If there is no enter in URL, will save empty value. App side will show default URL.',
+  prefectureGuide: 'URLに入力がない場合は ID:0 のURLをデフォルト表示します。\nデフォルトのURLにしたい場合は、編集ボタンを押してURLをすべて消去し、保存ボタンを押してください。',
   emailConfirmPrompt: '確認のためにメールアドレスを入力してください。'
 };

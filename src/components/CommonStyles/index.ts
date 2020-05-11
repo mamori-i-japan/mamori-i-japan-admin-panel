@@ -19,6 +19,10 @@ export const ContentContainer = styled.div`
     }
   }
 
+  p {
+    white-space: pre-wrap;
+  }
+
   .ant-btn-link {
     padding-left: 0;
   }
