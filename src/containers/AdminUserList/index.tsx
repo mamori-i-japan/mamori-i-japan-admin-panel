@@ -6,7 +6,10 @@ import moment from 'moment';
 import OperationButtons from '../../components/OperationButtons';
 import { I18nContext } from '../../locales';
 import { ContentContainer } from '../../components/CommonStyles';
-import { getAdminUsersAction } from '../../redux/AdminUser/actions';
+import {
+  getAdminUsersAction,
+  deleteAdminUserAction,
+} from '../../redux/AdminUser/actions';
 import { Store } from '../../redux/types';
 
 const { Title } = Typography;
@@ -22,19 +25,15 @@ export default () => {
     dispatch,
   ]);
 
-  // TODO: implement delete admin user
-  const deleteItem = (id: string) => { console.log('item delete', id) };
-  // const deleteItem = useCallback(
-  //   (id) => dispatch(deleteAdminUserAction(id)),
-  //   [dispatch]
-  // );
+  const deleteItem = useCallback((id) => dispatch(deleteAdminUserAction({ id })), [
+    dispatch,
+  ]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleCreate = () => {
-    // dispatch(getAdminUserAction(null));
     history.push('/users/create');
   };
 
@@ -59,13 +58,13 @@ export default () => {
     {
       title: 'permission',
       dataIndex: 'userAdminRole',
-      render: (value: string) => translate(value)
+      render: (value: string) => translate(value),
     },
     {
       title: 'createdDate',
       dataIndex: 'createdAt',
       render: (value: number) =>
-        value ? moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM') : ''
+        value ? moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM') : '',
     },
     {
       title: 'operation',
@@ -83,9 +82,7 @@ export default () => {
   return (
     <ContentContainer>
       <header>
-        <Title level={3}>
-          {translate('adminUser') + translate('list')}
-        </Title>
+        <Title level={3}>{translate('adminUser') + translate('list')}</Title>
         <Button type="primary" size="large" onClick={handleCreate}>
           {translate('createItem')}
         </Button>

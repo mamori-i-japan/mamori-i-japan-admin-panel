@@ -26,9 +26,9 @@ export const getAdminUsers = () => {
   return http.get('admins/users');
 };
 
-// export const postPositive = (data: { phoneNumber: string }) => {
-//   return http.post('admins/positives', data);
-// };
+export const deleteAdminUser = ({ id }: { id: string }) => {
+  return http.delete(`admins/users/${id}`);
+};
 
 // export const getMessages = async () => {
 //   // // generate default documents
@@ -82,15 +82,6 @@ export const getOrganizations = () => {
   return http.get('admins/organizations');
 };
 
-// TODO:
-// {
-//   name: string;
-//   message: string;
-//   adminRole?: AdminRoleString;
-//   organizationId?: string;
-//   prefectureId?: string;
-// }
-
 export const postOrganization = (data: CreateOrganizationRequestDto) => {
   return http.post('admins/organizations', data);
 };
@@ -104,7 +95,7 @@ export const patchOrganization = ({
 };
 
 export const deleteOrganization = ({ id }: { id: string }) => {
-  return http.delete('admins/organizations', { data: { id } });
+  return http.delete(`admins/organizations/${id}`);
 };
 
 export const getOrganization = ({ id }: { id: string }) => {
