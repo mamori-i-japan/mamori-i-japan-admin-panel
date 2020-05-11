@@ -65,7 +65,7 @@ export default () => {
           {translate('prefectureMessage') + translate('list')}
         </Title>
       </header>
-      <div>{translate('prefectureGuide')}</div>
+      <p>{translate('prefectureGuide')}</p>
 
       <section>
         <EditableTable<PrefectureMessage>
