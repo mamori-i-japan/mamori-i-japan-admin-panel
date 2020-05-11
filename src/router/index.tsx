@@ -11,7 +11,8 @@ import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 import accessPermission from '../constants/accessPermission';
 import NoMatch from '../components/NoMatch';
-import { HOST, redirectDefaultPath } from '../constants';
+import { HOST } from '../constants';
+import { redirectDefaultPath } from '../constants/accessPermission';
 
 const routes = [
   {

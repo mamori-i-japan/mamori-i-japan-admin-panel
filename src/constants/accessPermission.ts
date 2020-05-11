@@ -1,6 +1,7 @@
+import { HOST } from './index';
 import { store } from '../redux/store';
 
-export default {
+const accessPermission = {
   // access list permission
   accessAdminUser: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
@@ -30,6 +31,8 @@ export default {
   isOrganizationAdmin: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
 
+    console.log(adminUserRole);
+
     return adminUserRole === 'ORGANIZATION_ADMIN_ROLE';
   },
 
@@ -44,3 +47,14 @@ export default {
     return adminUserRole === 'SUPER_ADMIN_ROLE';
   }
 } as any;
+
+
+export const redirectDefaultPath = () => {
+  return accessPermission.accessAdminUser()
+    ? HOST
+    : accessPermission.isOrganizationAdmin()
+      ? HOST + 'organizations'
+      : HOST + 'prefectures';
+};
+
+export default accessPermission;

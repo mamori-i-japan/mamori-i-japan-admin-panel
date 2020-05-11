@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
@@ -8,18 +8,15 @@ import { LoginContainer } from './style';
 import dataMap from './dataMap';
 import { loginAction, autoSignInAction } from '../../redux/Auth/actions';
 import { Store } from '../../redux/types';
-import { redirectDefaultPath } from '../../constants';
+import { redirectDefaultPath } from '../../constants/accessPermission';
 
 const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const localtion = useLocation();
   const { translate } = useContext(I18nContext);
-  const { from }: any = localtion.state || {
-    from: { pathname: redirectDefaultPath() },
-  };
+
   const loading = useSelector((store: Store) => store.loading.isLoading);
 
   const handlelogin = useCallback((data) => dispatch(loginAction(data)), [
@@ -42,10 +39,10 @@ export default () => {
   useEffect(() => {
     autoLogin({
       callback: () => {
-        history.replace(from);
+        history.replace(redirectDefaultPath());
       },
     });
-  }, [autoLogin, history, from]);
+  }, [autoLogin, history]);
 
   return (
     <LoginContainer>
