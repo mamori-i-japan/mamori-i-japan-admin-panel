@@ -4,7 +4,11 @@ import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
 import { auth } from '../../utils/firebase';
 import { login } from '../../apis';
-import { sendEmailSaga, getAccessTokenSaga, onAuthStateChanged } from '../Firebase/saga';
+import {
+  sendEmailSaga,
+  getAccessTokenSaga,
+  onAuthStateChanged,
+} from '../Firebase/saga';
 import { langCode } from '../../constants';
 import { langLocales } from '../../locales';
 
@@ -41,7 +45,6 @@ function* loginSaga() {
 
     yield put({ type: loadingActionTypes.END_LOADING });
 
-    console.log(payload)
     yield payload.callback();
   });
 }
@@ -85,8 +88,6 @@ function* autoSignInSaga() {
 
       let email = localStorage.getItem('emailForSignIn');
 
-
-      // TODO:
       if (!email) {
         email = window.prompt(langLocales[langCode]['emailConfirmPrompt']);
       }
@@ -132,7 +133,6 @@ function* autoSignInSaga() {
           });
         }
       }
-
 
       yield put({ type: loadingActionTypes.END_LOADING });
     }
