@@ -78,7 +78,6 @@ function* logoutSaga() {
 function* autoSignInSaga() {
   yield takeEvery(actionTypes.AUTO_SIGN_IN, function* _({ payload }: any) {
     if (auth.isSignInWithEmailLink(window.location.href)) {
-      alert('in');
       yield put({ type: loadingActionTypes.START_LOADING });
 
       let email = localStorage.getItem('emailForSignIn');
