@@ -119,7 +119,6 @@ function* deleteAdminUserSaga() {
     type: string;
     payload: { id: string };
   }) {
-    alert(payload.id);
     yield put({ type: loadingActionTypes.START_LOADING });
 
     yield call(getAccessTokenSaga);

@@ -21,7 +21,6 @@ const AxiosRequestInterceptor = async (config: any) => {
 };
 
 export const handleError = (response: Response) => {
-  console.log(response);
   if (response && response.status === 401) {
     store.dispatch(logoutAction());
     return {
