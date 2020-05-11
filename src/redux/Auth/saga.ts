@@ -53,9 +53,9 @@ function* logoutSaga() {
     try {
       yield call([auth, auth.signOut]);
 
-      localStorage.removeItem('token');
-      localStorage.removeItem('userAdminRole');
-      localStorage.removeItem('email');
+      yield localStorage.removeItem('token');
+      yield localStorage.removeItem('userAdminRole');
+      yield localStorage.removeItem('email');
 
       yield put({
         type: actionTypes.LOGOUT_SUCCESS,
@@ -85,6 +85,8 @@ function* autoSignInSaga() {
 
       let email = localStorage.getItem('emailForSignIn');
 
+
+      // TODO:
       if (!email) {
         email = window.prompt(langLocales[langCode]['emailConfirmPrompt']);
       }
@@ -130,6 +132,9 @@ function* autoSignInSaga() {
           });
         }
       }
+
+
+      yield put({ type: loadingActionTypes.END_LOADING });
     }
   });
 }

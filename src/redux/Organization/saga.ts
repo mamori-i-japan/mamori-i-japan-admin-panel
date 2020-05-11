@@ -70,7 +70,7 @@ function* getOrganizationsSaga() {
         return {
           ...item,
           id: item.organizationId, // adjust API change
-          created: item.createdAt ? item.createdAt._seconds : null,
+          createdAt: item.createdAt ? item.createdAt._seconds : null,
         };
       });
 

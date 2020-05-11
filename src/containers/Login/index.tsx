@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import FormField from '../../components/FormField';
@@ -9,16 +9,15 @@ import { LoginContainer } from './style';
 import dataMap from './dataMap';
 import { loginAction, autoSignInAction } from '../../redux/Auth/actions';
 import { Store } from '../../redux/types';
-import accessPermission from '../../constants/accessPermission';
+import { redirectDefaultPath } from '../../constants/accessPermission';
 
 const { Title } = Typography;
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const localtion = useLocation();
   const { translate } = useContext(I18nContext);
-  const { from }: any = localtion.state || { from: { pathname: '/' } };
+
   const loading = useSelector((store: Store) => store.loading.isLoading);
   const [isEmailSent, changeIsEmailSent] = useState(false);
 
@@ -48,16 +47,10 @@ export default () => {
   useEffect(() => {
     autoLogin({
       callback: () => {
-        if (accessPermission.accessAdminUser()) {
-          history.replace(from);
-        } else if (accessPermission.accessOrganization()) {
-          history.replace('organizations');
-        } else if (accessPermission.accessPrefecture()) {
-          history.replace('prefectures');
-        }
+        history.replace(redirectDefaultPath());
       },
     });
-  }, [autoLogin, history, from]);
+  }, [autoLogin, history]);
 
   return isEmailSent
     ? <SentEmail />

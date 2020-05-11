@@ -22,17 +22,20 @@ export function* getAccessTokenSaga() {
     const user = yield call(onAuthStateChanged);
     const token = yield call([user, user.getIdToken], true);
 
-    localStorage.setItem('token', token);
+    yield localStorage.setItem('token', token);
 
-    const { userAdminRole, email } = jwtDecode<{ userAdminRole: string, email: string }>(token);
+    const { userAdminRole, email } = jwtDecode<{
+      userAdminRole: string;
+      email: string;
+    }>(token);
 
-    localStorage.setItem('email', email);
-    localStorage.setItem('userAdminRole', userAdminRole);
+    yield localStorage.setItem('email', email);
+    yield localStorage.setItem('userAdminRole', userAdminRole);
 
     yield put({
       type: authActionTypes.SAVE_TOKEN_SUCCESS,
-      payload: { token, userAdminRole, email }
-    })
+      payload: { token, userAdminRole, email },
+    });
   } catch (error) {
     yield put({
       type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
@@ -43,20 +46,17 @@ export function* getAccessTokenSaga() {
 
 export function* sendEmailSaga(email: string) {
   try {
-    yield call([auth, auth
-      .sendSignInLinkToEmail], email, actionCodeSettings)
+    yield call([auth, auth.sendSignInLinkToEmail], email, actionCodeSettings);
 
     yield localStorage.setItem('emailForSignIn', email);
 
     yield put({
-      type: actionTypes.SEND_EMAIL_SUCCESS
-    })
-
+      type: actionTypes.SEND_EMAIL_SUCCESS,
+    });
   } catch (error) {
     yield put({
       type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
       payload: { errorCode: error.code, errorMessage: error.message },
     });
   }
-
 }

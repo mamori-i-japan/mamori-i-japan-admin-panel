@@ -92,7 +92,7 @@ export default () => {
         },
       });
     } else {
-      if (accessPermission.rejectCreateOrganization()) {
+      if (accessPermission.isOrganizationAdmin()) {
         history.replace('/no-result');
       }
     }

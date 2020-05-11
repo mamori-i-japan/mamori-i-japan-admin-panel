@@ -5,6 +5,6 @@ export default {
   unexpectedError: '不明なエラーが発生しました。', // no error response
   adminUserIsExistError:
     'このメールアドレスは別の管理者アカウントですでに使用されています。', // POST admins/uers 400
-  notFound: 'サーバーがリクエストされたリソースを発見できません',
+  notFound: 'サーバーがリクエストされたリソースを発見できません。',
   pageIsNotFound: 'アクセスしたページは存在しません。',
 }

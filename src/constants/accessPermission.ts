@@ -1,10 +1,12 @@
+import { HOST } from './index';
 import { store } from '../redux/store';
 
-export default {
+const accessPermission = {
+  // access list permission
   accessAdminUser: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
 
-    return adminUserRole === 'SUPER_ADMIN_ROLE'
+    return adminUserRole === 'SUPER_ADMIN_ROLE';
   },
 
   accessOrganization: () => {
@@ -25,15 +27,34 @@ export default {
     );
   },
 
-  rejectCreateOrganization: () => {
+  // user's role
+  isOrganizationAdmin: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
+
+    console.log(adminUserRole);
 
     return adminUserRole === 'ORGANIZATION_ADMIN_ROLE';
   },
 
-  rejectDeleteOrganizaton: () => {
+  isPrefectureAdmin: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
 
-    return adminUserRole === 'ORGANIZATION_ADMIN_ROLE';
+    return adminUserRole === 'PREFECTURE_ADMIN_ROLE';
   },
-} as any; 
+  isAdminUser: () => {
+    const adminUserRole = store.getState().auth.userAdminRole;
+
+    return adminUserRole === 'SUPER_ADMIN_ROLE';
+  }
+} as any;
+
+
+export const redirectDefaultPath = () => {
+  return accessPermission.accessAdminUser()
+    ? HOST
+    : accessPermission.isOrganizationAdmin()
+      ? HOST + 'organizations'
+      : HOST + 'prefectures';
+};
+
+export default accessPermission;
