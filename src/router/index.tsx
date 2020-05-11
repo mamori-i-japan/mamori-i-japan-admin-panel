@@ -11,6 +11,7 @@ import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 import accessPermission from '../constants/accessPermission';
 import NoMatch from '../components/NoMatch';
+import EmailSendSuccess from '../components/SentEmail';
 
 import { HOST } from '../constants';
 
@@ -34,6 +35,12 @@ const routes = [
         path: HOST + 'users/:id',
         exact: true,
         component: AdminUserDetail,
+        permission: 'accessAdminUser',
+      },
+      {
+        path: HOST + 'success-send-email',
+        exact: true,
+        component: EmailSendSuccess,
         permission: 'accessAdminUser',
       },
       {
