@@ -57,5 +57,6 @@ export default {
   newCreatedOrganizationGuide: '',
   permission: '権限',
   prefectureGuide: 'URLに入力がない場合は ID:0 のURLをデフォルト表示します。\nデフォルトのURLにしたい場合は、編集ボタンを押してURLをすべて消去し、保存ボタンを押してください。',
-  emailConfirmPrompt: '確認のためにメールアドレスを入力してください。'
+  emailConfirmPrompt: '確認のためにメールアドレスを入力してください。',
+  emailHasBeenSent: '入力したアドレスにメールが送信されました。',
 };
