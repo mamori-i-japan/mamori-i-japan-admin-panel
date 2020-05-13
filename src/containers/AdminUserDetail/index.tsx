@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { find } from 'lodash';
 import { I18nContext } from '../../locales';
 import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
@@ -75,18 +76,20 @@ export default () => {
   const onRoleChange = (roleNumber: number) => {
     form.setFieldsValue({ role: roleNumber });
 
-    if (roleOptions[roleNumber].id === '2') {
+    const foundItem: any = find(roleOptions, { id: roleNumber });
+
+    if (foundItem.id === '2') {
       // case of prefecture admin
       const formattedForm = formatOfForm.concat([prefectureForm]);
       updateFormatOfForm(formattedForm);
-    } else if (roleOptions[roleNumber].id === '3') {
+    } else if (foundItem.id === '3') {
       // case of organization admin
       getOrganizationOptions();
       updateFormatOfForm(dataMap);
     } else {
       updateFormatOfForm(dataMap);
     };
-    updateCurrentRole(roleOptions[roleNumber].id);
+    updateCurrentRole(foundItem.id);
   };
 
   const onPrefectureChange = (index: number) => {
