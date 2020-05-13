@@ -9,7 +9,6 @@ import {
   TimePicker,
   Radio,
 } from 'antd';
-// import moment from 'moment';
 
 const { Option } = Select;
 const { TextArea } = Input;
