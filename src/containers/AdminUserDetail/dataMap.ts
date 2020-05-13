@@ -36,11 +36,11 @@ const roleOptions: RoleOption[] = [
     name: 'Prefecture Admin',
     role: 'PREFECTURE_ADMIN_ROLE',
   },
-  {
-    id: '3',
-    name: 'Organization Admin',
-    role: 'ORGANIZATION_ADMIN_ROLE',
-  },
+  // {
+  //   id: '3',
+  //   name: 'Organization Admin',
+  //   role: 'ORGANIZATION_ADMIN_ROLE',
+  // },
 ];
 
 const dataMap: FormItem[] = [
