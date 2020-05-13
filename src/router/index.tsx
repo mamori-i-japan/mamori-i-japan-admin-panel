@@ -6,8 +6,8 @@ import Dashboard from '../containers/Dashboard';
 import MessageList from '../containers/MessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
-import OrganizationList from '../containers/OrganizationList';
-import OrganizationDetail from '../containers/OrganizationDetail';
+// import OrganizationList from '../containers/OrganizationList';
+// import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 import accessPermission from '../constants/accessPermission';
 import NoMatch from '../components/NoMatch';
@@ -43,18 +43,18 @@ const routes = [
         component: AdminUserList,
         permission: 'accessAdminUser',
       },
-      {
-        path: HOST + 'organizations/:id',
-        exact: true,
-        component: OrganizationDetail,
-        permission: 'accessOrganization',
-      },
-      {
-        path: HOST + 'organizations',
-        exact: true,
-        component: OrganizationList,
-        permission: 'accessOrganization',
-      },
+      // {
+      //   path: HOST + 'organizations/:id',
+      //   exact: true,
+      //   component: OrganizationDetail,
+      //   permission: 'accessOrganization',
+      // },
+      // {
+      //   path: HOST + 'organizations',
+      //   exact: true,
+      //   component: OrganizationList,
+      //   permission: 'accessOrganization',
+      // },
       {
         path: '*',
         component: NoMatch,
