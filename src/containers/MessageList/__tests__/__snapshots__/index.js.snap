@@ -58,7 +58,7 @@ exports[`MessageList should render correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bdVaJa",
                   "isStatic": false,
-                  "lastClassName": "zcvEo",
+                  "lastClassName": "ecfRed",
                   "rules": Array [
                     "
   margin: 24px;
@@ -89,7 +89,7 @@ exports[`MessageList should render correctly 1`] = `
   section {
     width: 100%;
     padding-top: 24px;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .ant-table {
@@ -112,7 +112,7 @@ exports[`MessageList should render correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bdVaJa zcvEo"
+              className="sc-bdVaJa ecfRed"
             >
               <header>
                 <Title
