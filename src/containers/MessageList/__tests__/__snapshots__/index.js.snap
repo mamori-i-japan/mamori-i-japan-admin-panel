@@ -58,7 +58,7 @@ exports[`MessageList should render correctly 1`] = `
                 "componentStyle": ComponentStyle {
                   "componentId": "sc-bdVaJa",
                   "isStatic": false,
-                  "lastClassName": "jmpGmV",
+                  "lastClassName": "ecfRed",
                   "rules": Array [
                     "
   margin: 24px;
@@ -82,7 +82,7 @@ exports[`MessageList should render correctly 1`] = `
     white-space: pre-wrap;
   }
 
-  .ant-btn-link {wa
+  .ant-btn-link {
     padding-left: 0;
   }
 
@@ -112,7 +112,7 @@ exports[`MessageList should render correctly 1`] = `
             forwardedRef={null}
           >
             <div
-              className="sc-bdVaJa jmpGmV"
+              className="sc-bdVaJa ecfRed"
             >
               <header>
                 <Title
