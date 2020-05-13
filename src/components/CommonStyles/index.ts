@@ -23,7 +23,7 @@ export const ContentContainer = styled.div`
     white-space: pre-wrap;
   }
 
-  .ant-btn-link {
+  .ant-btn-link {wa
     padding-left: 0;
   }
 
