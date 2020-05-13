@@ -41,9 +41,6 @@ export default () => {
     dispatch,
   ]);
 
-  // TODO: implement edit admin user
-  const editItem = (values: any) => { console.log('item edited', values) };
-
   const handleBack = () => {
     history.goBack();
   };
@@ -64,7 +61,6 @@ export default () => {
           });
         } else {
           values.id = id;
-          editItem(values);
         }
       })
       .catch(info => {
