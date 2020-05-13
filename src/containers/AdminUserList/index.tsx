@@ -37,11 +37,6 @@ export default () => {
     history.push('/users/create');
   };
 
-  // const handleEdit = (id: string) => {
-  //   // dispatch(getAdminUserAction(id));
-  //   history.push(`/users/${id}`);
-  // };
-
   const columns: any = [
     {
       title: 'ID',
@@ -71,7 +66,6 @@ export default () => {
       render: ({ adminUserId }: { adminUserId: string }) => {
         return (
           <OperationButtons
-            // handleEdit={() => handleEdit(adminUserId)}
             deleteItem={() => deleteItem(adminUserId)}
           />
         );
