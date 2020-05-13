@@ -43,18 +43,18 @@ const routes = [
         component: AdminUserList,
         permission: 'accessAdminUser',
       },
-      {
-        path: HOST + 'organizations/:id',
-        exact: true,
-        component: OrganizationDetail,
-        permission: 'accessOrganization',
-      },
-      {
-        path: HOST + 'organizations',
-        exact: true,
-        component: OrganizationList,
-        permission: 'accessOrganization',
-      },
+      // {
+      //   path: HOST + 'organizations/:id',
+      //   exact: true,
+      //   component: OrganizationDetail,
+      //   permission: 'accessOrganization',
+      // },
+      // {
+      //   path: HOST + 'organizations',
+      //   exact: true,
+      //   component: OrganizationList,
+      //   permission: 'accessOrganization',
+      // },
       {
         path: '*',
         component: NoMatch,
