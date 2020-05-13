@@ -30,7 +30,7 @@ export const ContentContainer = styled.div`
   section {
     width: 100%;
     padding-top: 24px;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .ant-table {
