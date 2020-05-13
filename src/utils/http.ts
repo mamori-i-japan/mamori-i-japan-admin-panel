@@ -20,7 +20,7 @@ const AxiosRequestInterceptor = async (config: any) => {
   return configTemp;
 };
 
-export const handleError = (response: Response) => {
+export const handleError = (response: Response & { data: any }) => {
   if (response && response.status === 401) {
     store.dispatch(logoutAction());
     return {
@@ -45,7 +45,7 @@ export const handleError = (response: Response) => {
   } else {
     return {
       status: response.status,
-      error: response,
+      error: response.data.message,
     };
   }
 };

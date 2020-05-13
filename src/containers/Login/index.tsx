@@ -34,7 +34,6 @@ export default () => {
     handlelogin({
       ...values,
       callback: () => {
-        console.log('send-email-success');
         changeIsEmailSent(true);
       },
     });
