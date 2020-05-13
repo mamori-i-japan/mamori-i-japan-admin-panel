@@ -6,7 +6,7 @@ export default [
     path: HOST,
     permission: 'accessAdminUser'
   },
-  {
+  // {
   //   name: 'organization',
   //   path: HOST + 'organizations',
   //   permission: 'accessOrganization'
