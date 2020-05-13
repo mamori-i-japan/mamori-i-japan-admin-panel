@@ -26,11 +26,11 @@ const roleOptions: RoleOption[] = [
     name: 'Super Admin',
     role: 'SUPER_ADMIN_ROLE',
   },
-  {
-    id: '1',
-    name: 'National Admin',
-    role: 'NATIONAL_ADMIN_ROLE',
-  },
+  // {
+  //   id: '1',
+  //   name: 'National Admin',
+  //   role: 'NATIONAL_ADMIN_ROLE',
+  // },
   {
     id: '2',
     name: 'Prefecture Admin',
