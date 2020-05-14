@@ -3,7 +3,7 @@ import { store } from '../redux/store';
 import { logoutAction } from '../redux/Auth/actions';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_HOST || 'https://api-dev.mamori-i.jp/',
+  baseURL: process.env.REACT_APP_API_HOST,
   timeout: 30000,
 });
 

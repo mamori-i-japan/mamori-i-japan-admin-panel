@@ -12,6 +12,12 @@ npm install
 ```
 
 ### run local development env
+First, create .env.local file and write the API endpoint there.
+```sh
+# .env.local
+REACT_APP_API_HOST=https://example.com
+```
+Then, run dev server.
 ```sh
 npm start
 ```
@@ -40,6 +46,8 @@ npm run eject
 We use Circle CI as CI SaaS.
 When you push your code or create PR, lint and test will run.
 When the code is merged to the `develop` branch, the app will be deployed to DEV env.
+
+Please set environment variables of your CircleCI like .env.template file.
 
 ## Specification description　仕様説明
 
