@@ -46,4 +46,4 @@ const actionCodeSettings = {
   handleCodeInApp: true,
 };
 
-export { firebase, auth, actionCodeSettings };
+export { auth, actionCodeSettings };
