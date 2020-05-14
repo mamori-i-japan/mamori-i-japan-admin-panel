@@ -2,7 +2,6 @@
 import * as firebase from 'firebase/app';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
-import 'firebase/firestore';
 import { langCode } from '../constants';
 
 let firebaseConfig;
@@ -39,8 +38,6 @@ const auth = firebase.auth();
 
 auth.languageCode = langCode;
 
-const db = firebase.firestore();
-
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be whitelisted in the Firebase Console.
@@ -49,4 +46,4 @@ const actionCodeSettings = {
   handleCodeInApp: true,
 };
 
-export { firebase, auth, db, actionCodeSettings };
+export { firebase, auth, actionCodeSettings };
