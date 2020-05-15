@@ -2,7 +2,6 @@
 import * as firebase from 'firebase/app';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
-import 'firebase/firestore';
 import { langCode } from '../constants';
 
 let firebaseConfig;
@@ -32,8 +31,6 @@ const auth = firebase.auth();
 
 auth.languageCode = langCode;
 
-const db = firebase.firestore();
-
 const redirectHost =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/'
@@ -47,4 +44,4 @@ const actionCodeSettings = {
   handleCodeInApp: true,
 };
 
-export { firebase, auth, db, actionCodeSettings };
+export { auth, actionCodeSettings };
