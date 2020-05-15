@@ -6,5 +6,6 @@ export default [
     type: 'input',
     label: 'email',
     rules: [Validation.required, Validation.email],
+    autoFocus: true,
   },
 ];
