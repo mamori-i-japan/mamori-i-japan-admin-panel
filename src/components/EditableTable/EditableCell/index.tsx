@@ -28,7 +28,7 @@ export default ({
     <td {...restProps}>
       {editing ? (
         <Form.Item
-          rules={[Validation.halfWidth()]}
+          rules={[Validation.url()]}
           name={dataIndex}
           style={{ margin: 0 }}
         >
