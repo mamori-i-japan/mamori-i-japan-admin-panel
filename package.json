@@ -31,11 +31,12 @@
     "test": "react-scripts test",
     "test:cov": "npm run test -- --coverage --watchAll=false",
     "test:e2e": "echo \"need e2e test scripts\"",
+    "ci:test:cov": "npm run test -- --coverage --watchAll=false --ci",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "ci:lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings 0",
     "deploy:dev": "npm run build:dev && firebase deploy --token \"$FIREBASE_DEV_TOKEN\" -P default",
     "deploy:stg": "npm run build:stg && firebase deploy --token \"$FIREBASE_STG_TOKEN\" -P stg",
     "deploy:prd": "npm run build:prd && echo \"need deploy scripts\"",
-    "openapi-generate": "openapi-generator generate -i swagger/openapi.yml -g typescript-axios -o src/apis/openapi",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

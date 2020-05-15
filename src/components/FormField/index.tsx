@@ -27,7 +27,7 @@ export default ({
   onChange,
   createButton,
 }: FormFieldContentProps) => {
-  const { type, className, placeholder, name, rules, loading } = field;
+  const { type, className, placeholder, name, rules, loading, autoFocus } = field;
 
   switch (type) {
     case 'select':
@@ -186,7 +186,11 @@ export default ({
           rules={rules}
           colon={false}
         >
-          <Input placeholder={placeholder} disabled={field.readOnly} />
+          <Input
+            placeholder={placeholder}
+            disabled={field.readOnly}
+            autoFocus={autoFocus}
+          />
         </Form.Item>
       );
   }

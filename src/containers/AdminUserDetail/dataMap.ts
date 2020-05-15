@@ -18,6 +18,7 @@ type FormItem = {
   onChange?: () => void;
   loading?: boolean;
   withCreateItem?: boolean;
+  autoFocus?: boolean;
 }
 
 const roleOptions: RoleOption[] = [
@@ -49,6 +50,7 @@ const dataMap: FormItem[] = [
     type: 'input',
     label: 'email',
     rules: [Validation.required, Validation.email],
+    autoFocus: true,
   },
   {
     name: 'role',
