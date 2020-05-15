@@ -58,6 +58,7 @@ export default () => {
             },
             callback: () => {
               form.resetFields();
+              updateFormatOfForm(dataMap);
             }
           });
         } else {
