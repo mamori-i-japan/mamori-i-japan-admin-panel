@@ -3,7 +3,7 @@ import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
-import MessageList from '../containers/MessageList';
+import MessageList from '../containers/PrefectureMessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
 import { store } from '../redux/store';
