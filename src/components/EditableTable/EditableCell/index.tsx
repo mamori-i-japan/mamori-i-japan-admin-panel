@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, InputNumber, Form } from 'antd';
+import Validation from '../../../constants/Validation';
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
@@ -27,6 +28,7 @@ export default ({
     <td {...restProps}>
       {editing ? (
         <Form.Item
+          rules={[Validation.url()]}
           name={dataIndex}
           style={{ margin: 0 }}
         >
