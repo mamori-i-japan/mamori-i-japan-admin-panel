@@ -17,6 +17,23 @@ First, create .env.local file and write the API endpoint there.
 # .env.local
 REACT_APP_API_HOST=https://example.com
 ```
+Create a firebase project and write your config in the [lines](https://github.com/codeforjapan/contact-tracing-admin-panel/blob/master/src/utils/firebase.ts#L17:L26) of src/utils/firebase.ts .
+```ts
+// src/utils/firebase.ts
+...
+  // replace these values to your firebase project's one
+  firebaseConfig = {
+    apiKey: 'xxx',
+    authDomain: 'xxx',
+    databaseURL: 'xxx',
+    projectId: 'xxx',
+    storageBucket: 'xxx',
+    messagingSenderId: 'xxx',
+    appId: 'xxx',
+    measurementId: 'xxx',
+  };
+...
+```
 Then, run dev server.
 ```sh
 npm start
