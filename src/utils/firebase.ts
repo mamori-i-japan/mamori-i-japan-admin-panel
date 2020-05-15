@@ -41,10 +41,15 @@ auth.languageCode = langCode;
 
 const db = firebase.firestore();
 
+const redirectHost =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/'
+    : process.env.REACT_APP_HOST;
+
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be whitelisted in the Firebase Console.
-  url: `${process.env.REACT_APP_HOST || 'http://localhost:3000/'}login`,
+  url: `${redirectHost}login`,
   // This must be true.
   handleCodeInApp: true,
 };
