@@ -6,7 +6,7 @@
 
 ![](./docs/dfd.jpg)
 
-[The images made by miro (read only access)](https://miro.com/app/board/o9J_ksGHtPE=/)
+The images made by [Miro](https://miro.com/app/board/o9J_ksGHtPE=/) (read only access).
 
 ## How to develop
 
@@ -129,3 +129,7 @@ Form validation
 Confirm modal
 
     https://ant.design/components/modal/#components-modal-demo-confirm
+
+## Contact
+
+- [Contact Form](https://docs.google.com/forms/d/e/1FAIpQLSfcGM9itQ3i--GN9FUsQpdlW58Ug4Y6lcnE11N-igILDJdZlw/viewform)
