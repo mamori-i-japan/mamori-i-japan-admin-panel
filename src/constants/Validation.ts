@@ -12,4 +12,13 @@ export default {
     message: langLocales[langCode].isValidEmail,
     validateTrigger: 'submit',
   },
+  url: () => ({
+    validator(rule: any, value: string) {
+      //eslint-disable-next-line
+      if (!value || value.match(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/)) {
+        return Promise.resolve();
+      }
+      return Promise.reject(langLocales[langCode].isInvalidURL);
+    },
+  }),
 };

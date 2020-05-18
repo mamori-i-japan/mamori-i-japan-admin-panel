@@ -6,11 +6,6 @@ export default [
     type: 'input',
     label: 'email',
     rules: [Validation.required, Validation.email],
+    autoFocus: true,
   },
-  // {
-  //   name: 'password',
-  //   type: 'password',
-  //   label: 'password',
-  //   rules: [{ required: true, message: 'Please input!' }],
-  // },
 ];

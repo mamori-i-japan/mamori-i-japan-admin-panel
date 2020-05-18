@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import MessageList from '../';
+import MessageList from '..';
 
 configure({ adapter: new Adapter() });
 

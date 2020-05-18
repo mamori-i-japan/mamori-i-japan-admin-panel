@@ -162,7 +162,7 @@ function* getOrganizationSaga() {
     payload,
   }: {
     type: string;
-    payload: { id: string, callback: () => void };
+    payload: { id: string; callback: () => void };
   }) {
     const { listData } = yield select((state) => state.organization);
     let detailData;

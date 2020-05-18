@@ -3,11 +3,9 @@ import { Route, Switch, RouteProps, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Login from '../containers/Login';
 import Dashboard from '../containers/Dashboard';
-import MessageList from '../containers/MessageList';
+import MessageList from '../containers/PrefectureMessageList';
 import AdminUserList from '../containers/AdminUserList';
 import AdminUserDetail from '../containers/AdminUserDetail';
-import OrganizationList from '../containers/OrganizationList';
-import OrganizationDetail from '../containers/OrganizationDetail';
 import { store } from '../redux/store';
 import accessPermission from '../constants/accessPermission';
 import NoMatch from '../components/NoMatch';
@@ -42,18 +40,6 @@ const routes = [
         exact: true,
         component: AdminUserList,
         permission: 'accessAdminUser',
-      },
-      {
-        path: HOST + 'organizations/:id',
-        exact: true,
-        component: OrganizationDetail,
-        permission: 'accessOrganization',
-      },
-      {
-        path: HOST + 'organizations',
-        exact: true,
-        component: OrganizationList,
-        permission: 'accessOrganization',
       },
       {
         path: '*',

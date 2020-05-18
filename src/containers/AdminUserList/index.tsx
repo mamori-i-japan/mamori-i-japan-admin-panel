@@ -37,11 +37,6 @@ export default () => {
     history.push('/users/create');
   };
 
-  // const handleEdit = (id: string) => {
-  //   // dispatch(getAdminUserAction(id));
-  //   history.push(`/users/${id}`);
-  // };
-
   const columns: any = [
     {
       title: 'ID',
@@ -64,14 +59,13 @@ export default () => {
       title: 'createdDate',
       dataIndex: 'createdAt',
       render: (value: number) =>
-        value ? moment(new Date(value * 1000)).format('YYYY-MM-DD HH:MM') : '',
+        value ? moment(new Date(value * 1000)).format('YYYY-MM-DD HH:mm') : '',
     },
     {
       title: 'operation',
       render: ({ adminUserId }: { adminUserId: string }) => {
         return (
           <OperationButtons
-            // handleEdit={() => handleEdit(adminUserId)}
             deleteItem={() => deleteItem(adminUserId)}
           />
         );

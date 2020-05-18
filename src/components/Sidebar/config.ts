@@ -7,11 +7,6 @@ export default [
     permission: 'accessAdminUser'
   },
   {
-    name: 'organization',
-    path: HOST + 'organizations',
-    permission: 'accessOrganization'
-  },
-  {
     name: 'prefectureMessage',
     path: HOST + 'prefectures',
     permission: 'accessPrefecture'

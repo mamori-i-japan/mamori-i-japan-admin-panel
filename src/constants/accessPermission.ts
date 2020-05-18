@@ -31,8 +31,6 @@ const accessPermission = {
   isOrganizationAdmin: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
 
-    console.log(adminUserRole);
-
     return adminUserRole === 'ORGANIZATION_ADMIN_ROLE';
   },
 

@@ -52,7 +52,6 @@ export default {
   NATIONAL_ADMIN_ROLE: '行政管理者',
   PREFECTURE_ADMIN_ROLE: '都道府県管理者',
   createNewOrganization: '新しい組織を作成',
-  // TODO: review the Japanese
   deleteConfirmTitle: '削除しますか？',
   newCreatedOrganizationGuide: '',
   permission: '権限',

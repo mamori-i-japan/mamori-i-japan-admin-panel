@@ -43,7 +43,7 @@ function* createAdminUserSaga() {
 
       payload.callback();
     } catch (error) {
-      const errorMessage = error.status === 403 ? 'adminUserIsExistError' : error.error;
+      const errorMessage = error.status === 409 ? 'adminUserIsExistError' : error.error;
 
       yield put({
         type: feedbackActionTypes.SHOW_ERROR_MESSAGE,
