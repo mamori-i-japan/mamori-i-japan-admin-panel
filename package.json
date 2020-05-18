@@ -1,7 +1,17 @@
 {
-  "name": "admin-panel",
+  "name": "mamori-i-japan-admin-panel",
   "version": "0.1.0",
-  "private": true,
+  "author": {
+    "name": "まもりあいJAPAN",
+    "url": "https://github.com/mamori-i-japan"
+  },
+  "contributors": [
+    "Daisuke Hirata <daisukihirata@gmail.com> (https://github.com/DaisukeHirata)",
+    "Zhumei SONG <zhumei.song@monstar-lab.com> (https://github.com/zhumeisongsong)",
+    "Ryuta EBIHARA <ryuta.ebihara@monstar-lab.com> (https://github.com/ebiryu)"
+  ],
+  "private": false,
+  "license": "BSD-2-Clause",
   "dependencies": {
     "antd": "^4.1.3",
     "axios": "^0.19.2",
