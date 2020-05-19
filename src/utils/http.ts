@@ -28,10 +28,17 @@ export const handleError = (response: Response & { data: any }) => {
       error: 'unauthorized',
     };
   } else if (response && response.status === 404) {
-    return {
-      status: response.status,
-      error: 'notFound',
-    };
+    if (window.navigator.onLine) {
+      return {
+        status: response.status,
+        error: 'notFound',
+      };
+    } else {
+      return {
+        status: response.status,
+        error: 'offline',
+      };
+    }
   } else if (response && response.status >= 500) {
     return {
       status: response.status,
