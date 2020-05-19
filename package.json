@@ -5,6 +5,7 @@
     "name": "まもりあいJAPAN",
     "url": "https://github.com/mamori-i-japan"
   },
+  "description": "Admin Panel for Japanese Exposure Notification App to fight against COVID-19 a.k.a. \"まもりあいJAPAN\".",
   "contributors": [
     "Daisuke Hirata <daisukihirata@gmail.com> (https://github.com/DaisukeHirata)",
     "Zhumei SONG <zhumei.song@monstar-lab.com> (https://github.com/zhumeisongsong)",

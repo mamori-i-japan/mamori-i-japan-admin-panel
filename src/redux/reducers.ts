@@ -4,7 +4,6 @@ import adminUser from './AdminUser/reducer';
 import loading from './Loading/reducer';
 import prefectureMessage from './PrefectureMessage/reducer';
 import feedback from './Feedback/reducer';
-import organization from './Organization/reducer';
 
 export default {
   sidebar,
@@ -13,5 +12,4 @@ export default {
   adminUser,
   prefectureMessage,
   feedback,
-  organization
 };

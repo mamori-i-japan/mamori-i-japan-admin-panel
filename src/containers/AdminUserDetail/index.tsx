@@ -9,7 +9,6 @@ import { ContentContainer, DetailForm } from '../../components/CommonStyles';
 import FormField from '../../components/FormField';
 import dataMap, {
   prefectureForm,
-  organizationForm,
   roleOptions,
   RoleOption, FormItem
 } from './dataMap';
@@ -28,11 +27,8 @@ export default () => {
   const { translate } = useContext(I18nContext);
   const [form] = Form.useForm();
   const [formatOfForm, updateFormatOfForm] = useState(dataMap);
-  const [currentRole, updateCurrentRole] = useState('');
 
   const loading = useSelector((store: Store) => store.loading.isLoading);
-  const organizaionsList = useSelector((store: Store) => store.organization.listData);
-  const { isOrganizationLoading } = useSelector((store: Store) => store.adminUser);
 
   const createItem = useCallback((params) => dispatch(createAdminUserAction(params)), [
     dispatch,
@@ -54,7 +50,6 @@ export default () => {
           createItem({
             data: {
               ...values,
-              organizationId: organizaionsList[values.organization]
             },
             callback: () => {
               form.resetFields();
@@ -90,15 +85,10 @@ export default () => {
     } else {
       updateFormatOfForm(dataMap);
     };
-    updateCurrentRole(foundItem.id);
   };
 
   const onPrefectureChange = (index: number) => {
     form.setFieldsValue({ prefecture: index });
-  }
-
-  const onOrganizationChange = (index: number) => {
-    form.setFieldsValue({ organization: organizaionsList[index].organizationId });
   }
 
   const translateOptions = (item: FormItem) =>
@@ -111,22 +101,6 @@ export default () => {
           name: translate(option.name),
         })),
       })
-
-  const mapOrganizationsToForm = (organizations: any, isLoading: boolean): FormItem[] =>
-    (currentRole === '3') ? [
-      organizationForm(
-        organizations.map(
-          (organization: { organizationId: string; name: string }, index: number) => (
-            {
-              id: index,
-              name: `${organization.name}(${organization.organizationId})`,
-              organizationId: organization.organizationId,
-            }
-          )
-        ),
-        isLoading,
-      ),
-    ] : [];
 
   return (
     <ContentContainer>
@@ -153,7 +127,6 @@ export default () => {
         >
           {formatOfForm &&
             formatOfForm
-              .concat(mapOrganizationsToForm(organizaionsList, isOrganizationLoading))
               .map((item: FormItem) => (
                 <FormField
                   key={item.name}
@@ -163,9 +136,7 @@ export default () => {
                     ? onRoleChange
                     : item.name === 'prefecture'
                       ? onPrefectureChange
-                      : item.name === 'organization'
-                        ? onOrganizationChange
-                        : undefined
+                      : undefined
                   }
                   createButton={
                     item.withCreateItem

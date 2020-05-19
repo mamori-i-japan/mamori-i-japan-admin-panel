@@ -1,7 +1,5 @@
 import http from '../utils/http';
 import {
-  CreateOrganizationRequestDto,
-  UpdateOrganizationRequestDto,
   UpdatePrefectureRequestDto
 } from './types';
 
@@ -26,30 +24,6 @@ export const getAdminUsers = () => {
 
 export const deleteAdminUser = ({ id }: { id: string }) => {
   return http.delete(`admins/users/${id}`);
-};
-
-export const getOrganizations = () => {
-  return http.get('admins/organizations');
-};
-
-export const postOrganization = (data: CreateOrganizationRequestDto) => {
-  return http.post('admins/organizations', data);
-};
-
-export const patchOrganization = ({
-  id,
-  name,
-  message,
-}: UpdateOrganizationRequestDto) => {
-  return http.patch(`admins/organizations/${id}`, { name, message });
-};
-
-export const deleteOrganization = ({ id }: { id: string }) => {
-  return http.delete(`admins/organizations/${id}`);
-};
-
-export const getOrganization = ({ id }: { id: string }) => {
-  return http.get(`admins/organizations/${id}`);
 };
 
 export const getPrefectures = () => {
