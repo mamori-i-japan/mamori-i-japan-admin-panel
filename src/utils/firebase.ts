@@ -14,14 +14,14 @@ if (process.env.REACT_APP_ENV === 'prd') {
 } else {
   // replace these values to your firebase project's one
   firebaseConfig = {
-    apiKey: 'AIzaSyBbg2NNhLmY8YRSFmjibDoDM7O1EgheNEI',
-    authDomain: 'contact-tracing-26716.firebaseapp.com',
-    databaseURL: 'https://contact-tracing-26716.firebaseio.com',
-    projectId: 'contact-tracing-26716',
-    storageBucket: 'contact-tracing-26716.appspot.com',
-    messagingSenderId: '776506470916',
-    appId: '1:776506470916:web:247cbad6ea82c2010bfb51',
-    measurementId: 'G-H7GJ1Y3F0D',
+    apiKey: 'xxx',
+    authDomain: 'xxx',
+    databaseURL: 'xxx',
+    projectId: 'xxx',
+    storageBucket: 'xxx',
+    messagingSenderId: 'xxx',
+    appId: 'xxx',
+    measurementId: 'xxx',
   };
 }
 
