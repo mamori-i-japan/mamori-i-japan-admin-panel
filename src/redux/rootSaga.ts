@@ -3,7 +3,6 @@ import authSaga from './Auth/saga';
 import adminUserSaga from './AdminUser/saga';
 import PrefectureMessageSaga from './PrefectureMessage/saga';
 import feedbackSaga from './Feedback/saga';
-import organizationSaga from './Organization/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -11,6 +10,5 @@ export default function* rootSaga() {
     adminUserSaga(),
     PrefectureMessageSaga(),
     feedbackSaga(),
-    organizationSaga(),
   ]);
 }

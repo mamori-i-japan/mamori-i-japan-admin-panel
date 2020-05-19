@@ -1,8 +1,7 @@
-import { put, takeEvery, all, call, fork, take } from 'redux-saga/effects';
+import { put, takeEvery, all, call, fork } from 'redux-saga/effects';
 import actionTypes from './actionTypes';
 import loadingActionTypes from '../Loading/actionTypes';
 import feedbackActionTypes from '../Feedback/actionTypes';
-import organizationActionTypes from '../Organization/actionTypes';
 import { getAdminUsers, postAdminUser, deleteAdminUser } from '../../apis';
 import { getAccessTokenSaga, sendEmailSaga } from '../Firebase/saga';
 import { adminRoleList } from '../../constants/AdminRole';
@@ -97,21 +96,6 @@ function* getAdminUsersSaga() {
   });
 }
 
-function* getOrganizationOptions() {
-  yield takeEvery(actionTypes.GET_ORGANIZATION_OPTIONS, function* _() {
-    yield put({
-      type: actionTypes.CHANGE_ORGANIZATION_LOADING_STATUS,
-      payload: { isOrganizationLoading: true },
-    });
-    yield put({ type: organizationActionTypes.GET_ORGANIZATIONS });
-    yield take(loadingActionTypes.END_LOADING);
-    yield put({
-      type: actionTypes.CHANGE_ORGANIZATION_LOADING_STATUS,
-      payload: { isOrganizationLoading: false },
-    });
-  });
-}
-
 function* deleteAdminUserSaga() {
   yield takeEvery(actionTypes.DELETE_ADMIN_USER, function* _({
     payload,
@@ -151,7 +135,6 @@ export default function* rootSaga() {
   yield all([
     fork(createAdminUserSaga),
     fork(getAdminUsersSaga),
-    fork(getOrganizationOptions),
     fork(deleteAdminUserSaga),
   ]);
 }

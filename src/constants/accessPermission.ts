@@ -9,15 +9,6 @@ const accessPermission = {
     return adminUserRole === 'SUPER_ADMIN_ROLE';
   },
 
-  accessOrganization: () => {
-    const adminUserRole = store.getState().auth.userAdminRole;
-
-    return (
-      adminUserRole === 'SUPER_ADMIN_ROLE' ||
-      adminUserRole === 'ORGANIZATION_ADMIN_ROLE'
-    );
-  },
-
   accessPrefecture: () => {
     const adminUserRole = store.getState().auth.userAdminRole;
 
@@ -25,13 +16,6 @@ const accessPermission = {
       adminUserRole === 'SUPER_ADMIN_ROLE' ||
       adminUserRole === 'PREFECTURE_ADMIN_ROLE'
     );
-  },
-
-  // user's role
-  isOrganizationAdmin: () => {
-    const adminUserRole = store.getState().auth.userAdminRole;
-
-    return adminUserRole === 'ORGANIZATION_ADMIN_ROLE';
   },
 
   isPrefectureAdmin: () => {
@@ -50,9 +34,7 @@ const accessPermission = {
 export const redirectDefaultPath = () => {
   return accessPermission.accessAdminUser()
     ? HOST
-    : accessPermission.isOrganizationAdmin()
-      ? HOST + 'organizations'
-      : HOST + 'prefectures';
+    : HOST + 'prefectures';
 };
 
 export default accessPermission;
