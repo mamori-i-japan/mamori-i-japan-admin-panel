@@ -18,30 +18,22 @@ npm install
 
 ### run local development env
 
-First, create .env.local file and write the API endpoint there.
+
+First, create a firebase project.
+
+Next, create .env.local file and write the API endpoint and firebaes config there.
 
 ```sh
 # .env.local
-REACT_APP_API_HOST=https://example.com
-```
-
-Create a firebase project and write your config in the [lines](https://github.com/codeforjapan/contact-tracing-admin-panel/blob/master/src/utils/firebase.ts#L17:L26) of src/utils/firebase.ts .
-
-```ts
-// src/utils/firebase.ts
-...
-  // replace these values to your firebase project's one
-  firebaseConfig = {
-    apiKey: 'xxx',
-    authDomain: 'xxx',
-    databaseURL: 'xxx',
-    projectId: 'xxx',
-    storageBucket: 'xxx',
-    messagingSenderId: 'xxx',
-    appId: 'xxx',
-    measurementId: 'xxx',
-  };
-...
+REACT_APP_API_HOST=http://localhost:3001
+REACT_APP_FIREBASE_API_KEY=XXXXXX
+REACT_APP_FIREBASE_AUTH_DOMAIN=XXXXXX
+REACT_APP_FIREBASE_DATABASE_URL=XXXXXX
+REACT_APP_FIREBASE_PROJECT_ID=XXXXXX
+REACT_APP_FIREBASE_STORAGE_BUCKET=XXXXXX
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=XXXXXX
+REACT_APP_FIREBASE_APP_ID=XXXXXX
+REACT_APP_FIREBASE_MEASUREMENT_ID=
 ```
 
 Then, run dev server.
