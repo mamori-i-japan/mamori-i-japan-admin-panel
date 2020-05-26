@@ -1,14 +1,31 @@
-# Admin Panel of まもりあい JAPAN
+# mamori-i-japan-admin-panel
 
-## Project Overview and Dataflow Diagram
+Admin Panel for Japanese Exposure Notification App to fight against COVID-19 a.k.a. "まもりあいJAPAN".
 
-![](./docs/overview.jpg)
+## Table of Contents
 
-![](./docs/dfd.jpg)
+1. [Architecture](#Architecture)
+1. [Technology Stack](#Technology-Stack)
+1. [Getting Started](#Getting-Started)
+1. [Development Guideline](#Development-Guideline)
+1. [Demo](#Demo)
+1. [Test Reports](#Test-Reports)
+1. [Contact](#Contact)
+1. [Contributing](#Contributing)
+1. [Code of Conduct](#Code-of-Conduct)
+1. [License](#License)
+
+## Architecture
+
+### Overview and Data Flow Diagram
+
+![Overview](./docs/overview.jpg)
+
+![Data Flow Diagram](./docs/dfd.jpg)
 
 The images made by [Miro](https://miro.com/app/board/o9J_ksGHtPE=/) (read only access).
 
-## How to develop
+## Technology Stack
 
 ### install
 
@@ -16,8 +33,9 @@ The images made by [Miro](https://miro.com/app/board/o9J_ksGHtPE=/) (read only a
 npm install
 ```
 
-### run local development env
+### Running the Application on Local
 
+The admin panel can work with link to mamori-i-japan-api and Firebase.
 First, create .env.local file and write the API endpoint there.
 
 ```sh
@@ -72,6 +90,10 @@ npm run build
 ```sh
 npm run eject
 ```
+
+## Development Guideline
+
+### Project Layout (Brief Explaination)
 
 ## CI/CD
 
@@ -138,8 +160,21 @@ Confirm modal
 
 - [Contact Form](https://docs.google.com/forms/d/e/1FAIpQLSfcGM9itQ3i--GN9FUsQpdlW58Ug4Y6lcnE11N-igILDJdZlw/viewform)
 
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/mamori-i-japan/mamori-i-japan-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
 ## Contributors
 
 - [Zhumei SONG](https://github.com/zhumeisongsong)
 - [Ryuta EBIHARA](https://github.com/ebiryu)
 - [Daisuke Hirata](https://github.com/DaisukeHirata)
+
+## Code of Conduct
+
+Everyone interacting in the mamori-i-japan-api project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](./CODE_OF_CONDUCT.md).
+
+## License
+
+The app is available as open source under the terms of the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
+
